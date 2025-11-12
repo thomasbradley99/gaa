@@ -1,0 +1,12 @@
+{
+  "game": "sfl-2025-vs-cill-chomain",
+  "title": "SFL 2025 v Cill Chomain",
+  "notes": "Pending download and stat extraction.",
+  "downloads": [
+    {
+      "label": "full_match",
+      "url": "https://c.veocdn.com/9e1cff17-5774-41a2-ac9f-233a1fc51510/standard/human/ccb6b437/video.mp4",
+      "target": "sfl-2025-vs-cill-chomain.mp4"
+    }
+  ]
+}

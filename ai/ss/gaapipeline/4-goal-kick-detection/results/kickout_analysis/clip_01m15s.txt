@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 01:15
+CLIP_FILE: clip_01m15s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 01:15
+DETECTIONS: ['grass', 'football player', 'player', 'football player', 'football player', 'white round ball small white football football', 'official', 'football player footballer goalkeeper', 'pitch line sideline', 'netted goal', 'football player', 'white round ball small white football football', 'netted goal', 'player', 'football player', 'sideline', 'referee', 'football', 'football player', 'white round ball football', 'upright posts', 'white pitch lines']
+MISSED_DETECTIONS: ['goalkeeper', 'ball', 'goalpost']
+REASONING:There is no evidence of a kickout within this clip, no goalkeeper is observed kicking the ball. The game is already in play.
+LOW_CONFIDENCE_KICKOUTS: []

@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 03:00
+CLIP_FILE: clip_03m00s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 9
+HALF: first_half
+CLIP_TIME: 03:00
+DETECTIONS: ['player', 'ball', 'goalpost', 'pitch', 'crowd']
+MISSED_DETECTIONS: ['referee', 'goalkeeper']
+
+REASONING: The clip begins with the team in red and navy jerseys scoring a point at 00:04. This event necessitates a kickout to restart play. Following the score, players are seen repositioning themselves across the midfield in preparation for the kickout. However, the clip ends before the goalkeeper takes the kick. The essential action of the goalkeeper kicking the ball to restart play is not observed within the 15-second timeframe.

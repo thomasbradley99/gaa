@@ -1,0 +1,22 @@
+{
+  "team_a": {
+    "jersey_color": "Red",
+    "keeper_color": "Dark",
+    "attack_direction_1st_half": "right-to-left",
+    "attack_direction_2nd_half": "left-to-right"
+  },
+  "team_b": {
+    "jersey_color": "White/Blue",
+    "keeper_color": "White",
+    "attack_direction_1st_half": "left-to-right",
+    "attack_direction_2nd_half": "right-to-left"
+  },
+  "match_times": {
+    "start": 540,
+    "half_time": 3060,
+    "second_half_start": 3090,
+    "end": 5190
+  },
+  "notes": "Team A's jersey color is predominantly 'Red', sometimes appearing as 'Red/Orange' or 'Red/Maroon'. Team B's jersey color is predominantly 'White/Blue', with variations including 'White', 'Blue', 'Light Blue', or 'White/Light Blue'. Keeper colors were determined by the most frequent explicit mentions for each team. Attacking directions for the 2nd half assume a standard switch of ends at halftime, despite some conflicting or ambiguous keeper position descriptions in the frame data.",
+  "home_team_assignment": "EDIT_ME"
+}

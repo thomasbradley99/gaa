@@ -1,0 +1,10 @@
+HALF: first_half
+TIMESTAMP: 04:00
+CLIP_FILE: clip_04m00s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 04:00
+
+REASONING: The clip shows a point being scored from what appears to be a free kick. The kick is taken by an outfield player in a dark jersey, not the goalkeeper from the 20m line. Following the score, there is a stoppage in play, but the subsequent kickout from the opposing goalkeeper is not shown within this 15-second segment. The main action is the successful shot for a point, not a restart via a kickout.

@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 07:45
+CLIP_FILE: clip_07m45s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 9
+HALF: first_half
+CLIP_TIME: 07:45
+DETECTIONS: ['grass', 'football player', 'white round ball', 'referee', 'football player', 'football player', 'football player', 'football player', 'football player', 'white round ball', 'football player', 'football', 'football player', 'white goal', 'football player']
+MISSED_DETECTIONS: ['goalkeeper', 'goalpost']
+REASONING:The game is still in play and the goalkeeper has not kicked the ball from the 20m line after a score or wide. The referee has blown the whistle but the camera does not show a player kicking the ball. A scrum has formed.
+LOW_CONFIDENCE_KICKOUTS: []

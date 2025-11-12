@@ -1,0 +1,12 @@
+{
+  "game": "cmull-vs-castleconnor",
+  "title": "CMull Vs Castleconnor",
+  "notes": "Pending download and stat extraction.",
+  "downloads": [
+    {
+      "label": "full_match",
+      "url": "https://d3rrp696bc7l7y.cloudfront.net/32-851/1-CMullVsCastleconnor-20-45-42-2-11-2025_720.mp4?Expires=1762890700&Signature=UKg-GcFB5LpLcO9AgV6tysofhagCz9yHPy4DGNXjICKwYEWfvwMzjWXR~Ea1~0TZ8WQzPk9MfIwAM58G9ABvANNoYXv9bwRDbFGqri9eoz8kJzFfUczf20CJyBR-85zpVH91y-RDz08c4A372mi7p1iTpDyHH~VuS6rGKTVcZgf2lQtMHUo4IhUSui4xV28Knk3UHBmjdIl1wp~Ki83SO6cs9zc1a6G22c9aYr1Wu2v-Lj85QWZc41pFvdkfJgsFzWB3xgt46zC3vFATxVbZlw~DgIx~W8LY7cPVFGSkJHZwCrhXqk0lpCbPHydsuznRJmI9n6jXW2Beb4UpAMSK0Q__&Key-Pair-Id=APKAJWXGN3J3DTODVHDQ",
+      "target": "cmull-vs-castleconnor.mp4"
+    }
+  ]
+}

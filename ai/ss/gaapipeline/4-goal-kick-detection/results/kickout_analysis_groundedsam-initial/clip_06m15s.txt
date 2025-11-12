@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 06:15
+CLIP_FILE: clip_06m15s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 06:15
+DETECTIONS: ['grass', 'white goal frame', 'football player', 'football player', 'football player', 'football player', 'football player', 'pitch line', 'referee official', 'football player', 'white round ball', 'football', 'sideline', 'football player', 'upright posts', 'white small white football', 'crossbar']
+MISSED_DETECTIONS: []
+REASONING: The goalkeeper does not kick the ball in this clip. Players are just passing it around.
+LOW_CONFIDENCE_KICKOUTS: []

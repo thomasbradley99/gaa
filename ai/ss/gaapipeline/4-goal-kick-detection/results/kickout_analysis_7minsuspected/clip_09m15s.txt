@@ -1,0 +1,32 @@
+HALF: first_half
+TIMESTAMP: 09:15
+CLIP_FILE: clip_09m15s.mp4
+ANALYSIS:
+KICKOUT: YES
+CONFIDENCE: 9
+HALF: first_half
+CLIP_TIME: 09:15
+DETECTIONS: ['player', 'ball', 'goalpost', 'pitch', 'referee', 'crowd']
+MISSED_DETECTIONS: []
+
+TRIGGER_EVENT: A point was scored by the opposition (Team B). The referee signals the score at approximately 00:06.
+EXACT_CONTACT_TIME: The kick does not occur within the clip. The video ends as the goalkeeper is preparing to kick the ball.
+KICKING_TEAM: Team A
+PLAYER_POSITIONING: YES
+
+KICK_ANALYSIS:
+KICK_DISTANCE: N/A (Kick not shown)
+KICK_DIRECTION: N/A (Kick not shown)
+KICK_ACCURACY: N/A (Kick not shown)
+
+POSSESSION_OUTCOME:
+POSSESSION_WON_BY: N/A (Kick not shown)
+POSSESSION_LOCATION: N/A (Kick not shown)
+NEXT_ACTION: N/A (Kick not shown)
+
+JERSEY_COLORS:
+TEAM_A_COLORS: Blue jerseys with white trim, white shorts.
+TEAM_B_COLORS: Red and black halved jerseys, black shorts.
+GOALKEEPER_JERSEY: White
+
+TACTICAL_CONTEXT: The clip starts with Team B attacking. Following a scramble near the goal, a player from Team B kicks the ball over the crossbar for a point at 00:06. The referee confirms the score. In response, players from both teams begin to move upfield, clearing the area for the restart. The Team A goalkeeper, in a white jersey, collects the ball, walks forward from his goal, and places the ball down to take the kickout. The clip concludes just before he makes contact with the ball.

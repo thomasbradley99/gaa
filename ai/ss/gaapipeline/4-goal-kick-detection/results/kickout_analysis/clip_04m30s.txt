@@ -1,0 +1,34 @@
+HALF: first_half
+TIMESTAMP: 04:30
+CLIP_FILE: clip_04m30s.mp4
+ANALYSIS:
+KICKOUT: YES
+CONFIDENCE: 9
+HALF: first_half
+CLIP_TIME: 04:30
+DETECTIONS: ['grass', 'white goal frame', 'player', 'football player goalkeeper', 'football player', 'white round ball small white football football', 'football player', 'upright posts', 'football', 'upright posts']
+MISSED_DETECTIONS: ['referee']
+
+TRIGGER_EVENT: Wide ball
+EXACT_CONTACT_TIME: 0.14
+KICKING_TEAM: Team A
+PLAYER_POSITIONING: NO
+
+KICK_ANALYSIS:
+KICK_DISTANCE: Long
+KICK_DIRECTION: Center
+KICK_ACCURACY: On target
+
+POSSESSION_OUTCOME:
+POSSESSION_WON_BY: Contested
+POSSESSION_LOCATION: Field position where caught
+NEXT_ACTION: What happened after possession
+
+JERSEY_COLORS:
+TEAM_A_COLORS: Blue and white
+TEAM_B_COLORS: Red and black
+GOALKEEPER_JERSEY: Green
+
+TACTICAL_CONTEXT: The goalkeeper in green kicks the ball long downfield after a wide ball. The players are still not cleared out so the ball is contested immediately.
+
+LOW_CONFIDENCE_KICKOUTS: []

@@ -1,0 +1,34 @@
+HALF: first_half
+TIMESTAMP: 06:00
+CLIP_FILE: clip_06m00s.mp4
+ANALYSIS:
+KICKOUT: YES
+CONFIDENCE: 9
+HALF: first_half
+CLIP_TIME: 06:00
+DETECTIONS: ['player', 'ball', 'goalpost', 'grass']
+MISSED_DETECTIONS: []
+
+TRIGGER_EVENT: Wide Ball
+EXACT_CONTACT_TIME: 0.05
+KICKING_TEAM: Team A
+PLAYER_POSITIONING: YES
+
+KICK_ANALYSIS:
+KICK_DISTANCE: Medium
+KICK_DIRECTION: Center
+KICK_ACCURACY: Contested
+
+POSSESSION_OUTCOME:
+POSSESSION_WON_BY: Team B
+POSSESSION_LOCATION: Midfield
+NEXT_ACTION: Passing play
+
+JERSEY_COLORS:
+TEAM_A_COLORS: Blue and white
+TEAM_B_COLORS: Red and black
+GOALKEEPER_JERSEY: Orange
+
+TACTICAL_CONTEXT: After a shot goes wide, the orange goalkeeper of Team A performs a kickout. Players clear the area as the goalkeeper kicks the ball medium distance towards the center of the pitch. Team B contests and wins possession in midfield, leading to a passing play.
+
+LOW_CONFIDENCE_KICKOUTS: []

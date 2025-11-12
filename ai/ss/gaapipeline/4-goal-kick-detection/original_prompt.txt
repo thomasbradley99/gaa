@@ -1,0 +1,77 @@
+f"""
+        You are an expert GAA analyst watching a 15-second clip from the {half_name} at {timestamp}.
+
+        CRITICAL: GAA KICKOUTS ARE EXTREMELY RARE EVENTS. In a typical GAA match, there are only 15-25 kickouts in the ENTIRE 70+ minute game. In the first 10 minutes, expect 0-3 maximum.
+
+        GOAL: Detect ONLY GENUINE OFFICIAL GAA KICKOUTS. When in doubt, always say NO.
+
+        MANDATORY KICKOUT SEQUENCE (ALL MUST BE CLEARLY VISIBLE):
+        1. TRIGGER: You must SEE the ball going out of play (shot wide/over/saved)
+        2. COMPLETE STOPPAGE: All play stops, referee signals
+        3. AREA CLEARANCE: All outfield players deliberately exit the 20m area
+        4. FIELD SPREAD: Players spread to midfield/opposition half
+        5. GROUND PLACEMENT: Goalkeeper places ball on ground at 20m line
+        6. STRUCTURED KICK: Goalkeeper takes run-up, kicks from stationary ball
+        7. AERIAL CONTEST: Multiple players contest high ball
+
+        ULTRA-STRICT CRITERIA (MISSING ANY = NO KICKOUT):
+        ✓ You can SEE the trigger event (ball going out) in THIS clip
+        ✓ COMPLETE play stoppage visible (not during active play)
+        ✓ ALL players have CLEARED the 20-meter area completely
+        ✓ Players are SPREAD across the entire field (not bunched up)
+        ✓ Ball is placed on GROUND (not kicked from hands)
+        ✓ Clear PAUSE and setup time (not immediate clearance)
+        ✓ Goalkeeper takes PROPER run-up from behind ball
+        ✓ Multiple players contest the HIGH aerial ball
+        ✓ This is MATCH PLAY not warm-up/training
+
+        ABSOLUTELY NEVER DETECT:
+        - Warm-up kicks or training drills
+        - Goalkeeper clearances during active play
+        - Any kick from hands
+        - Quick clearances without setup
+        - Free kicks, sideline kicks, or other restarts
+        - Shots or passes during active play
+        - Any kick when players haven't fully cleared area
+        - Throw-ins or any other restart
+        - If you can't see the trigger event that caused it
+        
+        **OUTPUT FORMAT:**
+        KICKOUT: [YES/NO]
+        CONFIDENCE: [1-10]
+        HALF: {half_name}
+        CLIP_TIME: {timestamp}
+        
+        IF KICKOUT = YES:
+        TRIGGER_EVENT: [What caused it]
+        EXACT_CONTACT_TIME: [X.X seconds when foot touches ball]
+        KICKING_TEAM: [Team A/Team B based on goalkeeper jersey]
+        PLAYER_POSITIONING: [Did players clear and spread? YES/NO]
+        
+        KICK_ANALYSIS:
+        KICK_DISTANCE: [Short/Medium/Long]
+        KICK_DIRECTION: [Left/Center/Right]
+        KICK_ACCURACY: [On target/Off target/Contested]
+        
+        POSSESSION_OUTCOME:
+        POSSESSION_WON_BY: [Team A/Team B/Contested/Unclear]
+        POSSESSION_LOCATION: [Field position where caught]
+        NEXT_ACTION: [What happened after possession]
+        
+        JERSEY_COLORS:
+        TEAM_A_COLORS: [Describe colors]
+        TEAM_B_COLORS: [Describe colors]
+        GOALKEEPER_JERSEY: [Color of kicking goalkeeper]
+        
+        TACTICAL_CONTEXT: [Full sequence description]
+
+        IF KICKOUT = NO:
+        REASONING: [Why not an official kickout]
+
+        REMEMBER: 
+        - GAA kickouts are EXTREMELY RARE - only 2-3 in first 10 minutes maximum
+        - When in doubt, ALWAYS say NO
+        - Must see COMPLETE sequence from trigger to aerial contest
+        - This is MATCH PLAY not training/warm-up
+        - Be ULTRA-CONSERVATIVE in detection
+        """

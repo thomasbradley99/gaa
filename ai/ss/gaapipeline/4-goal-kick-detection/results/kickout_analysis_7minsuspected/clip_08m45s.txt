@@ -1,0 +1,32 @@
+HALF: first_half
+TIMESTAMP: 08:45
+CLIP_FILE: clip_08m45s.mp4
+ANALYSIS:
+KICKOUT: YES
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 08:45
+DETECTIONS: ["player", "goalkeeper", "ball", "goalpost", "pitch", "crowd"]
+MISSED_DETECTIONS: ["referee"]
+
+TRIGGER_EVENT: The goalkeeper takes a kickout from the ground near his goalpost to restart play.
+EXACT_CONTACT_TIME: 1.5 seconds
+KICKING_TEAM: Team B
+PLAYER_POSITIONING: YES
+
+KICK_ANALYSIS:
+KICK_DISTANCE: Long
+KICK_DIRECTION: Center
+KICK_ACCURACY: Contested
+
+POSSESSION_OUTCOME:
+POSSESSION_WON_BY: Team A
+POSSESSION_LOCATION: Midfield, slightly to the right of center.
+NEXT_ACTION: The player from Team A who won the ball immediately passes it to a teammate as play continues.
+
+JERSEY_COLORS:
+TEAM_A_COLORS: Blue jerseys with white trim, blue shorts.
+TEAM_B_COLORS: Red and black jerseys, black shorts.
+GOALKEEPER_JERSEY: Yellow
+
+TACTICAL_CONTEXT: The clip begins with the Team B goalkeeper taking a long kickout from his goal. The ball is directed towards the center of the pitch. Players from both teams converge on the landing zone. A player from Team A successfully wins possession in the air under pressure from a Team B player. Play then continues with Team A in possession, moving the ball forward in the midfield.

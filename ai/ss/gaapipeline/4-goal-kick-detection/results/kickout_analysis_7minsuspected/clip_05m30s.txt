@@ -1,0 +1,33 @@
+HALF: first_half
+TIMESTAMP: 05:30
+CLIP_FILE: clip_05m30s.mp4
+ANALYSIS:
+KICKOUT: YES
+CONFIDENCE: 9
+HALF: first_half
+CLIP_TIME: 05:30
+DETECTIONS: ['Player', 'Goalkeeper', 'Ball', 'Goalpost', 'Pitch']
+MISSED_DETECTIONS: ['Referee']
+
+IF KICKOUT = YES:
+    TRIGGER_EVENT: Restart of play. The clip begins with players already positioned in formation for a kickout following a presumed score or wide ball from the opposing team.
+    EXACT_CONTACT_TIME: 8.5 seconds
+    KICKING_TEAM: Team A
+    PLAYER_POSITIONING: YES
+
+    KICK_ANALYSIS:
+        KICK_DISTANCE: Long
+        KICK_DIRECTION: Center
+        KICK_ACCURACY: Contested
+
+    POSSESSION_OUTCOME:
+        POSSESSION_WON_BY: Contested
+        POSSESSION_LOCATION: Midfield
+        NEXT_ACTION: Players from both teams converge on the ball's landing area to compete for possession.
+
+    JERSEY_COLORS:
+        TEAM_A_COLORS: Red jerseys with a black horizontal stripe, black shorts.
+        TEAM_B_COLORS: Blue jerseys, white shorts.
+        GOALKEEPER_JERSEY: Yellow
+
+    TACTICAL_CONTEXT: The clip shows the execution of a standard kickout. The goalkeeper for Team A (in yellow) takes the kick from the ground inside the 20-meter line. The players are already spread out down the field in anticipation. The goalkeeper opts for a long kick down the central channel, aiming for the midfield battleground. As the ball travels, players from both teams close in on its expected landing spot to contest for aerial possession.

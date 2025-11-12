@@ -1,0 +1,349 @@
+{
+  "match_info": {
+    "title": "Basketball Match - Direct Event Extraction",
+    "total_events": 40,
+    "time_period": "First 10 minutes",
+    "method": "Direct VLM to events"
+  },
+  "events": [
+    {
+      "type": "Shot",
+      "team": "red",
+      "time_in_clip": 8.0,
+      "absolute_time": 8.0,
+      "outcome": "2Point",
+      "description": "Red team player makes a jump shot from the free-throw line for 2 points.",
+      "clip_file": "clip_02m15s.mp4"
+    },
+    {
+      "type": "Foul",
+      "team": "blue",
+      "time_in_clip": 12.1,
+      "absolute_time": 12.1,
+      "description": "Blue team player commits a shooting foul on red team player, resulting in free throws.",
+      "clip_file": "clip_02m15s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "red",
+      "time_in_clip": 15.0,
+      "absolute_time": 15.0,
+      "outcome": "FreeThrow",
+      "description": "Red team player makes first free throw.",
+      "clip_file": "clip_02m15s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "red",
+      "time_in_clip": 17.0,
+      "absolute_time": 17.0,
+      "outcome": "FreeThrow",
+      "description": "Red team player makes second free throw.",
+      "clip_file": "clip_02m15s.mp4"
+    },
+    {
+      "type": "Rebound",
+      "team": "blue",
+      "time_in_clip": 25.0,
+      "absolute_time": 25.0,
+      "description": "Blue team player secures defensive rebound after missed shot.",
+      "clip_file": "clip_02m30s.mp4"
+    },
+    {
+      "type": "Turnover",
+      "team": "blue",
+      "time_in_clip": 32.0,
+      "absolute_time": 32.0,
+      "description": "Blue team loses possession due to traveling violation.",
+      "clip_file": "clip_02m45s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "red",
+      "time_in_clip": 38.0,
+      "absolute_time": 38.0,
+      "outcome": "3Point",
+      "description": "Red team player makes a three-pointer from the corner.",
+      "clip_file": "clip_03m00s.mp4"
+    },
+    {
+      "type": "Assist",
+      "team": "red",
+      "time_in_clip": 38.0,
+      "absolute_time": 38.0,
+      "description": "Red team player assists on the three-pointer.",
+      "clip_file": "clip_03m00s.mp4"
+    },
+    {
+      "type": "Steal",
+      "team": "blue",
+      "time_in_clip": 45.0,
+      "absolute_time": 45.0,
+      "description": "Blue team player steals the ball from red team.",
+      "clip_file": "clip_03m15s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 48.0,
+      "absolute_time": 48.0,
+      "outcome": "2Point",
+      "description": "Blue team player scores on fast break layup.",
+      "clip_file": "clip_03m15s.mp4"
+    },
+    {
+      "type": "Block",
+      "team": "red",
+      "time_in_clip": 55.0,
+      "absolute_time": 55.0,
+      "description": "Red team player blocks blue team's shot attempt.",
+      "clip_file": "clip_03m30s.mp4"
+    },
+    {
+      "type": "Rebound",
+      "team": "red",
+      "time_in_clip": 56.0,
+      "absolute_time": 56.0,
+      "description": "Red team player secures offensive rebound after block.",
+      "clip_file": "clip_03m30s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "red",
+      "time_in_clip": 58.0,
+      "absolute_time": 58.0,
+      "outcome": "Miss",
+      "description": "Red team player misses putback attempt.",
+      "clip_file": "clip_03m30s.mp4"
+    },
+    {
+      "type": "Timeout",
+      "team": "blue",
+      "time_in_clip": 65.0,
+      "absolute_time": 65.0,
+      "description": "Blue team calls timeout.",
+      "clip_file": "clip_03m45s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 72.0,
+      "absolute_time": 72.0,
+      "outcome": "2Point",
+      "description": "Blue team player makes mid-range jumper.",
+      "clip_file": "clip_04m00s.mp4"
+    },
+    {
+      "type": "Foul",
+      "team": "red",
+      "time_in_clip": 80.0,
+      "absolute_time": 80.0,
+      "description": "Red team player commits flagrant foul.",
+      "clip_file": "clip_04m15s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 85.0,
+      "absolute_time": 85.0,
+      "outcome": "FreeThrow",
+      "description": "Blue team player makes first free throw from flagrant foul.",
+      "clip_file": "clip_04m15s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 87.0,
+      "absolute_time": 87.0,
+      "outcome": "FreeThrow",
+      "description": "Blue team player makes second free throw from flagrant foul.",
+      "clip_file": "clip_04m15s.mp4"
+    },
+    {
+      "type": "Substitution",
+      "team": "red",
+      "time_in_clip": 95.0,
+      "absolute_time": 95.0,
+      "description": "Red team makes substitution - player enters game.",
+      "clip_file": "clip_04m30s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "red",
+      "time_in_clip": 102.0,
+      "absolute_time": 102.0,
+      "outcome": "3Point",
+      "description": "Red team player makes three-pointer from top of key.",
+      "clip_file": "clip_04m45s.mp4"
+    },
+    {
+      "type": "Turnover",
+      "team": "blue",
+      "time_in_clip": 110.0,
+      "absolute_time": 110.0,
+      "description": "Blue team turns ball over due to shot clock violation.",
+      "clip_file": "clip_05m00s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "red",
+      "time_in_clip": 115.0,
+      "absolute_time": 115.0,
+      "outcome": "2Point",
+      "description": "Red team player makes dunk.",
+      "clip_file": "clip_05m15s.mp4"
+    },
+    {
+      "type": "Technical",
+      "team": "blue",
+      "time_in_clip": 125.0,
+      "absolute_time": 125.0,
+      "description": "Blue team receives technical foul for arguing with referee.",
+      "clip_file": "clip_05m30s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "red",
+      "time_in_clip": 128.0,
+      "absolute_time": 128.0,
+      "outcome": "FreeThrow",
+      "description": "Red team player makes technical free throw.",
+      "clip_file": "clip_05m30s.mp4"
+    },
+    {
+      "type": "Rebound",
+      "team": "blue",
+      "time_in_clip": 135.0,
+      "absolute_time": 135.0,
+      "description": "Blue team player secures defensive rebound.",
+      "clip_file": "clip_05m45s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 142.0,
+      "absolute_time": 142.0,
+      "outcome": "Miss",
+      "description": "Blue team player misses three-point attempt.",
+      "clip_file": "clip_06m00s.mp4"
+    },
+    {
+      "type": "Rebound",
+      "team": "red",
+      "time_in_clip": 143.0,
+      "absolute_time": 143.0,
+      "description": "Red team player secures defensive rebound.",
+      "clip_file": "clip_06m00s.mp4"
+    },
+    {
+      "type": "Fast Break",
+      "team": "red",
+      "time_in_clip": 145.0,
+      "absolute_time": 145.0,
+      "description": "Red team initiates fast break opportunity.",
+      "clip_file": "clip_06m00s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "red",
+      "time_in_clip": 148.0,
+      "absolute_time": 148.0,
+      "outcome": "2Point",
+      "description": "Red team player finishes fast break with layup.",
+      "clip_file": "clip_06m00s.mp4"
+    },
+    {
+      "type": "Foul",
+      "team": "blue",
+      "time_in_clip": 155.0,
+      "absolute_time": 155.0,
+      "description": "Blue team player commits defensive foul.",
+      "clip_file": "clip_06m15s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 165.0,
+      "absolute_time": 165.0,
+      "outcome": "3Point",
+      "description": "Blue team player makes three-pointer from wing.",
+      "clip_file": "clip_06m30s.mp4"
+    },
+    {
+      "type": "Steal",
+      "team": "red",
+      "time_in_clip": 175.0,
+      "absolute_time": 175.0,
+      "description": "Red team player steals inbound pass.",
+      "clip_file": "clip_06m45s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "red",
+      "time_in_clip": 178.0,
+      "absolute_time": 178.0,
+      "outcome": "2Point",
+      "description": "Red team player scores off steal with quick layup.",
+      "clip_file": "clip_06m45s.mp4"
+    },
+    {
+      "type": "Charge",
+      "team": "blue",
+      "time_in_clip": 185.0,
+      "absolute_time": 185.0,
+      "description": "Blue team player draws charging foul on red team.",
+      "clip_file": "clip_07m00s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 192.0,
+      "absolute_time": 192.0,
+      "outcome": "2Point",
+      "description": "Blue team player makes hook shot in the post.",
+      "clip_file": "clip_07m15s.mp4"
+    },
+    {
+      "type": "Double Dribble",
+      "team": "red",
+      "time_in_clip": 200.0,
+      "absolute_time": 200.0,
+      "description": "Red team player commits double dribble violation.",
+      "clip_file": "clip_07m30s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 208.0,
+      "absolute_time": 208.0,
+      "outcome": "Miss",
+      "description": "Blue team player misses contested jumper.",
+      "clip_file": "clip_07m45s.mp4"
+    },
+    {
+      "type": "Rebound",
+      "team": "blue",
+      "time_in_clip": 209.0,
+      "absolute_time": 209.0,
+      "description": "Blue team player secures offensive rebound.",
+      "clip_file": "clip_07m45s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 212.0,
+      "absolute_time": 212.0,
+      "outcome": "2Point",
+      "description": "Blue team player makes putback shot.",
+      "clip_file": "clip_07m45s.mp4"
+    },
+    {
+      "type": "Quarter End",
+      "team": "neutral",
+      "time_in_clip": 240.0,
+      "absolute_time": 240.0,
+      "description": "End of first quarter.",
+      "clip_file": "clip_08m00s.mp4"
+    }
+  ]
+} 

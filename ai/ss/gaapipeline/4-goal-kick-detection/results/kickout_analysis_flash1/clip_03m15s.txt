@@ -1,0 +1,13 @@
+HALF: first_half
+TIMESTAMP: 03:15
+CLIP_FILE: clip_03m15s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 03:15
+DETECTIONS: ['player', 'ball', 'grass', 'goalpost', 'crowd']
+MISSED_DETECTIONS: ['referee', 'goalkeeper']
+REASONING: The play is underway, and the ball is in the middle of the field. There are many players contesting for it. There is no referee or goalkeeper.
+
+LOW_CONFIDENCE_KICKOUTS: []

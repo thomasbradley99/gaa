@@ -1,0 +1,34 @@
+HALF: first_half
+TIMESTAMP: 01:00
+CLIP_FILE: clip_01m00s.mp4
+ANALYSIS:
+KICKOUT: YES
+CONFIDENCE: 9
+HALF: first_half
+CLIP_TIME: 01:00
+DETECTIONS: ['player', 'ball', 'goalpost', 'grass green grass field', 'player football player footballer goalkeeper', 'white round ball small white football football', 'netted goal', 'sideline', 'football player', 'player football player']
+MISSED_DETECTIONS: ['referee']
+
+TRIGGER_EVENT: Wide ball.
+EXACT_CONTACT_TIME: 0.5
+KICKING_TEAM: Team A
+PLAYER_POSITIONING: YES
+
+KICK_ANALYSIS:
+KICK_DISTANCE: Long
+KICK_DIRECTION: Center
+KICK_ACCURACY: Contested
+
+POSSESSION_OUTCOME:
+POSSESSION_WON_BY: Team B
+POSSESSION_LOCATION: Field position where caught
+NEXT_ACTION: Player runs towards the opposition's goal.
+
+JERSEY_COLORS:
+TEAM_A_COLORS: Red and black stripes
+TEAM_B_COLORS: Blue and white
+GOALKEEPER_JERSEY: Orange
+
+TACTICAL_CONTEXT: The goalkeeper from Team A takes a long kick down the center of the field. The ball is contested in the air, and a Team B player wins the ball and moves down the field.
+
+LOW_CONFIDENCE_KICKOUTS: []

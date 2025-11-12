@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 00:45
+CLIP_FILE: clip_00m45s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 00:45
+DETECTIONS: [player, pitch, crowd, dugout]
+MISSED_DETECTIONS: [ball, goalpost, goalkeeper, referee]
+
+REASONING: The clip shows players from both teams standing in the midfield area during a break in play. There is no goalkeeper or goalpost visible in the frame. The defining action of a kickout, which is the goalkeeper kicking the ball from near their goal, does not occur. The players are not repositioning themselves after a score or a wide ball; they appear to be waiting for play to resume from the middle of the pitch.

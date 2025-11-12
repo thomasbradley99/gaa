@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 00:30
+CLIP_FILE: clip_00m30s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 00:30
+DETECTIONS: [player, pitch, crowd]
+MISSED_DETECTIONS: [ball, goalkeeper, goalpost, referee]
+
+REASONING: The clip shows a period of open play in the middle of the field. The players are jogging and repositioning, but there is no indication of a stoppage in play or a restart. The defining action of a kickout, which is a goalkeeper kicking the ball from near their own goal, does not occur. The play is concentrated in the central third of the pitch, far from either goalpost.

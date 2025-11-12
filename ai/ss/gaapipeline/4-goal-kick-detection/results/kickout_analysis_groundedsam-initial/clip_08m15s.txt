@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 08:15
+CLIP_FILE: clip_08m15s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 8
+HALF: first_half
+CLIP_TIME: 08:15
+DETECTIONS: ['grass', 'green grass field', 'football player goalkeeper', 'player football player', 'white round ball football', 'referee official', 'football player', 'white goal football goal', 'footballer referee', 'football player', 'white round ball', 'football', 'small', 'netted goal', 'white round ball football', 'football goal', 'upright posts', 'football']
+MISSED_DETECTIONS: []
+REASONING:The play is still in action, as players are spread out around the field and the ball is in play in the centre of the field. This does not follow the kickout sequence.
+LOW_CONFIDENCE_KICKOUTS: []

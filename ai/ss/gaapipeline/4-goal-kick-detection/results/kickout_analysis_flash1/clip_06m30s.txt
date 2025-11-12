@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 06:30
+CLIP_FILE: clip_06m30s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 06:30
+DETECTIONS: ['player', 'ball', 'goalpost', 'grass']
+MISSED_DETECTIONS: []
+REASONING: The clip shows general play between the two teams, with the ball being passed around the pitch. There is no goalkeeper or kickout sequence visible.
+LOW_CONFIDENCE_KICKOUTS: []

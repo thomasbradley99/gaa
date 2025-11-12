@@ -1,0 +1,12 @@
+{
+  "game": "kilmeena-vs-cill-chomain",
+  "title": "Kilmeena v Cill Chomain",
+  "notes": "Pending download and stat extraction.",
+  "downloads": [
+    {
+      "label": "full_match",
+      "url": "https://c.veocdn.com/010c72f5-2c21-422c-bcf2-c198a4fe3a96/standard/human/41c052f9/video.mp4?v=JMjGSpBo",
+      "target": "kilmeena-vs-cill-chomain.mp4"
+    }
+  ]
+}

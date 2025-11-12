@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 01:30
+CLIP_FILE: clip_01m30s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 01:30
+DETECTIONS: ['grass', 'football player', 'football player', 'football player', 'football player', 'football player', 'football player', 'football player', 'football player', 'football player', 'football player', 'football player', 'football player', 'football player', 'football player', 'football player', 'white goal frame', 'netted goal', 'goal football goal']
+MISSED_DETECTIONS: ['ball', 'goalkeeper', 'referee']
+REASONING:The goalkeeper is not seen kicking the ball, nor is he setting up for a kickout. The players are engaged in an active play situation, moving around the field. The ball is missing but the optical flow of the players indicates that the play is active.
+LOW_CONFIDENCE_KICKOUTS: []

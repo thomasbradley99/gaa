@@ -1,0 +1,79 @@
+GAA MATCH EVENTS SUMMARY
+========================================
+
+Total Events: 60
+Source: Match narrative analysis
+Schema: GAA Events Schema Compliant
+
+Events by Type:
+  Foul: 3
+  Kickout: 25
+  Shot: 16
+  Throw-up: 1
+  Turnover: 15
+
+Events by Team:
+  Red Team: 28
+  Blue Team: 32
+
+Event Timeline:
+  00:20 - red Kickout (Lost)
+  00:38 - blue Kickout (Won)
+  00:49 - blue Kickout (Won)
+  01:02 - blue Kickout (Won)
+  01:15 - red Foul (N/A)
+  01:30 - blue Shot (Wide)
+  01:40 - red Kickout (Lost)
+  01:58 - blue Shot (Saved)
+  02:25 - red Kickout (Lost)
+  02:30 - red Turnover (Won)
+  02:40 - blue Turnover (Won)
+  02:45 - blue Turnover (Won)
+  02:58 - blue Shot (Wide)
+  03:02 - blue Kickout (Lost)
+  03:15 - blue Shot (Wide)
+  03:26 - red Kickout (Won)
+  03:30 - red Shot (1Point)
+  03:39 - blue Kickout (Won)
+  03:54 - blue Kickout (Won)
+  04:00 - red Turnover (Won)
+  04:06 - red Kickout (Lost)
+  04:28 - red Turnover (Won)
+  04:43 - red Turnover (Won)
+  04:45 - red Shot (Wide)
+  04:53 - blue Kickout (Lost)
+  05:00 - blue Shot (Saved)
+  05:16 - red Kickout (Won)
+  05:37 - red Kickout (Lost)
+  05:51 - blue Kickout (Lost)
+  06:02 - red Kickout (Lost)
+  06:15 - red Turnover (Won)
+  06:20 - red Shot (Saved)
+  06:21 - blue Kickout (Won)
+  06:30 - blue Shot (Wide)
+  06:40 - blue Kickout (Lost)
+  06:55 - blue Turnover (Won)
+  07:00 - blue Shot (Saved)
+  07:08 - red Kickout (Won)
+  07:15 - blue Turnover (Won)
+  07:28 - blue Shot (Wide)
+  07:30 - red Turnover (Won)
+  07:38 - blue Turnover (Won)
+  07:45 - blue Foul (N/A)
+  07:58 - red Turnover (Won)
+  08:02 - red Kickout (Lost)
+  08:05 - blue Foul (N/A)
+  08:18 - red Kickout (Lost)
+  08:34 - blue Kickout (Lost)
+  08:45 - blue Turnover (Won)
+  08:53 - blue Shot (Saved)
+  08:54 - red Kickout (Lost)
+  09:00 - red Turnover (Won)
+  09:07 - red Shot (Saved)
+  09:15 - red Shot (Wide)
+  09:23 - blue Kickout (Won)
+  09:30 - red Turnover (Won)
+  09:43 - red Shot (Wide)
+  09:45 - blue Throw-up (Won)
+  09:55 - blue Shot (Wide)
+  09:58 - blue Kickout (Won)

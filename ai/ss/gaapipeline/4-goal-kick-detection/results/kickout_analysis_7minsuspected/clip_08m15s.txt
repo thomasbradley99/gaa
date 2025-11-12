@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 08:15
+CLIP_FILE: clip_08m15s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 08:15
+DETECTIONS: ['player', 'goalkeeper', 'ball', 'goalpost', 'pitch']
+MISSED_DETECTIONS: ['referee']
+
+REASONING: The clip shows players from both teams standing around in the defensive half of the pitch near a goal. While the setup might resemble the moments before a kickout, with the goalkeeper present near the goal, no actual kickout occurs within the 15-second duration. The players are walking casually, and there is no attempt by the goalkeeper to place the ball and perform a kick to restart play. The overall lack of action and urgency indicates a break in play rather than an official kickout.

@@ -1,0 +1,12 @@
+{
+  "game": "davitts-kiltane",
+  "title": "Davitts 0-21 Kiltane 1-17",
+  "notes": "Pending download and stat extraction.",
+  "downloads": [
+    {
+      "label": "full_match",
+      "url": "https://c.veocdn.com/96e68c70-e344-4b48-b357-14d171f0a1a5/standard/human/45dfaba3/video.mp4",
+      "target": "davitts-kiltane.mp4"
+    }
+  ]
+}

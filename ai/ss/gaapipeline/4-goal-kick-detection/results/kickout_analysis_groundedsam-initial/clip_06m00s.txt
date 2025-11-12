@@ -1,0 +1,30 @@
+HALF: first_half
+TIMESTAMP: 06:00
+CLIP_FILE: clip_06m00s.mp4
+ANALYSIS:
+KICKOUT: YES
+CONFIDENCE: 8
+HALF: first_half
+CLIP_TIME: 06:00
+DETECTIONS: ['player', 'white round ball small white football football', 'grass green grass field', 'football player footballer']
+MISSED_DETECTIONS: ['referee', 'goalpost']
+
+TRIGGER_EVENT: Wide ball
+EXACT_CONTACT_TIME: 0.05
+KICKING_TEAM: Team A
+PLAYER_POSITIONING: NO
+KICK_ANALYSIS:
+KICK_DISTANCE: Long
+KICK_DIRECTION: Center
+KICK_ACCURACY: Contested
+POSSESSION_OUTCOME:
+POSSESSION_WON_BY: Team B
+POSSESSION_LOCATION: Field position where caught
+NEXT_ACTION: Players begin contesting for possession
+JERSEY_COLORS:
+TEAM_A_COLORS: Blue
+TEAM_B_COLORS: Red and Black
+GOALKEEPER_JERSEY: Orange
+TACTICAL_CONTEXT: The goalkeeper is wearing orange and kicks the ball from near the 20m line. There are players nearby which indicates that this is a kickout.
+
+LOW_CONFIDENCE_KICKOUTS: []

@@ -1,0 +1,30 @@
+HALF: first_half
+TIMESTAMP: 05:30
+CLIP_FILE: clip_05m30s.mp4
+ANALYSIS:
+KICKOUT: YES
+CONFIDENCE: 9
+HALF: first_half
+CLIP_TIME: 05:30
+DETECTIONS: ['grass', 'football player', 'white round ball small white football', 'football', 'referee', 'netted goal', 'upright posts']
+MISSED_DETECTIONS: []
+
+TRIGGER_EVENT: wide ball
+EXACT_CONTACT_TIME: 0.12
+KICKING_TEAM: Team B
+PLAYER_POSITIONING: NO
+KICK_ANALYSIS:
+KICK_DISTANCE: Short
+KICK_DIRECTION: Center
+KICK_ACCURACY: Contested
+POSSESSION_OUTCOME:
+POSSESSION_WON_BY: Contested
+POSSESSION_LOCATION: Field position where caught
+NEXT_ACTION: What happened after possession
+JERSEY_COLORS:
+TEAM_A_COLORS: Red and Black
+TEAM_B_COLORS: Blue and White
+GOALKEEPER_JERSEY: Yellow
+TACTICAL_CONTEXT: The goalkeeper from the blue and white team takes a short kickout.
+
+LOW_CONFIDENCE_KICKOUTS: []

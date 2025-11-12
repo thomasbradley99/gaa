@@ -1,0 +1,30 @@
+HALF: first_half
+TIMESTAMP: 00:45
+CLIP_FILE: clip_00m45s.mp4
+ANALYSIS:
+KICKOUT: YES
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 00:45
+DETECTIONS: ['grass green grass field', 'white goal frame', 'football player goalkeeper', 'referee referee', 'football player', 'football player goalkeeper', 'football player footballer', 'football player', 'football goal', 'referee referee', '##post', 'small white football', 'pitch line', 'referee referee']
+MISSED_DETECTIONS: []
+
+TRIGGER_EVENT: Wide ball
+EXACT_CONTACT_TIME: 0.8
+KICKING_TEAM: Team A
+PLAYER_POSITIONING: YES
+KICK_ANALYSIS:
+KICK_DISTANCE: Long
+KICK_DIRECTION: Center
+KICK_ACCURACY: Contested
+POSSESSION_OUTCOME:
+POSSESSION_WON_BY: Contested
+POSSESSION_LOCATION: Field position where caught
+NEXT_ACTION: What happened after possession
+JERSEY_COLORS:
+TEAM_A_COLORS: Red and black
+TEAM_B_COLORS: Blue and white
+GOALKEEPER_JERSEY: Orange
+TACTICAL_CONTEXT: The orange goalkeeper kicks the ball, the players move away to spread. After the goalkeeper kicks, players from both teams contest for it in the midfield.
+
+LOW_CONFIDENCE_KICKOUTS: []

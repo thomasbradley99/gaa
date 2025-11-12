@@ -28,6 +28,29 @@ yarn-error.log*
 # Vercel
 .vercel
 
+# Videos
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# Outputs and generated files
+**/outputs/
+**/clips/
+**/frames/
+**/video.mp4
+**/test-viewer/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+.venv
+
 # IDE
 .vscode/
 .idea/
@@ -39,3 +62,7 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 
+# Large data files
+*.zip
+*.tar.gz
+*.tar

@@ -1,0 +1,30 @@
+HALF: first_half
+TIMESTAMP: 06:30
+CLIP_FILE: clip_06m30s.mp4
+ANALYSIS:
+KICKOUT: YES
+CONFIDENCE: 7
+HALF: first_half
+CLIP_TIME: 06:30
+DETECTIONS: ['grass', 'football player', 'football', 'goalpost', 'referee', 'upright posts', 'white goal frame', 'football player goalkeeper']
+MISSED_DETECTIONS: []
+
+TRIGGER_EVENT: wide ball
+EXACT_CONTACT_TIME: 0.7
+KICKING_TEAM: Team B
+PLAYER_POSITIONING: YES
+KICK_ANALYSIS:
+KICK_DISTANCE: Medium
+KICK_DIRECTION: Center
+KICK_ACCURACY: On target
+POSSESSION_OUTCOME:
+POSSESSION_WON_BY: Contested
+POSSESSION_LOCATION: Midfield
+NEXT_ACTION: Pass
+JERSEY_COLORS:
+TEAM_A_COLORS: Red and black
+TEAM_B_COLORS: Blue and white
+GOALKEEPER_JERSEY: Yellow
+TACTICAL_CONTEXT: The goalkeeper kicks the ball out from his own 20-meter line. The players have cleared out from the goal area and spread out across the field. The kick is contested in midfield.
+
+LOW_CONFIDENCE_KICKOUTS: []

@@ -1,0 +1,412 @@
+{
+  "match_info": {
+    "title": "GAA Match - Direct Event Extraction",
+    "total_events": 47,
+    "time_period": "First 10 minutes",
+    "method": "Direct VLM to events"
+  },
+  "events": [
+    {
+      "type": "Foul",
+      "team": "red",
+      "time_in_clip": 8.0,
+      "absolute_time": 8.0,
+      "description": "Red team player commits a foul on a blue team player, resulting in a free kick for the blue team.",
+      "clip_file": "clip_02m15s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 12.1,
+      "absolute_time": 12.1,
+      "outcome": "1Point",
+      "description": "Blue team player scores a point from a free kick, confirmed by the umpire's white flag.",
+      "clip_file": "clip_02m15s.mp4"
+    },
+    {
+      "type": "Turnover",
+      "team": "blue",
+      "time_in_clip": 8.1,
+      "absolute_time": 68.1,
+      "description": "Blue team gains possession of a loose ball after a scrum.",
+      "clip_file": "clip_01m00s.mp4"
+    },
+    {
+      "type": "Foul",
+      "team": "red",
+      "time_in_clip": 12.5,
+      "absolute_time": 87.5,
+      "description": "Red team commits a foul on a blue player, resulting in a free kick.",
+      "clip_file": "clip_01m15s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 10.5,
+      "absolute_time": 100.5,
+      "outcome": "1Point",
+      "description": "Blue team player scores a point",
+      "clip_file": "clip_01m30s.mp4"
+    },
+    {
+      "type": "Turnover",
+      "team": "red",
+      "time_in_clip": 7.2,
+      "absolute_time": 112.2,
+      "description": "Red player intercepts a long kick from the blue team.",
+      "clip_file": "clip_01m45s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "red",
+      "time_in_clip": 12.0,
+      "absolute_time": 162.0,
+      "outcome": "1Point",
+      "description": "Red team player scores a point",
+      "clip_file": "clip_02m30s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 11.4,
+      "absolute_time": 176.4,
+      "outcome": "1Point",
+      "description": "Blue team player scores point",
+      "clip_file": "clip_02m45s.mp4"
+    },
+    {
+      "type": "Turnover",
+      "team": "blue",
+      "time_in_clip": 4.1,
+      "absolute_time": 184.1,
+      "description": "Blue team player intercepts a kick from the red team",
+      "clip_file": "clip_03m00s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 13.2,
+      "absolute_time": 193.2,
+      "outcome": "1Point",
+      "description": "Blue team player scores a point",
+      "clip_file": "clip_03m00s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 7.0,
+      "absolute_time": 202.0,
+      "outcome": "1Point",
+      "description": "Blue team player scores point",
+      "clip_file": "clip_03m15s.mp4"
+    },
+    {
+      "type": "Foul",
+      "team": "blue",
+      "time_in_clip": 4.0,
+      "absolute_time": 214.0,
+      "description": "Free kick awarded to blue team.",
+      "clip_file": "clip_03m30s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 8.0,
+      "absolute_time": 218.0,
+      "outcome": "1Point",
+      "description": "Blue team player scores a point from a free kick.",
+      "clip_file": "clip_03m30s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 12.7,
+      "absolute_time": 237.7,
+      "outcome": "1Point",
+      "description": "Blue team player scores a point",
+      "clip_file": "clip_03m45s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 2.6,
+      "absolute_time": 242.6,
+      "outcome": "1Point",
+      "description": "Umpire raises white flag to signal a point for the blue team.",
+      "clip_file": "clip_04m00s.mp4"
+    },
+    {
+      "type": "Kickout",
+      "team": "red",
+      "time_in_clip": 5.6,
+      "absolute_time": 245.6,
+      "description": "Red team goalkeeper kicks ball from hands.",
+      "clip_file": "clip_04m00s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "red",
+      "time_in_clip": 8.7,
+      "absolute_time": 263.7,
+      "outcome": "1Point",
+      "description": "Red team player scores a point",
+      "clip_file": "clip_04m15s.mp4"
+    },
+    {
+      "type": "Turnover",
+      "team": "blue",
+      "time_in_clip": 3.0,
+      "absolute_time": 273.0,
+      "description": "Red player is tackled and loses possession, blue player gains control of the ball.",
+      "clip_file": "clip_04m30s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 12.8,
+      "absolute_time": 282.8,
+      "outcome": "1Point",
+      "description": "Blue player kicks the ball over the crossbar for a point.",
+      "clip_file": "clip_04m30s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 5.0,
+      "absolute_time": 290.0,
+      "outcome": "1Point",
+      "description": "Blue team player scores a point",
+      "clip_file": "clip_04m45s.mp4"
+    },
+    {
+      "type": "Kickout",
+      "team": "red",
+      "time_in_clip": 12.2,
+      "absolute_time": 297.2,
+      "description": "Red team goalkeeper kicks ball from hands",
+      "clip_file": "clip_04m45s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 12.8,
+      "absolute_time": 312.8,
+      "outcome": "1Point",
+      "description": "A blue player kicks the ball over the bar for a point.",
+      "clip_file": "clip_05m00s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 1.5,
+      "absolute_time": 316.5,
+      "outcome": "1Point",
+      "description": "Blue team player scores a point",
+      "clip_file": "clip_05m15s.mp4"
+    },
+    {
+      "type": "Kickout",
+      "team": "red",
+      "time_in_clip": 8.5,
+      "absolute_time": 338.5,
+      "description": "Red team goalkeeper kicks ball from hands",
+      "clip_file": "clip_05m30s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 11.2,
+      "absolute_time": 341.2,
+      "outcome": "1Point",
+      "description": "Blue team player scores point",
+      "clip_file": "clip_05m30s.mp4"
+    },
+    {
+      "type": "Kickout",
+      "team": "red",
+      "time_in_clip": 5.6,
+      "absolute_time": 350.6,
+      "description": "Red team goalkeeper kicks ball from hands",
+      "clip_file": "clip_05m45s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 12.7,
+      "absolute_time": 357.7,
+      "outcome": "1Point",
+      "description": "Blue team player scores a point",
+      "clip_file": "clip_05m45s.mp4"
+    },
+    {
+      "type": "Kickout",
+      "team": "red",
+      "time_in_clip": 4.9,
+      "absolute_time": 364.9,
+      "description": "Red team goalkeeper kicks ball from hands",
+      "clip_file": "clip_06m00s.mp4"
+    },
+    {
+      "type": "Turnover",
+      "team": "blue",
+      "time_in_clip": 2.8,
+      "absolute_time": 377.8,
+      "description": "Blue player dispossesses red player and gains control of the ball.",
+      "clip_file": "clip_06m15s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 8.0,
+      "absolute_time": 383.0,
+      "outcome": "1Point",
+      "description": "Blue team player scores a point.",
+      "clip_file": "clip_06m15s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 12.5,
+      "absolute_time": 402.5,
+      "outcome": "1Point",
+      "description": "Blue team player scores a point",
+      "clip_file": "clip_06m30s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 12.5,
+      "absolute_time": 417.5,
+      "outcome": "1Point",
+      "description": "Blue team player scores a point",
+      "clip_file": "clip_06m45s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 9.5,
+      "absolute_time": 429.5,
+      "outcome": "1Point",
+      "description": "Blue team player scores point",
+      "clip_file": "clip_07m00s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 12.5,
+      "absolute_time": 447.5,
+      "outcome": "1Point",
+      "description": "Blue team player scores point",
+      "clip_file": "clip_07m15s.mp4"
+    },
+    {
+      "type": "Foul",
+      "team": "red",
+      "time_in_clip": 7.5,
+      "absolute_time": 472.5,
+      "description": "Foul by blue player, free kick awarded to red team.",
+      "clip_file": "clip_07m45s.mp4"
+    },
+    {
+      "type": "Foul",
+      "team": "blue",
+      "time_in_clip": 7.0,
+      "absolute_time": 487.0,
+      "description": "Foul by blue team, free kick awarded to red team",
+      "clip_file": "clip_08m00s.mp4"
+    },
+    {
+      "type": "Kickout",
+      "team": "red",
+      "time_in_clip": 4.0,
+      "absolute_time": 499.0,
+      "description": "Red team goalkeeper kicks ball from hands",
+      "clip_file": "clip_08m15s.mp4"
+    },
+    {
+      "type": "Kickout",
+      "team": "red",
+      "time_in_clip": 0.7,
+      "absolute_time": 510.7,
+      "description": "Red team goalkeeper kicks ball from hands",
+      "clip_file": "clip_08m30s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 8.5,
+      "absolute_time": 518.5,
+      "outcome": "1Point",
+      "description": "Blue team player scores point",
+      "clip_file": "clip_08m30s.mp4"
+    },
+    {
+      "type": "Kickout",
+      "team": "red",
+      "time_in_clip": 4.7,
+      "absolute_time": 529.7,
+      "description": "Red team goalkeeper kicks ball from hands",
+      "clip_file": "clip_08m45s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 12.3,
+      "absolute_time": 537.3,
+      "outcome": "1Point",
+      "description": "Blue team player scores a point",
+      "clip_file": "clip_08m45s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 12.0,
+      "absolute_time": 552.0,
+      "outcome": "1Point",
+      "description": "Blue team player scores point",
+      "clip_file": "clip_09m00s.mp4"
+    },
+    {
+      "type": "Foul",
+      "team": "red",
+      "time_in_clip": 6.1,
+      "absolute_time": 561.1,
+      "description": "Foul committed by red team player",
+      "clip_file": "clip_09m15s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 12.1,
+      "absolute_time": 582.1,
+      "outcome": "1Point",
+      "description": "Blue team player scores a point",
+      "clip_file": "clip_09m30s.mp4"
+    },
+    {
+      "type": "Kickout",
+      "team": "red",
+      "time_in_clip": 1.4,
+      "absolute_time": 586.4,
+      "description": "Red team goalkeeper kicks ball from hands",
+      "clip_file": "clip_09m45s.mp4"
+    },
+    {
+      "type": "Turnover",
+      "team": "blue",
+      "time_in_clip": 3.6,
+      "absolute_time": 588.6,
+      "description": "Blue team player wins possession from red team's kickout",
+      "clip_file": "clip_09m45s.mp4"
+    },
+    {
+      "type": "Shot",
+      "team": "blue",
+      "time_in_clip": 12.7,
+      "absolute_time": 597.7,
+      "outcome": "1Point",
+      "description": "Blue team player scores a point",
+      "clip_file": "clip_09m45s.mp4"
+    }
+  ]
+}

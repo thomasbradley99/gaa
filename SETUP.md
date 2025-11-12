@@ -33,7 +33,7 @@ psql -d gaa_app -f webapp/gaa-webapp/db/schema.sql
 ## Step 3: Backend Setup
 
 ```bash
-cd webapp/simple/backend
+cd webapp/gaa-webapp/backend
 
 # Install dependencies
 npm install
@@ -58,7 +58,7 @@ Backend will run on `http://localhost:3005`
 
 ```bash
 # Open a new terminal
-cd webapp/simple/frontend
+cd webapp/gaa-webapp/frontend
 
 # Install dependencies
 npm install
@@ -112,20 +112,20 @@ If you don't have one, the page will still work (just no background video).
 - Verify connection string format: `postgresql://user:password@host:port/database`
 
 ### Map not showing
-- Make sure `leaflet` and `react-leaflet` are installed: `cd webapp/simple/frontend && npm install`
+- Make sure `leaflet` and `react-leaflet` are installed: `cd webapp/gaa-webapp/frontend && npm install`
 - Check browser console for errors
-- Verify `gaapitchfinder_data.json` exists in `webapp/simple/frontend/src/components/pitch-finder/`
+- Verify `gaapitchfinder_data.json` exists in `webapp/gaa-webapp/frontend/src/components/pitch-finder/`
 
 ## Quick Commands Reference
 
 ```bash
 # Start everything (in separate terminals)
-cd webapp/simple/backend && npm run dev    # Terminal 1
-cd webapp/simple/frontend && npm run dev    # Terminal 2
+cd webapp/gaa-webapp/backend && npm run dev    # Terminal 1
+cd webapp/gaa-webapp/frontend && npm run dev    # Terminal 2
 
 # Or use a process manager like concurrently
 npm install -g concurrently
-concurrently "cd webapp/simple/backend && npm run dev" "cd webapp/simple/frontend && npm run dev"
+concurrently "cd webapp/gaa-webapp/backend && npm run dev" "cd webapp/gaa-webapp/frontend && npm run dev"
 ```
 
 ## Next Steps

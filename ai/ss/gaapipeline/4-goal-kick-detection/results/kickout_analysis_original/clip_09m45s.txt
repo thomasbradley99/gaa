@@ -1,0 +1,10 @@
+HALF: first_half
+TIMESTAMP: 09:45
+CLIP_FILE: clip_09m45s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 09:45
+
+REASONING: The video shows continuous open play with tackles and turnovers near the goal. There is no stoppage of play, no referee signal, no clearing of the 20-meter area, and no structured kick from a stationary ball by the goalkeeper. This is a normal phase of the match, not an official kickout.

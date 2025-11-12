@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAA Game Viewer with AI Descriptions</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .container {
+            max-width: 2400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 20px;
+        }
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        h1 {
+            grid-column: 1 / -1;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+        .video-section {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        video {
+            width: 100%;
+            border-radius: 4px;
+            background: #000;
+        }
+        .controls {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        button:active {
+            background: #3d8b40;
+        }
+        .time-display {
+            background: #333;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+        .descriptions-section {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+            max-height: 800px;
+            overflow-y: auto;
+        }
+        .description-block {
+            background: #333;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #666;
+            transition: all 0.3s;
+        }
+        .description-block.active {
+            border-left-color: #4CAF50;
+            background: #3a4a3a;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+        }
+        .description-block.upcoming {
+            border-left-color: #2196F3;
+            opacity: 0.7;
+        }
+        .description-block.past {
+            opacity: 0.5;
+        }
+        .time-stamp {
+            font-weight: bold;
+            color: #4CAF50;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        .description-text {
+            line-height: 1.6;
+            color: #ddd;
+        }
+        .jump-btn {
+            background: #2196F3;
+            font-size: 12px;
+            padding: 5px 10px;
+            margin-top: 8px;
+        }
+        .jump-btn:hover {
+            background: #1976D2;
+        }
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4CAF50;
+            border-radius: 5px;
+        }
+        .info {
+            grid-column: 1 / -1;
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #2196F3;
+        }
+        .professional-section {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+            max-height: 800px;
+            overflow-y: auto;
+        }
+        .event-block {
+            background: #333;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border-left: 4px solid #ff9800;
+            font-size: 14px;
+        }
+        .event-block.active {
+            border-left-color: #ff9800;
+            background: #4a3a2a;
+            box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+        }
+        .event-time {
+            font-weight: bold;
+            color: #ff9800;
+            font-size: 14px;
+        }
+        .event-code {
+            color: #ddd;
+            margin-top: 4px;
+        }
+        .event-label {
+            color: #aaa;
+            font-size: 12px;
+            font-style: italic;
+            margin-top: 2px;
+        }
+        .warning {
+            grid-column: 1 / -1;
+            background: #3a2a2a;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #ff9800;
+            color: #ffb74d;
+        }
+        .loading {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 20px;
+            color: #999;
+        }
+        .filters {
+            background: #2a2a2a;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        .filter-group {
+            margin-bottom: 10px;
+        }
+        .filter-group label {
+            display: block;
+            color: #4CAF50;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .filter-group input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            background: #333;
+            border: 1px solid #555;
+            color: #fff;
+            border-radius: 3px;
+        }
+        .event-type-filters {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px;
+            margin-top: 5px;
+        }
+        .event-type-filters label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: normal;
+            color: #ddd;
+            cursor: pointer;
+        }
+        .event-type-filters input[type="checkbox"] {
+            cursor: pointer;
+        }
+        .filter-btn {
+            background: #2196F3;
+            margin-top: 10px;
+        }
+        .event-block.hidden {
+            display: none;
+        }
+        /* Color coding for event matching */
+        .event-block.true-positive {
+            border-left-color: #4CAF50;
+            background: #2d4030;
+        }
+        .event-block.false-positive {
+            border-left-color: #f44336;
+            background: #4a2d2d;
+        }
+        .event-block.false-negative {
+            border-left-color: #ff9800;
+            background: #4a3d2d;
+        }
+        .match-badge {
+            display: inline-block;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-left: 5px;
+            font-weight: bold;
+        }
+        .match-badge.tp {
+            background: #4CAF50;
+            color: white;
+        }
+        .match-badge.fp {
+            background: #f44336;
+            color: white;
+        }
+        .match-badge.fn {
+            background: #ff9800;
+            color: white;
+        }
+        .stats-summary {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            grid-column: 1 / -1;
+        }
+        .stats-row {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .stat-box {
+            flex: 1;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .stat-box.tp {
+            background: #2d4030;
+            border: 2px solid #4CAF50;
+        }
+        .stat-box.fp {
+            background: #4a2d2d;
+            border: 2px solid #f44336;
+        }
+        .stat-box.fn {
+            background: #4a3d2d;
+            border: 2px solid #ff9800;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏐 GAA Game Viewer with AI Descriptions</h1>
+        <div class="info" id="gameInfo">
+            <strong id="gameTitle">Loading...</strong> | <span id="testType">Loading...</span>
+        </div>
+        
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <!-- Compact Filters -->
+            <div style="background: #2a2a2a; padding: 15px; border-radius: 8px;">
+                <h3 style="margin-top: 0; font-size: 16px;">🔍 Filters</h3>
+                <div class="filters">
+                <div class="filter-group">
+                    <label>Teams</label>
+                    <div style="display: flex; gap: 15px;">
+                        <label style="display: flex; align-items: center; gap: 5px; font-weight: normal; color: #ddd; cursor: pointer;">
+                            <input type="checkbox" id="filterOwn" checked> Own
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px; font-weight: normal; color: #ddd; cursor: pointer;">
+                            <input type="checkbox" id="filterOpp" checked> Opp
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Time Range (minutes)</label>
+                    <input type="number" id="minTime" value="0" min="0" style="width: 50px;"> 
+                    to 
+                    <input type="number" id="maxTime" value="0" min="0" style="width: 50px;">
+                    <span id="maxTimeLabel" style="color: #aaa; font-size: 11px; margin-left: 5px;">(auto)</span>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Event Types (select to filter, none = show all)</label>
+                    <div class="event-type-filters">
+                        <label><input type="checkbox" class="event-filter" value="Shot Own"> Shots Own</label>
+                        <label><input type="checkbox" class="event-filter" value="Shot Opp"> Shots Opp</label>
+                        <label><input type="checkbox" class="event-filter" value="EXACT:Point"> Points</label>
+                        <label><input type="checkbox" class="event-filter" value="EXACT:Goal"> Goals</label>
+                        <label><input type="checkbox" class="event-filter" value="Kickout Own"> Kickouts Own</label>
+                        <label><input type="checkbox" class="event-filter" value="Kickout Opp"> Kickouts Opp</label>
+                        <label><input type="checkbox" class="event-filter" value="Throw Up"> Throw Ups</label>
+                        <label><input type="checkbox" class="event-filter" value="Turnover Won"> Turnovers Won</label>
+                        <label><input type="checkbox" class="event-filter" value="Turnover lost"> Turnovers Lost</label>
+                        <label><input type="checkbox" class="event-filter" value="Foul Awarded"> Fouls Awarded</label>
+                        <label><input type="checkbox" class="event-filter" value="Foul Conceded"> Fouls Conceded</label>
+                        <label><input type="checkbox" class="event-filter" value="Attack Own"> Attacks Own</label>
+                        <label><input type="checkbox" class="event-filter" value="Attack OPP"> Attacks Opp</label>
+                        <label><input type="checkbox" class="event-filter" value="1st Half Start"> Half Starts</label>
+                    </div>
+                </div>
+                
+                <button class="filter-btn" onclick="applyFilters()">Apply Filters</button>
+            </div>
+        </div>
+            
+            <!-- AI Events -->
+            <div style="background: #2a2a2a; padding: 15px; border-radius: 8px;">
+                <h3 style="margin-top: 0; font-size: 16px;">🤖 AI Events</h3>
+                <div id="aiEventsList" style="max-height: 400px; overflow-y: auto;">Loading...</div>
+            </div>
+            
+            <!-- Professional Events -->
+            <div style="background: #2a2a2a; padding: 15px; border-radius: 8px;">
+                <h3 style="margin-top: 0; font-size: 16px;">🏆 Pro Events</h3>
+                <div id="professionalList" style="max-height: 400px; overflow-y: auto;">Loading...</div>
+            </div>
+        </div>
+        
+        <!-- Main Content: Video + Descriptions -->
+        <div class="main-content">
+            <div class="video-section">
+            <video id="gameVideo" controls>
+                <source id="videoSource" src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="controls">
+                <div class="time-display">
+                    <span id="currentTime">00:00</span> / <span id="duration">00:00</span>
+                </div>
+                <button onclick="skipTime(-10)">⏪ -10s</button>
+                <button onclick="skipTime(-5)">⏪ -5s</button>
+                <button onclick="video.paused ? video.play() : video.pause()">⏯️ Play/Pause</button>
+                <button onclick="skipTime(5)">+5s ⏩</button>
+                <button onclick="skipTime(10)">+10s ⏩</button>
+                <button onclick="video.playbackRate = 0.5">0.5x</button>
+                <button onclick="video.playbackRate = 1">1x</button>
+                <button onclick="video.playbackRate = 1.5">1.5x</button>
+            </div>
+            
+            <!-- AI Descriptions moved below video -->
+            <div class="descriptions-section">
+                <h3>🤖 AI Descriptions</h3>
+                <div id="descriptionsList" style="max-height: 400px; overflow-y: auto;">Loading descriptions...</div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        // Parse URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameName = urlParams.get('game') || 'cmull-vs-castleconnor';
+        const outputFolder = urlParams.get('output') || '6-with-audio';
+        const audioMode = urlParams.get('audio') || 'with-audio';
+        
+        // S3 base URL for GAA
+        const S3_BASE = 'https://end-nov-webapp-clann.s3.eu-west-1.amazonaws.com/gaa-analysis';
+        
+        console.log('🌐 Base URL:', S3_BASE);
+        console.log('📍 Current location:', window.location.href);
+        
+        // Update page info
+        document.getElementById('gameTitle').textContent = gameName.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        document.getElementById('testType').textContent = 'GAA Match Analysis';
+        
+        const video = document.getElementById('gameVideo');
+        const videoSource = document.getElementById('videoSource');
+        
+        // Set video source
+        videoSource.src = `${S3_BASE}/${gameName}/video.mp4`;
+        video.load();
+
+        // Debug logging for video
+        console.log('=== GAA VIDEO DEBUG INFO ===');
+        console.log('Game:', gameName);
+        console.log('Output folder:', outputFolder);
+        console.log('Audio mode:', audioMode);
+        console.log('Video source:', videoSource.src);
+        console.log('Current page URL:', window.location.href);
+        
+        // Video event listeners for debugging
+        video.addEventListener('loadstart', () => {
+            console.log('✅ Video loading started');
+        });
+        
+        video.addEventListener('loadeddata', () => {
+            console.log('✅ Video data loaded successfully!');
+            console.log('   Duration:', video.duration, 'seconds');
+        });
+        
+        video.addEventListener('error', (e) => {
+            console.error('❌ Video error:', e);
+            console.error('   Error code:', video.error ? video.error.code : 'unknown');
+            if (video.error) {
+                const errorCodes = {
+                    1: 'MEDIA_ERR_ABORTED - Loading aborted',
+                    2: 'MEDIA_ERR_NETWORK - Network error',
+                    3: 'MEDIA_ERR_DECODE - Decoding error',
+                    4: 'MEDIA_ERR_SRC_NOT_SUPPORTED - Source not supported or not found'
+                };
+                console.error('   Error type:', errorCodes[video.error.code] || 'Unknown');
+            }
+        });
+        
+        video.addEventListener('canplay', () => {
+            console.log('✅ Video can start playing');
+        });
+
+        // Load AI events from S3
+        let aiEvents = [];
+        let aiEventsLoaded = false;
+        
+        console.log('📥 Loading AI events from:', `${S3_BASE}/${gameName}/ai_events_data.js`);
+        
+        fetch(`${S3_BASE}/${gameName}/ai_events_data.js`)
+            .then(response => response.text())
+            .then(jsCode => {
+                const match = jsCode.match(/const aiEventsData = (\[[\s\S]*\]);/);
+                if (match) {
+                    aiEvents = JSON.parse(match[1]);
+                    console.log('✅ Loaded', aiEvents.length, 'AI events');
+                    console.log('First AI event:', aiEvents[0]);
+                    aiEventsLoaded = true;
+                    checkAndPerformMatching();
+                } else {
+                    console.error('❌ Could not parse AI events from JS code');
+                    console.error('JS code preview:', jsCode.substring(0, 200));
+                    document.getElementById('aiEventsList').innerHTML = 
+                        '<div style="color: #f44336;">Failed to parse AI events data.</div>';
+                }
+            })
+            .catch(err => {
+                console.error('❌ Failed to load AI events:', err);
+                document.getElementById('aiEventsList').innerHTML = 
+                    '<div style="color: #f44336;">No AI events available.</div>';
+            });
+        
+        // Load professional events from S3
+        let professionalEvents = [];
+        let professionalEventsLoaded = false;
+        
+        console.log('📥 Loading professional events from:', `${S3_BASE}/${gameName}/professional_events_data.js`);
+        
+        fetch(`${S3_BASE}/${gameName}/professional_events_data.js`)
+            .then(response => {
+                console.log('✅ Professional fetch response:', response.status);
+                return response.text();
+            })
+            .then(jsCode => {
+                console.log('✅ Received professional JS code, length:', jsCode.length);
+                const match = jsCode.match(/const professionalEvents = (\[[\s\S]*\]);/);
+                if (match) {
+                    professionalEvents = JSON.parse(match[1]);
+                    console.log('✅ Loaded', professionalEvents.length, 'professional events');
+                    professionalEventsLoaded = true;
+                    checkAndPerformMatching();
+                } else {
+                    console.error('❌ Could not parse professional events');
+                }
+            })
+            .catch(err => {
+                console.error('❌ Failed to load professional events:', err);
+                document.getElementById('professionalList').innerHTML = 
+                    '<div style="color: #f44336;">No professional data available.</div>';
+            });
+
+        // Load AI descriptions from S3
+        let descriptionsData = [];
+        
+        console.log('📥 Loading descriptions from:', `${S3_BASE}/${gameName}/descriptions_data.js`);
+        
+        fetch(`${S3_BASE}/${gameName}/descriptions_data.js`)
+            .then(response => {
+                console.log('✅ Fetch response:', response.status);
+                return response.text();
+            })
+            .then(jsCode => {
+                console.log('✅ Received JS code, length:', jsCode.length);
+                // Parse the JSON from the JS code
+                const match = jsCode.match(/const descriptionsData = (\[[\s\S]*\]);/);
+                if (match) {
+                    descriptionsData = JSON.parse(match[1]);
+                    console.log('✅ Loaded', descriptionsData.length, 'descriptions');
+                    renderDescriptions();
+                } else {
+                    console.error('❌ Could not parse descriptions from JS code');
+                    document.getElementById('descriptionsList').innerHTML = 
+                        '<div style="color: #f44336;">Failed to parse descriptions data.</div>';
+                }
+            })
+            .catch(err => {
+                console.error('❌ Failed to load descriptions:', err);
+                document.getElementById('descriptionsList').innerHTML = 
+                    '<div style="color: #f44336;">Failed to load descriptions. Error: ' + err.message + '</div>';
+            });
+
+        // Format time as MM:SS
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        // Update time display
+        video.addEventListener('timeupdate', () => {
+            document.getElementById('currentTime').textContent = formatTime(video.currentTime);
+            updateActiveDescription();
+        });
+
+        video.addEventListener('loadedmetadata', () => {
+            document.getElementById('duration').textContent = formatTime(video.duration);
+            // Set max time filter to video duration (in minutes)
+            const maxTimeMinutes = Math.ceil(video.duration / 60);
+            const maxTimeInput = document.getElementById('maxTime');
+            maxTimeInput.value = maxTimeMinutes;
+            maxTimeInput.max = maxTimeMinutes;
+            document.getElementById('maxTimeLabel').textContent = `(max: ${maxTimeMinutes}m)`;
+            // Re-apply filters now that maxTime is set
+            if (aiEventsLoaded && professionalEventsLoaded) {
+                applyFilters();
+            }
+            // Start at match start (calibration will determine this)
+            video.currentTime = 540; // Default 9:00, will be adjusted by calibration
+            console.log('⏩ Starting at match start');
+        });
+
+        // Skip time
+        function skipTime(seconds) {
+            video.currentTime = Math.max(0, Math.min(video.duration, video.currentTime + seconds));
+        }
+
+        // Jump to specific time
+        function jumpTo(time) {
+            video.currentTime = time;
+            video.play();
+        }
+
+        // Match AI events to professional events
+        const MATCH_TOLERANCE = 25; // seconds
+        let matchResults = { aiMatches: [], proMatches: [], tp: 0, fp: 0, fn: 0 };
+        
+        function performMatching() {
+            if (aiEvents.length === 0 || professionalEvents.length === 0) {
+                console.log('⚠️ Cannot perform matching - no events loaded');
+                return;
+            }
+            
+            matchResults = { aiMatches: [], proMatches: [], tp: 0, fp: 0, fn: 0 };
+            
+            // Match each AI event to professional events
+            aiEvents.forEach((aiEvt, aiIdx) => {
+                let matched = false;
+                
+                for (let proIdx = 0; proIdx < professionalEvents.length; proIdx++) {
+                    const proEvt = professionalEvents[proIdx];
+                    const timeDiff = Math.abs(aiEvt.time - proEvt.time);
+                    
+                    // Check if times match and event codes match
+                    if (timeDiff <= MATCH_TOLERANCE && aiEvt.code === proEvt.code) {
+                        matchResults.aiMatches[aiIdx] = { matched: true, proIdx };
+                        if (!matchResults.proMatches[proIdx]) {
+                            matchResults.proMatches[proIdx] = { matched: true, aiIdx };
+                        }
+                        matched = true;
+                        matchResults.tp++;
+                        break;
+                    }
+                }
+                
+                if (!matched) {
+                    matchResults.aiMatches[aiIdx] = { matched: false };
+                    matchResults.fp++;
+                }
+            });
+            
+            // Count false negatives (professional events not matched)
+            professionalEvents.forEach((proEvt, proIdx) => {
+                if (!matchResults.proMatches[proIdx]) {
+                    matchResults.proMatches[proIdx] = { matched: false };
+                    matchResults.fn++;
+                }
+            });
+            
+            // Calculate metrics (for console logging)
+            const precision = matchResults.tp / (matchResults.tp + matchResults.fp) || 0;
+            const recall = matchResults.tp / (matchResults.tp + matchResults.fn) || 0;
+            const f1 = 2 * (precision * recall) / (precision + recall) || 0;
+            
+            console.log('🎯 Matching complete:', {
+                tp: matchResults.tp,
+                fp: matchResults.fp,
+                fn: matchResults.fn,
+                precision: (precision * 100).toFixed(1) + '%',
+                recall: (recall * 100).toFixed(1) + '%',
+                f1: (f1 * 100).toFixed(1) + '%'
+            });
+        }
+        
+        // Check if both events loaded, then perform matching and render
+        function checkAndPerformMatching() {
+            if (aiEventsLoaded && professionalEventsLoaded) {
+                console.log('📊 Both event lists loaded, performing matching...');
+                performMatching();
+                renderAIEvents();
+                renderProfessionalEvents();
+            }
+        }
+        
+        // Render AI events
+        function renderAIEvents() {
+            const container = document.getElementById('aiEventsList');
+            if (!container) {
+                console.error('❌ aiEventsList container not found');
+                return;
+            }
+            
+            console.log('📝 renderAIEvents called, aiEvents length:', aiEvents ? aiEvents.length : 'undefined');
+            if (aiEvents && aiEvents.length > 0) {
+                console.log('First AI event in render:', aiEvents[0]);
+            }
+            
+            if (!aiEvents || aiEvents.length === 0) {
+                container.innerHTML = '<div style="color: #aaa; padding: 10px;">No AI events loaded</div>';
+                return;
+            }
+            
+            container.innerHTML = aiEvents.map((evt, index) => {
+                const labelText = evt.label ? ` (${evt.label})` : '';
+                const match = matchResults.aiMatches && matchResults.aiMatches[index];
+                let cssClass = '';
+                let badge = '';
+                
+                if (match) {
+                    if (match.matched) {
+                        cssClass = 'true-positive';
+                        badge = '<span class="match-badge tp">✓ MATCH</span>';
+                    } else {
+                        cssClass = 'false-positive';
+                        badge = '<span class="match-badge fp">✗ FALSE</span>';
+                    }
+                }
+                
+                return `
+                    <div class="event-block ${cssClass}" id="ai-${index}" data-time="${evt.time}" data-code="${evt.code}">
+                        <div class="event-time">[${evt.timeLabel}]${badge}</div>
+                        <div class="event-code">${evt.code}${labelText}</div>
+                        <button class="jump-btn" onclick="jumpTo(${evt.time})">Jump</button>
+                    </div>
+                `;
+            }).join('');
+            
+            console.log(`✅ Rendered ${aiEvents.length} AI events`);
+        }
+        
+        // Render professional events
+        function renderProfessionalEvents() {
+            const container = document.getElementById('professionalList');
+            
+            if (!professionalEvents || professionalEvents.length === 0) {
+                container.innerHTML = '<div style="color: #aaa; padding: 10px;">No professional events loaded</div>';
+                return;
+            }
+            
+            container.innerHTML = professionalEvents.map((evt, index) => {
+                const labelText = evt.label ? ` (${evt.label})` : '';
+                const match = matchResults.proMatches && matchResults.proMatches[index];
+                let cssClass = '';
+                let badge = '';
+                
+                if (match) {
+                    if (match.matched) {
+                        cssClass = 'true-positive';
+                        badge = '<span class="match-badge tp">✓ MATCH</span>';
+                    } else {
+                        cssClass = 'false-negative';
+                        badge = '<span class="match-badge fn">⚠ MISSED</span>';
+                    }
+                }
+                
+                return `
+                    <div class="event-block ${cssClass}" id="prof-${index}" data-time="${evt.time}" data-code="${evt.code}">
+                        <div class="event-time">[${evt.timeLabel}]${badge}</div>
+                        <div class="event-code">${evt.code}${labelText}</div>
+                        <button class="jump-btn" onclick="jumpTo(${evt.time})">Jump</button>
+                    </div>
+                `;
+            }).join('');
+            
+            console.log(`✅ Rendered ${professionalEvents.length} professional events`);
+            
+            // Auto-apply filters on first load
+            applyFilters();
+        }
+        
+        // Apply filters to both AI and professional events
+        function applyFilters() {
+            const minTimeInput = parseInt(document.getElementById('minTime').value) || 0;
+            const maxTimeInput = parseInt(document.getElementById('maxTime').value) || 0;
+            const minTime = minTimeInput * 60;
+            // If maxTime is 0 or not set, use video duration (or a large number)
+            const maxTime = maxTimeInput > 0 ? maxTimeInput * 60 : (video.duration || 999999);
+            
+            // Get team filters
+            const showOwn = document.getElementById('filterOwn').checked;
+            const showOpp = document.getElementById('filterOpp').checked;
+            
+            // Get selected event types
+            const selectedTypes = Array.from(document.querySelectorAll('.event-filter:checked'))
+                .map(cb => cb.value);
+            
+            // If no types selected, show all types
+            const showAllTypes = selectedTypes.length === 0;
+            
+            console.log('🔍 Applying filters:', {minTime, maxTime, showOwn, showOpp, selectedTypes, showAllTypes});
+            
+            // Helper function to check if event matches filters
+            function matchesFilters(evt) {
+                // Check time range (if maxTime is 0, show all events)
+                const inTimeRange = evt.time >= minTime && evt.time <= maxTime;
+                
+                // Check team filter (GAA uses Own/Opp instead of Home/Opp)
+                const isOwn = evt.code.includes('Own') || evt.code.startsWith('Possession Own') || evt.code.startsWith('Pos Own') || evt.code.startsWith('Attack Own');
+                const isOpp = evt.code.includes('Opp') || evt.code.startsWith('Possession Opp') || evt.code.startsWith('Pos Opp') || evt.code.startsWith('Attack Opp') || evt.code.startsWith('Attack OPP');
+                // Show events that match team filter OR neutral events (events without Own/Opp)
+                const isNeutral = !isOwn && !isOpp;
+                const matchesTeam = (showOwn && isOwn) || (showOpp && isOpp) || isNeutral;
+                
+                // Check event type with exact matching for EXACT: prefix
+                const matchesType = showAllTypes || selectedTypes.some(type => {
+                    if (type.startsWith('EXACT:')) {
+                        // Exact match for GAA events
+                        const exactType = type.replace('EXACT:', '');
+                        return evt.code.includes(exactType);
+                    } else {
+                        // Substring match
+                        return evt.code.includes(type);
+                    }
+                });
+                
+                return inTimeRange && matchesTeam && matchesType;
+            }
+            
+            // Filter AI events
+            let visibleAICount = 0;
+            aiEvents.forEach((evt, index) => {
+                const element = document.getElementById(`ai-${index}`);
+                if (!element) return;
+                
+                if (matchesFilters(evt)) {
+                    element.classList.remove('hidden');
+                    visibleAICount++;
+                } else {
+                    element.classList.add('hidden');
+                }
+            });
+            
+            // Filter professional events
+            let visibleProCount = 0;
+            professionalEvents.forEach((evt, index) => {
+                const element = document.getElementById(`prof-${index}`);
+                if (!element) return;
+                
+                if (matchesFilters(evt)) {
+                    element.classList.remove('hidden');
+                    visibleProCount++;
+                } else {
+                    element.classList.add('hidden');
+                }
+            });
+            
+            console.log(`✅ Showing ${visibleAICount} / ${aiEvents.length} AI events`);
+            console.log(`✅ Showing ${visibleProCount} / ${professionalEvents.length} Pro events`);
+        }
+
+        // Render AI descriptions
+        function renderDescriptions() {
+            const container = document.getElementById('descriptionsList');
+            container.innerHTML = descriptionsData.map((desc, index) => {
+                const timestamp = desc.timestamp;
+                const timeLabel = formatTime(timestamp);
+                const description = desc.description;
+                
+                return `
+                <div class="description-block" id="desc-${index}" data-start="${timestamp}">
+                    <div class="time-stamp">[${timeLabel}]</div>
+                    <div class="description-text">${description}</div>
+                    <button class="jump-btn" onclick="jumpTo(${timestamp})">Jump to ${timeLabel}</button>
+                </div>
+                `;
+            }).join('');
+        }
+
+        // Update active description and events based on current time
+        function updateActiveDescription() {
+            const currentTime = video.currentTime;
+            
+            // Update AI descriptions
+            descriptionsData.forEach((desc, index) => {
+                const timestamp = desc.timestamp;
+                const element = document.getElementById(`desc-${index}`);
+                if (!element) return;
+                
+                // Each description is 60 seconds (1 minute clip)
+                const isActive = currentTime >= timestamp && currentTime < timestamp + 60;
+                const isUpcoming = currentTime < timestamp && currentTime >= timestamp - 30;
+                const isPast = currentTime >= timestamp + 60;
+
+                element.classList.remove('active', 'upcoming', 'past');
+                
+                if (isActive) {
+                    element.classList.add('active');
+                } else if (isUpcoming) {
+                    element.classList.add('upcoming');
+                } else if (isPast) {
+                    element.classList.add('past');
+                }
+            });
+            
+            // Update professional events (highlight if within ±5 seconds)
+            professionalEvents.forEach((evt, index) => {
+                const element = document.getElementById(`prof-${index}`);
+                if (!element) return;
+                
+                const timeDiff = Math.abs(currentTime - evt.time);
+                const isActive = timeDiff <= 5;  // Highlight if within 5 seconds
+
+                element.classList.remove('active');
+                if (isActive) {
+                    element.classList.add('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+

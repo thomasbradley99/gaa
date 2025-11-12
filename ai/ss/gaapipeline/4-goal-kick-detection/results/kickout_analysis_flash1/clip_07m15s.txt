@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 07:15
+CLIP_FILE: clip_07m15s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 07:15
+DETECTIONS: ['player', 'ball', 'pitch']
+MISSED_DETECTIONS: ['goalpost', 'goalkeeper']
+REASONING: There is no indication of a kickout being taken within this clip. The goalkeepers or goalposts are not observed, and play is underway.
+LOW_CONFIDENCE_KICKOUTS: []

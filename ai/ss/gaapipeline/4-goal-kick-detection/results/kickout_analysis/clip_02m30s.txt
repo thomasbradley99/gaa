@@ -1,0 +1,34 @@
+HALF: first_half
+TIMESTAMP: 02:30
+CLIP_FILE: clip_02m30s.mp4
+ANALYSIS:
+KICKOUT: YES
+CONFIDENCE: 9
+HALF: first_half
+CLIP_TIME: 02:30
+DETECTIONS: ['grass', 'white goal frame', 'netted goal', 'football player', 'football player', 'white round ball white football football', 'referee', 'upright posts', 'white round ball football', 'football player', 'goalie', 'football player', 'white pitch lines', 'football player', 'football player', 'upright posts', 'football goal', 'football goal']
+MISSED_DETECTIONS: []
+
+TRIGGER_EVENT: Ball out of play leads to goalkeeper preparing for a kickout.
+EXACT_CONTACT_TIME: 0.09
+KICKING_TEAM: Team B
+PLAYER_POSITIONING: YES
+
+KICK_ANALYSIS:
+KICK_DISTANCE: Long
+KICK_DIRECTION: Center
+KICK_ACCURACY: Contested
+
+POSSESSION_OUTCOME:
+POSSESSION_WON_BY: Contested
+POSSESSION_LOCATION: Field position where caught
+NEXT_ACTION: What happened after possession
+
+JERSEY_COLORS:
+TEAM_A_COLORS: Red and black
+TEAM_B_COLORS: Blue and white
+GOALKEEPER_JERSEY: Orange
+
+TACTICAL_CONTEXT: The play develops towards goalposts, and the goalkeeper prepares to take a kickout. Players move away from the goal area and the goalie kicks the ball long down the field.
+
+LOW_CONFIDENCE_KICKOUTS: []

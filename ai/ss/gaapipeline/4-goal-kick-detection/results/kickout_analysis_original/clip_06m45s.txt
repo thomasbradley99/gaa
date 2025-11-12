@@ -1,0 +1,10 @@
+HALF: first_half
+TIMESTAMP: 06:45
+CLIP_FILE: clip_06m45s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 06:45
+
+REASONING: The clip begins mid-play with the ball already in the air. There is no visible trigger event (e.g., a shot going wide or over the bar), no stoppage of play, and no footage of a goalkeeper setting up and taking a kick from a stationary ball on the 20-meter line. The action shown is consistent with a pass or a clearance during a continuous phase of play, not a formal kickout restart.

@@ -1,0 +1,13 @@
+HALF: first_half
+TIMESTAMP: 03:45
+CLIP_FILE: clip_03m45s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 03:45
+DETECTIONS: [player, ball, goalpost, grass]
+MISSED_DETECTIONS: [referee, goalkeeper]
+REASONING: The clip shows play in the middle of the field with players contesting for possession. There is no indication of a kickout sequence taking place.
+
+LOW_CONFIDENCE_KICKOUTS: []

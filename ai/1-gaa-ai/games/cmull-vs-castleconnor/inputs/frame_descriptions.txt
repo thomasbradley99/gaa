@@ -1,0 +1,191 @@
+00000s (00m00s): White/Blue vs Orange/Dark. Keepers not visible. WARMUP - players standing around in groups, no organized play. No ball visible. Stopped / players resting.
+00030s (00m30s): Red/Orange jerseys vs Blue jerseys. Black keeper near RIGHT goal. WARMUP - players are spread out, practicing skills with multiple balls across midfield. Active play.
+00060s (01m00s): Blue jerseys vs Red/Orange jerseys. Keepers not visible. IN-PLAY - active practice or small-sided game. Ball in midfield. Active play.
+00090s (01m30s): Red vs Blue. Keepers not visible. WARMUP - players standing around, no organized play. Ball at midfield near blue players. Slow.
+00120s (02m00s): Dark Blue/Black vs Orange/Red. No keepers visible. IN-PLAY - players in motion. Ball not visible. Active play.
+00150s (02m30s): Dark blue jerseys vs Red jersey. No keepers visible. WARMUP - players in motion, no organized game. Ball not visible. Active.
+00180s (03m00s): Blue/black vs Orange. Keepers not visible. WARMUP - players standing around in groups, no organized play. Ball not visible. Slow / players resting.
+00210s (03m30s): White vs Blue. Keepers not visible. WARMUP - players standing around, no organized play. Ball not visible. Slow.
+00240s (04m00s): Red jerseys vs Orange bibs. None visible. WARMUP - players standing around, no organized play. No ball visible. Slow.
+00270s (04m30s): Blue vs Orange. Keepers not visible. WARMUP - players standing around, no organized play, with multiple balls and cones. Slow activity.
+00300s (05m00s): Dark jerseys vs N/A. No keepers visible. HALFTIME - players walking off field, leaving pitch. No ball. Slow.
+00330s (05m30s): White vs Red. No distinct keepers visible. IN-PLAY - players are scattered and mostly walking or standing. Ball not visible. Slow.
+00360s (06m00s): White vs Dark Blue. Keepers not visible. WARMUP - players standing around, no organized play. Multiple balls scattered on the field. Slow / players resting.
+00390s (06m30s): White jerseys (no opposition visible). Not visible. WARMUP - players in a huddle. Ball near the huddle at midfield. Stopped / players resting.
+00420s (07m00s): White jerseys vs Dark jerseys. No keepers visible. WARMUP - players standing around in groups, no organized play. Ball not visible. Stopped.
+00450s (07m30s): Red/Orange vs Dark Blue/Black. No keepers visible. WARMUP - players standing around, no organized play. Ball not visible. Players resting.
+00480s (08m00s): Red jerseys vs White jerseys. No keepers visible. IN-PLAY - game is temporarily stopped, players standing around the referee. Ball is at midfield, near the referee. Slow activity, players resting.
+00510s (08m30s): Red vs Light Blue/White. No keepers visible. IN-PLAY - players standing and walking slowly in midfield. Ball not visible.
+00540s (09m00s): Red vs Blue. IN-PLAY - players in motion. Ball at midfield, right of center. Active play.
+00570s (09m30s): Blue jerseys vs Red jerseys. Keepers not visible. IN-PLAY - players in motion. Ball not clearly visible, players concentrated around midfield. Active play.
+00600s (10m00s): Red vs Blue. Keepers not visible.
+IN-PLAY - active match, players in motion. Ball not visible.
+Active play.
+00630s (10m30s): Red vs White/Blue. No distinct keepers visible. IN-PLAY - active match, players in motion. Ball is midfield, in the air. Active play.
+00660s (11m00s): Red vs White. Keepers not visible. IN-PLAY. Ball in left midfield/attacking third. Active play.
+00690s (11m30s): Red vs White and Blue. Keepers not visible. IN-PLAY - active match, players in motion. Ball at midfield. Active.
+00720s (12m00s): White vs Red. No keepers visible. IN-PLAY - active match, players in motion. Ball on ground, left of center field, closer to the left goal area. Active play.
+00750s (12m30s): Red/Orange vs Blue/White. Keepers not visible. IN-PLAY - active match, players in motion, ball not visible. Active.
+00780s (13m00s): Red vs White. Black LEFT goal, Black RIGHT goal. IN-PLAY - active match, players in motion. Ball midfield, right side, in the air. Active play.
+00810s (13m30s): Red jerseys vs White/blue jerseys. No distinct keepers visible. IN-PLAY - active match, players in motion. Ball not visible. Active play.
+00840s (14m00s): Red vs Blue/White. Keepers not visible. IN-PLAY - players are on the field, distributed across the pitch. Ball not visible. Activity level: slow.
+00870s (14m30s): Red/Orange jerseys vs White/Blue jerseys. White keeper LEFT goal, White keeper RIGHT goal. IN-PLAY - players are positioned for a free kick/restart. Ball at midfield, slightly left. Active play.
+00900s (15m00s): White vs Red. Black LEFT goal. IN-PLAY - active match, players in motion. Ball in left goalmouth. Active play.
+00930s (15m30s): Red jerseys vs White jerseys. IN-PLAY - active match, players in motion. Ball is with a red player in the left-center midfield. Active play.
+00960s (16m00s): Red jerseys vs Blue/White jerseys. Keepers not visible. IN-PLAY - players in motion across the field. Ball in midfield, left side. Active play.
+00990s (16m30s): Red jerseys vs White/Blue jerseys. No keepers visible. IN-PLAY - active match, players in motion. Ball is at midfield, right side. Active play.
+01020s (17m00s): Red vs White. White LEFT goal, No keeper visible RIGHT goal. IN-PLAY - active match, players in motion. Ball not visible. Slow.
+01050s (17m30s): Red jerseys vs White/Blue jerseys. White/Blue keeper LEFT goal, no distinct keeper RIGHT goal. IN-PLAY - ball on ground, players gathered around it. Active play, players contesting the ball in midfield, slightly left of center.
+01080s (18m00s): Red jerseys vs White jerseys. Keepers Not visible. IN-PLAY - active match, players in motion. Ball held by a red player in the left attacking 45. Active play.
+01110s (18m30s): Red jerseys vs White jerseys. Keepers: Not visible. IN-PLAY - players actively contesting the ball in midfield. Active play.
+01140s (19m00s): Red vs White. No keepers visible. IN-PLAY - players are spread across the field, standing or walking slowly. Ball not visible. Slow.
+01170s (19m30s): Red jerseys vs White/Blue jerseys. No distinct keepers visible. IN-PLAY - active match, players in motion. Ball not clearly visible. Active play.
+01200s (20m00s): Red jerseys vs White jerseys. Keepers not clearly visible. IN-PLAY - active match, players in motion. Ball is at midfield, carried by a player in white. Active play.
+01230s (20m30s): Red jerseys vs White jerseys. Black keeper RIGHT goal. IN-PLAY - active match, players in motion. Ball is in the midfield, right side. Active play.
+01260s (21m00s): White/Blue jerseys vs Red jerseys. White/Blue keeper LEFT goal, Red keeper RIGHT goal. IN-PLAY - player is near the ball with a hurley, other players are moving. Ball is at midfield-left. Active play.
+01290s (21m30s): Red jerseys vs White jerseys. Red LEFT goal, White RIGHT goal. IN-PLAY - active match, players in motion. Ball is midfield, high in the air. Active play.
+01320s (22m00s): White vs Red. Keepers not visible. IN-PLAY - players in motion, ball in midfield slightly right of center. Active play.
+01350s (22m30s): Red jerseys vs. White/blue jerseys. No keepers visible. IN-PLAY - active match, players in motion. Ball is high in the air over midfield. Active play.
+01380s (23m00s): Red vs White. White keeper RIGHT goal. IN-PLAY - player taking a kick-out. Ball near the right goal line. Active play.
+01410s (23m30s): Red jerseys vs Blue/White jerseys. Black keeper LEFT goal. IN-PLAY - players in motion. Ball at midfield. Active play.
+01440s (24m00s): Red vs White/Light Blue. Keepers not visible. IN-PLAY - active match, players in motion. Ball is midfield, right side. Active play.
+01470s (24m30s): Red vs White. Keepers not visible. IN-PLAY - active match, players in motion. Ball at midfield. Active play.
+01500s (25m00s): Red/Orange vs White/Blue. No keepers visible. IN-PLAY - active match, players in motion. Ball is in midfield, slightly left. Active play.
+01530s (25m30s): Red vs White/Blue. Keepers not visible. IN-PLAY - active match, players in motion. Ball is in midfield, left-center, being kicked. Active play.
+01560s (26m00s): White/Blue jerseys vs Red/White jerseys. No distinct keepers visible. IN-PLAY - active match, players in motion. Ball at midfield, left side, carried by a player. Active play.
+01590s (26m30s): Red jerseys vs Blue jerseys. IN-PLAY - active match, players in motion. Ball is in midfield, center-right. Active play.
+01620s (27m00s): Red/Orange vs White. No distinct keepers visible. IN-PLAY - active match, players in motion. Ball is with a player in a white jersey on the right side of the field, near midfield. Active play.
+01650s (27m30s): Red jerseys vs White/Blue jerseys. Keepers not visible. IN-PLAY - active match, players in motion. Ball is in the right midfield area, near the sideline. Active play.
+01680s (28m00s): Red vs White. Black RIGHT goal. IN-PLAY - active match, players in motion. Ball is in the air in the midfield area. Active play.
+01710s (28m30s): Orange/Red jerseys vs White/Blue jerseys. Keepers not visible. IN-PLAY - active match, players in motion. Ball is implied to be near the player in the orange jersey in the central-right midfield area. Active play.
+01740s (29m00s): Red vs White and Blue. Keepers not visible. IN-PLAY - active match, players in motion. Ball at midfield, right of center. Active play.
+01770s (29m30s): Red/orange jerseys vs White jerseys. No distinct keepers visible. IN-PLAY - active match, players in motion. Ball is on the ground near midfield. Active play.
+01800s (30m00s): Red vs White. Keepers not visible. IN-PLAY - active match, players in motion. Ball is at midfield, right of center. Active play.
+01830s (30m30s): Red/Orange vs White. No distinct keepers visible. IN-PLAY - players are on the field, widely distributed, but activity is slow. Ball not visible.
+01860s (31m00s): Red jerseys vs White jerseys. No distinct keepers visible. IN-PLAY - Player #15 (red) celebrates with the ball near the right goal. Ball in the hands of player #15, right goal area. Active play, momentarily paused for celebration.
+01890s (31m30s): Red vs White/Blue. Not visible LEFT goal, Black RIGHT goal. IN-PLAY - players are active and contesting the ball. Ball is in the midfield, slightly right of center, contested by multiple players. Active play.
+01920s (32m00s): Red vs White. Dark RIGHT goal. IN-PLAY - active match, players in motion. Ball at central-right midfield. Active play.
+01950s (32m30s): White jerseys vs Orange/Red jerseys. Black RIGHT goal. IN-PLAY - active match, players in motion. Ball with player 18 (white jersey) in the midfield, slightly right of center. Active play.
+01980s (33m00s): Red/white jerseys vs Blue/white jerseys. Keepers not visible. IN-PLAY - referee making a signal, players reacting. Ball not visible. Stopped play.
+02010s (33m30s): Red/orange jerseys vs White/blue jerseys. Keepers not visible. IN-PLAY - active match, players in motion. Ball not visible. Active play.
+02040s (34m00s): Red/Orange vs White. No keepers visible. IN-PLAY - active match, players in motion. Ball is in midfield. Active play.
+02070s (34m30s): White vs Red. Dark Blue LEFT, Light Grey RIGHT. IN-PLAY - active match, players in motion. Ball at midfield, right side. Active play.
+02100s (35m00s): Red vs White. Keepers not distinctly visible. IN-PLAY - active match, players in motion. Ball in midfield, slightly right of center. Active play.
+02130s (35m30s): Red vs White. Keepers not visible. IN-PLAY - player #10 in white prepares to kick the ball. Ball mid-right. Slow.
+02160s (36m00s): Red jerseys vs White jerseys. Keepers not visible. IN-PLAY - active match, players in motion. Ball is at midfield, slightly to the left. Active play.
+02190s (36m30s): Dark vs White. Not visible LEFT goal, not visible RIGHT goal. IN-PLAY - Dark player kicks ball towards right goal. Ball in right penalty area, near the ground. Active play.
+02220s (37m00s): White jerseys vs Red jerseys. Dark jersey LEFT goal. IN-PLAY - active match, players in motion. Ball in midfield, slightly left of center, being contested. Active play.
+02250s (37m30s): Red vs Blue. IN-PLAY - players in motion. Ball not visible. Active play.
+02280s (38m00s): White and Blue jerseys vs Red jerseys. Keepers not visible. IN-PLAY - active match, players in motion. Ball is at midfield. Active play.
+02310s (38m30s): Red vs White/Grey. White/Grey LEFT goal, no distinct keeper RIGHT goal. IN-PLAY - active match, players in motion. Ball in center-left, near the 45-meter line. Active play.
+02340s (39m00s): Red jerseys vs White jerseys. Dark LEFT. IN-PLAY - active match, players in motion. Ball left sideline, midfield. Active play.
+02370s (39m30s): Red vs White/Blue. White/Blue keeper LEFT goal. IN-PLAY - players in motion. Ball near right sideline, being played by a white/blue jersey player. Active play.
+02400s (40m00s): Teams: Red jerseys vs White/blue jerseys.
+Keepers: Dark jersey LEFT goal, Not visible RIGHT goal.
+Game state: IN-PLAY - active match, players in motion.
+Ball location: Not visible.
+Activity level: Active play.
+02430s (40m30s): White and blue jerseys vs Dark blue jerseys. Not visible. WARMUP - players standing around, no organized play. Not visible. Slow / players resting.
+02460s (41m00s): Blue jerseys vs Dark jerseys with orange bibs. No keepers visible.
+WARMUP - players standing around, no organized play.
+Ball near right penalty area. Slow / players resting.
+02490s (41m30s): Blue jerseys vs Dark blue/black jerseys. No keepers visible. WARMUP - players standing around, one player holding a ball. Ball held by a player in the right foreground, near the sideline. Slow.
+02520s (42m00s): Blue vs Blue. No keepers visible. IN-PLAY - active match, players in motion. Ball at midfield, right side. Active play.
+02550s (42m30s): Blue vs Red/Maroon. Keepers not visible. IN-PLAY - player is kicking the ball. Midfield, left of center. Active play.
+02580s (43m00s): Blue vs Red. No keepers visible. IN-PLAY - active match, players in motion. Ball is at midfield, slightly to the left. Active play.
+02610s (43m30s): Blue vs Orange. No keepers visible. IN-PLAY - active match, players in motion. Ball in right midfield. Active play.
+02640s (44m00s): Blue jerseys vs Red/Orange jerseys. Keepers not visible. IN-PLAY - active match, players in motion. Ball at midfield, right side. Active play.
+02670s (44m30s): Blue vs Red/Orange. Not visible. WARMUP - players standing around, some kneeling, no organized play. Ball is left midfield. Slow.
+02700s (45m00s): Blue jerseys vs Red jerseys. No keepers visible. IN-PLAY - active match, players in motion. Ball not visible. Slow play.
+02730s (45m30s): Blue vs Red. Keepers not visible. IN-PLAY - players in motion. Ball in the air, midfield on the right side. Active play.
+02760s (46m00s): Blue vs Red. Keepers not visible. IN-PLAY - players in motion. Ball is in midfield. Active play.
+02790s (46m30s): Blue vs Red. Red keeper RIGHT goal. WARMUP - players standing around, no organized play. Ball not visible. Slow.
+02820s (47m00s): Teams not discernible. Keepers not visible. WARMUP - players standing around, no organized play. Ball not visible. Stopped.
+02850s (47m30s): Blue vs Red. Dark/Black keeper RIGHT goal, LEFT goal's keeper not visible. IN-PLAY - players are actively engaged with the ball. Ball is in the air, right midfield. Active play.
+02880s (48m00s): Blue/Dark Blue vs Red/Orange. No distinct keepers visible. IN-PLAY - ball in the air over midfield heading towards the right goal, players in motion but not actively contesting with high intensity. Slow.
+02910s (48m30s): Teams not identifiable. Keepers not visible. WARMUP - people standing around off the pitch, no organized play. Ball not visible. Activity level: stopped.
+02940s (49m00s): Blue vs Blue. No keepers visible. IN-PLAY - player running with ball. Ball on left side of midfield. Active play.
+02970s (49m30s): Blue vs Red. Keepers not visible. WARMUP - players standing around in groups. Ball mid-right, in the air. Slow activity.
+03000s (50m00s): White vs Orange/Red. Keepers not visible. IN-PLAY - players gathered around an official, ball not visible. Stopped.
+03030s (50m30s): Blue vs White. No keepers visible. IN-PLAY. Ball not visible. Slow activity.
+03060s (51m00s): Red/Navy vs White/Blue. No keepers visible. HALFTIME - players walking on the field, not actively playing. Ball in midfield, slightly right of center. Slow / players resting.
+03090s (51m30s): White vs Red. Keepers not visible. IN-PLAY - players in motion. Ball not visible. Active play.
+03120s (52m00s): Red jerseys vs White/Blue jerseys. Keepers not visible. IN-PLAY - active match, players in motion. Ball not visible. Active play.
+03150s (52m30s): White jerseys vs Red jerseys. Keepers not clearly visible. IN-PLAY - active match, players in motion. Ball in midfield. Active play.
+03180s (53m00s): Red vs White. Green LEFT goal, no distinct keeper RIGHT goal. IN-PLAY - active match, players in motion. Ball on ground in right midfield, near a cluster of players. Active play.
+03210s (53m30s): White/blue jerseys vs Red jerseys. No distinct keeper visible LEFT goal, Black keeper RIGHT goal. IN-PLAY - active match, players in motion. Ball is at midfield, slightly left of center. Active play.
+03240s (54m00s): White vs Red. Keepers not visible. IN-PLAY - active match, players in motion. Ball at midfield. Active play.
+03270s (54m30s): Red vs Blue/White. White keeper LEFT goal, N/A RIGHT goal. IN-PLAY - players are actively moving towards the ball, which is in the air over midfield. Active.
+03300s (55m00s): Red jerseys vs White/Blue jerseys. Keepers not visible. IN-PLAY - active match, players in motion. Ball is in the air, midfield. Active play.
+03330s (55m30s): Red vs White/Blue. No keepers visible. IN-PLAY - active match, players in motion. Ball is at midfield, right side, with player #12 (red). Active play.
+03360s (56m00s): Red vs White/Blue. Not visible LEFT, Not visible RIGHT. IN-PLAY - active match, players in motion. Ball is in midfield, slightly right of center. Active play.
+03390s (56m30s): Red/Orange jerseys vs White/Blue jerseys. No keepers visible. IN-PLAY - players in motion, actively contesting the ball. Ball is in the midfield, left side. Active play.
+03420s (57m00s): Red jerseys vs White and Blue jerseys. Dark jersey LEFT goal, Dark jersey RIGHT goal. IN-PLAY - players in motion. Ball not visible. Active play.
+03450s (57m30s): Red vs White. White keeper RIGHT goal. IN-PLAY - active match, players in motion. Ball is in midfield, center-right. Active play.
+03480s (58m00s): White/Blue jerseys vs Red/Orange jerseys. Keepers not visible. IN-PLAY - active match, players in motion. Ball is in midfield, slightly right of center, amidst a cluster of players. Active play.
+03510s (58m30s): Red jerseys vs Blue & White jerseys. No keepers visible. IN-PLAY - players actively running, one player carries the ball on a hurley. Ball in midfield, slightly left of center. Active play.
+03540s (59m00s): Red vs White. IN-PLAY - active match, players in motion. Ball in midfield, slightly right of center. Active play.
+03570s (59m30s): White vs Red. Black keeper LEFT goal, Light-colored keeper RIGHT goal. IN-PLAY - players grouped and in motion near the right penalty area. Active.
+03600s (60m00s): White jerseys vs Red jerseys. Keepers not visible. IN-PLAY - active match, players in motion. Ball not visible, likely midfield area. Active play.
+03630s (60m30s): Red vs White/Blue. Keepers not visible. IN-PLAY - active match, players in motion. Ball is in the air at midfield, right side. Active play.
+03660s (61m00s): Red vs Blue. Blue LEFT goal, None visible RIGHT goal. IN-PLAY - active match, players in motion. Ball near player 19 (red), in the midfield area, slightly right of center. Active play.
+03690s (61m30s): Red jerseys vs White/Blue jerseys. Not visible LEFT goal, Red RIGHT goal. IN-PLAY - active match, players in motion. Ball at midfield, right side, carried by a White/Blue player. Active play.
+03720s (62m00s): Red vs White and blue. Dark blue/black LEFT, Black RIGHT. IN-PLAY - active match, players in motion. Ball at midfield, right half. Active play.
+03750s (62m30s): 1. Teams: White jerseys vs Red jerseys
+2. Keepers (if visible): Not visible
+3. Game state: IN-PLAY - active match, players in motion
+4. Ball location: Midfield, on the right flank
+5. Activity level: Active play
+03780s (63m00s): White vs Red. Keepers not clearly visible. IN-PLAY - players are actively running and engaged in the match. Ball is at midfield, left side, with a player in a white/blue jersey. Active play.
+03810s (63m30s): White jerseys vs Red jerseys. Blue (for White team) RIGHT goal. IN-PLAY - players spread out on field. Ball not visible. Slow.
+03840s (64m00s): White/Blue jerseys vs Red jerseys. Keepers not visible. IN-PLAY - players standing around. Ball not visible. Stopped.
+03870s (64m30s): White jerseys vs Red/Orange jerseys. Light blue keeper RIGHT goal. IN-PLAY - players standing/walking on the field. Ball not visible. Slow / stopped.
+03900s (65m00s): White vs Red. Blue/Black LEFT keeper. IN-PLAY - active match, players in motion. Ball is in the air near midfield. Active play.
+03930s (65m30s): Red vs White/Blue. White keeper LEFT goal. IN-PLAY - players are spread across the field in motion. Ball not clearly visible. Active play.
+03960s (66m00s): Red vs White/Blue. Black LEFT, Black RIGHT. IN-PLAY - players are moving and positioned across the field. Ball not clearly visible, active play.
+03990s (66m30s): Red jerseys vs Blue jerseys. Keepers not clearly identifiable. IN-PLAY - players celebrating, possibly after a score. Ball not visible. Slow, players reacting.
+04020s (67m00s): Red vs Blue and White. WARMUP - players standing around, no organized play (a player is on the ground). Not visible. Stopped / players resting.
+04050s (67m30s): Red jerseys vs White jerseys. WARMUP - players standing around, no organized play. Ball in midfield, near the red team's cluster. Stopped.
+04080s (68m00s): Red vs White. IN-PLAY - player bending to pick up the ball for a restart. Ball in right midfield. Active play.
+04110s (68m30s): Red jerseys vs White jerseys. Keepers not visible. IN-PLAY - players on field, some near the ball. Ball midfield, right side. Slow.
+04140s (69m00s): Red vs White/Blue. No keepers visible. IN-PLAY - players in motion, one player celebrating. Ball at midfield. Active play.
+04170s (69m30s): Red jerseys vs White & blue jerseys. White LEFT goal, White RIGHT goal. IN-PLAY - active match, players in motion. Ball at midfield, left of center. Active play.
+04200s (70m00s): Red vs White. Dark jersey LEFT keeper, no RIGHT keeper visible. IN-PLAY - active match, players in motion. Ball in midfield. Active play.
+04230s (70m30s): Red vs White/Blue. Black keeper LEFT goal, No distinct keeper RIGHT goal. IN-PLAY - active match, players in motion. Midfield, contested by several players. Active play.
+04260s (71m00s): Red vs White/Blue jerseys. White/Blue RIGHT keeper. IN-PLAY - active match, players in motion. Ball is midfield, slightly left of center. Active play.
+04290s (71m30s): Red jerseys vs White/Blue jerseys. Dark keeper RIGHT goal, no distinct keeper visible LEFT goal. IN-PLAY - active match, players in motion. Ball is on the ground in the midfield, slightly right of center, with players contesting. Active play.
+04320s (72m00s): White jerseys vs Red jerseys. Dark jersey RIGHT goal. IN-PLAY - players standing near the right goal, some with arms raised, possibly after a score. Stopped.
+04350s (72m30s): White vs Red. No keepers visible. IN-PLAY - players are actively competing for the ball, with some players on the ground. Ball is on the ground in the right midfield area near the fallen players. Active play.
+04380s (73m00s): Red vs White. White keeper LEFT goal. IN-PLAY - active match, players in motion. Ball in the air, above the goal crossbar. Active play.
+04410s (73m30s): White vs Red. No keepers visible. IN-PLAY - active match, players in motion. Ball not visible. Active play.
+04440s (74m00s): White/blue jerseys vs Red/white jerseys. Keepers not visible. IN-PLAY - active match, players in motion. Ball is in the air, over the mid-left of the field. Active play.
+04470s (74m30s): White/Blue jerseys vs Red/Orange jerseys. White/Blue keeper RIGHT goal, No clear keeper LEFT goal. IN-PLAY - active match, players in motion. Ball is near the right goal area, being kicked. Active play.
+04500s (75m00s): Red vs White. Black RIGHT keeper. IN-PLAY - active match, players in motion. Ball not visible, players concentrated in midfield and right penalty area. Active play.
+04530s (75m30s): Red jerseys vs White/Blue jerseys. Keepers not visible. IN-PLAY - players are actively engaged, some players are around the ball near the right goal. Ball near the right goal's penalty area. Active play.
+04560s (76m00s): White/light blue jerseys vs Red jerseys. Red keeper RIGHT goal. IN-PLAY - players are standing, some red players are reacting/celebrating near the goal posts. Ball not visible. Slow.
+04590s (76m30s): 1. Teams: Red jerseys vs White jerseys
+2. Keepers (if visible): Dark (navy/black) keeper RIGHT goal, no keeper visible LEFT goal
+3. Game state: IN-PLAY - active match, players in motion
+4. Ball location: Right midfield area
+5. Activity level: Active play
+04620s (77m00s): Blue/White jerseys vs Red/Orange jerseys. No distinct keeper jerseys visible. IN-PLAY - active match, players in motion. Ball is in the air, in the midfield, left side, contested by players. Active play.
+04650s (77m30s): White jerseys vs Red jerseys. Keepers not visible. IN-PLAY - ball held by player #6 in midfield. Activity level: Stopped.
+04680s (78m00s): White vs Red. Keepers not visible. IN-PLAY - players in motion. Ball in midfield. Active play.
+04710s (78m30s): Red vs White. Keepers not visible. IN-PLAY - players in motion, ball in the air over midfield. Active play.
+04740s (79m00s): White/black jerseys vs Red/pink jerseys. No keepers visible. IN-PLAY - players are distributed across the midfield, some moving towards the ball. Ball is in midfield, slightly left of center. Active play.
+04770s (79m30s): White vs Red. Keepers not visible. IN-PLAY - active match, players in motion. Ball is in midfield. Active play.
+04800s (80m00s): Red jerseys vs White/Blue jerseys. Dark jersey keeper RIGHT goal. IN-PLAY - active match, players in motion. Ball is in the midfield, left of center. Active play.
+04830s (80m30s): White jerseys vs Red jerseys. No keepers visible. IN-PLAY - active match, players in motion. Ball is in midfield, right side. Active play.
+04860s (81m00s): White/Blue jerseys vs Red jerseys. White keeper LEFT goal, Dark keeper RIGHT goal. IN-PLAY - player striking ball at the left goal in the penalty area. Active play.
+04890s (81m30s): White/Blue vs Red. IN-PLAY - active match, players in motion. Ball not visible. Active play.
+04920s (82m00s): White vs Red. Keepers Not visible. IN-PLAY - active match, players in motion. Ball Not visible. Active play.
+04950s (82m30s): Red/white jerseys vs Blue/white jerseys. Keepers not visible. IN-PLAY - players standing around or walking slowly. Ball not visible. Slow.
+04980s (83m00s): White/Blue jerseys vs Red jerseys. White keeper LEFT goal. IN-PLAY - players in motion. Ball is at midfield, being carried by a player. Active play.
+05010s (83m30s): Red vs White. Keepers not visible. IN-PLAY - active match, players in motion. Ball at midfield. Active play.
+05040s (84m00s): Red jerseys vs White/Light Blue jerseys. Dark Blue/Black keeper (for White/Light Blue team) RIGHT goal. IN-PLAY - a player is on the ground, ball is midfield right. Slow / players reacting to incident.
+05070s (84m30s): Red jerseys vs White jerseys. IN-PLAY - a player is being attended to on the field. Ball near the right goalpost. Stopped.
+05100s (85m00s): Red vs White. Dark blue/black RIGHT. IN-PLAY - player preparing to take a kick. Ball in right penalty area. Slow.
+05130s (85m30s): Red vs White jerseys. No keepers visible. IN-PLAY - active match, players in motion. Ball is in the midfield area. Active play.
+05160s (86m00s): Red vs White. Keepers not visible. IN-PLAY - players are spread across the field. Ball not visible. Activity is slow, with players moving and standing.
+05190s (86m30s): Red/White jerseys vs Blue jerseys. Keepers not visible. IN-PLAY - player placing ball for a set-piece, midfield right side. Stopped.
+05220s (87m00s): White and Blue jerseys vs Red jerseys. No keepers visible. WARMUP - players standing around, no organized play. Ball not visible. Players resting.

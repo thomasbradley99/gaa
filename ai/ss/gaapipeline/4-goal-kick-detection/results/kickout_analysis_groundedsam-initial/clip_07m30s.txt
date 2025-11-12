@@ -1,0 +1,13 @@
+HALF: first_half
+TIMESTAMP: 07:30
+CLIP_FILE: clip_07m30s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 7
+HALF: first_half
+CLIP_TIME: 07:30
+DETECTIONS: ['player', 'football player footballer', 'white round ball small white football', 'football player', 'football player', 'upright posts', 'football player', 'white goal frame', 'football player', 'football player', 'football player', 'football', 'football player', 'referee referee official', 'football goal', 'football', 'white goal', 'football goal', 'grass green grass field']
+MISSED_DETECTIONS: ['goalkeeper']
+REASONING:The clip shows general gameplay and no clear indication of a kickout event occurring. I don't see the goalkeeper, nor the usual signs of a kickout setup with players spreading or the referee signaling.
+
+LOW_CONFIDENCE_KICKOUTS: []

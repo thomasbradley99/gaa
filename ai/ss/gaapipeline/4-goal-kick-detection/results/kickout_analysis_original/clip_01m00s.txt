@@ -1,0 +1,10 @@
+HALF: first_half
+TIMESTAMP: 01:00
+CLIP_FILE: clip_01m00s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 01:00
+
+REASONING: The clip begins with the ball already in the air from what appears to be a midfield free kick, not a kickout from the 20-meter line. The kick is taken by an outfield player in a red and black jersey, not a goalkeeper. The subsequent action is continuous open play. None of the mandatory criteria for an official GAA kickout are met, as there is no visible trigger event, no goalkeeper involvement from the 20-meter line, and no setup sequence.

@@ -1,0 +1,3 @@
+Ground truth XML placeholder for SFL 2025 v Cill Chomain.
+Paste the exported XML content below this line.
+

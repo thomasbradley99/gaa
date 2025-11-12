@@ -1,0 +1,38 @@
+# Videos
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# Outputs and generated files
+**/outputs/
+**/clips/
+**/frames/
+**/video.mp4
+**/test-viewer/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+.venv
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Large data files
+*.zip
+*.tar.gz
+*.tar
+

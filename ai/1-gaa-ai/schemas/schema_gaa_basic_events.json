@@ -1,0 +1,128 @@
+{
+  "version": "1.0",
+  "sport": "GAA",
+  "actions": {
+    "1st Half End": [],
+    "1st Half Start": [],
+    "2nd Half End": [],
+    "2nd Half Start": [],
+    "Ball in Play": [],
+    "Stoppage": [
+      "Point",
+      "Goal",
+      "Wide",
+      "45m"
+    ],
+    "Possession Own": [
+      "Won",
+      "Lost",
+      "Turnover",
+      "Attack",
+      "KIckout Opp"
+    ],
+    "Possession Opp": [
+      "Won",
+      "Lost",
+      "Turnover",
+      "Attack",
+      "KIckout Opp"
+    ],
+    "Pos Own Att": [
+      "Turnover",
+      "Kickout Own",
+      "KIckout Opp"
+    ],
+    "Pos Opp ATT": [
+      "Turnover",
+      "Kickout Own",
+      "KIckout Opp"
+    ],
+    "Attack Own": [],
+    "Attack OPP": [],
+    "Shot Own": [
+      "From Play",
+      "From Free",
+      "Point",
+      "Goal",
+      "Wide",
+      "Short Keeper",
+      "Rebound Post"
+    ],
+    "Shot Opp": [
+      "From Play",
+      "From Free",
+      "Point",
+      "Goal",
+      "Wide",
+      "45m",
+      "Short Keeper",
+      "Pass / Other",
+      "Rebound Post"
+    ],
+    "Kickout Own": [
+      "Long",
+      "Mid",
+      "Short",
+      "Left",
+      "Centre",
+      "Right",
+      "Won",
+      "Lost"
+    ],
+    "Kickout Opp": [
+      "Long",
+      "Mid",
+      "Short",
+      "Left",
+      "Centre",
+      "Right",
+      "Won",
+      "Lost"
+    ],
+    "Turnover Won": [
+      "Forced",
+      "Unforced",
+      "A1",
+      "A2",
+      "A3",
+      "M1",
+      "M2",
+      "M3",
+      "D1",
+      "D2",
+      "D3",
+      "attack third",
+      "middle third",
+      "defensive"
+    ],
+    "Turnover lost": [
+      "Forced",
+      "Unforced",
+      "A1",
+      "A2",
+      "A3",
+      "M1",
+      "M2",
+      "M3",
+      "attack third",
+      "middle third"
+    ],
+    "Foul Awarded": [],
+    "Foul Conceded": [],
+    "Scoreable Foul Awarded": [],
+    "Scoreable Foul Conceded": [],
+    "Throw Up": [
+      "Won"
+    ],
+    "Hot Ball": [
+      "Won",
+      "Lost"
+    ],
+    "Highlight": [
+      "Point",
+      "Goal"
+    ],
+    "Referee": []
+  }
+}
+

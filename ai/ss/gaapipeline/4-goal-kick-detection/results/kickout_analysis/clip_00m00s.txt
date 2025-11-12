@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 00:00
+CLIP_FILE: clip_00m00s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 8
+HALF: first_half
+CLIP_TIME: 00:00
+DETECTIONS: ['grass green grass field', 'white goal frame', 'white round ball small white football football', 'football player goalkeeper', 'football player', 'upright posts', 'netted goal', 'football player goalkeeper', 'football player', 'referee', 'football player', 'white round ball small white football football', 'football player', 'referee', 'football player', 'netted goal football goal', 'football player', 'player', 'football player', 'white pitch lines', 'white pitch lines', 'white round ball football', 'upright posts', 'football goal']
+MISSED_DETECTIONS: []
+REASONING: The clip shows a lot of players on the field and the ball in play, but there is no visible kickout being performed by the goalkeeper, so I will classify this as no kickout.
+LOW_CONFIDENCE_KICKOUTS: []

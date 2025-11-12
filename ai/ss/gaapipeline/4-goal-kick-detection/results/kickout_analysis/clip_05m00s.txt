@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 05:00
+CLIP_FILE: clip_05m00s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 05:00
+DETECTIONS: ['grass green grass field', 'football player goalkeeper', 'player football player footballer', 'white goal frame', 'white round ball', 'football player goalkeeper', 'white pitch lines', 'netted goal', 'football player goalkeeper', 'pitch line sideline', 'netted goal football goal goal', 'referee referee', 'football player', 'white round ball', 'football player', 'player', 'upright', 'football goal', 'football goal']
+MISSED_DETECTIONS: []
+REASONING:The ball is in the middle of the field with many players around it. No goalkeeper is seen kicking the ball, therefore there is no kickout.
+LOW_CONFIDENCE_KICKOUTS: []

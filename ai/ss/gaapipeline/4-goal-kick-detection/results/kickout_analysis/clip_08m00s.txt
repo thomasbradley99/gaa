@@ -1,0 +1,32 @@
+HALF: first_half
+TIMESTAMP: 08:00
+CLIP_FILE: clip_08m00s.mp4
+ANALYSIS:
+KICKOUT: YES
+CONFIDENCE: 9
+HALF: first_half
+CLIP_TIME: 08:00
+DETECTIONS: ['grass', 'field', 'football player', 'football player', 'referee', 'football player', 'football player', 'football', 'football player', 'goalpost', 'football player', 'football player']
+MISSED_DETECTIONS: []
+
+TRIGGER_EVENT: Wide ball
+EXACT_CONTACT_TIME: 0.5
+KICKING_TEAM: Team A
+PLAYER_POSITIONING: NO
+KICK_ANALYSIS:
+KICK_DISTANCE: Short
+KICK_DIRECTION: Center
+KICK_ACCURACY: On target
+POSSESSION_OUTCOME:
+POSSESSION_WON_BY: Team A
+POSSESSION_LOCATION: Field position where caught
+NEXT_ACTION: Ball continues forward
+
+JERSEY_COLORS:
+TEAM_A_COLORS: Blue and white
+TEAM_B_COLORS: Red and black
+GOALKEEPER_JERSEY: Orange
+
+TACTICAL_CONTEXT: The ball is kicked short by the goalkeeper in orange. The players do not spread out appropriately, and remain close to the goalpost. The ball is kicked and won by a player in blue, who continues the play forward
+
+LOW_CONFIDENCE_KICKOUTS: []

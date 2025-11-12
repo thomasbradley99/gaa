@@ -1,0 +1,30 @@
+HALF: first_half
+TIMESTAMP: 08:30
+CLIP_FILE: clip_08m30s.mp4
+ANALYSIS:
+KICKOUT: YES
+CONFIDENCE: 8
+HALF: first_half
+CLIP_TIME: 08:30
+
+TRIGGER_EVENT: A shot by the team in blue jerseys goes wide of the posts at 00:01.
+EXACT_CONTACT_TIME: 10.8 seconds
+KICKING_TEAM: Team A
+PLAYER_POSITIONING: YES
+
+KICK_ANALYSIS:
+KICK_DISTANCE: Medium
+KICK_DIRECTION: Left
+KICK_ACCURACY: Contested
+
+POSSESSION_OUTCOME:
+POSSESSION_WON_BY: Contested
+POSSESSION_LOCATION: Near the kicking team's 45-meter line.
+NEXT_ACTION: Players from both teams challenge for the breaking ball as play continues.
+
+JERSEY_COLORS:
+TEAM_A_COLORS: Red/Orange jerseys with a black shoulder design, black shorts.
+TEAM_B_COLORS: Blue jerseys with white trim, white shorts.
+GOALKEEPER_JERSEY: Yellow/Orange
+
+TACTICAL_CONTEXT: The clip begins with the blue team attacking, and a shot from the left side of the attacking zone goes wide of the goal. This triggers the kickout. The goalkeeper for Team A retrieves the ball and places it on the 20-meter line. Outfield players move out towards midfield. The goalkeeper takes a medium-range kickout aimed towards the left-hand side of the field, landing around the 45-meter line. The ball is not caught cleanly but is immediately contested on the ground by players from both teams.

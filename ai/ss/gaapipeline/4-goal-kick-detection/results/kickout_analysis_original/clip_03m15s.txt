@@ -1,0 +1,10 @@
+HALF: first_half
+TIMESTAMP: 03:15
+CLIP_FILE: clip_03m15s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 03:15
+
+REASONING: The clip shows a point being scored, which is a valid trigger for a kickout. However, the subsequent action is not a kickout. The camera pans away and the game continues without any of the mandatory kickout procedures being shown. There is no stoppage where players clear the 20-meter area, no goalkeeper placing the ball on the ground, and no structured kick from the 20-meter line. The play shown after the score is continuous midfield action, not a restart from a kickout.

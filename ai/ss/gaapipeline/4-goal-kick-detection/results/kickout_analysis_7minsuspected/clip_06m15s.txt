@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 06:15
+CLIP_FILE: clip_06m15s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 06:15
+DETECTIONS: [player, ball, goalpost, pitch, crowd]
+MISSED_DETECTIONS: [goalkeeper, referee]
+
+REASONING: The clip shows a period of open play culminating in a point being scored. A player from the team in blue jerseys kicks the ball over the crossbar. This action is what *causes* a kickout to be awarded, but the actual kickout by the goalkeeper to restart play does not occur within this 15-second clip. The video ends as the players begin to reset their positions following the score.

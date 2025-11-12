@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 03:30
+CLIP_FILE: clip_03m30s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 03:30
+DETECTIONS: ['grass', 'referee', 'white goal frame', 'football player', 'player', 'football player', 'football player', 'pitch', 'white round ball', 'netted goal', 'upright posts', 'match official']
+MISSED_DETECTIONS: []
+REASONING: The clip shows general play in the middle of the field. There is no action indicating a kickout being taken place.
+LOW_CONFIDENCE_KICKOUTS: []

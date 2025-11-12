@@ -1,0 +1,32 @@
+HALF: first_half
+TIMESTAMP: 05:15
+CLIP_FILE: clip_05m15s.mp4
+ANALYSIS:
+KICKOUT: YES
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 05:15
+DETECTIONS: ['player', 'goalkeeper', 'referee', 'ball', 'goalpost', 'pitch']
+MISSED_DETECTIONS: []
+
+TRIGGER_EVENT: A point was scored by the opposing team. The referee, dressed in black, is seen with his arm raised to signal the score at the start of the clip.
+EXACT_CONTACT_TIME: 3.0 seconds
+KICKING_TEAM: Team A
+PLAYER_POSITIONING: YES
+
+KICK_ANALYSIS:
+KICK_DISTANCE: Long
+KICK_DIRECTION: Center
+KICK_ACCURACY: Contested
+
+POSSESSION_OUTCOME:
+POSSESSION_WON_BY: Contested
+POSSESSION_LOCATION: Midfield
+NEXT_ACTION: The clip ends as players from both teams jump to contest the high ball.
+
+JERSEY_COLORS:
+TEAM_A_COLORS: Red and black jerseys, dark shorts.
+TEAM_B_COLORS: Blue jerseys, white shorts.
+GOALKEEPER_JERSEY: Yellow/Gold
+
+TACTICAL_CONTEXT: The clip begins immediately after a point has been scored against Team A. The referee confirms the score. The Team A goalkeeper in the yellow/gold jersey takes the resulting kickout from his goal line. He executes a long kick down the center of the pitch towards the midfield area. The ball is sent high to be contested by players from both teams, but the clip ends before possession is clearly won.

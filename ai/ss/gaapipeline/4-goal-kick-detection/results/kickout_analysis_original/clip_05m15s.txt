@@ -1,0 +1,10 @@
+HALF: first_half
+TIMESTAMP: 05:15
+CLIP_FILE: clip_05m15s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 05:15
+
+REASONING: The clip shows the immediate aftermath of a point being scored, which is a trigger event for a kickout. However, the actual kickout sequence does not occur. There is no clearance of the 20-meter area by the outfield players, no goalkeeper placing the ball on the ground, and no structured kick is taken. The players are simply resetting their positions following the score.

@@ -1,0 +1,3 @@
+[submodule "grounding_dino"]
+	path = grounding_dino
+	url = https://github.com/IDEA-Research/GroundingDINO.git

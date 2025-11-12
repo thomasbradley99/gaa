@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 00:45
+CLIP_FILE: clip_00m45s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 00:45
+DETECTIONS: ['grass green grass field', 'white goal frame', 'football player goalkeeper', 'referee referee', 'football player', 'football player goalkeeper', 'football player footballer', 'football player', 'football goal', 'referee referee', '##post', 'small white football', 'pitch line', 'referee referee']
+MISSED_DETECTIONS: []
+REASONING: There is no kickout in this clip. The players are simply moving around the pitch and there is no visible evidence of a kickout taking place.
+LOW_CONFIDENCE_KICKOUTS: []

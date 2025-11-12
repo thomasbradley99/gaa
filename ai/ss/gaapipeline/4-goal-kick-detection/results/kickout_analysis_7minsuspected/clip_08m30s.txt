@@ -1,0 +1,33 @@
+HALF: first_half
+TIMESTAMP: 08:30
+CLIP_FILE: clip_08m30s.mp4
+ANALYSIS:
+KICKOUT: YES
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 08:30
+DETECTIONS: [player, goalkeeper, referee, ball, goalpost, pitch, crowd]
+MISSED_DETECTIONS: []
+
+IF KICKOUT = YES:
+TRIGGER_EVENT: The clip begins with the referee signalling for a restart, likely after a wide or a point scored by the opposing team just prior to the clip's start.
+EXACT_CONTACT_TIME: 2.8 seconds
+KICKING_TEAM: Team B
+PLAYER_POSITIONING: YES
+
+KICK_ANALYSIS:
+KICK_DISTANCE: Medium
+KICK_DIRECTION: Right
+KICK_ACCURACY: Contested
+
+POSSESSION_OUTCOME:
+POSSESSION_WON_BY: Team A
+POSSESSION_LOCATION: In the attacking third, close to the goal.
+NEXT_ACTION: A scramble for possession occurs, which Team A wins, leading directly to a goal.
+
+JERSEY_COLORS:
+TEAM_A_COLORS: Blue and white jerseys, blue shorts.
+TEAM_B_COLORS: Red and black jerseys, black shorts.
+GOALKEEPER_JERSEY: Orange/Yellow
+
+TACTICAL_CONTEXT: The clip opens as the referee signals for a restart. The goalkeeper for Team B (in the orange/yellow jersey) executes a medium-range kickout at 2.8 seconds, aiming for the right side of the field. The kick is directed into a contested area. Players from Team A (blue/white) win the ensuing aerial battle and subsequent ground ball scramble close to Team B's goal. This quick turnover in a dangerous area results in Team A scoring a goal.

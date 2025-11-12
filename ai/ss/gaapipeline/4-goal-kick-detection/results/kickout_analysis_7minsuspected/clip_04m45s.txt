@@ -1,0 +1,32 @@
+HALF: first_half
+TIMESTAMP: 04:45
+CLIP_FILE: clip_04m45s.mp4
+ANALYSIS:
+KICKOUT: YES
+CONFIDENCE: 8
+HALF: first_half
+CLIP_TIME: 04:45
+DETECTIONS: [player, ball, goalpost, pitch, crowd]
+MISSED_DETECTIONS: [referee, goalkeeper]
+
+TRIGGER_EVENT: A shot on goal by the attacking team (Team A) goes wide of the post at 00:06.
+EXACT_CONTACT_TIME: The kick itself occurs off-camera. The ball is first seen in flight at 00:09.
+KICKING_TEAM: Team B
+PLAYER_POSITIONING: YES
+
+KICK_ANALYSIS:
+KICK_DISTANCE: Long
+KICK_DIRECTION: Center
+KICK_ACCURACY: Contested
+
+POSSESSION_OUTCOME:
+POSSESSION_WON_BY: Contested
+POSSESSION_LOCATION: Midfield
+NEXT_ACTION: Players from both teams converge on the breaking ball to gain possession.
+
+JERSEY_COLORS:
+TEAM_A_COLORS: Blue jerseys with white details.
+TEAM_B_COLORS: Red and black jerseys.
+GOALKEEPER_JERSEY: Not visible in the clip.
+
+TACTICAL_CONTEXT: The clip begins with Team A (blue) in possession, attacking the goal on the right side of the screen. At 00:05, a player from Team A takes a shot which goes wide of the posts. This triggers a kickout for Team B (red/black). The camera immediately pans away from the goal to cover the midfield players who have spread out to receive the kick. The kickout happens off-screen, and the ball is seen flying into the midfield at 00:09, where it is contested by players from both teams.

@@ -1,0 +1,53 @@
+====================================================================================================
+F1 SCORE COMPARISON - FULL 14+ MINUTE RUNS
+====================================================================================================
+
+Run     | F1    | Events | Prec  | Recall | Key Features
+--------|-------|--------|-------|--------|--------------------------------------------------
+1245    | 45.7% | 85     | 43.5% | 48.1%  | Descriptive + overlap markers, NO field position
+1420    | 44.9% | 72     | 45.8% | 44.0%  | Descriptive + overlap markers, NO field position  
+1454    | 40.7% | 91     | 37.4% | 44.7%  | Descriptive + FIELD POSITION context added
+1529    | 39.2% | 113    | 32.7% | 48.7%  | Checklist approach (over-detection)
+1540    | 30.7% | 75     | 30.7% | 30.7%  | Flow-based (natural but misses events)
+20251107-full | 19.8% | 171    | 29.8% | 14.8%  | Full-match run, production1 end-to-end (baseline)
+20251107-first20 | 44.6% | 90     | 47.8% | 41.7%  | Production1, 11:00-30:00, clean 60s clips
+20251107-full-clean | 28.7% | 314    | 32.2% | 25.9%  | Production1 full match, 60s clips only (post-cleanup)
+20251107-segmented | 33.2% | 334    | 34.1% | 32.3%  | Production1 full match, 20-min segments (Stage 2&3 segmented)
+
+====================================================================================================
+KEY INSIGHTS:
+====================================================================================================
+
+1. BEST APPROACH: Descriptive observations WITHOUT field position context
+   - 1245: 45.7% F1 (85 events)
+   - 1420: 44.9% F1 (72 events)
+
+2. FIELD POSITION CONTEXT HURT PERFORMANCE:
+   - Before (1420): 44.9% F1, 72 events
+   - After  (1454): 40.7% F1, 91 events
+   - Why: AI became overconfident, generated 19 more events (many false positives)
+   - BUT: It DID detect opponent attacks (Opp A3 Entry, Opp Cross) that were missed before
+
+3. SIMPLER IS BETTER:
+   - Checklist: Too prescriptive → over-detection (113 events)
+   - Flow-based: Too vague → misses discrete events (only 75 events)
+   - Descriptive: Goldilocks zone
+
+4. EVENT COUNT MATTERS:
+   - Sweet spot seems to be 72-85 events
+   - Over 90 events = too many false positives
+   - Under 75 events = missing too many real events
+
+====================================================================================================
+RECOMMENDATION:
+====================================================================================================
+
+Use 1245/1420 prompt structure:
+- Descriptive observations with overlap markers
+- NO field position context (keep it simple)
+- Focus on "what happened" not "flow of play"
+- Let Stage 2 do the synthesis and validation
+
+Trade-off: Will miss some opponent attacking events (Opp A3 Entry, Opp Cross all 0%)
+But: Overall F1 is higher due to fewer false positives
+

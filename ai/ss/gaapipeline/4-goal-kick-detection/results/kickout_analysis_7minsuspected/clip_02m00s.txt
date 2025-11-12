@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 02:00
+CLIP_FILE: clip_02m00s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 02:00
+DETECTIONS: [player, ball, pitch]
+MISSED_DETECTIONS: [goalkeeper, goalpost, referee]
+
+REASONING: The video clip depicts a period of continuous open play in the midfield. A player from the blue team is seen in possession, running and passing the ball to teammates. The action is confined to the middle third of the pitch, and there is no indication of a restart of play from a goal area. No goalkeeper is visible performing a kick, and the players are not positioned for a kickout. All kicks observed are passes between outfield players.

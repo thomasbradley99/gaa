@@ -1,0 +1,13 @@
+HALF: first_half
+TIMESTAMP: 03:00
+CLIP_FILE: clip_03m00s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 03:00
+DETECTIONS: ['player', 'ball', 'goalpost', 'grass']
+MISSED_DETECTIONS: []
+REASONING: The goalkeeper is not observed in this clip, and there is no kick being taken, so there is no kickout. The players are passing the ball between each other.
+
+LOW_CONFIDENCE_KICKOUTS: []

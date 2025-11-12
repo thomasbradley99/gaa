@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 09:00
+CLIP_FILE: clip_09m00s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 9
+HALF: first_half
+CLIP_TIME: 09:00
+DETECTIONS: ['grass green grass field', 'player football player', 'footballer referee', 'white goal frame', 'football player', 'football player', 'football player', 'football player goalkeeper', 'football player', 'white goal frame', 'white round ball football', 'goalpost on the pitch', 'white round ball', 'football', 'white round ball football']
+MISSED_DETECTIONS: []
+REASONING: The game is in active play. No kickout sequence is observed. Players are spread across the field, passing and contesting the ball. There is no indication that the ball has gone out of play. No goalkeeper is observed to be taking a kickout.
+LOW_CONFIDENCE_KICKOUTS: []

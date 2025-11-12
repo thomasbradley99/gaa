@@ -1,0 +1,10 @@
+HALF: first_half
+TIMESTAMP: 00:15
+CLIP_FILE: clip_00m15s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 10
+HALF: first_half
+CLIP_TIME: 00:15
+
+REASONING: The scene appears to be a pre-game warm-up or a training session, not active match play. There are multiple balls on the pitch, and players are casually jogging and kicking them around without any formal structure. There is no trigger event (like a shot going wide), no stoppage of play, and no organised setup for a kickout. Players are not positioned in a typical kickout formation, and the overall activity is inconsistent with an official game restart.

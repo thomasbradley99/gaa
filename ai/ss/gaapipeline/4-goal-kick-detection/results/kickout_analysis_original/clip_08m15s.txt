@@ -1,0 +1,10 @@
+HALF: first_half
+TIMESTAMP: 08:15
+CLIP_FILE: clip_08m15s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 1
+HALF: first_half
+CLIP_TIME: 08:15
+
+REASONING: The clip begins after the play has already stopped, so the trigger event (a shot going wide or over the bar) is not visible. The clip also ends before the ball lands, meaning the aerial contest and possession outcome cannot be observed. Lacking both the start and end points of a valid kickout sequence, this cannot be confirmed as an official kickout per the strict guidelines.

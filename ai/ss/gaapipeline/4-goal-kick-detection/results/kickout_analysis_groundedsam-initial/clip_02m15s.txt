@@ -1,0 +1,12 @@
+HALF: first_half
+TIMESTAMP: 02:15
+CLIP_FILE: clip_02m15s.mp4
+ANALYSIS:
+KICKOUT: NO
+CONFIDENCE: 7
+HALF: first_half
+CLIP_TIME: 02:15
+DETECTIONS: ['grass', 'football player', 'football player', 'football player', 'football player', 'football player', 'football player', 'football player', 'football player', 'referee']
+MISSED_DETECTIONS: ['ball', 'goalpost', 'goalkeeper']
+REASONING: The clip appears to show general play and not a kickout. The ball is being contested between players in the middle of the field. No kickout sequence events were observed.
+LOW_CONFIDENCE_KICKOUTS: []

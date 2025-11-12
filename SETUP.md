@@ -22,7 +22,7 @@ cd gaa-webapp
 createdb gaa_app
 
 # Run schema
-psql -d gaa_app -f db/schema.sql
+psql -d gaa_app -f webapp/simple/db/schema.sql
 ```
 
 **Alternative:** If you don't have PostgreSQL locally, you can use:
@@ -33,7 +33,7 @@ psql -d gaa_app -f db/schema.sql
 ## Step 3: Backend Setup
 
 ```bash
-cd webapp/simple-backend
+cd webapp/simple/backend
 
 # Install dependencies
 npm install
@@ -58,7 +58,7 @@ Backend will run on `http://localhost:3005`
 
 ```bash
 # Open a new terminal
-cd webapp/simple-frontend
+cd webapp/simple/frontend
 
 # Install dependencies
 npm install
@@ -78,7 +78,7 @@ Frontend will run on `http://localhost:3000`
 
 Place a video file at:
 ```
-webapp/simple-frontend/public/hero-video.mp4
+webapp/simple/frontend/public/hero-video.mp4
 ```
 
 If you don't have one, the page will still work (just no background video).
@@ -112,20 +112,20 @@ If you don't have one, the page will still work (just no background video).
 - Verify connection string format: `postgresql://user:password@host:port/database`
 
 ### Map not showing
-- Make sure `leaflet` and `react-leaflet` are installed: `cd webapp/simple-frontend && npm install`
+- Make sure `leaflet` and `react-leaflet` are installed: `cd webapp/simple/frontend && npm install`
 - Check browser console for errors
-- Verify `gaapitchfinder_data.json` exists in `webapp/simple-frontend/src/components/pitch-finder/`
+- Verify `gaapitchfinder_data.json` exists in `webapp/simple/frontend/src/components/pitch-finder/`
 
 ## Quick Commands Reference
 
 ```bash
 # Start everything (in separate terminals)
-cd webapp/simple-backend && npm run dev    # Terminal 1
-cd webapp/simple-frontend && npm run dev    # Terminal 2
+cd webapp/simple/backend && npm run dev    # Terminal 1
+cd webapp/simple/frontend && npm run dev    # Terminal 2
 
 # Or use a process manager like concurrently
 npm install -g concurrently
-concurrently "cd webapp/simple-backend && npm run dev" "cd webapp/simple-frontend && npm run dev"
+concurrently "cd webapp/simple/backend && npm run dev" "cd webapp/simple/frontend && npm run dev"
 ```
 
 ## Next Steps

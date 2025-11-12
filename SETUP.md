@@ -22,7 +22,7 @@ cd gaa-webapp
 createdb gaa_app
 
 # Run schema
-psql -d gaa_app -f webapp/simple/db/schema.sql
+psql -d gaa_app -f webapp/gaa-webapp/db/schema.sql
 ```
 
 **Alternative:** If you don't have PostgreSQL locally, you can use:
@@ -78,7 +78,7 @@ Frontend will run on `http://localhost:3000`
 
 Place a video file at:
 ```
-webapp/simple/frontend/public/hero-video.mp4
+webapp/gaa-webapp/frontend/public/hero-video.mp4
 ```
 
 If you don't have one, the page will still work (just no background video).

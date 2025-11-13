@@ -132,8 +132,20 @@ The next stage will try to identify GAA event types from your narrative:
 **Defending:** Turnovers (Won/Lost), Fouls (Awarded/Conceded)
 **Other:** Ball in Play, Stoppages, Highlights, Referee decisions
 
-**CRITICAL - PRESERVE THESE DETAILS:**
-Your narrative feeds into the next stage, so you MUST preserve:
+**CRITICAL - PRESERVE AND INFER POSSESSION:**
+Your narrative feeds into the next stage, so you MUST preserve and infer:
+
+- **POSSESSION START/END INFERENCE:**
+  * Stage 1 mentions "has possession", "is in possession", "gains possession" - these are possession START points
+  * You need to INFER when possession ENDS by looking for:
+    - Turnovers: "intercepts", "wins the ball", "tackles", "loses possession" → Previous possession ends, new one starts
+    - Shots: When a team shoots, their possession ends (shot is the end of that possession)
+    - Kickouts: When a kickout happens, the team taking it gains possession (previous possession ended)
+    - Throw-ups: When a throw-up happens, possession changes
+  * Mark possession periods explicitly: "X:XX - [Team] has possession" and "Y:YY - [Team] possession ends" or "Y:YY - [Other team] gains possession"
+  * Possession can last 30 seconds to 2+ minutes - infer the duration from when it starts to when it ends
+
+- **Other events to preserve:**
 - **Possession changes:** "intercepts", "wins the ball", "gains possession", "regains possession", "tackles" → These become "Turnover Won" events
 - **Attacks:** "attacks", "builds attack", "advances forward" → "Attack Own/Opp" events
 - **Shots:** any mention of shooting, striking toward goal → "Shot Own/Opp" events (with Point/Goal/Wide outcomes)
@@ -190,9 +202,10 @@ Keep it detailed for important events:
 **FINAL CHECKLIST BEFORE YOU FINISH:**
 1. Did you keep every score (point/goal) that had clear "ball over bar" or "ball into net" language?
 2. For any score you removed, did you document the reason in the validation notes?
-3. Did you preserve possession changes? (intercepts, tackles, turnovers)
-4. Did you preserve restarts? (kickouts, throw-ups)
-5. Did you preserve attacks and shots?
+3. Did you infer possession START and END points? (When team gains possession → START, when they lose it → END)
+4. Did you preserve possession changes? (intercepts, tackles, turnovers)
+5. Did you preserve restarts? (kickouts, throw-ups)
+6. Did you preserve attacks and shots?
 
 Remember: You're helping us filter out hallucinations, not add more. When in doubt, be skeptical of dramatic claims (especially scores).
 
@@ -271,10 +284,10 @@ def _segment_observations(observations_text: str) -> list[dict]:
 def create_narrative():
     """Create coherent narrative from visual observations in 20-minute segments."""
 
-    input_file = INPUT_DIR / "1_observations.txt"
+    input_file = OUTPUT_DIR / "1_observations.txt"
     output_file = OUTPUT_DIR / "2_narrative.txt"
     segments_dir = OUTPUT_DIR / "2_narrative_segments"
-    prompt_dir = OUTPUT_DIR / "prompt_stage2_segments"
+    prompt_dir = OUTPUT_DIR / "2_prompt_segments"
 
     if not input_file.exists():
         raise FileNotFoundError(f"❌ Input file not found: {input_file}")
@@ -327,7 +340,7 @@ def create_narrative():
         label = f"{_format_label(start_seconds)}-{_format_label(end_seconds)}"
 
         prompt_text = _build_stage2_prompt(segment_text, start_seconds, end_seconds)
-        prompt_file = prompt_dir / f"prompt_stage2_segment_{order_idx:02d}_{label}.txt"
+        prompt_file = prompt_dir / f"2_prompt_segment_{order_idx:02d}_{label}.txt"
         prompt_file.write_text(prompt_text)
 
         # Create model instance per thread (thread-safe)
@@ -438,11 +451,11 @@ def create_narrative():
         json.dump(segments_meta, meta_fp, indent=2)
 
     summary_text = "\n".join([
-        "Stage 2 prompts are saved per segment in prompt_stage2_segments/",
+        "Stage 2 prompts are saved per segment in 2_prompt_segments/",
         "Segment narratives are saved in 2_narrative_segments/",
         "Segments metadata stored in 2_narrative_segments/segments_metadata.json"
     ]) + "\n"
-    (OUTPUT_DIR / "prompt_stage2.txt").write_text(summary_text)
+    (OUTPUT_DIR / "2_prompt.txt").write_text(summary_text)
 
     avg_prompt_tokens = totals['prompt_tokens'] // totals['count']
     avg_output_tokens = totals['output_tokens'] // totals['count']
@@ -476,7 +489,7 @@ def create_narrative():
         }
     }
 
-    usage_file = OUTPUT_DIR / 'usage_stats_stage2.json'
+    usage_file = OUTPUT_DIR / '2_usage_stats.json'
     usage_file.write_text(json.dumps(usage_stats, indent=2) + "\n")
 
     print(f"✅ Coherent narrative created across {totals['count']} segment(s)")

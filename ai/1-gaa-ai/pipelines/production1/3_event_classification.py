@@ -529,7 +529,7 @@ Remember - timestamps are already in absolute time (11:25 format), just use them
     total_elapsed = time.time() - stage_start_time
     
     # Save usage stats
-    usage_file = OUTPUT_DIR / 'usage_stats_stage3.json'
+    usage_file = OUTPUT_DIR / '3_usage_stats.json'
     usage_stats = {
         'stage': 'stage_3_classification',
         'model': 'gemini-2.5-pro',

@@ -17,25 +17,23 @@
       "Won",
       "Lost",
       "Turnover",
-      "Attack",
-      "KIckout Opp"
+      "Attack"
     ],
     "Possession Opp": [
       "Won",
       "Lost",
       "Turnover",
-      "Attack",
-      "KIckout Opp"
+      "Attack"
     ],
     "Pos Own Att": [
       "Turnover",
       "Kickout Own",
-      "KIckout Opp"
+      "Kickout Opp"
     ],
     "Pos Opp ATT": [
       "Turnover",
       "Kickout Own",
-      "KIckout Opp"
+      "Kickout Opp"
     ],
     "Attack Own": [],
     "Attack OPP": [],
@@ -45,8 +43,10 @@
       "Point",
       "Goal",
       "Wide",
+      "45m",
       "Short Keeper",
-      "Rebound Post"
+      "Rebound Post",
+      "Save"
     ],
     "Shot Opp": [
       "From Play",
@@ -93,7 +93,7 @@
       "D3",
       "attack third",
       "middle third",
-      "defensive"
+      "defensive third"
     ],
     "Turnover lost": [
       "Forced",
@@ -104,8 +104,12 @@
       "M1",
       "M2",
       "M3",
+      "D1",
+      "D2",
+      "D3",
       "attack third",
-      "middle third"
+      "middle third",
+      "defensive third"
     ],
     "Foul Awarded": [],
     "Foul Conceded": [],

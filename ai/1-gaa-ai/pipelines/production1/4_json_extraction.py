@@ -79,11 +79,12 @@ def extract_json():
     print(f"📖 Loaded narrative: {len(narrative_text)} characters")
     
     # REGEX PARSING (no AI needed!)
-    # Pattern: MM:SS - Event Code [Optional Tag] [Optional: Description]
-    # Matches both:
+    # Pattern: MM:SS - Event Code [Tag1] [Tag2] ... [TagN]: Description
+    # Matches:
     #   04:28 - Opp Throw In
     #   04:33 - Home Shot at Goal [Save]: Description here
-    pattern = r'(\d+):(\d+)\s*-\s*([^\[\:]+?)(?:\s*\[([^\]]+)\])?(?:\s*:\s*(.+))?$'
+    #   09:08 - Shot Opp [From Play] [Point]: Red scores a point
+    pattern = r'(\d+):(\d+)\s*-\s*([^\[\:]+?)(?:\s*\[([^\]]+)\])*(?:\s*:\s*(.+))?$'
     
     events = []
     for line in narrative_text.split('\n'):
@@ -93,8 +94,11 @@ def extract_json():
             
         match = re.match(pattern, line)
         if match:
-            minutes, seconds, code, tag, label = match.groups()
+            minutes, seconds, code, tags_str, label = match.groups()
             start_seconds = int(minutes) * 60 + int(seconds)
+            
+            # Extract all tags (multiple [tag] patterns)
+            tags = re.findall(r'\[([^\]]+)\]', line.split(':')[0] if ':' in line else line)
             
             event = {
                 'ID': f'ai-{len(events)+1:04d}',
@@ -106,8 +110,12 @@ def extract_json():
                 'label': label.strip() if label else code.strip()  # Use code as label if no description
             }
             
-            if tag:
-                event['tag'] = _normalize_tag(tag)
+            # Add tags (join multiple tags with comma, or use single tag)
+            if tags:
+                if len(tags) == 1:
+                    event['tag'] = _normalize_tag(tags[0])
+                else:
+                    event['tag'] = ', '.join([_normalize_tag(t) for t in tags])
             
             events.append(event)
     

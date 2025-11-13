@@ -61,7 +61,11 @@ elif PRO_XML_TEMPLATE.exists():
 else:
     raise FileNotFoundError("No ground truth XML found in inputs/")
 
-SCHEMA_FILE = SCHEMA_DIR / "schema_gaa_all_events.json"
+# Use focused evaluation schema (excludes meta/arbitrary events)
+SCHEMA_FILE = SCHEMA_DIR / "schema_gaa_evaluation.json"
+# Fallback to full schema if evaluation schema doesn't exist
+if not SCHEMA_FILE.exists():
+    SCHEMA_FILE = SCHEMA_DIR / "schema_gaa_all_events.json"
 OUT_FILE = OUTPUT_DIR / "7_evaluation_metrics.json"
 TIMELINE_FILE = OUTPUT_DIR / "7_evaluation_timeline.txt"
 
@@ -300,9 +304,11 @@ def generate_timeline(matches, overall_metrics, total_ai, total_pro, output_dir,
     total_output_tokens = 0
     
     # Stage 1
-    stage1_file = output_dir / "usage_stats_stage1.json"
+    stage1_file = output_dir / "1_usage_stats.json"
     if not stage1_file.exists():
-        stage1_file = output_dir / "usage_stats.json"  # Fallback to old name
+        stage1_file = output_dir / "usage_stats_stage1.json"  # Fallback to old name
+        if not stage1_file.exists():
+            stage1_file = output_dir / "usage_stats.json"  # Fallback to older name
     
     if stage1_file.exists():
         with open(stage1_file, 'r') as f:
@@ -316,7 +322,9 @@ def generate_timeline(matches, overall_metrics, total_ai, total_pro, output_dir,
         lines.append(f"Stage 1 (Clip Descriptions):  ${cost:.4f}  ({tokens_in:,} in / {tokens_out:,} out)")
     
     # Stage 2
-    stage2_file = output_dir / "usage_stats_stage2.json"
+    stage2_file = output_dir / "2_usage_stats.json"
+    if not stage2_file.exists():
+        stage2_file = output_dir / "usage_stats_stage2.json"  # Fallback to old name
     if stage2_file.exists():
         with open(stage2_file, 'r') as f:
             stage2 = json.load(f)
@@ -329,7 +337,9 @@ def generate_timeline(matches, overall_metrics, total_ai, total_pro, output_dir,
         lines.append(f"Stage 2 (Narrative):          ${cost:.4f}  ({tokens_in:,} in / {tokens_out:,} out)")
     
     # Stage 3  
-    stage3_file = output_dir / "usage_stats_stage3.json"
+    stage3_file = output_dir / "3_usage_stats.json"
+    if not stage3_file.exists():
+        stage3_file = output_dir / "usage_stats_stage3.json"  # Fallback to old name
     if stage3_file.exists():
         with open(stage3_file, 'r') as f:
             stage3 = json.load(f)

@@ -158,7 +158,7 @@ def main():
         print(f"📖 Parsing professional XML: {pro_xml.name}")
         pro_events = parse_xml_events(pro_xml)
         pro_js = f"const professionalEvents = {json.dumps(pro_events, indent=2)};"
-        pro_output = BASE_DIR / "professional_events_data.js"
+        pro_output = OUTPUT_DIR / "6_professional_events_data.js"
         pro_output.write_text(pro_js)
         print(f"✅ Exported {len(pro_events)} professional events")
         print(f"   → {pro_output}")
@@ -169,7 +169,7 @@ def main():
         print(f"\n📖 Parsing AI events JSON...")
         ai_events = parse_ai_events(ai_json)
         ai_js = f"const aiEventsData = {json.dumps(ai_events, indent=2)};"
-        ai_output = BASE_DIR / "ai_events_data.js"
+        ai_output = OUTPUT_DIR / "6_ai_events_data.js"
         ai_output.write_text(ai_js)
         print(f"✅ Exported {len(ai_events)} AI events")
         print(f"   → {ai_output}")
@@ -180,7 +180,7 @@ def main():
         print(f"\n📖 Parsing observations...")
         descriptions = parse_observations(obs_file)
         desc_js = f"const descriptionsData = {json.dumps(descriptions, indent=2)};"
-        desc_output = BASE_DIR / "descriptions_data.js"
+        desc_output = OUTPUT_DIR / "6_descriptions_data.js"
         desc_output.write_text(desc_js)
         print(f"✅ Exported {len(descriptions)} descriptions")
         print(f"   → {desc_output}")
@@ -188,7 +188,7 @@ def main():
     print("\n" + "=" * 60)
     print("✅ EXPORT COMPLETE!")
     print(f"\n📤 Upload to S3:")
-    print(f"   aws s3 cp {BASE_DIR}/*.js s3://end-nov-webapp-clann/gaa-analysis/{args.game}/")
+    print(f"   aws s3 cp {OUTPUT_DIR}/*.js s3://end-nov-webapp-clann/gaa-analysis/{args.game}/")
     print(f"\n🌐 Website URL (after upload):")
     print(f"   https://end-nov-webapp-clann.s3.eu-west-1.amazonaws.com/gaa-analysis/game_viewer.html?game={args.game}&audio=with-audio")
 

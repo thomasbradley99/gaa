@@ -95,7 +95,7 @@ if profile_path.exists():
     print()
 else:
     print(f"⚠️  No game profile found - using generic team descriptions")
-    print(f"   Run: python3 0.5_calibrate_game.py --game {ARGS.game}")
+    print(f"   Run: python3 0.3_calibrate_game.py --game {ARGS.game}")
     print()
 
 def analyze_single_clip(clip_path: Path) -> dict:
@@ -133,52 +133,88 @@ def analyze_single_clip(clip_path: Path) -> dict:
             home_goal_side = defending_goal(home_attacks)
             away_goal_side = defending_goal(away_attacks)
 
-            team_context = f"""CONTEXT: {current_half}.
+            # Determine camera perspective based on attack direction
+            # In 1st half: if home attacks left-to-right, home's goal is LEFT, away's goal is RIGHT
+            # In 2nd half: directions reverse, so home attacks right-to-left, home's goal is RIGHT, away's goal is LEFT
+            if current_half == "1st half":
+                if home_attacks == "left-to-right":
+                    # Home goal LEFT, Away goal RIGHT
+                    camera_perspective = f"Camera perspective: When showing LEFT side = {home_color}'s defensive end ({home_color}'s goal), {away_color}'s attacking end. When showing RIGHT side = {away_color}'s defensive end ({away_color}'s goal), {home_color}'s attacking end."
+                else:  # home attacks right-to-left in 1st half
+                    # Home goal RIGHT, Away goal LEFT
+                    camera_perspective = f"Camera perspective: When showing RIGHT side = {home_color}'s defensive end ({home_color}'s goal), {away_color}'s attacking end. When showing LEFT side = {away_color}'s defensive end ({away_color}'s goal), {home_color}'s attacking end."
+            else:  # 2nd half - teams switch ends
+                if home_attacks == "right-to-left":  # In 2nd half, home now attacks right-to-left
+                    # Home goal RIGHT, Away goal LEFT (switched from 1st half)
+                    camera_perspective = f"Camera perspective: When showing RIGHT side = {home_color}'s defensive end ({home_color}'s goal), {away_color}'s attacking end. When showing LEFT side = {away_color}'s defensive end ({away_color}'s goal), {home_color}'s attacking end."
+                else:  # home attacks left-to-right in 2nd half
+                    # Home goal LEFT, Away goal RIGHT
+                    camera_perspective = f"Camera perspective: When showing LEFT side = {home_color}'s defensive end ({home_color}'s goal), {away_color}'s attacking end. When showing RIGHT side = {away_color}'s defensive end ({away_color}'s goal), {home_color}'s attacking end."
+
+            team_context = f"""CONTEXT: {current_half}
 
 TEAMS (refer to them ONLY by jersey color):
 - {home_color} ({home_keeper} keeper) - attacking {home_attacks}, defend {home_goal_side} side goal
-- {away_color} ({away_keeper} keeper) - attacking {away_attacks}, defend {away_goal_side} side goal"""
+- {away_color} ({away_keeper} keeper) - attacking {away_attacks}, defend {away_goal_side} side goal
+
+CAMERA:
+This is a panning camera that follows the action. {camera_perspective}"""
         else:
-            team_context = "TEAMS: Identify teams by jersey colors"
+            team_context = "TEAMS: Identify teams by jersey colors\n\nCAMERA: This is a panning camera system that follows the action."
 
         clip_start_time = f"{timestamp//60}:{timestamp%60:02d}"
         clip_end_ts = timestamp + 60
         clip_end_time = f"{clip_end_ts//60}:{clip_end_ts%60:02d}"
-        example_mid_time = f"{(timestamp + 30)//60}:{(timestamp + 30)%60:02d}"
+        
+        # Calculate example timestamps throughout the clip
+        example_time_10s = f"{(timestamp + 10)//60}:{(timestamp + 10)%60:02d}"
+        example_time_25s = f"{(timestamp + 25)//60}:{(timestamp + 25)%60:02d}"
+        example_time_45s = f"{(timestamp + 45)//60}:{(timestamp + 45)%60:02d}"
 
-        prompt = f"""You are analyzing a GAA (Gaelic Athletic Association) match clip.
+        prompt = f"""You are watching a GAA (Gaelic Athletic Association) match clip with audio.
 
 {team_context}
 
 **CLIP TIMING:**
-This clip shows {clip_start_time} to {clip_end_time}.
+This clip shows {clip_start_time} to {clip_end_time} (60 seconds of match play).
 
 **YOUR TASK:**
-Describe what happens using absolute game time (e.g., {clip_start_time}, {example_mid_time}).
+Describe what you actually SEE and HEAR happening in this clip. Use absolute game timestamps (e.g., {clip_start_time}, {example_time_10s}, {example_time_25s}, {clip_end_time}).
 
-What to describe:
-- Possession changes (tackles, interceptions, who wins the ball)
-- Shots at goal (points, goals, wides)
-- Attacks and build-up play
-- Kickouts (restarts after scores)
-- Throw-ups (restarts from referee)
-- Fouls and referee decisions
-- Turnovers (possession changes)
-- Scores: Points (over the bar) and Goals (into net) - BE VERY CAREFUL - only if you see ball clearly score AND celebrations/restart
+**FOCUS ON WHAT YOU OBSERVE:**
+- Which team has the ball at different moments? Track possession changes.
+- What happens with the ball? (passes, carries, shots, kickouts, throw-ups)
+- Where is the action happening? (which end of pitch, which third)
+- What do you hear? (whistle, crowd, commentary)
+- Who wins contested balls? (tackles, interceptions, aerial duels)
+- Shots and scores? (only if you CLEARLY see ball cross line/bar AND celebrations/restart)
+- **Officials**: Can you see the referee or umpires (officials beside the goal)? Their signals can help confirm shots: hands raised above head = point scored (over bar), arms outstretched to the side = wide (missed)
 
-**Important:**
-- Use absolute timestamps like {clip_start_time} (NOT 0:05)
-- Only describe what you're confident about
-- Refer to teams ONLY by jersey color
-- GAA scoring: Points (over crossbar) and Goals (into net)
+**KEY THINGS TO LOOK FOR (but describe naturally):**
+- Kickouts (goalkeeper restarts after scores)
+- Shots (points over bar, goals into net, wides)
+- Turnovers (possession changes - tackles, interceptions, mistakes)
+- Fouls (referee stops play, free kicks awarded)
+- Throw-ups (referee restarts from contested ball)
+- Possession changes (when team gains/loses the ball)
 
-**Example:**
-{clip_start_time} - Blue goalkeeper takes kickout from goal area
-{clip_start_time} - White player wins possession in midfield
-{example_mid_time} - Blue intercepts pass and attacks
-{clip_end_time} - Blue player scores a point over the bar
+**IMPORTANT:**
+- Use absolute timestamps like {clip_start_time} (NOT relative times like "0:05")
+- Use different timestamps throughout the clip as events happen (e.g., {clip_start_time}, {example_time_10s}, {example_time_25s})
+- Only describe what you're confident you see/hear
+- Refer to teams ONLY by jersey color (e.g., "Red/White", "White/Blue")
+- Be natural - describe what happens chronologically
+- Don't force specific event types - just describe what you observe
 
-Just describe what happens:"""
+**EXAMPLE OUTPUT:**
+{clip_start_time} - White/Blue goalkeeper takes kickout, sends it long down the middle
+{clip_start_time} - Red/White player wins the ball in midfield
+{example_time_10s} - Red/White team has possession, passing around midfield
+{example_time_25s} - Red/White team moves forward, entering White/Blue's defensive third
+{example_time_45s} - Red/White player takes shot, goes wide
+{clip_end_time} - White/Blue goalkeeper takes kickout
+
+Describe what you see and hear:"""
 
         # Read video data
         with open(clip_path, 'rb') as f:
@@ -221,7 +257,7 @@ Just describe what happens:"""
 def analyze_clips():
     """Analyze clips WITH AUDIO for full 41-event detection"""
     output_file = OUTPUT_DIR / "1_observations.txt"  # Stage 1 outputs observations
-    usage_file = OUTPUT_DIR / "usage_stats_stage1.json"
+    usage_file = OUTPUT_DIR / "1_usage_stats.json"
     
     # Get all clips with audio
     all_clips = sorted(INPUT_DIR.glob("*.mp4"))

@@ -300,7 +300,7 @@ def main():
     print(f"📸 Frames: {frame_count} frames (2 per clip at 0s and 30s)")
     print(f"⚡ Speed: Extracted from clips (ultra-fast)")
     print()
-    print(f"Next step: python3 0.5_calibrate_game.py --game {ARGS.game}")
+    print(f"Next step: python3 0.3_calibrate_game.py --game {ARGS.game}")
     
     return True
 

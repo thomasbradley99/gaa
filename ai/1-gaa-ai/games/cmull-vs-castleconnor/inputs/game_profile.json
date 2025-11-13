@@ -1,22 +1,22 @@
 {
   "team_a": {
-    "jersey_color": "Red",
+    "jersey_color": "Red/White",
+    "keeper_color": "Black",
+    "attack_direction_1st_half": "left-to-right",
+    "attack_direction_2nd_half": "right-to-left"
+  },
+  "team_b": {
+    "jersey_color": "White/Blue",
     "keeper_color": "Dark",
     "attack_direction_1st_half": "right-to-left",
     "attack_direction_2nd_half": "left-to-right"
   },
-  "team_b": {
-    "jersey_color": "White/Blue",
-    "keeper_color": "White",
-    "attack_direction_1st_half": "left-to-right",
-    "attack_direction_2nd_half": "right-to-left"
-  },
   "match_times": {
-    "start": 540,
-    "half_time": 3060,
-    "second_half_start": 3090,
-    "end": 5190
+    "start": 450,
+    "half_time": 2400,
+    "second_half_start": 2640,
+    "end": 5160
   },
-  "notes": "Team A's jersey color is predominantly 'Red', sometimes appearing as 'Red/Orange' or 'Red/Maroon'. Team B's jersey color is predominantly 'White/Blue', with variations including 'White', 'Blue', 'Light Blue', or 'White/Light Blue'. Keeper colors were determined by the most frequent explicit mentions for each team. Attacking directions for the 2nd half assume a standard switch of ends at halftime, despite some conflicting or ambiguous keeper position descriptions in the frame data.",
-  "home_team_assignment": "EDIT_ME"
+  "notes": "Team A's jersey color is a consolidation of 'Red', 'Red/White', 'Red/Orange', 'Red/Black', and 'Orange' variants, with 'Red/White' being the most representative. Team B's jersey color is a consolidation of 'Blue', 'White', 'Blue/White', 'White/Blue', 'Light Blue/White', 'White/Dark Blue', 'White/Light Blue', 'White/Dark', and 'White/Black' variants, with 'White/Blue' being the most representative. Team A's keeper color 'Black' was chosen due to its specific and frequent mention when visible. Team B's keeper color 'Dark' was chosen due to high inconsistency and frequent 'not visible' mentions, with 'Dark' being a common general description when visible. The halftime break duration is 4 minutes (240 seconds), which is slightly shorter than the typical 5-15 minutes for GAA but represents the clearest and most sustained break in active match play.",
+  "home_team_assignment": "White/Blue"
 }

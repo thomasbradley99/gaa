@@ -29,24 +29,40 @@ api_key = os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
 genai.configure(api_key=api_key)
 
 def describe_single_frame(frame_path: Path, timestamp_seconds: int) -> dict:
-    """Describe a single frame using Flash"""
+    """Describe a single frame using Flash - extract simple facts"""
     try:
-        prompt = f"""Frame at {timestamp_seconds}s. Report:
+        prompt = f"""Frame at {timestamp_seconds}s. Extract these facts:
 
-1. Teams: [color] jerseys vs [color] jerseys
-2. Keepers (if visible): [color] keeper LEFT goal, [color] keeper RIGHT goal
-3. Game state - choose ONE:
-   - "THROW-UP" - referee throws up ball, players contesting
-   - "IN-PLAY" - active match, players in motion
-   - "HALFTIME" - players walking off field, leaving pitch
-   - "WARMUP" - players standing around, no organized play
-   - "END" - players shaking hands, celebrating, leaving field
-4. Ball location: where is it? (center, penalty area, midfield, sideline, etc.)
-5. Activity level: active play / slow / stopped / players resting
+1. Team colors: [color] jerseys vs [color] jerseys
+   - GAA jerseys typically have TWO colors (e.g., "Blue/White", "Red/Orange", "Green/Yellow")
+   - Report BOTH colors if you see them (use "/" or "&" to separate: "Blue/White", "Red & Orange")
+   - If you see orange/reddish, say "Orange" or "Red/Orange" not just "Red"
+   - If you see blue and white together, say "Blue/White" or "Blue & White" not just "Blue" or "White"
+   - Be specific: distinguish "Orange" from "Red", "Light Blue" from "Dark Blue"
+2. Keeper colors (if visible): [color] keeper at LEFT goal, [color] keeper at RIGHT goal
+   - Be specific: "Dark", "Black", "Dark Blue", etc. - not just "Dark" if you can see the actual color
+3. Attack direction: 
+   - Which team is attacking left-to-right? (their goal/defense is on LEFT, attacking towards RIGHT)
+   - Which team is attacking right-to-left? (their goal/defense is on RIGHT, attacking towards LEFT)
+   - IMPORTANT: Players typically face the direction they are attacking towards
+   - "Left-to-right" = team's goal is on left side, players face/move right (attacking right)
+   - "Right-to-left" = team's goal is on right side, players face/move left (attacking left)
+   - Look at player body orientation and movement direction to determine which goal they're defending and which direction they're attacking
+   - Only report if this is ACTIVE match play (both teams competing on full pitch)
+   - If WARMUP/PRACTICE, attack direction is not applicable
+4. Match status: 
+   - "ACTIVE" = ONLY if full pitch is occupied by TWO COMPETING TEAMS in organized match play (both teams visible, competitive action, ball in play, match structure)
+   - "WARMUP/PRACTICE" = Everything else: drills, warmup, practice, empty pitch, players walking off/on, halftime break, partial field activity, or any non-competitive activity
+   - If you see drills, practice, warmup, empty pitch, players walking, or anything that's NOT full competitive match play → WARMUP/PRACTICE
 
-Format example: "Blue vs White. Pink LEFT, Green RIGHT. THROW-UP - referee throws up ball, teams contesting. Active."
+Format example: "Orange vs Blue/White. Dark LEFT, Dark RIGHT. Orange attacks left-to-right, Blue/White attacks right-to-left. ACTIVE"
 
-Be concise (2-3 lines)."""
+Be concise (2-3 lines). Only report what you can see clearly. GAA jerseys often have two colors - report both.
+
+CRITICAL RULES:
+- ACTIVE = Full pitch, two competing teams, organized match play ONLY
+- Everything else (drills, warmup, practice, empty pitch, walking, halftime) = WARMUP/PRACTICE
+- Attack directions only matter for ACTIVE match play"""
 
         with open(frame_path, 'rb') as f:
             frame_data = f.read()
@@ -85,7 +101,7 @@ def calibrate_game():
     frames = sorted(FRAMES_DIR.glob('frame_*.jpg'))
     if not frames:
         print(f"❌ No calibration frames found in: {FRAMES_DIR}")
-        print(f"Run: python 0.1_generate_clips_and_frames.py --game {ARGS.game}")
+        print(f"Run: python 0.2_generate_clips_and_frames.py --game {ARGS.game}")
         return False
     
     print(f"📸 Found {len(frames)} calibration frames")
@@ -150,36 +166,91 @@ def calibrate_game():
         for d in frame_descriptions
     ])
     
-    synthesis_prompt = f"""Based on these frame descriptions from a GAA (Gaelic Athletic Association) match, create a game profile.
+    synthesis_prompt = f"""You are analyzing frame descriptions from a GAA (Gaelic Athletic Association) match video to create a game profile.
 
 **FRAME DESCRIPTIONS WITH TIMESTAMPS:**
 
 {descriptions_text}
 
-**YOUR TASK:**
-Extract the following information:
+**UNDERSTANDING GAA MATCH STRUCTURE:**
+- GAA matches have two halves, each typically 30-35 minutes long
+- Teams switch ends at halftime (so attack directions reverse)
+- Match starts after warmup period
+- There's a halftime break between halves
+
+**YOUR TASK - REASON THROUGH THE TIMELINE:**
+
+Read through ALL frame descriptions chronologically and identify:
 
 1. **TEAM IDENTIFICATION:**
-   - Identify Team A: What jersey color? What goalkeeper color?
-   - Identify Team B: What jersey color? What goalkeeper color?
-   - DO NOT assign "home" or "away" - just call them Team A and Team B
+   - What are the two jersey colors? 
+   - IMPORTANT: GAA jerseys typically have TWO colors (e.g., "Blue/White", "Red/Orange", "Green/Yellow")
+   - Look at ACTIVE match frames - those are most reliable for team colors
+   - Report BOTH colors if you see them (use "/" or "&" to separate: "Blue/White", "Red & Orange")
+   - Be VERY specific: distinguish "Orange" from "Red", "Blue/White" from "White", "Light Blue" from "Dark Blue"
+   - If you see orange/reddish in ACTIVE frames, it's likely "Orange" or "Red/Orange" not just "Red"
+   - If you see blue and white together, it's "Blue/White" or "Blue & White" not just "Blue" or "White"
+   - What are the goalkeeper colors for each team? (be specific: "Dark", "Black", "Dark Blue", etc.)
+   - Look for consistent keeper colors across ACTIVE frames
+   - If keepers are rarely visible or colors are inconsistent, use "Dark" as a default (most common when keepers are visible)
+   - Only assign specific colors if you see them consistently mentioned
+   - Call them Team A and Team B (don't assign home/away)
+
+2. **MATCH TIMES - INFER FROM PATTERNS:**
    
-2. **MATCH TIMES:**
-   - Match START: Find the FIRST timestamp with "THROW-UP" or "IN-PLAY" state
-   - Half Time: Find first timestamp with "HALFTIME" state (players walking off)
-   - 2nd Half START: Find the SECOND "THROW-UP" or "IN-PLAY" state (after halftime)
-   - Match END: Find the last timestamp with "IN-PLAY" or first "END" state
+   Look at the pattern of ACTIVE vs WARMUP states across the timeline:
+   
+   **Match START:**
+   - Find where WARMUP transitions to sustained ACTIVE match play
+   - Early ACTIVE states (before 5 minutes) are likely practice - ignore them
+   - The REAL match start is when you see sustained ACTIVE states after a clear warmup period
+   - Typically 8-12 minutes into video
+   - Choose the timestamp where organized match clearly begins
+   
+   **Half Time:**
+   - GAA halves are ~30 minutes long
+   - Look for a gap in ACTIVE play that:
+     * Comes AFTER match start
+     * Is approximately 30-35 minutes after match start
+     * Shows pattern: ACTIVE → (break/gap with mostly WARMUP/PRACTICE) → ACTIVE resumes
+   - The halftime is the END of the first sustained ACTIVE period (before the break)
+   - During halftime break, you should see mostly WARMUP/PRACTICE frames (empty pitch, players walking, etc.)
+   - Ignore scattered ACTIVE frames during what should be halftime break - those are likely false positives
+   - The REAL halftime break should have a clear pattern: sustained ACTIVE → mostly WARMUP/PRACTICE → sustained ACTIVE resumes
+   
+   **2nd Half START:**
+   - Should come after a proper halftime break (5-15 minutes after halftime)
+   - GAA halftime breaks are typically 5-15 minutes - ignore any ACTIVE resuming too quickly (less than 5 minutes)
+   - Look for where ACTIVE match play resumes after a substantial break
+   - Should see sustained ACTIVE states resuming (not just a brief pause)
+   - If you see ACTIVE at 2-3 minutes after halftime, that's likely still 1st half play - ignore it
+   
+   **Match END:**
+   - Should be at least 25-30 minutes after 2nd half start
+   - Find where ACTIVE match play ends (last sustained ACTIVE state)
    
 3. **ATTACKING DIRECTIONS:**
-   - In 1st half: Which team attacks left-to-right? Which attacks right-to-left?
-   - In 2nd half: Do they switch directions?
+   - For 1st half: Analyze ALL ACTIVE frame descriptions during the 1st half period
+     * Which team attacks left-to-right? Which attacks right-to-left?
+     * Look at the actual attack directions reported in the descriptions
+   - For 2nd half: Analyze ALL ACTIVE frame descriptions during the 2nd half period
+     * Which team attacks left-to-right? Which attacks right-to-left?
+     * Look at the actual attack directions reported in the descriptions
+   - Use the frame descriptions directly - don't assume or reverse
+   - If descriptions are inconsistent, use the most common pattern for each half
+   - This system must work for ANY game - infer from what's actually described
 
-**RULES:**
-- Use the timestamps from the descriptions
-- Be specific about colors (exact shades like "Light blue", "Dark blue", "White")
-- Times should be in SECONDS (integer)
-- Include buffer time - better to start early than miss events
-- DO NOT try to determine home/away - that will be set manually
+**CRITICAL THINKING:**
+- Use the full timeline pattern, not individual frames
+- Match start = transition from WARMUP to sustained ACTIVE
+- Halftime = end of first ~30 min ACTIVE period
+- 2nd half start = ACTIVE play resumes after break
+- Think about what makes sense temporally - a gap at 5 minutes is NOT halftime
+
+**OUTPUT:**
+- Times in SECONDS (integer)
+- Include 30-60 second buffer before match start (better to start early than miss events)
+- Be specific about colors
 
 **OUTPUT FORMAT (JSON only, no markdown, no code blocks):**
 {{
@@ -227,6 +298,10 @@ Provide ONLY the JSON object:"""
         
         game_profile = json.loads(result_text)
         
+        # Ensure home_team_assignment field exists (AI sometimes omits it)
+        if 'home_team_assignment' not in game_profile:
+            game_profile['home_team_assignment'] = 'EDIT_ME'
+        
         # Get token usage
         usage = response.usage_metadata
         input_tokens = usage.prompt_token_count
@@ -262,9 +337,9 @@ Provide ONLY the JSON object:"""
         print(f"\n⏱️  MATCH TIMES:")
         mt = game_profile['match_times']
         print(f"   Start: {mt['start']}s ({mt['start']//60}m{mt['start']%60:02d}s)")
-        print(f"   Half Time: {mt['half_time']}s ({mt['half_time']//60}m{mt['half_time']%60:02d}s)")
+        print(f"   Half Time: {mt['half_time']}s ({mt['half_time']//60}m{mt['half_time']%60:02d}s) - 1st half duration: {(mt['half_time']-mt['start'])//60}m{(mt['half_time']-mt['start'])%60:02d}s")
         print(f"   2nd Half: {mt['second_half_start']}s ({mt['second_half_start']//60}m{mt['second_half_start']%60:02d}s)")
-        print(f"   End: {mt['end']}s ({mt['end']//60}m{mt['end']%60:02d}s)")
+        print(f"   End: {mt['end']}s ({mt['end']//60}m{mt['end']%60:02d}s) - 2nd half duration: {(mt['end']-mt['second_half_start'])//60}m{(mt['end']-mt['second_half_start'])%60:02d}s")
         
         print(f"\n🎯 ATTACKING DIRECTIONS:")
         print(f"   1st Half - Team A: {game_profile['team_a']['attack_direction_1st_half']}, " +

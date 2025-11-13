@@ -10,14 +10,17 @@ This is the original pipeline using **60-second clips with no overlap**.
 ## Pipeline Stages
 
 ```bash
-# 0.0 Download videos (reads inputs/video_source.json)
-python3 0.0_download_videos.py --game {game-name}
+# 0.1 Download videos (reads inputs/video_source.json)
+python3 0.1_download_videos.py --game {game-name}
 
-# 0. Calibration (one-time per game)
-python3 0.5_calibrate_game.py --game {game-name}
+# 0.2 Generate clips (60s, no overlap)
+python3 0.2_generate_clips_and_frames.py --game {game-name}
 
-# 0.1 Generate clips (60s, no overlap)
-python3 0.1_generate_clips_and_frames.py --game {game-name}
+# 0.3 Calibration (one-time per game)
+python3 0.3_calibrate_game.py --game {game-name}
+
+# 0.4 Filter ground truth to detectable events (optional)
+python3 0.4_filter_to_detectable.py --game {game-name} --time-range 450-2400
 
 # 1. Clip descriptions (parallel processing)
 python3 1_clips_to_descriptions.py --game {game-name} --start-clip X --end-clip Y
@@ -59,7 +62,7 @@ Each game directory should contain an `inputs/video_source.json` file describing
 }
 ```
 
-Use `python3 0.0_download_videos.py --dry-run` to validate URLs without downloading.
+Use `python3 0.1_download_videos.py --dry-run` to validate URLs without downloading.
 
 ## Performance
 

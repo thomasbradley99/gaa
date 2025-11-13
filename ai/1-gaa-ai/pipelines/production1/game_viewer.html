@@ -514,9 +514,9 @@
         let aiEvents = [];
         let aiEventsLoaded = false;
         
-        console.log('📥 Loading AI events from:', `${S3_BASE}/${gameName}/ai_events_data.js`);
+        console.log('📥 Loading AI events from:', `${S3_BASE}/${gameName}/6_ai_events_data.js`);
         
-        fetch(`${S3_BASE}/${gameName}/ai_events_data.js`)
+        fetch(`${S3_BASE}/${gameName}/6_ai_events_data.js`)
             .then(response => response.text())
             .then(jsCode => {
                 const match = jsCode.match(/const aiEventsData = (\[[\s\S]*\]);/);
@@ -543,9 +543,9 @@
         let professionalEvents = [];
         let professionalEventsLoaded = false;
         
-        console.log('📥 Loading professional events from:', `${S3_BASE}/${gameName}/professional_events_data.js`);
+        console.log('📥 Loading professional events from:', `${S3_BASE}/${gameName}/6_professional_events_data.js`);
         
-        fetch(`${S3_BASE}/${gameName}/professional_events_data.js`)
+        fetch(`${S3_BASE}/${gameName}/6_professional_events_data.js`)
             .then(response => {
                 console.log('✅ Professional fetch response:', response.status);
                 return response.text();
@@ -571,9 +571,9 @@
         // Load AI descriptions from S3
         let descriptionsData = [];
         
-        console.log('📥 Loading descriptions from:', `${S3_BASE}/${gameName}/descriptions_data.js`);
+        console.log('📥 Loading descriptions from:', `${S3_BASE}/${gameName}/6_descriptions_data.js`);
         
-        fetch(`${S3_BASE}/${gameName}/descriptions_data.js`)
+        fetch(`${S3_BASE}/${gameName}/6_descriptions_data.js`)
             .then(response => {
                 console.log('✅ Fetch response:', response.status);
                 return response.text();

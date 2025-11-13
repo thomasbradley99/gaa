@@ -15,22 +15,32 @@
         .container {
             max-width: 2400px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 350px 1fr;
+            display: flex;
+            flex-direction: column;
             gap: 20px;
         }
-        .sidebar {
+        .filters-section {
+            width: 100%;
+        }
+        .video-row {
+            display: grid;
+            grid-template-columns: 350px 1fr 350px;
+            gap: 20px;
+        }
+        .events-column {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
-        .main-content {
+        .video-column {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
+        .descriptions-section {
+            width: 100%;
+        }
         h1 {
-            grid-column: 1 / -1;
             color: #4CAF50;
             margin-bottom: 10px;
         }
@@ -78,7 +88,7 @@
             background: #2a2a2a;
             padding: 20px;
             border-radius: 8px;
-            max-height: 800px;
+            max-height: 600px;
             overflow-y: auto;
         }
         .description-block {
@@ -131,18 +141,21 @@
             border-radius: 5px;
         }
         .info {
-            grid-column: 1 / -1;
             background: #2a2a2a;
             padding: 15px;
             border-radius: 4px;
             border-left: 4px solid #2196F3;
         }
-        .professional-section {
+        .events-section {
             background: #2a2a2a;
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
-            max-height: 800px;
+            max-height: 600px;
             overflow-y: auto;
+        }
+        .events-section h3 {
+            margin-top: 0;
+            font-size: 16px;
         }
         .event-block {
             background: #333;
@@ -156,6 +169,30 @@
             border-left-color: #ff9800;
             background: #4a3a2a;
             box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+        }
+        /* AI Events styling */
+        #aiEventsList .event-block {
+            border-left-color: #4CAF50;
+        }
+        #aiEventsList .event-block.active {
+            border-left-color: #4CAF50;
+            background: #3a4a3a;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+        }
+        #aiEventsList .event-time {
+            color: #4CAF50;
+        }
+        /* Professional Events styling */
+        #professionalList .event-block {
+            border-left-color: #ff9800;
+        }
+        #professionalList .event-block.active {
+            border-left-color: #ff9800;
+            background: #4a3a2a;
+            box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+        }
+        #professionalList .event-time {
+            color: #ff9800;
         }
         .event-time {
             font-weight: bold;
@@ -315,9 +352,8 @@
             <strong id="gameTitle">Loading...</strong> | <span id="testType">Loading...</span>
         </div>
         
-        <!-- Left Sidebar -->
-        <div class="sidebar">
-            <!-- Compact Filters -->
+        <!-- Filters at Top -->
+        <div class="filters-section">
             <div style="background: #2a2a2a; padding: 15px; border-radius: 8px;">
                 <h3 style="margin-top: 0; font-size: 16px;">🔍 Filters</h3>
                 <div class="filters">
@@ -364,47 +400,53 @@
                 <button class="filter-btn" onclick="applyFilters()">Apply Filters</button>
             </div>
         </div>
-            
-            <!-- AI Events -->
-            <div style="background: #2a2a2a; padding: 15px; border-radius: 8px;">
-                <h3 style="margin-top: 0; font-size: 16px;">🤖 AI Events</h3>
-                <div id="aiEventsList" style="max-height: 400px; overflow-y: auto;">Loading...</div>
+        
+        <!-- Video Row: AI Events | Video | Pro Events -->
+        <div class="video-row">
+            <!-- Left: AI Events -->
+            <div class="events-column">
+                <div class="events-section">
+                    <h3>🤖 AI Events</h3>
+                    <div id="aiEventsList">Loading...</div>
+                </div>
             </div>
             
-            <!-- Professional Events -->
-            <div style="background: #2a2a2a; padding: 15px; border-radius: 8px;">
-                <h3 style="margin-top: 0; font-size: 16px;">🏆 Pro Events</h3>
-                <div id="professionalList" style="max-height: 400px; overflow-y: auto;">Loading...</div>
+            <!-- Center: Video Player -->
+            <div class="video-column">
+                <div class="video-section">
+                    <video id="gameVideo" controls>
+                        <source id="videoSource" src="" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="controls">
+                        <div class="time-display">
+                            <span id="currentTime">00:00</span> / <span id="duration">00:00</span>
+                        </div>
+                        <button onclick="skipTime(-10)">⏪ -10s</button>
+                        <button onclick="skipTime(-5)">⏪ -5s</button>
+                        <button onclick="video.paused ? video.play() : video.pause()">⏯️ Play/Pause</button>
+                        <button onclick="skipTime(5)">+5s ⏩</button>
+                        <button onclick="skipTime(10)">+10s ⏩</button>
+                        <button onclick="video.playbackRate = 0.5">0.5x</button>
+                        <button onclick="video.playbackRate = 1">1x</button>
+                        <button onclick="video.playbackRate = 1.5">1.5x</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right: Professional Events -->
+            <div class="events-column">
+                <div class="events-section">
+                    <h3>🏆 Pro Events</h3>
+                    <div id="professionalList">Loading...</div>
+                </div>
             </div>
         </div>
         
-        <!-- Main Content: Video + Descriptions -->
-        <div class="main-content">
-            <div class="video-section">
-            <video id="gameVideo" controls>
-                <source id="videoSource" src="" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="controls">
-                <div class="time-display">
-                    <span id="currentTime">00:00</span> / <span id="duration">00:00</span>
-                </div>
-                <button onclick="skipTime(-10)">⏪ -10s</button>
-                <button onclick="skipTime(-5)">⏪ -5s</button>
-                <button onclick="video.paused ? video.play() : video.pause()">⏯️ Play/Pause</button>
-                <button onclick="skipTime(5)">+5s ⏩</button>
-                <button onclick="skipTime(10)">+10s ⏩</button>
-                <button onclick="video.playbackRate = 0.5">0.5x</button>
-                <button onclick="video.playbackRate = 1">1x</button>
-                <button onclick="video.playbackRate = 1.5">1.5x</button>
-            </div>
-            
-            <!-- AI Descriptions moved below video -->
-            <div class="descriptions-section">
-                <h3>🤖 AI Descriptions</h3>
-                <div id="descriptionsList" style="max-height: 400px; overflow-y: auto;">Loading descriptions...</div>
-            </div>
-        </div>
+        <!-- Descriptions Below -->
+        <div class="descriptions-section">
+            <h3>🤖 AI Descriptions</h3>
+            <div id="descriptionsList">Loading descriptions...</div>
         </div>
     </div>
 
@@ -875,6 +917,20 @@
                     element.classList.add('upcoming');
                 } else if (isPast) {
                     element.classList.add('past');
+                }
+            });
+            
+            // Update AI events (highlight if within ±5 seconds)
+            aiEvents.forEach((evt, index) => {
+                const element = document.getElementById(`ai-${index}`);
+                if (!element) return;
+                
+                const timeDiff = Math.abs(currentTime - evt.time);
+                const isActive = timeDiff <= 5;  // Highlight if within 5 seconds
+
+                element.classList.remove('active');
+                if (isActive) {
+                    element.classList.add('active');
                 }
             });
             

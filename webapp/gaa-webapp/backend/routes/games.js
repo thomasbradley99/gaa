@@ -7,13 +7,29 @@ const router = express.Router();
 // Get user's games
 router.get('/', authenticateToken, async (req, res) => {
   try {
-    const result = await query(
-      `SELECT g.* FROM games g
-       INNER JOIN team_members tm ON g.team_id = tm.team_id
-       WHERE tm.user_id = $1
-       ORDER BY g.created_at DESC`,
-      [req.user.userId]
-    );
+    const { teamId } = req.query;
+    
+    let queryText = `
+      SELECT 
+        g.*,
+        t.name as team_name
+      FROM games g
+      INNER JOIN team_members tm ON g.team_id = tm.team_id
+      INNER JOIN teams t ON g.team_id = t.id
+      WHERE tm.user_id = $1
+    `;
+    
+    const params = [req.user.userId];
+    
+    // Filter by team if teamId provided
+    if (teamId) {
+      queryText += ` AND g.team_id = $2`;
+      params.push(teamId);
+    }
+    
+    queryText += ` ORDER BY g.created_at DESC`;
+    
+    const result = await query(queryText, params);
 
     res.json({ games: result.rows });
   } catch (error) {
@@ -22,10 +38,10 @@ router.get('/', authenticateToken, async (req, res) => {
   }
 });
 
-// Create game
+// Create game (supports VEO URL or file upload)
 router.post('/', authenticateToken, async (req, res) => {
   try {
-    const { title, description, teamId } = req.body;
+    const { title, description, teamId, videoUrl } = req.body;
 
     if (!title || !teamId) {
       return res.status(400).json({ error: 'Title and team ID are required' });
@@ -41,11 +57,25 @@ router.post('/', authenticateToken, async (req, res) => {
       return res.status(403).json({ error: 'Not a member of this team' });
     }
 
+    // Determine file type based on videoUrl
+    let fileType = 'upload'; // default for file uploads
+    if (videoUrl) {
+      if (videoUrl.includes('veo.co') || videoUrl.includes('app.veo.co')) {
+        fileType = 'veo';
+      } else if (videoUrl.includes('traceup.com')) {
+        fileType = 'trace';
+      } else if (videoUrl.includes('spiideo.com')) {
+        fileType = 'spiideo';
+      } else {
+        fileType = 'veo'; // default for external URLs
+      }
+    }
+
     const result = await query(
-      `INSERT INTO games (title, description, team_id, created_by)
-       VALUES ($1, $2, $3, $4)
+      `INSERT INTO games (title, description, team_id, created_by, video_url, file_type, uploaded_by, status)
+       VALUES ($1, $2, $3, $4, $5, $6, $4, 'pending')
        RETURNING *`,
-      [title, description || null, teamId, req.user.userId]
+      [title, description || null, teamId, req.user.userId, videoUrl || null, fileType]
     );
 
     res.status(201).json({ game: result.rows[0] });
@@ -55,14 +85,36 @@ router.post('/', authenticateToken, async (req, res) => {
   }
 });
 
+// Get demo games (public, no auth required)
+router.get('/demo', async (req, res) => {
+  try {
+    const result = await query(
+      `SELECT g.id, g.title, g.description, g.thumbnail_url, g.duration, g.status, g.video_url, g.file_type, g.created_at
+       FROM games g
+       WHERE g.is_demo = true AND g.status = 'analyzed'
+       ORDER BY g.created_at DESC
+       LIMIT 5`
+    );
+
+    res.json({ games: result.rows });
+  } catch (error) {
+    console.error('Get demo games error:', error);
+    res.status(500).json({ error: 'Failed to get demo games' });
+  }
+});
+
 // Get single game
 router.get('/:id', authenticateToken, async (req, res) => {
   try {
     const { id } = req.params;
 
     const result = await query(
-      `SELECT g.* FROM games g
+      `SELECT 
+        g.*,
+        t.name as team_name
+       FROM games g
        INNER JOIN team_members tm ON g.team_id = tm.team_id
+       INNER JOIN teams t ON g.team_id = t.id
        WHERE g.id = $1 AND tm.user_id = $2`,
       [id, req.user.userId]
     );
@@ -71,7 +123,13 @@ router.get('/:id', authenticateToken, async (req, res) => {
       return res.status(404).json({ error: 'Game not found' });
     }
 
-    res.json({ game: result.rows[0] });
+    const game = result.rows[0];
+    
+    // TODO: Generate presigned S3 URLs if s3_key exists
+    // For now, return game data as-is
+    // When S3 integration is added, we'll generate presigned URLs here
+    
+    res.json({ game });
   } catch (error) {
     console.error('Get game error:', error);
     res.status(500).json({ error: 'Failed to get game' });

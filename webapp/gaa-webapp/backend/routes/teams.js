@@ -101,5 +101,43 @@ router.post('/join-by-code', authenticateToken, async (req, res) => {
   }
 });
 
+// Get team members
+router.get('/:teamId/members', authenticateToken, async (req, res) => {
+  try {
+    const { teamId } = req.params;
+
+    // Verify user is member of team
+    const memberCheck = await query(
+      'SELECT * FROM team_members WHERE team_id = $1 AND user_id = $2',
+      [teamId, req.user.userId]
+    );
+
+    if (memberCheck.rows.length === 0) {
+      return res.status(403).json({ error: 'Not a member of this team' });
+    }
+
+    // Get all team members with user details
+    const result = await query(
+      `SELECT 
+        tm.id,
+        tm.role,
+        tm.joined_at,
+        u.id as user_id,
+        u.name,
+        u.email
+       FROM team_members tm
+       INNER JOIN users u ON tm.user_id = u.id
+       WHERE tm.team_id = $1
+       ORDER BY tm.joined_at ASC`,
+      [teamId]
+    );
+
+    res.json({ members: result.rows });
+  } catch (error) {
+    console.error('Get team members error:', error);
+    res.status(500).json({ error: 'Failed to get team members' });
+  }
+});
+
 module.exports = router;
 

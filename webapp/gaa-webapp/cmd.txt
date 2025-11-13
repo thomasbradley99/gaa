@@ -1,0 +1,13 @@
+# Commands to run GAA Webapp
+# Run from: /Users/thomasbradley/clann-repos
+
+# Terminal 1 - Backend Server
+cd gaa/webapp/gaa-webapp/backend && npm run dev
+
+# Terminal 2 - Frontend Server
+cd gaa/webapp/gaa-webapp/frontend && npm run dev
+
+# Backend runs on: http://localhost:4011
+# Frontend runs on: http://localhost:4012
+# Open http://localhost:4012 in your browser
+

@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3005;
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
     ? process.env.CORS_ORIGIN?.split(',') || ['https://gaa.clannai.com']
-    : ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3456'],
+    : ['http://localhost:4012', 'http://localhost:3013'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']

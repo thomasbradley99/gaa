@@ -174,7 +174,14 @@ function HomePage() {
           <div className="flex justify-between items-center">
             {/* Logo */}
             <div className="cursor-pointer">
-              <span className="text-white text-2xl font-bold">ClannAI GAA</span>
+              <Image
+                src="/clann-logo-white.png"
+                alt="ClannAI"
+                width={90}
+                height={24}
+                className="h-6 w-auto"
+                priority
+              />
             </div>
 
             {/* Auth Buttons */}
@@ -345,7 +352,13 @@ function HomePage() {
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center mb-4 md:mb-0">
-              <span className="text-white text-lg font-bold">ClannAI GAA</span>
+              <Image
+                src="/clann-logo-white.png"
+                alt="ClannAI"
+                width={60}
+                height={16}
+                className="h-4 w-auto"
+              />
               <span className="ml-3 text-gray-400 text-sm">© 2025 ClannAI. All rights reserved.</span>
             </div>
             <div className="flex items-center gap-6">

@@ -191,7 +191,7 @@ export default function TeamPage() {
             {!currentTeam && (
               <>
                 {!showMap ? (
-                  <div className="bg-gray-800 rounded-lg p-8 text-center mb-6">
+                  <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-8 text-center mb-6">
                     <Users className="w-16 h-16 text-gray-600 mx-auto mb-4" />
                     <h2 className="text-xl font-semibold text-white mb-2">No Team Yet</h2>
                     <p className="text-gray-400 mb-6">
@@ -200,21 +200,21 @@ export default function TeamPage() {
                     <div className="flex gap-4 justify-center">
                       <button
                         onClick={() => setShowMap(true)}
-                        className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors flex items-center gap-2"
+                        className="px-6 py-3 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white font-semibold rounded-lg transition-colors flex items-center gap-2"
                       >
                         <MapPin className="w-5 h-5" />
                         Find Club on Map
                       </button>
                       <button
                         onClick={() => setShowCreateModal(true)}
-                        className="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors flex items-center gap-2"
+                        className="px-6 py-3 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg transition-colors flex items-center gap-2"
                       >
                         <Plus className="w-5 h-5" />
                         Create Team Manually
                       </button>
                       <button
                         onClick={() => setShowJoinModal(true)}
-                        className="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors flex items-center gap-2"
+                        className="px-6 py-3 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg transition-colors flex items-center gap-2"
                       >
                         <UserPlus className="w-5 h-5" />
                         Join Team
@@ -232,7 +232,7 @@ export default function TeamPage() {
                           setTeamName('')
                           setTeamDescription('')
                         }}
-                        className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white text-sm font-semibold rounded-lg transition-colors"
+                        className="px-4 py-2 bg-white/5 hover:bg-white/10 text-white text-sm font-semibold rounded-lg transition-colors"
                       >
                         Cancel
                       </button>
@@ -258,7 +258,7 @@ export default function TeamPage() {
             {currentTeam && (
               <>
                 {/* Team Header */}
-                <div className="bg-gray-800 rounded-lg p-6 mb-6">
+                <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-6 mb-6">
                   <div className="flex items-start justify-between">
                     <div>
                       <h2 className="text-2xl font-bold text-white mb-2">{currentTeam.name}</h2>
@@ -279,25 +279,25 @@ export default function TeamPage() {
                 </div>
 
                 {/* Team Info */}
-                <div className="bg-gray-800 rounded-lg p-6 mb-6">
+                <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-6 mb-6">
                   <h3 className="text-lg font-semibold text-white mb-4">Team Information</h3>
                   <div className="space-y-4">
                     <div>
                       <label className="text-sm text-gray-400">Invite Code</label>
                       <div className="flex items-center gap-2 mt-1">
-                        <code className="px-4 py-2 bg-gray-700 rounded-lg text-white font-mono text-lg">
+                        <code className="px-4 py-2 bg-black/50 border border-white/10 rounded-lg text-white font-mono text-lg">
                           {currentTeam.invite_code}
                         </code>
                         <button
                           onClick={() => copyInviteCode(currentTeam.invite_code)}
-                          className="p-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-white transition-colors"
+                          className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-white transition-colors"
                           title="Copy invite code"
                         >
                           <Copy className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => copyInviteLink(currentTeam.invite_code)}
-                          className="p-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-white transition-colors"
+                          className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-white transition-colors"
                           title="Copy invite link"
                         >
                           <Share2 className="w-4 h-4" />
@@ -318,14 +318,14 @@ export default function TeamPage() {
                 </div>
 
                 {/* Team Members */}
-                <div className="bg-gray-800 rounded-lg p-6">
+                <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-6">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-lg font-semibold text-white">
                       Members ({teamMembers.length})
                     </h3>
                     <button
                       onClick={() => copyInviteCode(currentTeam.invite_code)}
-                      className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-colors flex items-center gap-2"
+                      className="px-4 py-2 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white text-sm font-semibold rounded-lg transition-colors flex items-center gap-2"
                     >
                       <UserPlus className="w-4 h-4" />
                       Invite Member
@@ -339,10 +339,10 @@ export default function TeamPage() {
                       {teamMembers.map((member) => (
                         <div
                           key={member.id}
-                          className="flex items-center justify-between p-4 bg-gray-700 rounded-lg"
+                          className="flex items-center justify-between p-4 bg-black/50 border border-white/10 rounded-lg"
                         >
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-gray-600 flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">
                               <Users className="w-5 h-5 text-gray-400" />
                             </div>
                             <div>
@@ -351,7 +351,7 @@ export default function TeamPage() {
                             </div>
                           </div>
                           <div className="flex items-center gap-4">
-                            <span className="px-3 py-1 bg-gray-600 text-white text-xs font-semibold rounded-full">
+                            <span className="px-3 py-1 bg-[#2D8B4D] text-white text-xs font-semibold rounded-full">
                               {member.role}
                             </span>
                             <span className="text-sm text-gray-400">
@@ -379,7 +379,7 @@ export default function TeamPage() {
       {/* Create Team Modal */}
       {showCreateModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4">
+          <div className="bg-black/90 backdrop-blur-lg border border-white/10 rounded-xl p-6 w-full max-w-md mx-4">
             <h2 className="text-xl font-semibold text-white mb-4">Create Team</h2>
             <form onSubmit={(e) => handleCreateTeam(undefined, e)} className="space-y-4">
               <div>
@@ -391,7 +391,7 @@ export default function TeamPage() {
                   value={teamName}
                   onChange={(e) => setTeamName(e.target.value)}
                   placeholder="e.g., Dublin GAA"
-                  className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 bg-black/50 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2D8B4D]"
                   required
                 />
               </div>
@@ -404,7 +404,7 @@ export default function TeamPage() {
                   onChange={(e) => setTeamDescription(e.target.value)}
                   placeholder="Optional description..."
                   rows={3}
-                  className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 bg-black/50 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2D8B4D]"
                 />
               </div>
               <div className="flex gap-3">
@@ -416,14 +416,14 @@ export default function TeamPage() {
                     setTeamDescription('')
                     setError('')
                   }}
-                  className="flex-1 px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors"
+                  className="flex-1 px-4 py-2 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={creating}
-                  className="flex-1 px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
+                  className="flex-1 px-4 py-2 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 disabled:bg-black/50 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
                 >
                   {creating ? 'Creating...' : 'Create Team'}
                 </button>
@@ -436,7 +436,7 @@ export default function TeamPage() {
       {/* Join Team Modal */}
       {showJoinModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4">
+          <div className="bg-black/90 backdrop-blur-lg border border-white/10 rounded-xl p-6 w-full max-w-md mx-4">
             <h2 className="text-xl font-semibold text-white mb-4">Join Team</h2>
             <form onSubmit={handleJoinTeam} className="space-y-4">
               <div>
@@ -448,7 +448,7 @@ export default function TeamPage() {
                   value={inviteCode}
                   onChange={(e) => setInviteCode(e.target.value.toUpperCase())}
                   placeholder="ABC123"
-                  className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 font-mono text-center text-lg"
+                  className="w-full px-4 py-2 bg-black/50 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2D8B4D] font-mono text-center text-lg"
                   required
                   maxLength={6}
                 />
@@ -461,14 +461,14 @@ export default function TeamPage() {
                     setInviteCode('')
                     setError('')
                   }}
-                  className="flex-1 px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors"
+                  className="flex-1 px-4 py-2 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={joining}
-                  className="flex-1 px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
+                  className="flex-1 px-4 py-2 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 disabled:bg-black/50 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
                 >
                   {joining ? 'Joining...' : 'Join Team'}
                 </button>

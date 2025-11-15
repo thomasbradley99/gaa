@@ -78,8 +78,12 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <div className="text-white">Loading...</div>
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <img 
+          src="/clann-logo-white.png" 
+          alt="Clann AI" 
+          className="w-20 h-20 animate-pulse"
+        />
       </div>
     )
   }
@@ -89,7 +93,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 flex">
+    <div className="min-h-screen bg-black flex">
       {/* Sidebar */}
       <Sidebar user={user} />
 
@@ -99,8 +103,8 @@ export default function DashboardPage() {
           <div className="max-w-7xl mx-auto px-6 py-8">
             {/* Header */}
             <div className="mb-6">
-              <h1 className="text-3xl font-bold text-white mb-2">Games</h1>
-              <p className="text-gray-400">Manage and analyze your GAA games</p>
+              <h1 className="text-3xl font-bold text-white mb-2">Matches</h1>
+              <p className="text-gray-400">Manage and analyze your GAA matches</p>
             </div>
 
             {/* Upload Section */}
@@ -113,13 +117,13 @@ export default function DashboardPage() {
             ) : (
               <div className="bg-gray-800 rounded-lg p-6 mb-6">
                 <p className="text-gray-400 mb-4">
-                  You need to create or join a team before adding games.
+                  You need to create or join a squad before adding matches.
                 </p>
                 <button
                   onClick={() => router.push('/team')}
-                  className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors"
+                  className="px-4 py-2 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white font-semibold rounded-lg transition-colors"
                 >
-                  Go to Team Page
+                  Go to Squad Page
                 </button>
               </div>
             )}
@@ -132,18 +136,22 @@ export default function DashboardPage() {
               </div>
             )}
 
-            {/* Games Grid */}
+            {/* Matches Grid */}
             {gamesLoading ? (
               <div className="text-center py-12">
-                <div className="text-gray-400">Loading games...</div>
+                <img 
+                  src="/clann-logo-white.png" 
+                  alt="Loading" 
+                  className="w-12 h-12 mx-auto animate-pulse"
+                />
               </div>
             ) : gamesList.length === 0 ? (
               <div className="text-center py-12">
-                <div className="text-gray-400 mb-4">No games yet</div>
+                <div className="text-gray-400 mb-4">No matches yet</div>
                 <p className="text-gray-500 text-sm">
                   {userTeams.length === 0
-                    ? 'Create or join a team to get started'
-                    : 'Add your first game using the form above'}
+                    ? 'Create or join a squad to get started'
+                    : 'Add your first match using the form above'}
                 </p>
               </div>
             ) : (

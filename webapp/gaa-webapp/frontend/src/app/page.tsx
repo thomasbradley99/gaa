@@ -158,7 +158,7 @@ function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 relative overflow-hidden">
+    <div className="min-h-screen bg-black relative overflow-hidden">
       <style jsx global>{`
         :root {
           --gaa-green: #016F32;
@@ -175,9 +175,9 @@ function HomePage() {
             {/* Logo */}
             <div className="cursor-pointer">
               <Image
-                src="/clann-logo-white.png"
+                src="/clann-logo-text-white.png"
                 alt="ClannAI"
-                width={90}
+                width={140}
                 height={24}
                 className="h-6 w-auto"
                 style={{ width: 'auto', height: 'auto' }}
@@ -195,7 +195,7 @@ function HomePage() {
               </button>
               <button
                 onClick={openGetStarted}
-                className="bg-black px-4 py-2 rounded-md text-sm font-semibold text-white hover:bg-gray-900"
+                className="bg-[#2D8B4D] px-4 py-2 rounded-md text-sm font-semibold text-white hover:bg-[#2D8B4D]/80"
               >
                 Get started
               </button>
@@ -354,11 +354,11 @@ function HomePage() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center mb-4 md:mb-0">
               <Image
-                src="/clann-logo-white.png"
+                src="/clann-logo-text-white.png"
                 alt="ClannAI"
-                width={60}
-                height={16}
-                className="h-4 w-auto"
+                width={100}
+                height={20}
+                className="h-5 w-auto"
                 style={{ width: 'auto', height: 'auto' }}
               />
               <span className="ml-3 text-gray-400 text-sm">© 2025 ClannAI. All rights reserved.</span>

@@ -20,9 +20,9 @@ export function VideoOverlayTimeline({
     return `${mins}:${secs.toString().padStart(2, '0')}`
   }
 
-  // Get color for team
+  // Get color for team - using Clann green (#2D8B4D)
   const getTeamColor = (team?: string) => {
-    if (team === 'home' || team === 'red') return 'bg-green-500 border-green-700'
+    if (team === 'home' || team === 'red') return 'bg-[#2D8B4D] border-[#2D8B4D]/70'
     if (team === 'away' || team === 'blue') return 'bg-yellow-400 border-yellow-600'
     return 'bg-gray-500 border-gray-700' // Default for unknown teams
   }

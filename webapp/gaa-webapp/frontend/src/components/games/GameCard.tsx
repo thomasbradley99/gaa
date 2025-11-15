@@ -22,9 +22,9 @@ export default function GameCard({ game }: GameCardProps) {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'analyzed':
-        return 'bg-green-600'
+        return 'bg-[#2D8B4D]' // Clann green for ready status
       case 'processing':
-        return 'bg-blue-600'
+        return 'bg-[#2D8B4D]/70' // Clann green for processing
       case 'pending':
         return 'bg-yellow-600'
       case 'failed':
@@ -68,10 +68,10 @@ export default function GameCard({ game }: GameCardProps) {
   return (
     <div
       onClick={() => router.push(`/games/${game.id}`)}
-      className="bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:bg-gray-750 transition-colors border border-gray-700 hover:border-gray-600"
+      className="bg-black/80 backdrop-blur-lg rounded-xl overflow-hidden cursor-pointer hover:bg-black/90 transition-colors border border-white/10 hover:border-[#2D8B4D]/50"
     >
       {/* Thumbnail */}
-      <div className="relative aspect-video bg-gray-700">
+      <div className="relative aspect-video bg-black/50">
         {game.thumbnail_url ? (
           <img
             src={game.thumbnail_url}

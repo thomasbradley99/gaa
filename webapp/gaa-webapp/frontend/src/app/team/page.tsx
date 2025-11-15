@@ -156,8 +156,12 @@ export default function TeamPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <div className="text-white">Loading...</div>
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <img 
+          src="/clann-logo-white.png" 
+          alt="Clann AI" 
+          className="w-20 h-20 animate-pulse"
+        />
       </div>
     )
   }
@@ -169,7 +173,7 @@ export default function TeamPage() {
   const currentTeam = userTeams.length > 0 ? userTeams[0] : null
 
   return (
-    <div className="min-h-screen bg-gray-900 flex">
+    <div className="min-h-screen bg-black flex">
       {/* Sidebar */}
       <Sidebar user={user} />
 

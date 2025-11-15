@@ -327,7 +327,7 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
         <h2 className="text-xl sm:text-2xl font-bold text-white">Match Statistics</h2>
         <button
           onClick={exportToPDF}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-colors text-sm font-medium shadow-lg"
+          className="flex items-center gap-2 px-4 py-2 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white rounded-xl transition-colors text-sm font-medium shadow-lg"
         >
           <Download className="w-4 h-4" />
           <span className="hidden sm:inline">Export to PDF</span>

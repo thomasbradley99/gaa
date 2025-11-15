@@ -286,7 +286,7 @@ export function VideoPlayerContainer({
           onClick={() => triggerFlash('prev', handlePrevEvent)}
         >
           <div
-            className={`absolute inset-0 bg-blue-500 pointer-events-none transition-opacity duration-150 ${
+            className={`absolute inset-0 bg-[#2D8B4D] pointer-events-none transition-opacity duration-150 ${
               flashRegion === 'prev' ? 'opacity-20' : 'opacity-0'
             }`}
           />

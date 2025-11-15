@@ -154,22 +154,26 @@ export default function GameDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <div className="text-white">Loading game...</div>
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <img 
+          src="/clann-logo-white.png" 
+          alt="Clann AI" 
+          className="w-20 h-20 animate-pulse"
+        />
       </div>
     )
   }
 
   if (error || !game) {
     return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
           <div className="text-red-400 mb-4">{error || 'Game not found'}</div>
           <button
             onClick={() => router.push('/dashboard')}
-            className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg"
+            className="px-4 py-2 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white rounded-lg"
           >
-            Back to Games
+            Back to Matches
           </button>
         </div>
       </div>

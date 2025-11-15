@@ -36,16 +36,19 @@ export function EventList({
     })
   }, [events, teamFilter, selectedEventType])
 
+  // Clann green from logo - #2D8B4D
+  const CLANN_GREEN = 'bg-[#2D8B4D]'
+  
   // Get event type color
   const getEventTypeColor = (type: GameEvent['type']) => {
     switch (type) {
       case 'shot':
-        // Color based on outcome
-        return 'bg-green-600' // Default for shots
+        // Color based on outcome - use Clann green for shots
+        return CLANN_GREEN
       case 'kickout':
         return 'bg-orange-500'
       case 'turnover':
-        return 'bg-blue-500'
+        return 'bg-red-500'
       case 'throw-up':
         return 'bg-gray-400'
       case 'foul':
@@ -53,9 +56,9 @@ export function EventList({
       case 'card':
         return 'bg-red-600'
       case 'whistle':
-        return 'bg-purple-500'
+        return 'bg-pink-500'
       case 'kick-in':
-        return 'bg-cyan-500'
+        return 'bg-teal-500'
       default:
         return 'bg-gray-500'
     }
@@ -83,7 +86,7 @@ export function EventList({
 
   // Get team color
   const getTeamColor = (team: 'home' | 'away') => {
-    return team === 'home' ? 'bg-green-600' : 'bg-yellow-400'
+    return team === 'home' ? CLANN_GREEN : 'bg-yellow-400'
   }
 
   // Check if event is near current time
@@ -141,7 +144,7 @@ export function EventList({
               onClick={() => onEventClick(event)}
               className={`w-full text-left p-3 rounded-lg border transition-all ${
                 isEventActive(event)
-                  ? 'bg-green-900/30 border-green-500'
+                  ? 'bg-[#2D8B4D]/20 border-[#2D8B4D]'
                   : 'bg-gray-800 border-gray-700 hover:border-gray-600'
               }`}
             >
@@ -156,7 +159,7 @@ export function EventList({
                   <div className="flex items-center gap-2 mb-1">
                     <span
                       className={`px-2 py-0.5 rounded text-xs font-semibold ${
-                        event.team === 'home' ? 'bg-green-600' : 'bg-yellow-500'
+                        event.team === 'home' ? 'bg-[#2D8B4D]' : 'bg-yellow-500'
                       } text-white`}
                     >
                       {event.team === 'home' ? 'Home' : 'Away'}

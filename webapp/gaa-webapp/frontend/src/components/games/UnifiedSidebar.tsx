@@ -58,7 +58,7 @@ export default function UnifiedSidebar({
               onClick={() => setActiveTab('events')}
               className={`px-3 py-1.5 text-sm font-medium rounded-xl transition-all ${
                 activeTab === 'events'
-                  ? 'bg-blue-600 text-white shadow-lg'
+                  ? 'bg-[#2D8B4D] text-white shadow-lg'
                   : 'text-white/60 hover:text-white hover:bg-white/10'
               }`}
             >
@@ -68,7 +68,7 @@ export default function UnifiedSidebar({
               onClick={() => setActiveTab('stats')}
               className={`px-3 py-1.5 text-sm font-medium rounded-xl transition-all ${
                 activeTab === 'stats'
-                  ? 'bg-blue-600 text-white shadow-lg'
+                  ? 'bg-[#2D8B4D] text-white shadow-lg'
                   : 'text-white/60 hover:text-white hover:bg-white/10'
               }`}
             >
@@ -78,7 +78,7 @@ export default function UnifiedSidebar({
               onClick={() => setActiveTab('ai')}
               className={`px-3 py-1.5 text-sm font-medium rounded-xl transition-all ${
                 activeTab === 'ai'
-                  ? 'bg-blue-600 text-white shadow-lg'
+                  ? 'bg-[#2D8B4D] text-white shadow-lg'
                   : 'text-white/60 hover:text-white hover:bg-white/10'
               }`}
             >
@@ -142,7 +142,7 @@ export default function UnifiedSidebar({
             <div className="p-4">
               <div className="text-center py-12 text-white/60">
                 <svg
-                  className="w-16 h-16 mx-auto mb-4 text-blue-500/50"
+                  className="w-16 h-16 mx-auto mb-4 text-[#2D8B4D]/50"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

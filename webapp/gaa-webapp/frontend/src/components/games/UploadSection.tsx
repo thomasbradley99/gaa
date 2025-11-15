@@ -142,9 +142,9 @@ export default function UploadSection({ teamId, teamName, onGameCreated }: Uploa
   }
 
   return (
-    <div className="bg-gray-800 rounded-lg p-6 mb-6">
-      <h2 className="text-xl font-semibold mb-4">Add New Game</h2>
-      <p className="text-sm text-gray-400 mb-4">Team: <span className="text-white font-medium">{teamName}</span></p>
+    <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-6 mb-6">
+      <h2 className="text-xl font-semibold mb-4">Add New Match</h2>
+      <p className="text-sm text-gray-400 mb-4">Squad: <span className="text-white font-medium">{teamName}</span></p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Title */}
@@ -157,7 +157,7 @@ export default function UploadSection({ teamId, teamName, onGameCreated }: Uploa
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="e.g., Dublin vs Kerry"
-            className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-4 py-2 bg-black/50 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2D8B4D]"
             required
           />
         </div>
@@ -172,12 +172,12 @@ export default function UploadSection({ teamId, teamName, onGameCreated }: Uploa
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Optional description..."
             rows={2}
-            className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-4 py-2 bg-black/50 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2D8B4D]"
           />
         </div>
 
         {/* Toggle between URL and File Upload */}
-        <div className="flex gap-4 border-b border-gray-700 pb-4">
+        <div className="flex gap-4 border-b border-white/10 pb-4">
           <button
             type="button"
             onClick={() => {
@@ -187,8 +187,8 @@ export default function UploadSection({ teamId, teamName, onGameCreated }: Uploa
             }}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
               !useFileUpload
-                ? 'bg-green-600 text-white'
-                : 'bg-gray-700 text-gray-400 hover:text-white'
+                ? 'bg-[#2D8B4D] text-white'
+                : 'bg-white/5 text-gray-400 hover:text-white hover:bg-white/10'
             }`}
           >
             <LinkIcon className="w-4 h-4" />
@@ -202,8 +202,8 @@ export default function UploadSection({ teamId, teamName, onGameCreated }: Uploa
             }}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
               useFileUpload
-                ? 'bg-green-600 text-white'
-                : 'bg-gray-700 text-gray-400 hover:text-white'
+                ? 'bg-[#2D8B4D] text-white'
+                : 'bg-white/5 text-gray-400 hover:text-white hover:bg-white/10'
             }`}
           >
             <Upload className="w-4 h-4" />
@@ -223,7 +223,7 @@ export default function UploadSection({ teamId, teamName, onGameCreated }: Uploa
               value={videoUrl}
               onChange={(e) => setVideoUrl(e.target.value)}
               placeholder="https://veo.co/teams/123/matches/456"
-              className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 bg-black/50 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2D8B4D]"
             />
             <p className="mt-1 text-xs text-gray-400">
               Paste VEO, Trace, or Spiideo URL
@@ -241,7 +241,7 @@ export default function UploadSection({ teamId, teamName, onGameCreated }: Uploa
             {!selectedFile ? (
               <div
                 onClick={() => fileInputRef.current?.click()}
-                className="border-2 border-dashed border-gray-600 rounded-lg p-8 text-center cursor-pointer hover:border-green-500 transition-colors"
+                className="border-2 border-dashed border-white/10 rounded-lg p-8 text-center cursor-pointer hover:border-[#2D8B4D] transition-colors"
               >
                 <FileVideo className="w-12 h-12 mx-auto mb-3 text-gray-400" />
                 <p className="text-gray-400 mb-1">Click to select video file</p>
@@ -255,10 +255,10 @@ export default function UploadSection({ teamId, teamName, onGameCreated }: Uploa
                 />
               </div>
             ) : (
-              <div className="border border-gray-600 rounded-lg p-4 bg-gray-700/50">
+              <div className="border border-white/10 rounded-lg p-4 bg-black/30">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <FileVideo className="w-8 h-8 text-green-400" />
+                    <FileVideo className="w-8 h-8 text-[#2D8B4D]" />
                     <div>
                       <p className="text-white font-medium">{selectedFile.name}</p>
                       <p className="text-xs text-gray-400">
@@ -269,16 +269,16 @@ export default function UploadSection({ teamId, teamName, onGameCreated }: Uploa
                   <button
                     type="button"
                     onClick={handleRemoveFile}
-                    className="p-2 hover:bg-gray-600 rounded-lg transition-colors"
+                    className="p-2 hover:bg-white/10 rounded-lg transition-colors"
                   >
                     <X className="w-5 h-5 text-gray-400" />
                   </button>
                 </div>
                 {uploadProgress > 0 && uploadProgress < 100 && (
                   <div className="mt-3">
-                    <div className="w-full bg-gray-600 rounded-full h-2">
+                    <div className="w-full bg-white/10 rounded-full h-2">
                       <div
-                        className="bg-green-500 h-2 rounded-full transition-all"
+                        className="bg-[#2D8B4D] h-2 rounded-full transition-all"
                         style={{ width: `${uploadProgress}%` }}
                       />
                     </div>
@@ -303,9 +303,9 @@ export default function UploadSection({ teamId, teamName, onGameCreated }: Uploa
         <button
           type="submit"
           disabled={loading || (useFileUpload && !selectedFile) || (!useFileUpload && !videoUrl)}
-          className="w-full px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
+          className="w-full px-4 py-2 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 disabled:bg-black/50 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
         >
-          {loading ? (uploadProgress > 0 ? `Uploading... ${Math.round(uploadProgress)}%` : 'Adding Game...') : 'Add Game'}
+          {loading ? (uploadProgress > 0 ? `Uploading... ${Math.round(uploadProgress)}%` : 'Adding Match...') : 'Add Match'}
         </button>
       </form>
     </div>

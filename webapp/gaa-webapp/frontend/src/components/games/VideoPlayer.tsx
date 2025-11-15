@@ -175,7 +175,7 @@ export default function VideoPlayer({
     }
     
     if (eventTeam === 'away' || eventTeam === 'blue') {
-      return '#2563EB' // Blue
+      return '#EAB308' // Yellow
     }
     
     return '#016F32' // Default green
@@ -343,7 +343,7 @@ export default function VideoPlayer({
           className="absolute top-0 left-0 w-1/5 h-full cursor-pointer"
           onClick={() => triggerFlash('prev', handlePreviousEvent)}
         >
-          <div className={`absolute inset-0 bg-blue-500 pointer-events-none transition-opacity duration-150 ${
+          <div className={`absolute inset-0 bg-[#2D8B4D] pointer-events-none transition-opacity duration-150 ${
             flashRegion === 'prev' ? 'opacity-20' : 'opacity-0'
           }`} />
         </div>
@@ -363,7 +363,7 @@ export default function VideoPlayer({
           className="absolute top-0 left-2/5 w-1/5 h-full cursor-pointer"
           onClick={() => triggerFlash('play', handlePlayPause)}
         >
-          <div className={`absolute inset-0 bg-green-500 pointer-events-none transition-opacity duration-150 ${
+          <div className={`absolute inset-0 bg-[#2D8B4D] pointer-events-none transition-opacity duration-150 ${
             flashRegion === 'play' ? 'opacity-30' : 'opacity-0'
           }`} />
         </div>
@@ -383,7 +383,7 @@ export default function VideoPlayer({
           className="absolute top-0 left-4/5 w-1/5 h-full cursor-pointer"
           onClick={() => triggerFlash('next', handleNextEvent)}
         >
-          <div className={`absolute inset-0 bg-purple-500 pointer-events-none transition-opacity duration-150 ${
+          <div className={`absolute inset-0 bg-[#2D8B4D] pointer-events-none transition-opacity duration-150 ${
             flashRegion === 'next' ? 'opacity-20' : 'opacity-0'
           }`} />
         </div>
@@ -555,7 +555,7 @@ export default function VideoPlayer({
                         onClick={() => handleSpeedChange(speed)}
                         className={`px-3 py-2 text-xs rounded transition-colors whitespace-nowrap ${
                           playbackSpeed === speed 
-                            ? 'bg-blue-600 text-white' 
+                            ? 'bg-[#2D8B4D] text-white' 
                             : 'text-white hover:bg-white/20'
                         }`}
                       >

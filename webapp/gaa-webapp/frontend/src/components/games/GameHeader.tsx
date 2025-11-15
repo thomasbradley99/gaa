@@ -97,7 +97,7 @@ export default function GameHeader({
         {/* Right: Toggle Right Sidebar Button */}
         <button
           onClick={onToggleRightSidebar}
-          className="flex items-center gap-2 px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-colors text-sm shadow-lg"
+          className="flex items-center gap-2 px-3 py-1.5 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white rounded-xl transition-colors text-sm shadow-lg"
         >
           <svg
             className="w-4 h-4"

@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3005';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4011';
 
 // Get token from localStorage
 export const getToken = () => {
@@ -42,7 +42,11 @@ const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({ error: 'Request failed' }));
-    throw new Error(error.error || `HTTP ${response.status}`);
+    const errorMessage = error.error || `HTTP ${response.status}`;
+    const customError: any = new Error(errorMessage);
+    customError.status = response.status;
+    customError.data = error;
+    throw customError;
   }
 
   return response.json();
@@ -78,16 +82,35 @@ export const teams = {
       method: 'POST',
       body: JSON.stringify({ inviteCode }),
     }),
+  getMembers: (teamId: string) =>
+    apiRequest(`/api/teams/${teamId}/members`),
 };
 
 // Games API
 export const games = {
-  list: () => apiRequest('/api/games'),
+  list: (teamId?: string) => {
+    const url = teamId ? `/api/games?teamId=${teamId}` : '/api/games';
+    return apiRequest(url);
+  },
   get: (id: string) => apiRequest(`/api/games/${id}`),
-  create: (data: { title: string; description?: string; teamId: string }) =>
+  getUploadUrl: (fileName: string, fileType: string) =>
+    apiRequest('/api/games/upload-url', {
+      method: 'POST',
+      body: JSON.stringify({ fileName, fileType }),
+    }),
+  create: (data: { 
+    title: string; 
+    description?: string; 
+    teamId: string; 
+    videoUrl?: string;
+    s3Key?: string;
+    originalFilename?: string;
+    fileSize?: number;
+  }) =>
     apiRequest('/api/games', {
       method: 'POST',
       body: JSON.stringify(data),
     }),
+  getDemo: () => apiRequest('/api/games/demo'),
 };
 

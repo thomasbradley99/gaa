@@ -17,7 +17,25 @@ const authenticateToken = (req, res, next) => {
   }
 };
 
+/**
+ * Authenticate Lambda requests using API key
+ * Lambda sends X-API-Key header with secret key
+ */
+const authenticateLambda = (req, res, next) => {
+  const apiKey = req.headers['x-api-key'];
+  const expectedKey = process.env.LAMBDA_API_KEY || 'gaa-lambda-secret-key-change-in-production';
+
+  if (!apiKey || apiKey !== expectedKey) {
+    return res.status(401).json({ error: 'Invalid API key' });
+  }
+
+  // Mark request as from Lambda
+  req.isLambda = true;
+  next();
+};
+
 module.exports = {
-  authenticateToken
+  authenticateToken,
+  authenticateLambda
 };
 

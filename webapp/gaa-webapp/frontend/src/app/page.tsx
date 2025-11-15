@@ -180,6 +180,7 @@ function HomePage() {
                 width={90}
                 height={24}
                 className="h-6 w-auto"
+                style={{ width: 'auto', height: 'auto' }}
                 priority
               />
             </div>
@@ -358,6 +359,7 @@ function HomePage() {
                 width={60}
                 height={16}
                 className="h-4 w-auto"
+                style={{ width: 'auto', height: 'auto' }}
               />
               <span className="ml-3 text-gray-400 text-sm">© 2025 ClannAI. All rights reserved.</span>
             </div>

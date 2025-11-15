@@ -30,14 +30,51 @@ router.post('/create', authenticateToken, async (req, res) => {
       return res.status(400).json({ error: 'Team name is required' });
     }
 
-    // Generate invite code
-    const inviteCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+    // Check if user already has a team
+    const existingTeamResult = await query(
+      `SELECT t.* FROM teams t
+       INNER JOIN team_members tm ON t.id = tm.team_id
+       WHERE tm.user_id = $1 AND tm.role = 'admin'`,
+      [req.user.userId]
+    );
+
+    if (existingTeamResult.rows.length > 0) {
+      return res.status(400).json({ 
+        error: 'You already have a team. Each user can only create one team.',
+        existingTeam: existingTeamResult.rows[0]
+      });
+    }
+
+    // Check if team name already exists
+    const nameCheckResult = await query(
+      'SELECT id, name FROM teams WHERE name = $1',
+      [name.trim()]
+    );
+
+    if (nameCheckResult.rows.length > 0) {
+      return res.status(409).json({ 
+        error: `A team named "${name}" already exists. Each club can only have one team.`,
+        existingTeam: nameCheckResult.rows[0]
+      });
+    }
+
+    // Generate invite code (ensure it's unique)
+    let inviteCode;
+    let codeExists = true;
+    while (codeExists) {
+      inviteCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+      const codeCheck = await query(
+        'SELECT id FROM teams WHERE invite_code = $1',
+        [inviteCode]
+      );
+      codeExists = codeCheck.rows.length > 0;
+    }
 
     const result = await query(
       `INSERT INTO teams (name, description, invite_code, created_by)
        VALUES ($1, $2, $3, $4)
        RETURNING *`,
-      [name, description || null, inviteCode, req.user.userId]
+      [name.trim(), description || null, inviteCode, req.user.userId]
     );
 
     const team = result.rows[0];
@@ -52,6 +89,16 @@ router.post('/create', authenticateToken, async (req, res) => {
     res.status(201).json({ team });
   } catch (error) {
     console.error('Create team error:', error);
+    
+    // Handle unique constraint violation
+    if (error.code === '23505') {
+      if (error.constraint === 'unique_team_name') {
+        return res.status(409).json({ 
+          error: `A team named "${req.body.name}" already exists. Each club can only have one team.`
+        });
+      }
+    }
+    
     res.status(500).json({ error: 'Failed to create team' });
   }
 });

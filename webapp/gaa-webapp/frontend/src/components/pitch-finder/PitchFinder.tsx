@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
-import { RotateCcw } from 'lucide-react';
+import { RotateCcw, Check, Users } from 'lucide-react';
 
 // Dynamically import Leaflet components with SSR disabled
 const MapContainer = dynamic(
@@ -52,10 +52,18 @@ const MAP_CENTER = [53.4129, -7.9135]; // Center of Ireland
 const MAP_ZOOM = 7;
 const MAP_OPACITY_NORMALIZATION = 2500; // Max rainfall for opacity calculation
 
-export function PitchFinder() {
+interface PitchFinderProps {
+  onClubSelect?: (club: Pitch) => void;
+  showSelectButton?: boolean;
+  onCreateTeam?: (club: Pitch) => void;
+  isCreatingTeam?: boolean;
+}
+
+export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTeam, isCreatingTeam = false }: PitchFinderProps) {
   const [selectedProvince, setSelectedProvince] = useState('all');
   const [selectedCounty, setSelectedCounty] = useState('all');
   const [selectedClub, setSelectedClub] = useState('all');
+  const [selectedClubData, setSelectedClubData] = useState<Pitch | null>(null);
   const [search, setSearch] = useState('');
   const [isClient, setIsClient] = useState(false);
   const [leaflet, setLeaflet] = useState<any>(null);
@@ -261,7 +269,13 @@ export function PitchFinder() {
                       key={`result-${originalIndex}`}
                       className={`flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer transition-colors
                         ${selectedClub !== 'all' && p.Club === selectedClub ? 'bg-blue-800/60 border border-blue-400 text-white' : 'bg-gray-800 hover:bg-gray-700 text-gray-100 border border-transparent'}`}
-                      onClick={() => setSelectedClub(p.Club)}
+                      onClick={() => {
+                        setSelectedClub(p.Club);
+                        setSelectedClubData(p);
+                        if (onClubSelect) {
+                          onClubSelect(p);
+                        }
+                      }}
                     >
                       <div className="flex flex-col min-w-0">
                         <span className="font-medium truncate max-w-[180px]">{p.Club}</span>
@@ -368,7 +382,21 @@ export function PitchFinder() {
                 <div className="flex items-center gap-2">
                   <select
                     value={selectedClub}
-                    onChange={e => setSelectedClub(e.target.value)}
+                    onChange={e => {
+                      const clubName = e.target.value;
+                      setSelectedClub(clubName);
+                      if (clubName !== 'all') {
+                        const club = pitches.find(p => p.Club === clubName);
+                        if (club) {
+                          setSelectedClubData(club);
+                          if (onClubSelect) {
+                            onClubSelect(club);
+                          }
+                        }
+                      } else {
+                        setSelectedClubData(null);
+                      }
+                    }}
                     className="w-full p-2 rounded-lg bg-gray-900 border border-gray-700 text-gray-100"
                   >
                     <option value="all">All Clubs</option>
@@ -433,17 +461,66 @@ export function PitchFinder() {
                   pitch.Latitude === p.Latitude && 
                   pitch.Longitude === p.Longitude
                 );
+                const isSelected = selectedClub !== 'all' && p.Club === selectedClub;
                 return (
                   <li
                     key={`result-${originalIndex}`}
-                    className={`flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer transition-colors
-                      ${selectedClub !== 'all' && p.Club === selectedClub ? 'bg-blue-800/60 border border-blue-400 text-white' : 'bg-gray-800 hover:bg-gray-700 text-gray-100 border border-transparent'}`}
-                    onClick={() => setSelectedClub(p.Club)}
+                    className={`rounded-lg transition-all ${
+                      isSelected 
+                        ? 'bg-gradient-to-r from-green-900/40 to-blue-900/40 border-2 border-green-500' 
+                        : 'bg-gray-800 hover:bg-gray-700 border-2 border-transparent'
+                    }`}
                   >
-                    <div className="flex flex-col min-w-0">
-                      <span className="font-medium truncate max-w-[180px]">{p.Club}</span>
-                      <span className="text-xs text-gray-400 truncate">{p.Province} &middot; {p.County}</span>
+                    <div
+                      className="flex items-center justify-between px-3 py-3 cursor-pointer"
+                      onClick={() => {
+                        setSelectedClub(p.Club);
+                        setSelectedClubData(p);
+                        if (onClubSelect) {
+                          onClubSelect(p);
+                        }
+                      }}
+                    >
+                      <div className="flex items-center gap-3 flex-1 min-w-0">
+                        {isSelected && (
+                          <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
+                            <Check className="w-4 h-4 text-white" />
+                          </div>
+                        )}
+                        <div className="flex flex-col min-w-0 flex-1">
+                          <span className={`font-medium truncate ${isSelected ? 'text-white' : 'text-gray-100'}`}>
+                            {p.Club}
+                          </span>
+                          <span className={`text-xs truncate ${isSelected ? 'text-gray-300' : 'text-gray-400'}`}>
+                            {p.Province} &middot; {p.County}
+                          </span>
+                        </div>
+                      </div>
                     </div>
+                    {isSelected && onCreateTeam && (
+                      <div className="px-3 pb-3 pt-2 border-t border-green-500/30">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onCreateTeam(p);
+                          }}
+                          disabled={isCreatingTeam}
+                          className="w-full px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-all flex items-center justify-center gap-2 text-sm"
+                        >
+                          {isCreatingTeam ? (
+                            <>
+                              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                              Creating Team...
+                            </>
+                          ) : (
+                            <>
+                              <Users className="w-4 h-4" />
+                              This is my club - Create Team
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    )}
                   </li>
                 );
               })}

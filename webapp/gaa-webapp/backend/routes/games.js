@@ -1,8 +1,80 @@
+/**
+ * GAA Games Routes
+ * 
+ * Handles game creation, listing, and video management for GAA webapp.
+ * 
+ * Features:
+ * - Create games with VEO URLs or file uploads
+ * - Trigger Lambda to download VEO videos
+ * - Generate presigned S3 URLs for video playback
+ * - List user's games filtered by team
+ * 
+ * Part of: GAA Webapp Backend
+ */
+
 const express = require('express');
+const { LambdaClient, InvokeCommand } = require('@aws-sdk/client-lambda');
 const { query } = require('../utils/database');
-const { authenticateToken } = require('../middleware/auth');
+const { authenticateToken, authenticateLambda } = require('../middleware/auth');
+const { getPresignedUploadUrl, getPresignedDownloadUrl } = require('../utils/s3');
 
 const router = express.Router();
+
+// Lambda client (only initialize if AWS credentials are available)
+let lambdaClient = null;
+if (process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY) {
+  lambdaClient = new LambdaClient({
+    region: process.env.AWS_REGION || 'eu-west-1',
+    credentials: {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    },
+  });
+}
+
+/**
+ * GAA VEO Downloader Lambda Trigger
+ * 
+ * Triggers the GAA VEO downloader Lambda function when a VEO URL is submitted.
+ * Lambda function downloads the video from VEO and uploads to S3.
+ * 
+ * @param {string} gameId - Game ID from database
+ * @param {string} videoUrl - VEO match URL
+ * @returns {Promise<boolean>} - True if Lambda invoked successfully
+ */
+async function triggerVeoDownload(gameId, videoUrl) {
+  if (!lambdaClient) {
+    console.log('⚠️  Lambda client not configured - skipping GAA VEO download trigger');
+    return false;
+  }
+
+  const lambdaFunctionName = process.env.AWS_LAMBDA_FUNCTION_NAME || 'gaa-veo-downloader-nov25';
+  
+  try {
+    console.log(`🚀 Triggering Lambda: ${lambdaFunctionName}`);
+    console.log(`   Game ID: ${gameId}`);
+    console.log(`   VEO URL: ${videoUrl}`);
+
+    const invokeCommand = new InvokeCommand({
+      FunctionName: lambdaFunctionName,
+      InvocationType: 'Event', // Async invocation
+      Payload: JSON.stringify({
+        game_id: gameId,
+        video_url: videoUrl,
+      }),
+    });
+
+    const lambdaResponse = await lambdaClient.send(invokeCommand);
+    console.log(`✅ Lambda invoked successfully!`);
+    console.log(`   Status Code: ${lambdaResponse.StatusCode}`);
+    console.log(`   Request ID: ${lambdaResponse.$metadata.requestId}`);
+    
+    return true;
+  } catch (error) {
+    console.error(`❌ Failed to invoke Lambda:`, error);
+    return false;
+  }
+}
 
 // Get user's games
 router.get('/', authenticateToken, async (req, res) => {
@@ -38,10 +110,32 @@ router.get('/', authenticateToken, async (req, res) => {
   }
 });
 
+// Get presigned URL for file upload
+router.post('/upload-url', authenticateToken, async (req, res) => {
+  try {
+    const { fileName, fileType } = req.body;
+
+    if (!fileName || !fileType) {
+      return res.status(400).json({ error: 'File name and type are required' });
+    }
+
+    const { uploadUrl, s3Key, publicUrl } = await getPresignedUploadUrl(
+      fileName,
+      fileType,
+      req.user.userId
+    );
+
+    res.json({ uploadUrl, s3Key, publicUrl });
+  } catch (error) {
+    console.error('Get upload URL error:', error);
+    res.status(500).json({ error: 'Failed to generate upload URL' });
+  }
+});
+
 // Create game (supports VEO URL or file upload)
 router.post('/', authenticateToken, async (req, res) => {
   try {
-    const { title, description, teamId, videoUrl } = req.body;
+    const { title, description, teamId, videoUrl, s3Key, originalFilename, fileSize } = req.body;
 
     if (!title || !teamId) {
       return res.status(400).json({ error: 'Title and team ID are required' });
@@ -57,9 +151,17 @@ router.post('/', authenticateToken, async (req, res) => {
       return res.status(403).json({ error: 'Not a member of this team' });
     }
 
-    // Determine file type based on videoUrl
+    // Determine file type based on videoUrl or s3Key
     let fileType = 'upload'; // default for file uploads
-    if (videoUrl) {
+    let finalVideoUrl = null;
+
+    if (s3Key) {
+      // File upload - use public S3 URL
+      fileType = 'upload';
+      finalVideoUrl = `https://${process.env.AWS_BUCKET_NAME || 'clann-gaa-videos-nov25'}.s3.${process.env.AWS_REGION || 'eu-west-1'}.amazonaws.com/${s3Key}`;
+    } else if (videoUrl) {
+      // URL input
+      finalVideoUrl = videoUrl;
       if (videoUrl.includes('veo.co') || videoUrl.includes('app.veo.co')) {
         fileType = 'veo';
       } else if (videoUrl.includes('traceup.com')) {
@@ -72,13 +174,38 @@ router.post('/', authenticateToken, async (req, res) => {
     }
 
     const result = await query(
-      `INSERT INTO games (title, description, team_id, created_by, video_url, file_type, uploaded_by, status)
-       VALUES ($1, $2, $3, $4, $5, $6, $4, 'pending')
+      `INSERT INTO games (title, description, team_id, created_by, video_url, file_type, uploaded_by, status, s3_key, original_filename, file_size)
+       VALUES ($1, $2, $3, $4, $5, $6, $4, 'pending', $7, $8, $9)
        RETURNING *`,
-      [title, description || null, teamId, req.user.userId, videoUrl || null, fileType]
+      [
+        title,
+        description || null,
+        teamId,
+        req.user.userId,
+        finalVideoUrl,
+        fileType,
+        s3Key || null,
+        originalFilename || null,
+        fileSize || null,
+      ]
     );
 
-    res.status(201).json({ game: result.rows[0] });
+    const game = result.rows[0];
+
+    // If GAA VEO URL submitted, trigger Lambda to download video
+    // Lambda will: extract video URL → download → upload to S3 → update database
+    if (fileType === 'veo' && finalVideoUrl && !s3Key) {
+      console.log(`📹 GAA VEO URL detected - triggering download Lambda...`);
+      
+      // Trigger Lambda asynchronously (don't wait for response)
+      // Game is created with status='pending', Lambda will update to 'analyzed' when done
+      triggerVeoDownload(game.id, finalVideoUrl).catch(err => {
+        console.error('❌ Failed to trigger GAA VEO download Lambda:', err);
+        // Don't fail the request - game is created, Lambda can be triggered manually later
+      });
+    }
+
+    res.status(201).json({ game });
   } catch (error) {
     console.error('Create game error:', error);
     res.status(500).json({ error: 'Failed to create game' });
@@ -125,14 +252,84 @@ router.get('/:id', authenticateToken, async (req, res) => {
 
     const game = result.rows[0];
     
-    // TODO: Generate presigned S3 URLs if s3_key exists
-    // For now, return game data as-is
-    // When S3 integration is added, we'll generate presigned URLs here
+    // Generate presigned S3 URLs if s3_key exists
+    if (game.s3_key) {
+      try {
+        const presignedUrl = await getPresignedDownloadUrl(game.s3_key);
+        game.video_url = presignedUrl; // Override with presigned URL for secure access
+      } catch (s3Error) {
+        console.error('Failed to generate presigned URL:', s3Error);
+        // Fallback to public URL if presigned fails
+        game.video_url = `https://${process.env.AWS_BUCKET_NAME || 'clann-gaa-videos-nov25'}.s3.${process.env.AWS_REGION || 'eu-west-1'}.amazonaws.com/${game.s3_key}`;
+      }
+    }
     
     res.json({ game });
   } catch (error) {
     console.error('Get game error:', error);
     res.status(500).json({ error: 'Failed to get game' });
+  }
+});
+
+/**
+ * POST /api/games/:id/events
+ * 
+ * Lambda endpoint to store events from AI analysis pipeline.
+ * Accepts GAA Events Schema format and stores in events JSONB field.
+ * 
+ * Auth: Lambda API key (X-API-Key header)
+ */
+router.post('/:id/events', authenticateLambda, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { events, match_info, team_mapping } = req.body;
+
+    // Validate game exists
+    const gameResult = await query('SELECT id FROM games WHERE id = $1', [id]);
+    if (gameResult.rows.length === 0) {
+      return res.status(404).json({ error: 'Game not found' });
+    }
+
+    // Validate events data structure
+    if (!events || !Array.isArray(events)) {
+      return res.status(400).json({ error: 'Events must be an array' });
+    }
+
+    // Build events JSONB object
+    const eventsData = {
+      match_info: match_info || {
+        title: 'GAA Match Events',
+        total_events: events.length,
+        analysis_method: 'AI pipeline',
+        created_at: new Date().toISOString()
+      },
+      events: events,
+      team_mapping: team_mapping || null, // Store team mapping if provided
+      updated_at: new Date().toISOString()
+    };
+
+    // Update database: store events and update status
+    const updateResult = await query(
+      `UPDATE games 
+       SET events = $1::jsonb, 
+           status = 'analyzed',
+           updated_at = NOW()
+       WHERE id = $2
+       RETURNING id, status`,
+      [JSON.stringify(eventsData), id]
+    );
+
+    console.log(`✅ Events stored for game ${id}: ${events.length} events`);
+
+    res.json({
+      message: 'Events stored successfully',
+      game_id: id,
+      events_count: events.length,
+      status: updateResult.rows[0].status
+    });
+  } catch (error) {
+    console.error('Store events error:', error);
+    res.status(500).json({ error: 'Failed to store events' });
   }
 });
 

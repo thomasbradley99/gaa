@@ -21,8 +21,7 @@ Clean, new AWS infrastructure for the GAA webapp. Separate from existing buckets
 - **Policy**: S3 read/write permissions
 
 ### 4. Database
-- **Option A**: Vercel Postgres (recommended - easier)
-- **Option B**: AWS RDS PostgreSQL (if you want AWS-managed)
+- **AWS RDS PostgreSQL** - Single database for local dev and production
 
 ---
 
@@ -291,57 +290,107 @@ aws lambda create-function \
 
 ---
 
-## 💾 Database Options
+## 💾 AWS RDS PostgreSQL Setup
 
-### Option A: Vercel Postgres (Recommended)
+**We're using AWS RDS for both local development and production** - same database, same connection.
 
-**Pros:**
-- Easy setup (built into Vercel)
-- Free tier available
-- Automatic backups
-- No AWS RDS costs
+### Quick Setup (Automated)
 
-**Setup:**
-1. Go to Vercel Dashboard → Your Project → Storage
-2. Create Postgres database
-3. Get connection string
-4. Use as `DATABASE_URL` in backend env vars
-
-### Option B: AWS RDS PostgreSQL
-
-**Pros:**
-- Full control
-- Can scale independently
-- Better for high traffic
-
-**Setup:**
 ```bash
-# Create RDS instance
+cd /Users/thomasbradley/clann-repos/gaa/webapp/gaa-webapp
+
+# Set password (optional)
+export RDS_PASSWORD="YourSecurePassword123!"
+
+# Run setup script
+./setup-rds.sh
+```
+
+See `RDS_SETUP.md` for detailed instructions.
+
+### Manual Setup
+
+**Step 1: Create RDS Instance**
+
+```bash
 aws rds create-db-instance \
-  --db-instance-identifier gaa-webapp-db \
+  --db-instance-identifier clann-gaa-db-nov25 \
   --db-instance-class db.t3.micro \
   --engine postgres \
-  --engine-version 15.4 \
+  --engine-version 15.15 \
   --master-username gaaadmin \
-  --master-user-password 'YourSecurePassword123!' \
+  --master-user-password YourSecurePassword123! \
   --allocated-storage 20 \
-  --region eu-west-1 \
-  --publicly-accessible \
+  --storage-type gp2 \
   --backup-retention-period 7 \
-  --storage-encrypted
+  --publicly-accessible \
+  --region eu-west-1
 
-# Wait 5-10 minutes, then get endpoint
+# Wait for instance (5-10 minutes)
+aws rds wait db-instance-available \
+  --db-instance-identifier clann-gaa-db-nov25 \
+  --region eu-west-1
+
+# Get endpoint
 aws rds describe-db-instances \
-  --db-instance-identifier gaa-webapp-db \
-  --region eu-west-1 \
+  --db-instance-identifier clann-gaa-db-nov25 \
   --query 'DBInstances[0].Endpoint.Address' \
-  --output text
+  --output text \
+  --region eu-west-1
+```
+
+**Step 2: Configure Security Group**
+
+```bash
+# Get security group
+SG_ID=$(aws rds describe-db-instances \
+  --db-instance-identifier clann-gaa-db-nov25 \
+  --query 'DBInstances[0].VpcSecurityGroups[0].VpcSecurityGroupId' \
+  --output text \
+  --region eu-west-1)
+
+# Add your IP
+MY_IP=$(curl -s https://checkip.amazonaws.com)
+aws ec2 authorize-security-group-ingress \
+  --group-id $SG_ID \
+  --protocol tcp \
+  --port 5432 \
+  --cidr $MY_IP/32 \
+  --region eu-west-1
+
+# Add all IPs for testing (remove in production!)
+aws ec2 authorize-security-group-ingress \
+  --group-id $SG_ID \
+  --protocol tcp \
+  --port 5432 \
+  --cidr 0.0.0.0/0 \
+  --region eu-west-1
+```
+
+**Step 3: Create Database and Run Schema**
+
+```bash
+ENDPOINT="clann-gaa-db-nov25.xxxxx.eu-west-1.rds.amazonaws.com"
+
+# Create database
+psql "postgresql://gaaadmin:YourSecurePassword123!@$ENDPOINT:5432/postgres" \
+  -c "CREATE DATABASE gaa_app;"
+
+# Run schema
+psql "postgresql://gaaadmin:YourSecurePassword123!@$ENDPOINT:5432/gaa_app" \
+  -f db/schema.sql
+
+# Run migration
+psql "postgresql://gaaadmin:YourSecurePassword123!@$ENDPOINT:5432/gaa_app" \
+  -f db/migrations/001_add_video_fields.sql
 ```
 
 **Connection String:**
 ```
-postgresql://gaaadmin:YourSecurePassword123!@gaa-webapp-db.xxxxx.eu-west-1.rds.amazonaws.com:5432/gaa_app
+postgresql://gaaadmin:YourSecurePassword123!@clann-gaa-db-nov25.xxxxx.eu-west-1.rds.amazonaws.com:5432/gaa_app
 ```
+
+**Cost:** ~$17/month (or FREE for first year with AWS Free Tier)
 
 ---
 

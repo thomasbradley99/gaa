@@ -3,11 +3,52 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { auth, teams, games, getToken } from '@/lib/api-client'
+import Sidebar from '@/components/shared/Sidebar'
+import UploadSection from '@/components/games/UploadSection'
+import GameCard from '@/components/games/GameCard'
 
 export default function DashboardPage() {
   const router = useRouter()
   const [user, setUser] = useState<any>(null)
+  const [userTeams, setUserTeams] = useState<any[]>([])
+  const [gamesList, setGamesList] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const [gamesLoading, setGamesLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  const fetchUserData = async () => {
+    try {
+      const userData = await auth.me()
+      setUser(userData.user)
+    } catch (err) {
+      router.push('/')
+    }
+  }
+
+  const fetchTeams = async () => {
+    try {
+      const data = await teams.list()
+      setUserTeams(data.teams || [])
+    } catch (err: any) {
+      console.error('Failed to fetch teams:', err)
+    }
+  }
+
+  const fetchGames = async () => {
+    setGamesLoading(true)
+    setError('')
+    try {
+      // Fetch games for user's team (if they have one)
+      const teamId = userTeams.length > 0 ? userTeams[0].id : undefined
+      const data = await games.list(teamId)
+      setGamesList(data.games || [])
+    } catch (err: any) {
+      setError(err.message || 'Failed to load games')
+      console.error('Failed to fetch games:', err)
+    } finally {
+      setGamesLoading(false)
+    }
+  }
 
   useEffect(() => {
     const token = getToken()
@@ -16,16 +57,24 @@ export default function DashboardPage() {
       return
     }
 
-    // Fetch user data
-    auth.me()
-      .then((data) => {
-        setUser(data.user)
-        setLoading(false)
-      })
-      .catch(() => {
-        router.push('/')
-      })
+    const init = async () => {
+      await fetchUserData()
+      await fetchTeams()
+      setLoading(false)
+    }
+
+    init()
   }, [router])
+
+  useEffect(() => {
+    if (!loading && user && userTeams.length > 0) {
+      fetchGames()
+    }
+  }, [loading, user, userTeams])
+
+  const handleGameCreated = () => {
+    fetchGames()
+  }
 
   if (loading) {
     return (
@@ -35,47 +84,78 @@ export default function DashboardPage() {
     )
   }
 
+  if (!user) {
+    return null
+  }
+
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
-        
-        <div className="bg-gray-800 rounded-lg p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4">Welcome, {user?.name || user?.email}!</h2>
-          <p className="text-gray-400">Your GAA analysis dashboard is ready.</p>
-        </div>
+    <div className="min-h-screen bg-gray-900 flex">
+      {/* Sidebar */}
+      <Sidebar user={user} />
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="bg-gray-800 rounded-lg p-6">
-            <h3 className="text-lg font-semibold mb-4">Teams</h3>
-            <p className="text-gray-400">Manage your GAA teams</p>
-            <button
-              onClick={() => {
-                // TODO: Implement team creation
-                alert('Team creation coming soon!')
-              }}
-              className="mt-4 px-4 py-2 bg-green-600 hover:bg-green-700 rounded-md"
-            >
-              Create Team
-            </button>
-          </div>
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
+        <div className="flex-1 overflow-y-auto">
+          <div className="max-w-7xl mx-auto px-6 py-8">
+            {/* Header */}
+            <div className="mb-6">
+              <h1 className="text-3xl font-bold text-white mb-2">Games</h1>
+              <p className="text-gray-400">Manage and analyze your GAA games</p>
+            </div>
 
-          <div className="bg-gray-800 rounded-lg p-6">
-            <h3 className="text-lg font-semibold mb-4">Games</h3>
-            <p className="text-gray-400">View and analyze your games</p>
-            <button
-              onClick={() => {
-                // TODO: Implement game creation
-                alert('Game creation coming soon!')
-              }}
-              className="mt-4 px-4 py-2 bg-green-600 hover:bg-green-700 rounded-md"
-            >
-              Add Game
-            </button>
+            {/* Upload Section */}
+            {userTeams.length > 0 ? (
+              <UploadSection 
+                teamId={userTeams[0].id} 
+                teamName={userTeams[0].name}
+                onGameCreated={handleGameCreated} 
+              />
+            ) : (
+              <div className="bg-gray-800 rounded-lg p-6 mb-6">
+                <p className="text-gray-400 mb-4">
+                  You need to create or join a team before adding games.
+                </p>
+                <button
+                  onClick={() => router.push('/team')}
+                  className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors"
+                >
+                  Go to Team Page
+                </button>
+              </div>
+            )}
+
+
+            {/* Error Message */}
+            {error && (
+              <div className="mb-6 p-4 bg-red-900/50 border border-red-700 rounded-lg text-red-200">
+                {error}
+              </div>
+            )}
+
+            {/* Games Grid */}
+            {gamesLoading ? (
+              <div className="text-center py-12">
+                <div className="text-gray-400">Loading games...</div>
+              </div>
+            ) : gamesList.length === 0 ? (
+              <div className="text-center py-12">
+                <div className="text-gray-400 mb-4">No games yet</div>
+                <p className="text-gray-500 text-sm">
+                  {userTeams.length === 0
+                    ? 'Create or join a team to get started'
+                    : 'Add your first game using the form above'}
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {gamesList.map((game) => (
+                  <GameCard key={game.id} game={game} />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
     </div>
   )
 }
-

@@ -35,14 +35,14 @@ export default function GameHeader({
   }
 
   return (
-    <div className="bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 px-4 sm:px-6 py-3">
+    <div className="bg-black/80 backdrop-blur-md border-b border-white/10 px-4 sm:px-6 py-3">
       <div className="flex items-center justify-between">
         {/* Left: Toggle Left Sidebar + Game Info */}
         <div className="flex items-center gap-4 min-w-0 flex-1">
           {/* Toggle Left Sidebar */}
           <button
             onClick={onToggleLeftSidebar}
-            className="flex items-center justify-center w-8 h-8 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+            className="flex items-center justify-center w-8 h-8 text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-colors"
             title={showLeftSidebar ? 'Hide Navigation' : 'Show Navigation'}
           >
             <svg
@@ -97,7 +97,7 @@ export default function GameHeader({
         {/* Right: Toggle Right Sidebar Button */}
         <button
           onClick={onToggleRightSidebar}
-          className="flex items-center gap-2 px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors text-sm"
+          className="flex items-center gap-2 px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-colors text-sm shadow-lg"
         >
           <svg
             className="w-4 h-4"

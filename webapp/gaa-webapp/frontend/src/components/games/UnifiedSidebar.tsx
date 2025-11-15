@@ -45,41 +45,41 @@ export default function UnifiedSidebar({
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-full bg-gray-900 border-l border-gray-800 z-50 transition-transform duration-300 ${
+        className={`fixed top-0 right-0 h-full bg-black/90 backdrop-blur-lg border-l border-white/10 z-50 transition-transform duration-300 ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
         style={{ width: '400px', maxWidth: '100vw' }}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-800">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
           <div className="flex items-center gap-2">
             {/* Tabs */}
             <button
               onClick={() => setActiveTab('events')}
-              className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${
+              className={`px-3 py-1.5 text-sm font-medium rounded-xl transition-all ${
                 activeTab === 'events'
-                  ? 'bg-green-600 text-white'
-                  : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'text-white/60 hover:text-white hover:bg-white/10'
               }`}
             >
               Events
             </button>
             <button
               onClick={() => setActiveTab('stats')}
-              className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${
+              className={`px-3 py-1.5 text-sm font-medium rounded-xl transition-all ${
                 activeTab === 'stats'
-                  ? 'bg-green-600 text-white'
-                  : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'text-white/60 hover:text-white hover:bg-white/10'
               }`}
             >
               Stats
             </button>
             <button
               onClick={() => setActiveTab('ai')}
-              className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${
+              className={`px-3 py-1.5 text-sm font-medium rounded-xl transition-all ${
                 activeTab === 'ai'
-                  ? 'bg-green-600 text-white'
-                  : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'text-white/60 hover:text-white hover:bg-white/10'
               }`}
             >
               AI Coach
@@ -89,7 +89,7 @@ export default function UnifiedSidebar({
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="p-1.5 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+            className="p-1.5 text-white/60 hover:text-white hover:bg-white/10 rounded-xl transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -140,9 +140,9 @@ export default function UnifiedSidebar({
 
           {activeTab === 'ai' && (
             <div className="p-4">
-              <div className="text-center py-12 text-gray-400">
+              <div className="text-center py-12 text-white/60">
                 <svg
-                  className="w-16 h-16 mx-auto mb-4 text-gray-600"
+                  className="w-16 h-16 mx-auto mb-4 text-blue-500/50"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -154,8 +154,8 @@ export default function UnifiedSidebar({
                     d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
                   />
                 </svg>
-                <p className="text-sm font-medium">AI Coach Coming Soon</p>
-                <p className="text-xs mt-2">
+                <p className="text-sm font-medium text-white">AI Coach Coming Soon</p>
+                <p className="text-xs mt-2 text-white/50">
                   Get personalized insights and recommendations
                 </p>
               </div>

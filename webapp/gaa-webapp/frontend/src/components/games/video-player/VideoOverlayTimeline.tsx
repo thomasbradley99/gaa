@@ -21,8 +21,10 @@ export function VideoOverlayTimeline({
   }
 
   // Get color for team
-  const getTeamColor = (team: 'home' | 'away') => {
-    return team === 'home' ? 'bg-green-500 border-green-700' : 'bg-yellow-400 border-yellow-600'
+  const getTeamColor = (team?: string) => {
+    if (team === 'home' || team === 'red') return 'bg-green-500 border-green-700'
+    if (team === 'away' || team === 'blue') return 'bg-yellow-400 border-yellow-600'
+    return 'bg-gray-500 border-gray-700' // Default for unknown teams
   }
 
   // Get icon for event type

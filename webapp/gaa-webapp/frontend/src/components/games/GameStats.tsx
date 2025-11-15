@@ -321,13 +321,13 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
   }
 
   return (
-    <div className="bg-gray-800 rounded-lg p-4 sm:p-6">
+    <div className="bg-black/50 backdrop-blur-lg border border-white/10 rounded-2xl p-4 sm:p-6 shadow-xl">
       {/* Header with Export Button */}
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl sm:text-2xl font-bold text-white">Match Statistics</h2>
         <button
           onClick={exportToPDF}
-          className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-sm font-medium"
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-colors text-sm font-medium shadow-lg"
         >
           <Download className="w-4 h-4" />
           <span className="hidden sm:inline">Export to PDF</span>

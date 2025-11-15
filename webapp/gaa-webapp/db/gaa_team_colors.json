@@ -1,0 +1,126 @@
+{
+  "comment": "Common GAA team colors - makes it easier to fill out team information",
+  "teams": {
+    "Dublin": {
+      "home_color": "#0066CC",
+      "away_color": "#87CEEB",
+      "accent_color": null,
+      "county": "Dublin"
+    },
+    "Kerry": {
+      "home_color": "#016F32",
+      "away_color": "#FFD700",
+      "accent_color": null,
+      "county": "Kerry"
+    },
+    "Mayo": {
+      "home_color": "#DC143C",
+      "away_color": "#016F32",
+      "accent_color": null,
+      "county": "Mayo"
+    },
+    "Tyrone": {
+      "home_color": "#FFFFFF",
+      "away_color": "#DC143C",
+      "accent_color": null,
+      "county": "Tyrone"
+    },
+    "Cork": {
+      "home_color": "#DC143C",
+      "away_color": "#FFFFFF",
+      "accent_color": null,
+      "county": "Cork"
+    },
+    "Galway": {
+      "home_color": "#8B0000",
+      "away_color": "#FFFFFF",
+      "accent_color": null,
+      "county": "Galway"
+    },
+    "Donegal": {
+      "home_color": "#016F32",
+      "away_color": "#FFD700",
+      "accent_color": null,
+      "county": "Donegal"
+    },
+    "Kilkenny": {
+      "home_color": "#000000",
+      "away_color": "#FFB300",
+      "accent_color": null,
+      "county": "Kilkenny"
+    },
+    "Limerick": {
+      "home_color": "#016F32",
+      "away_color": "#FFFFFF",
+      "accent_color": null,
+      "county": "Limerick"
+    },
+    "Tipperary": {
+      "home_color": "#0066CC",
+      "away_color": "#FFD700",
+      "accent_color": null,
+      "county": "Tipperary"
+    },
+    "Waterford": {
+      "home_color": "#0066CC",
+      "away_color": "#FFFFFF",
+      "accent_color": null,
+      "county": "Waterford"
+    },
+    "Clare": {
+      "home_color": "#FFB300",
+      "away_color": "#0066CC",
+      "accent_color": null,
+      "county": "Clare"
+    },
+    "Wexford": {
+      "home_color": "#800080",
+      "away_color": "#FFD700",
+      "accent_color": null,
+      "county": "Wexford"
+    },
+    "Meath": {
+      "home_color": "#016F32",
+      "away_color": "#FFD700",
+      "accent_color": null,
+      "county": "Meath"
+    },
+    "Kildare": {
+      "home_color": "#FFFFFF",
+      "away_color": "#C0C0C0",
+      "accent_color": null,
+      "county": "Kildare"
+    },
+    "Armagh": {
+      "home_color": "#FF6600",
+      "away_color": "#FFFFFF",
+      "accent_color": null,
+      "county": "Armagh"
+    },
+    "Roscommon": {
+      "home_color": "#FFD700",
+      "away_color": "#0066CC",
+      "accent_color": null,
+      "county": "Roscommon"
+    },
+    "Down": {
+      "home_color": "#DC143C",
+      "away_color": "#000000",
+      "accent_color": null,
+      "county": "Down"
+    },
+    "Monaghan": {
+      "home_color": "#FFFFFF",
+      "away_color": "#0066CC",
+      "accent_color": null,
+      "county": "Monaghan"
+    },
+    "Derry": {
+      "home_color": "#DC143C",
+      "away_color": "#FFFFFF",
+      "accent_color": null,
+      "county": "Derry"
+    }
+  }
+}
+

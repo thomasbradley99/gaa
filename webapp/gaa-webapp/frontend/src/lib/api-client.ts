@@ -82,6 +82,11 @@ export const teams = {
       method: 'PUT',
       body: JSON.stringify(data),
     }),
+  updateTeamColors: (teamId: string, data: { home_color: string; away_color: string; accent_color?: string | null }) =>
+    apiRequest(`/api/teams/${teamId}/colors`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    }),
   joinByCode: (inviteCode: string) =>
     apiRequest('/api/teams/join-by-code', {
       method: 'POST',

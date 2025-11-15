@@ -152,7 +152,7 @@ router.post('/join-by-code', authenticateToken, async (req, res) => {
 router.put('/:teamId', authenticateToken, async (req, res) => {
   try {
     const { teamId } = req.params;
-    const { name, description } = req.body;
+    const { name, description, home_color, away_color, accent_color } = req.body;
 
     if (!name) {
       return res.status(400).json({ error: 'Team name is required' });
@@ -180,13 +180,18 @@ router.put('/:teamId', authenticateToken, async (req, res) => {
       });
     }
 
-    // Update team
+    // Update team (including colors)
     const result = await query(
       `UPDATE teams 
-       SET name = $1, description = $2, updated_at = NOW()
-       WHERE id = $3
+       SET name = $1, 
+           description = $2, 
+           home_color = COALESCE($3, home_color),
+           away_color = COALESCE($4, away_color),
+           accent_color = $5,
+           updated_at = NOW()
+       WHERE id = $6
        RETURNING *`,
-      [name.trim(), description || null, teamId]
+      [name.trim(), description || null, home_color, away_color, accent_color, teamId]
     );
 
     if (result.rows.length === 0) {
@@ -205,6 +210,45 @@ router.put('/:teamId', authenticateToken, async (req, res) => {
     }
     
     res.status(500).json({ error: 'Failed to update team' });
+  }
+});
+
+// Update team colors only (simplified endpoint)
+router.patch('/:teamId/colors', authenticateToken, async (req, res) => {
+  try {
+    const { teamId } = req.params;
+    const { home_color, away_color, accent_color } = req.body;
+
+    // Verify user is admin of team
+    const memberCheck = await query(
+      'SELECT * FROM team_members WHERE team_id = $1 AND user_id = $2 AND role = $3',
+      [teamId, req.user.userId, 'admin']
+    );
+
+    if (memberCheck.rows.length === 0) {
+      return res.status(403).json({ error: 'Only team admins can update team colors' });
+    }
+
+    // Update colors
+    const result = await query(
+      `UPDATE teams 
+       SET home_color = COALESCE($1, home_color),
+           away_color = COALESCE($2, away_color),
+           accent_color = $3,
+           updated_at = NOW()
+       WHERE id = $4
+       RETURNING *`,
+      [home_color, away_color, accent_color, teamId]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Team not found' });
+    }
+
+    res.json({ team: result.rows[0] });
+  } catch (error) {
+    console.error('Update team colors error:', error);
+    res.status(500).json({ error: 'Failed to update team colors' });
   }
 });
 

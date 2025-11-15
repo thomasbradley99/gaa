@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { auth, teams, getToken } from '@/lib/api-client'
 import Sidebar from '@/components/shared/Sidebar'
 import { PitchFinder } from '@/components/pitch-finder/PitchFinder'
+import TeamColorPicker from '@/components/teams/TeamColorPicker'
 import { Users, Copy, Share2, Plus, UserPlus, Edit, Trash2, MapPin } from 'lucide-react'
 
 export default function TeamPage() {
@@ -355,6 +356,17 @@ export default function TeamPage() {
                       </p>
                     </div>
                   </div>
+                </div>
+
+                {/* Team Colors */}
+                <div className="mb-6">
+                  <TeamColorPicker 
+                    teamId={currentTeam.id}
+                    currentHomeColor={currentTeam.home_color}
+                    currentAwayColor={currentTeam.away_color}
+                    onColorsUpdated={fetchTeams}
+                    apiClient={teams}
+                  />
                 </div>
 
                 {/* Team Members */}

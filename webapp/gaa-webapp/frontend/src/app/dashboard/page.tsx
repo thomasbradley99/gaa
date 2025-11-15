@@ -15,6 +15,7 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true)
   const [gamesLoading, setGamesLoading] = useState(false)
   const [error, setError] = useState('')
+  const [showUploadForm, setShowUploadForm] = useState(false)
 
   const fetchUserData = async () => {
     try {
@@ -74,6 +75,7 @@ export default function DashboardPage() {
 
   const handleGameCreated = () => {
     fetchGames()
+    setShowUploadForm(false)
   }
 
   if (loading) {
@@ -101,37 +103,54 @@ export default function DashboardPage() {
       <div className="flex-1 flex flex-col">
         <div className="flex-1 overflow-y-auto">
           <div className="max-w-7xl mx-auto px-6 py-8">
-            {/* Header */}
-            <div className="mb-6">
-              <h1 className="text-3xl font-bold text-white mb-2">Matches</h1>
-              <p className="text-gray-400">Manage and analyze your GAA matches</p>
+            {/* Header with Upload Button */}
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <h1 className="text-3xl font-bold text-white mb-2">Matches</h1>
+                <p className="text-gray-400">Manage and analyze your GAA matches</p>
+              </div>
+              {userTeams.length > 0 && (
+                <button
+                  onClick={() => setShowUploadForm(!showUploadForm)}
+                  className="px-6 py-3 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white font-semibold rounded-xl transition-all flex items-center gap-2 shadow-lg hover:shadow-xl"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                  Upload Match
+                </button>
+              )}
             </div>
 
-            {/* Upload Section */}
-            {userTeams.length > 0 ? (
-              <UploadSection 
-                teamId={userTeams[0].id} 
-                teamName={userTeams[0].name}
-                onGameCreated={handleGameCreated} 
-              />
-            ) : (
-              <div className="bg-gray-800 rounded-lg p-6 mb-6">
+            {/* Upload Form (Collapsible) */}
+            {showUploadForm && userTeams.length > 0 && (
+              <div className="mb-8">
+                <UploadSection 
+                  teamId={userTeams[0].id} 
+                  teamName={userTeams[0].name}
+                  onGameCreated={handleGameCreated} 
+                />
+              </div>
+            )}
+
+            {/* No Team Message */}
+            {userTeams.length === 0 && (
+              <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-8 text-center mb-8">
                 <p className="text-gray-400 mb-4">
                   You need to create or join a squad before adding matches.
                 </p>
                 <button
                   onClick={() => router.push('/team')}
-                  className="px-4 py-2 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white font-semibold rounded-lg transition-colors"
+                  className="px-6 py-3 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white font-semibold rounded-xl transition-colors"
                 >
                   Go to Squad Page
                 </button>
               </div>
             )}
 
-
             {/* Error Message */}
             {error && (
-              <div className="mb-6 p-4 bg-red-900/50 border border-red-700 rounded-lg text-red-200">
+              <div className="mb-8 p-4 bg-red-900/50 border border-red-700 rounded-xl text-red-200">
                 {error}
               </div>
             )}

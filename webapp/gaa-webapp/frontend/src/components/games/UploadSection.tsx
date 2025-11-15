@@ -142,9 +142,10 @@ export default function UploadSection({ teamId, teamName, onGameCreated }: Uploa
   }
 
   return (
-    <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-6 mb-6">
-      <h2 className="text-xl font-semibold mb-4">Add New Match</h2>
-      <p className="text-sm text-gray-400 mb-4">Squad: <span className="text-white font-medium">{teamName}</span></p>
+    <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-6">
+      <div className="flex items-center justify-between mb-4">
+        <p className="text-sm text-gray-400">Squad: <span className="text-white font-medium">{teamName}</span></p>
+      </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Title */}

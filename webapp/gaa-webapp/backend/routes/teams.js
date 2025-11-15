@@ -148,6 +148,66 @@ router.post('/join-by-code', authenticateToken, async (req, res) => {
   }
 });
 
+// Update team
+router.put('/:teamId', authenticateToken, async (req, res) => {
+  try {
+    const { teamId } = req.params;
+    const { name, description } = req.body;
+
+    if (!name) {
+      return res.status(400).json({ error: 'Team name is required' });
+    }
+
+    // Verify user is admin of team
+    const memberCheck = await query(
+      'SELECT * FROM team_members WHERE team_id = $1 AND user_id = $2 AND role = $3',
+      [teamId, req.user.userId, 'admin']
+    );
+
+    if (memberCheck.rows.length === 0) {
+      return res.status(403).json({ error: 'Only team admins can update team details' });
+    }
+
+    // Check if new name conflicts with another team (but not this one)
+    const nameCheckResult = await query(
+      'SELECT id, name FROM teams WHERE name = $1 AND id != $2',
+      [name.trim(), teamId]
+    );
+
+    if (nameCheckResult.rows.length > 0) {
+      return res.status(409).json({ 
+        error: `A team named "${name}" already exists.`
+      });
+    }
+
+    // Update team
+    const result = await query(
+      `UPDATE teams 
+       SET name = $1, description = $2, updated_at = NOW()
+       WHERE id = $3
+       RETURNING *`,
+      [name.trim(), description || null, teamId]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Team not found' });
+    }
+
+    res.json({ team: result.rows[0] });
+  } catch (error) {
+    console.error('Update team error:', error);
+    
+    // Handle unique constraint violation
+    if (error.code === '23505') {
+      return res.status(409).json({ 
+        error: `A team with this name already exists.`
+      });
+    }
+    
+    res.status(500).json({ error: 'Failed to update team' });
+  }
+});
+
 // Get team members
 router.get('/:teamId/members', authenticateToken, async (req, res) => {
   try {

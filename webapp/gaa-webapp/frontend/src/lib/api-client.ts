@@ -77,6 +77,11 @@ export const teams = {
       method: 'POST',
       body: JSON.stringify(data),
     }),
+  update: (teamId: string, data: { name: string; description?: string }) =>
+    apiRequest(`/api/teams/${teamId}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }),
   joinByCode: (inviteCode: string) =>
     apiRequest('/api/teams/join-by-code', {
       method: 'POST',

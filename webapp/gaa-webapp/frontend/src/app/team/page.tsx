@@ -16,13 +16,16 @@ export default function TeamPage() {
   const [error, setError] = useState('')
   const [showCreateModal, setShowCreateModal] = useState(false)
   const [showJoinModal, setShowJoinModal] = useState(false)
+  const [showEditModal, setShowEditModal] = useState(false)
   const [teamName, setTeamName] = useState('')
   const [teamDescription, setTeamDescription] = useState('')
   const [inviteCode, setInviteCode] = useState('')
   const [creating, setCreating] = useState(false)
   const [joining, setJoining] = useState(false)
+  const [updating, setUpdating] = useState(false)
   const [selectedClub, setSelectedClub] = useState<any>(null)
   const [showMap, setShowMap] = useState(false)
+  const [showEditMap, setShowEditMap] = useState(false)
 
   const fetchUserData = async () => {
     try {
@@ -118,6 +121,45 @@ export default function TeamPage() {
     setTeamName(club.Club) // Auto-fill team name with club name
     if (!teamDescription) {
       setTeamDescription(`${club.County} GAA`)
+    }
+  }
+
+  const handleUpdateTeam = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!currentTeam) return
+    
+    const nameToUse = teamName.trim()
+    if (!nameToUse) {
+      setError('Team name is required')
+      return
+    }
+
+    setUpdating(true)
+    setError('')
+
+    try {
+      await teams.update(currentTeam.id, {
+        name: nameToUse,
+        description: teamDescription || undefined,
+      })
+      await fetchTeams()
+      setShowEditModal(false)
+      setShowEditMap(false)
+      setTeamName('')
+      setTeamDescription('')
+      setSelectedClub(null)
+    } catch (err: any) {
+      setError(err.message || 'Failed to update team')
+    } finally {
+      setUpdating(false)
+    }
+  }
+
+  const openEditModal = () => {
+    if (currentTeam) {
+      setTeamName(currentTeam.name)
+      setTeamDescription(currentTeam.description || '')
+      setShowEditModal(true)
     }
   }
 
@@ -267,11 +309,9 @@ export default function TeamPage() {
                       )}
                     </div>
                     <button
-                      onClick={() => {
-                        // TODO: Edit team
-                        alert('Edit team coming soon!')
-                      }}
-                      className="p-2 text-gray-400 hover:text-white transition-colors"
+                      onClick={openEditModal}
+                      className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                      title="Edit team"
                     >
                       <Edit className="w-5 h-5" />
                     </button>
@@ -474,6 +514,107 @@ export default function TeamPage() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Team Modal */}
+      {showEditModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 overflow-y-auto">
+          <div className="bg-black/90 backdrop-blur-lg border border-white/10 rounded-xl p-6 w-full max-w-4xl mx-4 my-8">
+            <h2 className="text-xl font-semibold text-white mb-4">Edit Team</h2>
+            
+            {!showEditMap ? (
+              <form onSubmit={handleUpdateTeam} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Team Name *
+                  </label>
+                  <input
+                    type="text"
+                    value={teamName}
+                    onChange={(e) => setTeamName(e.target.value)}
+                    placeholder="e.g., Dublin GAA"
+                    className="w-full px-4 py-2 bg-black/50 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2D8B4D]"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Description
+                  </label>
+                  <textarea
+                    value={teamDescription}
+                    onChange={(e) => setTeamDescription(e.target.value)}
+                    placeholder="Optional description..."
+                    rows={3}
+                    className="w-full px-4 py-2 bg-black/50 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2D8B4D]"
+                  />
+                </div>
+                
+                <button
+                  type="button"
+                  onClick={() => setShowEditMap(true)}
+                  className="w-full px-4 py-3 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
+                >
+                  <MapPin className="w-5 h-5" />
+                  Select Club from Map
+                </button>
+
+                <div className="flex gap-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowEditModal(false)
+                      setTeamName('')
+                      setTeamDescription('')
+                      setSelectedClub(null)
+                      setError('')
+                    }}
+                    className="flex-1 px-4 py-2 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={updating}
+                    className="flex-1 px-4 py-2 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 disabled:bg-black/50 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
+                  >
+                    {updating ? 'Updating...' : 'Update Team'}
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold text-white">Select Your Club</h3>
+                  <button
+                    onClick={() => setShowEditMap(false)}
+                    className="px-4 py-2 bg-white/5 hover:bg-white/10 text-white text-sm font-semibold rounded-lg transition-colors"
+                  >
+                    Back
+                  </button>
+                </div>
+                <PitchFinder 
+                  onClubSelect={handleClubSelect}
+                  isCreatingTeam={false}
+                />
+                {selectedClub && (
+                  <div className="mt-4 p-4 bg-[#2D8B4D]/20 border border-[#2D8B4D]/50 rounded-lg">
+                    <p className="text-white font-medium mb-2">Selected: {selectedClub.Club}</p>
+                    <p className="text-gray-400 text-sm mb-3">{selectedClub.County} GAA</p>
+                    <button
+                      onClick={() => {
+                        setShowEditMap(false)
+                      }}
+                      className="px-4 py-2 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white font-semibold rounded-lg transition-colors"
+                    >
+                      Confirm Selection
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       )}

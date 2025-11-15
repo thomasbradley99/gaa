@@ -53,11 +53,13 @@ app.get('/api', (req, res) => {
 // Import routes
 const authRoutes = require('./routes/auth');
 const teamsRoutes = require('./routes/teams');
+const videoProxyRoutes = require('./routes/video-proxy');
 const gamesRoutes = require('./routes/games');
 
 // Register routes
 app.use('/api/auth', authRoutes);
 app.use('/api/teams', teamsRoutes);
+app.use('/api/video-proxy', videoProxyRoutes);
 app.use('/api/games', gamesRoutes);
 
 // Error handling middleware

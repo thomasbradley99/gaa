@@ -262,6 +262,10 @@ router.get('/:id', authenticateToken, async (req, res) => {
         // Fallback to public URL if presigned fails
         game.video_url = `https://${process.env.AWS_BUCKET_NAME || 'clann-gaa-videos-nov25'}.s3.${process.env.AWS_REGION || 'eu-west-1'}.amazonaws.com/${game.s3_key}`;
       }
+    } else if (game.video_url && (game.video_url.includes('veocdn.com') || game.video_url.includes('veo.co'))) {
+      // VEO URL - proxy through our backend to bypass CORS
+      const backendUrl = process.env.BACKEND_URL || `http://localhost:${process.env.PORT || 4011}`;
+      game.video_url = `${backendUrl}/api/video-proxy?url=${encodeURIComponent(game.video_url)}`;
     }
     
     res.json({ game });

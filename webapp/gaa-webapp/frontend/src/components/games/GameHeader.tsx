@@ -5,15 +5,19 @@ import { Calendar, Users } from 'lucide-react'
 interface GameHeaderProps {
   game: any
   currentTime: number
-  showSidebar: boolean
-  onToggleSidebar: () => void
+  showRightSidebar: boolean
+  showLeftSidebar: boolean
+  onToggleRightSidebar: () => void
+  onToggleLeftSidebar: () => void
 }
 
 export default function GameHeader({
   game,
   currentTime,
-  showSidebar,
-  onToggleSidebar,
+  showRightSidebar,
+  showLeftSidebar,
+  onToggleRightSidebar,
+  onToggleLeftSidebar,
 }: GameHeaderProps) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
@@ -33,8 +37,38 @@ export default function GameHeader({
   return (
     <div className="bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 px-4 sm:px-6 py-3">
       <div className="flex items-center justify-between">
-        {/* Left: Game Info */}
+        {/* Left: Toggle Left Sidebar + Game Info */}
         <div className="flex items-center gap-4 min-w-0 flex-1">
+          {/* Toggle Left Sidebar */}
+          <button
+            onClick={onToggleLeftSidebar}
+            className="flex items-center justify-center w-8 h-8 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors"
+            title={showLeftSidebar ? 'Hide Navigation' : 'Show Navigation'}
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              {showLeftSidebar ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 5l7 7-7 7M5 5l7 7-7 7"
+                />
+              )}
+            </svg>
+          </button>
+
           <h1 className="text-white font-semibold text-sm sm:text-base truncate">
             {game.title}
           </h1>
@@ -60,9 +94,9 @@ export default function GameHeader({
           {formatTime(currentTime)}
         </div>
 
-        {/* Right: Toggle Sidebar Button */}
+        {/* Right: Toggle Right Sidebar Button */}
         <button
-          onClick={onToggleSidebar}
+          onClick={onToggleRightSidebar}
           className="flex items-center gap-2 px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors text-sm"
         >
           <svg
@@ -71,7 +105,7 @@ export default function GameHeader({
             stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            {showSidebar ? (
+            {showRightSidebar ? (
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -88,7 +122,7 @@ export default function GameHeader({
             )}
           </svg>
           <span className="hidden sm:inline">
-            {showSidebar ? 'Hide' : 'Show'} Details
+            {showRightSidebar ? 'Hide' : 'Show'} Details
           </span>
         </button>
       </div>

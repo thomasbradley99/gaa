@@ -22,7 +22,8 @@ export default function GameDetailPage() {
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [currentEventIndex, setCurrentEventIndex] = useState(-1)
-  const [showSidebar, setShowSidebar] = useState(true)
+  const [showRightSidebar, setShowRightSidebar] = useState(true)
+  const [showLeftSidebar, setShowLeftSidebar] = useState(true)
   const [teamFilter, setTeamFilter] = useState<'all' | 'home' | 'away'>('all')
 
   // Parse events from game data
@@ -177,22 +178,30 @@ export default function GameDetailPage() {
 
   return (
     <div className="flex h-screen bg-black">
-      {/* Left Navigation - Always Visible */}
-      <Sidebar user={user} />
+      {/* Left Navigation - Toggleable */}
+      <div
+        className={`transition-all duration-300 ${
+          showLeftSidebar ? 'w-64' : 'w-0'
+        } overflow-hidden`}
+      >
+        <Sidebar user={user} />
+      </div>
 
       {/* Middle - Video Fullscreen */}
       <div className="flex-1 flex flex-col overflow-hidden">
         <GameHeader
           game={game}
           currentTime={currentTime}
-          showSidebar={showSidebar}
-          onToggleSidebar={() => setShowSidebar(!showSidebar)}
+          showRightSidebar={showRightSidebar}
+          showLeftSidebar={showLeftSidebar}
+          onToggleRightSidebar={() => setShowRightSidebar(!showRightSidebar)}
+          onToggleLeftSidebar={() => setShowLeftSidebar(!showLeftSidebar)}
         />
 
         <div 
           className="flex-1 relative transition-all duration-300"
           style={{
-            marginRight: showSidebar ? '400px' : '0'
+            marginRight: showRightSidebar ? '400px' : '0'
           }}
         >
           {game.video_url ? (
@@ -228,8 +237,8 @@ export default function GameDetailPage() {
 
       {/* Right Sidebar - Toggleable */}
       <UnifiedSidebar
-        isOpen={showSidebar}
-        onClose={() => setShowSidebar(false)}
+        isOpen={showRightSidebar}
+        onClose={() => setShowRightSidebar(false)}
         game={game}
         events={filteredEvents}
         currentTime={currentTime}

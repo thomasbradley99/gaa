@@ -4,7 +4,7 @@ export interface GameEvent {
   id: string
   type: string  // Event type from database (shot, kickout, turnover, etc.)
   timestamp: number  // seconds
-  team: 'home' | 'away'
+  team?: string  // Team identifier (home, away, red, blue, etc.)
   player?: string
   description?: string
   metadata?: {

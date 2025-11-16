@@ -363,7 +363,12 @@ function HomePage() {
               </p>
               <div className="flex gap-0 rounded-2xl overflow-hidden border border-gray-700/50 bg-black/40 backdrop-blur-sm relative" style={{ height: '600px' }}>
                 {/* Video Player */}
-                <div className="flex-1 relative">
+                <div 
+                  className="flex-1 relative transition-all duration-300"
+                  style={{
+                    marginRight: showDemoSidebar ? '400px' : '0'
+                  }}
+                >
                   <VideoPlayer
                     game={{
                       video_url: DEMO_GAME_DATA.videoUrl,

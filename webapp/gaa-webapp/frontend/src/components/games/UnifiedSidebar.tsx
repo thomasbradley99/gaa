@@ -154,9 +154,9 @@ export default function UnifiedSidebar({
                     d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
                   />
                 </svg>
-                <p className="text-sm font-medium text-white">AI Coach Coming Soon</p>
-                <p className="text-xs mt-2 text-white/50">
-                  Get personalized insights and recommendations
+                <p className="text-sm font-medium text-white mb-2">AI Coaching</p>
+                <p className="text-xs text-white/50">
+                  Personalized tactical insights and match recommendations
                 </p>
               </div>
             </div>

@@ -200,11 +200,15 @@ function HomePage() {
             {/* Hero Message */}
             <div className="max-w-3xl mx-auto text-center mb-20">
               <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                AI Analysis for GAA Teams
+                Ready for 2026
               </h1>
               
-              <p className="text-lg md:text-xl text-white/60 mb-10 font-light">
-                Upload your match footage. Get every shot, turnover, and key moment automatically detected. Instant stats and tactical insights.
+              <p className="text-lg md:text-xl text-white/60 mb-4 font-light">
+                Create account. Upload match URL. Get AI coaching.
+              </p>
+              
+              <p className="text-base text-white/50 mb-10 font-light">
+                Upload footage from last season to see how it works.
               </p>
               
               <button
@@ -215,7 +219,7 @@ function HomePage() {
               </button>
               
               <p className="mt-6 text-sm text-white/40">
-                No credit card • 2 minute setup
+                No credit card required
               </p>
             </div>
 

@@ -174,8 +174,8 @@ router.post('/', authenticateToken, async (req, res) => {
     }
 
     const result = await query(
-      `INSERT INTO games (title, description, team_id, created_by, video_url, file_type, uploaded_by, status, s3_key, original_filename, file_size)
-       VALUES ($1, $2, $3, $4, $5, $6, $4, 'pending', $7, $8, $9)
+      `INSERT INTO games (title, description, team_id, created_by, video_url, status)
+       VALUES ($1, $2, $3, $4, $5, 'pending')
        RETURNING *`,
       [
         title,
@@ -183,10 +183,6 @@ router.post('/', authenticateToken, async (req, res) => {
         teamId,
         req.user.userId,
         finalVideoUrl,
-        fileType,
-        s3Key || null,
-        originalFilename || null,
-        fileSize || null,
       ]
     );
 

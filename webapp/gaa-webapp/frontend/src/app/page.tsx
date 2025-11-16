@@ -309,7 +309,12 @@ function HomePage() {
               <p className="text-gray-300 text-center mb-8">
                 Search for your GAA club on the map of Ireland
               </p>
-              <PitchFinder />
+              <PitchFinder 
+                onClubSelect={() => {
+                  setIsLogin(false) // Default to sign up
+                  setShowAuthModal(true)
+                }}
+              />
             </div>
           </div>
         </div>

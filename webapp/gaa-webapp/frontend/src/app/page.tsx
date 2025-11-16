@@ -199,7 +199,7 @@ function HomePage() {
 
             {/* Hero Message */}
             <div className="max-w-3xl mx-auto text-center mb-20">
-              <p className="text-sm md:text-base text-white/40 mb-4 font-light uppercase tracking-wide">
+              <p className="text-sm md:text-base text-white/40 mb-6 font-light uppercase tracking-wide">
                 The first automated system for GAA
               </p>
               
@@ -221,10 +221,6 @@ function HomePage() {
               >
                 Start Free
               </button>
-              
-              <p className="mt-6 text-sm text-white/40">
-                No credit card required
-              </p>
             </div>
 
             {/* Demo Game Section */}

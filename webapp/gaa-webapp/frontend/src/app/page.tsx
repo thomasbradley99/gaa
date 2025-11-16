@@ -225,14 +225,6 @@ function HomePage() {
 
             {/* Demo Game Section */}
             <div id="demo-section" className="max-w-[1800px] mx-auto px-4 py-16 scroll-mt-20">
-              <div className="max-w-2xl mx-auto text-center mb-10">
-                <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-                  AI for GAA
-                </h2>
-                <p className="text-lg text-white/50 font-light">
-                  Automatic detection. Real-time stats. Match insights.
-                </p>
-              </div>
               <div className="flex gap-0 rounded-2xl overflow-hidden border border-white/5 bg-black/60 backdrop-blur-xl relative shadow-2xl" style={{ height: '600px' }}>
                 {/* Video Player */}
                 <div 
@@ -315,14 +307,6 @@ function HomePage() {
 
             {/* Pitch Finder Section */}
             <div className="max-w-7xl mx-auto px-4 py-16">
-              <div className="max-w-2xl mx-auto text-center mb-10">
-                <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-                  Find Your Club
-                </h2>
-                <p className="text-lg text-white/50 font-light">
-                  Select your club to get started
-                </p>
-              </div>
               <PitchFinder 
                 onClubSelect={() => {
                   setIsLogin(false) // Default to sign up

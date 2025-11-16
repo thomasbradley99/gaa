@@ -215,12 +215,22 @@ function HomePage() {
                 Try it now with footage from last season.
               </p>
               
-              <button
-                onClick={openGetStarted}
-                className="px-8 py-3 bg-[#2D8B4D] hover:bg-[#2D8B4D]/90 text-white font-medium rounded-lg transition-all duration-200 text-base"
-              >
-                Start Free
-              </button>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <button
+                  onClick={openGetStarted}
+                  className="px-8 py-3 bg-[#2D8B4D] hover:bg-[#2D8B4D]/90 text-white font-medium rounded-lg transition-all duration-200 text-base"
+                >
+                  Start Free
+                </button>
+                <button
+                  onClick={() => {
+                    document.querySelector('#demo-section')?.scrollIntoView({ behavior: 'smooth' })
+                  }}
+                  className="px-8 py-3 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/20 hover:border-white/30 text-white font-medium rounded-lg transition-all duration-200 text-base"
+                >
+                  See us in action
+                </button>
+              </div>
             </div>
 
             {/* Demo Game Section */}

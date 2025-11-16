@@ -203,8 +203,8 @@ function HomePage() {
       `}</style>
 
       {/* Header Navigation */}
-      <header className="fixed top-0 left-0 right-0 bg-gray-800/0 backdrop-blur-sm z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4">
+      <header className="fixed top-0 left-0 right-0 bg-black/40 backdrop-blur-md z-50 border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3 sm:py-4">
           <div className="flex justify-between items-center">
             {/* Logo */}
             <div className="cursor-pointer">
@@ -223,13 +223,13 @@ function HomePage() {
             <div className="flex items-center gap-2 sm:gap-4">
               <button
                 onClick={openSignIn}
-                className="bg-white text-black text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-md shadow-sm hover:bg-gray-100 hover:shadow"
+                className="bg-white text-black text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-lg shadow-sm hover:bg-gray-100 hover:shadow"
               >
                 Sign in
               </button>
               <button
                 onClick={openGetStarted}
-                className="bg-[#2D8B4D] px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-semibold text-white hover:bg-[#2D8B4D]/80"
+                className="bg-[#2D8B4D] px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-white hover:bg-[#2D8B4D]/80 shadow-lg"
               >
                 Get started
               </button>
@@ -267,30 +267,30 @@ function HomePage() {
           {/* Hero Content */}
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Empty space above hero text */}
-            <div className="h-[25vh]" />
+            <div className="h-[20vh] sm:h-[25vh]" />
 
             {/* Hero Message */}
-            <div className="max-w-3xl mx-auto text-center mb-20">
-              <p className="text-sm md:text-base text-white/40 mb-6 font-light uppercase tracking-wide">
+            <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-20">
+              <p className="text-xs sm:text-sm md:text-base text-white/40 mb-4 sm:mb-6 font-light uppercase tracking-wide">
                 Automated AI system for GAA
               </p>
               
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight px-4">
                 Get ready for 2026
               </h1>
               
-              <p className="text-lg md:text-xl text-white/60 mb-4 font-light">
+              <p className="text-base sm:text-lg md:text-xl text-white/60 mb-3 sm:mb-4 font-light px-4">
                 Create account. Upload match URL. Get AI coaching.
               </p>
               
-              <p className="text-base text-white/50 mb-10 font-light">
+              <p className="text-sm sm:text-base text-white/50 mb-8 sm:mb-10 font-light px-4">
                 Try it now with footage from last season.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4">
                 <button
                   onClick={openGetStarted}
-                  className="px-8 py-3 bg-[#2D8B4D] hover:bg-[#2D8B4D]/90 text-white font-medium rounded-lg transition-all duration-200 text-base"
+                  className="w-full sm:w-auto px-8 py-3.5 bg-[#2D8B4D] hover:bg-[#2D8B4D]/90 text-white font-medium rounded-lg transition-all duration-200 text-base shadow-lg"
                 >
                   Start Free
                 </button>
@@ -298,7 +298,7 @@ function HomePage() {
                   onClick={() => {
                     document.querySelector('#demo-section')?.scrollIntoView({ behavior: 'smooth' })
                   }}
-                  className="px-8 py-3 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/20 hover:border-white/30 text-white font-medium rounded-lg transition-all duration-200 text-base"
+                  className="w-full sm:w-auto px-8 py-3.5 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/20 hover:border-white/30 text-white font-medium rounded-lg transition-all duration-200 text-base"
                 >
                   See us in action
                 </button>
@@ -306,7 +306,7 @@ function HomePage() {
             </div>
 
             {/* Demo Game Section */}
-            <div id="demo-section" className="max-w-[1800px] mx-auto px-4 py-16 scroll-mt-20">
+            <div id="demo-section" className="max-w-[1800px] mx-auto px-4 py-8 sm:py-16 scroll-mt-20">
               {/* Desktop/Landscape: Side-by-side */}
               {isLandscape ? (
                 <div className="flex gap-0 rounded-2xl overflow-hidden border border-white/5 bg-black/60 backdrop-blur-xl relative shadow-2xl h-[400px] md:h-[500px] lg:h-[600px]">
@@ -436,7 +436,7 @@ function HomePage() {
             </div>
 
             {/* Pitch Finder Section */}
-            <div className="max-w-7xl mx-auto px-4 py-16">
+            <div className="max-w-7xl mx-auto px-4 py-8 sm:py-16">
               <PitchFinder 
                 onClubSelect={() => {
                   setIsLogin(false) // Default to sign up
@@ -449,25 +449,25 @@ function HomePage() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-gray-800/50 backdrop-blur-sm border-t border-gray-700/50">
-        <div className="max-w-7xl mx-auto px-4 py-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center mb-4 md:mb-0">
+      <footer className="bg-black/60 backdrop-blur-sm border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
               <Image
                 src="/clann-logo-text-white.png"
                 alt="ClannAI"
                 width={100}
                 height={20}
-                className="h-5 w-auto"
+                className="h-4 sm:h-5 w-auto"
                 style={{ width: 'auto', height: 'auto' }}
               />
-              <span className="ml-3 text-gray-400 text-sm">© 2025 ClannAI. All rights reserved.</span>
+              <span className="text-gray-400 text-xs sm:text-sm">© 2025 ClannAI. All rights reserved.</span>
             </div>
-            <div className="flex items-center gap-6">
-              <a href="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors">
+            <div className="flex items-center gap-4 sm:gap-6">
+              <a href="/privacy" className="text-gray-400 hover:text-white text-xs sm:text-sm transition-colors">
                 Privacy Policy
               </a>
-              <a href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">
+              <a href="/terms" className="text-gray-400 hover:text-white text-xs sm:text-sm transition-colors">
                 Terms of Service
               </a>
             </div>

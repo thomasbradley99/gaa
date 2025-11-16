@@ -195,26 +195,62 @@ function HomePage() {
           {/* Hero Content */}
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Empty space above hero text */}
-            <div className="h-[30vh]" />
+            <div className="h-[25vh]" />
 
-            {/* Simple Hero Message */}
-            <div className="max-w-3xl mx-auto text-center mb-16">
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                AI for GAA
+            {/* Hero Message */}
+            <div className="max-w-4xl mx-auto text-center mb-16">
+              <div className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full mb-6">
+                <span className="text-sm font-medium text-white/90">The first AI system built for GAA</span>
+              </div>
+              
+              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                Detect. Analyze. Coach.
               </h1>
-              <p className="text-xl md:text-2xl text-white/80 mb-8">
-                Upload your footage and get automated insights.
+              
+              <p className="text-xl md:text-2xl text-white/70 mb-4 max-w-2xl mx-auto">
+                Automatically detect every shot, turnover, and key moment. Get instant tactical insights that help your team win.
               </p>
-              <button
-                onClick={openGetStarted}
-                className="px-8 py-4 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white font-semibold rounded-xl transition-all duration-200 shadow-xl text-lg"
-              >
-                Get Started Free
-              </button>
+              
+              <p className="text-lg text-white/50 mb-10">
+                Used by clubs across Ireland to gain the competitive edge.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <button
+                  onClick={openGetStarted}
+                  className="px-8 py-4 bg-[#2D8B4D] hover:bg-[#2D8B4D]/90 text-white font-semibold rounded-xl transition-all duration-200 shadow-2xl text-lg group"
+                >
+                  Start Free Trial
+                  <span className="ml-2 group-hover:translate-x-1 inline-block transition-transform">→</span>
+                </button>
+                <button
+                  onClick={() => {
+                    document.querySelector('#demo-section')?.scrollIntoView({ behavior: 'smooth' })
+                  }}
+                  className="px-8 py-4 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/20 hover:border-white/30 text-white font-medium rounded-xl transition-all duration-200"
+                >
+                  Watch Demo
+                </button>
+              </div>
+              
+              <div className="mt-12 flex items-center justify-center gap-8 text-sm text-white/40">
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5 text-[#2D8B4D]" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                  </svg>
+                  <span>No credit card required</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5 text-[#2D8B4D]" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                  </svg>
+                  <span>Setup in minutes</span>
+                </div>
+              </div>
             </div>
 
             {/* Demo Game Section */}
-            <div className="max-w-[1800px] mx-auto px-4 py-12">
+            <div id="demo-section" className="max-w-[1800px] mx-auto px-4 py-12 scroll-mt-20">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center text-white">
                 See It In Action
               </h2>

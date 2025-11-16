@@ -49,7 +49,7 @@ const pitches: Pitch[] = rawPitches as Pitch[];
 
 // Constants matching the original Python script
 const MAP_CENTER = [53.4129, -7.9135]; // Center of Ireland
-const MAP_ZOOM = 6; // More zoomed out to show full Ireland
+const MAP_ZOOM = 7; // Balanced zoom for desktop/landscape
 const MAP_OPACITY_NORMALIZATION = 2500; // Max rainfall for opacity calculation
 
 interface PitchFinderProps {

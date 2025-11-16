@@ -62,7 +62,7 @@ else
         --timeout $TIMEOUT \
         --memory-size $MEMORY \
         --region $REGION \
-        --environment "Variables={GEMINI_API_KEY=AIzaSyDjpe_vHrJmwc7P9-93Bg7ICFSw195CaP0,BACKEND_API_URL=http://localhost:4011,LAMBDA_API_KEY=gaa-lambda-secret-key-2024}"
+        --environment "Variables={GEMINI_API_KEY=AIzaSyDjpe_vHrJmwc7P9-93Bg7ICFSw195CaP0,BACKEND_API_URL=https://api-gaa.clannai.com,LAMBDA_API_KEY=gaa-lambda-secret-key-2024}"
 fi
 
 # Add ffmpeg layer (you'll need to create this layer first)

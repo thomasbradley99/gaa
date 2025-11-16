@@ -327,9 +327,9 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
   }
 
   return (
-    <div className="bg-black/50 backdrop-blur-lg border border-white/10 rounded-2xl p-4 sm:p-6 shadow-xl">
+    <div className="bg-black/50 backdrop-blur-lg border border-white/10 rounded-2xl p-4 sm:p-6 shadow-xl overflow-x-auto">
       {/* Header with Export Button */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-6 min-w-[320px]">
         <h2 className="text-xl sm:text-2xl font-bold text-white">Match Statistics</h2>
         <button
           onClick={exportToPDF}
@@ -342,7 +342,7 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
       </div>
 
       {/* Score Display - Anadi Style */}
-      <div className="flex items-center justify-center gap-8 sm:gap-16 mb-8 pb-6 border-b-2 border-gray-700">
+      <div className="flex items-center justify-center gap-8 sm:gap-16 mb-8 pb-6 border-b-2 border-gray-700 min-w-[320px]">
         <div className="text-center">
           <div className="text-3xl sm:text-4xl font-bold text-white mb-2">HOME</div>
           <div className="text-4xl sm:text-5xl font-bold text-white">{stats.home.goals} - {stats.home.points}</div>
@@ -354,7 +354,7 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
       </div>
 
       {/* Main Statistics Table */}
-      <div className="space-y-2 mb-8">
+      <div className="space-y-2 mb-8 min-w-[320px]">
         <StatRow label="Conversion Rate %" home={`${stats.home.conversionRate}%`} away={`${stats.away.conversionRate}%`} />
         <StatRow label="Possession" home={`${stats.home.possession}%`} away={`${stats.away.possession}%`} />
         <StatRow label="Number of Team Possessions" home={stats.home.possessions.toString()} away={stats.away.possessions.toString()} />
@@ -377,7 +377,7 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
       </div>
 
       {/* Kickout Breakdowns */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 min-w-[320px]">
         <KickoutBreakdown 
           title="HOME KICKOUTS WON" 
           long={stats.home.kickoutsLong}
@@ -403,7 +403,7 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
       </div>
 
       {/* Shot Outcome Breakdown */}
-      <div className="bg-gray-700 rounded-lg p-3 sm:p-4">
+      <div className="bg-gray-700 rounded-lg p-3 sm:p-4 min-w-[320px]">
         <h3 className="text-xs sm:text-sm font-bold text-green-400 mb-3 uppercase tracking-wide text-center">SHOT OUTCOME</h3>
         <div className="space-y-1.5">
           <div className="flex items-center justify-between gap-2">

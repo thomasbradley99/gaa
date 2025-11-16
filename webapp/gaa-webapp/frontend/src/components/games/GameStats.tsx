@@ -327,34 +327,34 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
   }
 
   return (
-    <div className="bg-black/50 backdrop-blur-lg border border-white/10 rounded-2xl p-4 sm:p-6 shadow-xl overflow-x-auto">
+    <div className="bg-black/50 backdrop-blur-lg border border-white/10 rounded-2xl p-3 sm:p-6 shadow-xl">
       {/* Header with Export Button */}
-      <div className="flex items-center justify-between mb-6 min-w-[320px]">
-        <h2 className="text-xl sm:text-2xl font-bold text-white">Match Statistics</h2>
+      <div className="flex items-center justify-between mb-4 sm:mb-6">
+        <h2 className="text-lg sm:text-2xl font-bold text-white">Match Statistics</h2>
         <button
           onClick={exportToPDF}
-          className="flex items-center gap-2 px-4 py-2 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white rounded-xl transition-colors text-sm font-medium shadow-lg"
+          className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white rounded-xl transition-colors text-xs sm:text-sm font-medium shadow-lg"
         >
-          <Download className="w-4 h-4" />
+          <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           <span className="hidden sm:inline">Export to PDF</span>
           <span className="sm:hidden">PDF</span>
         </button>
       </div>
 
       {/* Score Display - Anadi Style */}
-      <div className="flex items-center justify-center gap-8 sm:gap-16 mb-8 pb-6 border-b-2 border-gray-700 min-w-[320px]">
+      <div className="flex items-center justify-center gap-4 sm:gap-16 mb-6 sm:mb-8 pb-4 sm:pb-6 border-b-2 border-gray-700">
         <div className="text-center">
-          <div className="text-3xl sm:text-4xl font-bold text-white mb-2">HOME</div>
-          <div className="text-4xl sm:text-5xl font-bold text-white">{stats.home.goals} - {stats.home.points}</div>
+          <div className="text-xl sm:text-4xl font-bold text-white mb-1 sm:mb-2">HOME</div>
+          <div className="text-2xl sm:text-5xl font-bold text-white">{stats.home.goals} - {stats.home.points}</div>
         </div>
         <div className="text-center">
-          <div className="text-3xl sm:text-4xl font-bold text-white mb-2">AWAY</div>
-          <div className="text-4xl sm:text-5xl font-bold text-white">{stats.away.goals} - {stats.away.points}</div>
+          <div className="text-xl sm:text-4xl font-bold text-white mb-1 sm:mb-2">AWAY</div>
+          <div className="text-2xl sm:text-5xl font-bold text-white">{stats.away.goals} - {stats.away.points}</div>
         </div>
       </div>
 
       {/* Main Statistics Table */}
-      <div className="space-y-2 mb-8 min-w-[320px]">
+      <div className="space-y-1.5 sm:space-y-2 mb-6 sm:mb-8">
         <StatRow label="Conversion Rate %" home={`${stats.home.conversionRate}%`} away={`${stats.away.conversionRate}%`} />
         <StatRow label="Possession" home={`${stats.home.possession}%`} away={`${stats.away.possession}%`} />
         <StatRow label="Number of Team Possessions" home={stats.home.possessions.toString()} away={stats.away.possessions.toString()} />
@@ -377,7 +377,7 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
       </div>
 
       {/* Kickout Breakdowns */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 min-w-[320px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
         <KickoutBreakdown 
           title="HOME KICKOUTS WON" 
           long={stats.home.kickoutsLong}
@@ -403,43 +403,43 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
       </div>
 
       {/* Shot Outcome Breakdown */}
-      <div className="bg-gray-700 rounded-lg p-3 sm:p-4 min-w-[320px]">
-        <h3 className="text-xs sm:text-sm font-bold text-green-400 mb-3 uppercase tracking-wide text-center">SHOT OUTCOME</h3>
-        <div className="space-y-1.5">
-          <div className="flex items-center justify-between gap-2">
-            <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{stats.home.scores}</div>
-            <div className="flex-1 bg-gray-800 px-2 py-1 rounded text-white text-xs text-center uppercase">Scores</div>
-            <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{stats.away.scores}</div>
+      <div className="bg-gray-700 rounded-lg p-2.5 sm:p-4">
+        <h3 className="text-[10px] sm:text-sm font-bold text-green-400 mb-2 sm:mb-3 uppercase tracking-wide text-center">SHOT OUTCOME</h3>
+        <div className="space-y-1">
+          <div className="flex items-center justify-between gap-1.5 sm:gap-2">
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.home.scores}</div>
+            <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Scores</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.away.scores}</div>
           </div>
-          <div className="flex items-center justify-between gap-2">
-            <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{stats.home.wides}</div>
-            <div className="flex-1 bg-gray-800 px-2 py-1 rounded text-white text-xs text-center uppercase">Wide</div>
-            <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{stats.away.wides}</div>
+          <div className="flex items-center justify-between gap-1.5 sm:gap-2">
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.home.wides}</div>
+            <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Wide</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.away.wides}</div>
           </div>
-          <div className="flex items-center justify-between gap-2">
-            <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{stats.home.shortKeeper}</div>
-            <div className="flex-1 bg-gray-800 px-2 py-1 rounded text-white text-xs text-center uppercase">Short Keeper</div>
-            <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{stats.away.shortKeeper}</div>
+          <div className="flex items-center justify-between gap-1.5 sm:gap-2">
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.home.shortKeeper}</div>
+            <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Short Keeper</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.away.shortKeeper}</div>
           </div>
-          <div className="flex items-center justify-between gap-2">
-            <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{stats.home.saved}</div>
-            <div className="flex-1 bg-gray-800 px-2 py-1 rounded text-white text-xs text-center uppercase">Saved</div>
-            <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{stats.away.saved}</div>
+          <div className="flex items-center justify-between gap-1.5 sm:gap-2">
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.home.saved}</div>
+            <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Saved</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.away.saved}</div>
           </div>
-          <div className="flex items-center justify-between gap-2">
-            <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{stats.home.m45}</div>
-            <div className="flex-1 bg-gray-800 px-2 py-1 rounded text-white text-xs text-center uppercase">45M</div>
-            <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{stats.away.m45}</div>
+          <div className="flex items-center justify-between gap-1.5 sm:gap-2">
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.home.m45}</div>
+            <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">45M</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.away.m45}</div>
           </div>
-          <div className="flex items-center justify-between gap-2">
-            <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{stats.home.reboundPost}</div>
-            <div className="flex-1 bg-gray-800 px-2 py-1 rounded text-white text-xs text-center uppercase">Rebound Post</div>
-            <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{stats.away.reboundPost}</div>
+          <div className="flex items-center justify-between gap-1.5 sm:gap-2">
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.home.reboundPost}</div>
+            <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Rebound Post</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.away.reboundPost}</div>
           </div>
-          <div className="flex items-center justify-between gap-2">
-            <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{stats.home.other}</div>
-            <div className="flex-1 bg-gray-800 px-2 py-1 rounded text-white text-xs text-center uppercase">Other</div>
-            <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{stats.away.other}</div>
+          <div className="flex items-center justify-between gap-1.5 sm:gap-2">
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.home.other}</div>
+            <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Other</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.away.other}</div>
           </div>
         </div>
       </div>
@@ -449,21 +449,21 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
 
 function StatRow({ label, home, away }: { label: string; home: string; away: string }) {
   return (
-    <div className="flex items-center gap-2 sm:gap-3 py-1.5">
+    <div className="flex items-center gap-1.5 sm:gap-3 py-1">
       {/* Home value - left side */}
-      <div className="bg-gray-600 px-2 sm:px-3 py-1.5 sm:py-2 rounded text-white text-xs sm:text-sm font-medium min-w-[50px] sm:min-w-[60px] text-center">
+      <div className="bg-gray-600 px-1.5 sm:px-3 py-1 sm:py-2 rounded text-white text-[10px] sm:text-sm font-medium min-w-[35px] sm:min-w-[60px] text-center">
         {home}
       </div>
       
       {/* Black bar with stat name - stretches across middle */}
-      <div className="flex-1 bg-black px-3 sm:px-4 py-1.5 sm:py-2 rounded">
-        <div className="text-white text-xs sm:text-sm font-medium text-center uppercase tracking-wide">
+      <div className="flex-1 bg-black px-2 sm:px-4 py-1 sm:py-2 rounded min-w-0">
+        <div className="text-white text-[9px] sm:text-sm font-medium text-center uppercase tracking-wide truncate">
           {label}
         </div>
       </div>
       
       {/* Away value - right side */}
-      <div className="bg-gray-600 px-2 sm:px-3 py-1.5 sm:py-2 rounded text-white text-xs sm:text-sm font-medium min-w-[50px] sm:min-w-[60px] text-center">
+      <div className="bg-gray-600 px-1.5 sm:px-3 py-1 sm:py-2 rounded text-white text-[10px] sm:text-sm font-medium min-w-[35px] sm:min-w-[60px] text-center">
         {away}
       </div>
     </div>
@@ -486,28 +486,28 @@ function KickoutBreakdown({
   opponentVoid: number
 }) {
   return (
-    <div className="bg-gray-700 rounded-lg p-3 sm:p-4">
-      <h3 className="text-xs sm:text-sm font-bold text-green-400 mb-3 uppercase tracking-wide text-center">{title}</h3>
-      <div className="space-y-1.5">
-        <div className="flex items-center justify-between gap-2">
-          <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{long}</div>
-          <div className="flex-1 bg-gray-800 px-2 py-1 rounded text-white text-xs text-center uppercase">Long</div>
-          <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{opponentLong}</div>
+    <div className="bg-gray-700 rounded-lg p-2.5 sm:p-4">
+      <h3 className="text-[10px] sm:text-sm font-bold text-green-400 mb-2 sm:mb-3 uppercase tracking-wide text-center">{title}</h3>
+      <div className="space-y-1">
+        <div className="flex items-center justify-between gap-1.5 sm:gap-2">
+          <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{long}</div>
+          <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Long</div>
+          <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{opponentLong}</div>
         </div>
-        <div className="flex items-center justify-between gap-2">
-          <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{short}</div>
-          <div className="flex-1 bg-gray-800 px-2 py-1 rounded text-white text-xs text-center uppercase">Short</div>
-          <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{opponentShort}</div>
+        <div className="flex items-center justify-between gap-1.5 sm:gap-2">
+          <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{short}</div>
+          <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Short</div>
+          <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{opponentShort}</div>
         </div>
-        <div className="flex items-center justify-between gap-2">
-          <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{mid}</div>
-          <div className="flex-1 bg-gray-800 px-2 py-1 rounded text-white text-xs text-center uppercase">Mid</div>
-          <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{opponentMid}</div>
+        <div className="flex items-center justify-between gap-1.5 sm:gap-2">
+          <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{mid}</div>
+          <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Mid</div>
+          <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{opponentMid}</div>
         </div>
-        <div className="flex items-center justify-between gap-2">
-          <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{voidCount}</div>
-          <div className="flex-1 bg-gray-800 px-2 py-1 rounded text-white text-xs text-center uppercase">Void</div>
-          <div className="bg-black px-2 py-1 rounded text-white text-xs font-medium min-w-[40px] text-center">{opponentVoid}</div>
+        <div className="flex items-center justify-between gap-1.5 sm:gap-2">
+          <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{voidCount}</div>
+          <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Void</div>
+          <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{opponentVoid}</div>
         </div>
       </div>
     </div>

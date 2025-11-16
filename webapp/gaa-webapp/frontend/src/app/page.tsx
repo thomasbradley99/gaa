@@ -199,8 +199,12 @@ function HomePage() {
 
             {/* Hero Message */}
             <div className="max-w-3xl mx-auto text-center mb-20">
+              <p className="text-sm md:text-base text-white/40 mb-4 font-light uppercase tracking-wide">
+                The first automated system for GAA
+              </p>
+              
               <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                Ready for 2026
+                Get ready for 2026
               </h1>
               
               <p className="text-lg md:text-xl text-white/60 mb-4 font-light">
@@ -208,7 +212,7 @@ function HomePage() {
               </p>
               
               <p className="text-base text-white/50 mb-10 font-light">
-                Upload footage from last season to see how it works.
+                Try it now with footage from last season.
               </p>
               
               <button

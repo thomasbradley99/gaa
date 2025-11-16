@@ -69,22 +69,22 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
     const awayKickouts = awayEvents.filter((e) => e.type === 'kickout')
     
     // Home kickouts won (when home team wins their own kickout)
-    const homeKickoutsWon = homeKickouts.filter((e) => e.metadata?.outcome === 'won').length
-    const homeKickoutsLong = homeKickouts.filter((e) => e.metadata?.kickoutType === 'long' && e.metadata?.outcome === 'won').length
-    const homeKickoutsShort = homeKickouts.filter((e) => e.metadata?.kickoutType === 'short' && e.metadata?.outcome === 'won').length
-    const homeKickoutsMid = homeKickouts.filter((e) => e.metadata?.kickoutType === 'mid' && e.metadata?.outcome === 'won').length
-    const homeKickoutsVoid = homeKickouts.filter((e) => e.metadata?.kickoutType === 'void' && e.metadata?.outcome === 'won').length
+    const homeKickoutsWon = homeKickouts.filter((e) => e.metadata?.possessionOutcome === 'won').length
+    const homeKickoutsLong = homeKickouts.filter((e) => e.metadata?.kickoutType === 'long' && e.metadata?.possessionOutcome === 'won').length
+    const homeKickoutsShort = homeKickouts.filter((e) => e.metadata?.kickoutType === 'short' && e.metadata?.possessionOutcome === 'won').length
+    const homeKickoutsMid = homeKickouts.filter((e) => e.metadata?.kickoutType === 'mid' && e.metadata?.possessionOutcome === 'won').length
+    const homeKickoutsVoid = homeKickouts.filter((e) => e.metadata?.kickoutType === 'void' && e.metadata?.possessionOutcome === 'won').length
     
     // Away kickouts won (when away team wins their own kickout)
-    const awayKickoutsWon = awayKickouts.filter((e) => e.metadata?.outcome === 'won').length
-    const awayKickoutsLong = awayKickouts.filter((e) => e.metadata?.kickoutType === 'long' && e.metadata?.outcome === 'won').length
-    const awayKickoutsShort = awayKickouts.filter((e) => e.metadata?.kickoutType === 'short' && e.metadata?.outcome === 'won').length
-    const awayKickoutsMid = awayKickouts.filter((e) => e.metadata?.kickoutType === 'mid' && e.metadata?.outcome === 'won').length
-    const awayKickoutsVoid = awayKickouts.filter((e) => e.metadata?.kickoutType === 'void' && e.metadata?.outcome === 'won').length
+    const awayKickoutsWon = awayKickouts.filter((e) => e.metadata?.possessionOutcome === 'won').length
+    const awayKickoutsLong = awayKickouts.filter((e) => e.metadata?.kickoutType === 'long' && e.metadata?.possessionOutcome === 'won').length
+    const awayKickoutsShort = awayKickouts.filter((e) => e.metadata?.kickoutType === 'short' && e.metadata?.possessionOutcome === 'won').length
+    const awayKickoutsMid = awayKickouts.filter((e) => e.metadata?.kickoutType === 'mid' && e.metadata?.possessionOutcome === 'won').length
+    const awayKickoutsVoid = awayKickouts.filter((e) => e.metadata?.kickoutType === 'void' && e.metadata?.possessionOutcome === 'won').length
 
     // Opponent kickouts won (when team wins opponent's kickout)
-    const homeOpponentKickoutsWon = awayKickouts.filter((e) => e.metadata?.outcome === 'lost').length
-    const awayOpponentKickoutsWon = homeKickouts.filter((e) => e.metadata?.outcome === 'lost').length
+    const homeOpponentKickoutsWon = awayKickouts.filter((e) => e.metadata?.possessionOutcome === 'lost').length
+    const awayOpponentKickoutsWon = homeKickouts.filter((e) => e.metadata?.possessionOutcome === 'lost').length
 
     // Turnovers
     const homeTurnovers = homeEvents.filter((e) => e.type === 'turnover')

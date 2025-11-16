@@ -31,7 +31,7 @@ export default function UnifiedSidebar({
   teamFilter,
   onTeamFilterChange,
 }: UnifiedSidebarProps) {
-  const [activeTab, setActiveTab] = useState<TabType>('events')
+  const [activeTab, setActiveTab] = useState<TabType>('stats')
 
   return (
     <>
@@ -55,16 +55,6 @@ export default function UnifiedSidebar({
           <div className="flex items-center gap-2">
             {/* Tabs */}
             <button
-              onClick={() => setActiveTab('events')}
-              className={`px-3 py-1.5 text-sm font-medium rounded-xl transition-all ${
-                activeTab === 'events'
-                  ? 'bg-[#2D8B4D] text-white shadow-lg'
-                  : 'text-white/60 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              Events
-            </button>
-            <button
               onClick={() => setActiveTab('stats')}
               className={`px-3 py-1.5 text-sm font-medium rounded-xl transition-all ${
                 activeTab === 'stats'
@@ -73,6 +63,16 @@ export default function UnifiedSidebar({
               }`}
             >
               Stats
+            </button>
+            <button
+              onClick={() => setActiveTab('events')}
+              className={`px-3 py-1.5 text-sm font-medium rounded-xl transition-all ${
+                activeTab === 'events'
+                  ? 'bg-[#2D8B4D] text-white shadow-lg'
+                  : 'text-white/60 hover:text-white hover:bg-white/10'
+              }`}
+            >
+              Events
             </button>
             <button
               onClick={() => setActiveTab('ai')}

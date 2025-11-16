@@ -39,7 +39,10 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
     const homeSaved = homeShots.filter((e) => e.metadata?.scoreType === 'saved').length
     const home45M = homeShots.filter((e) => e.metadata?.scoreType === '45m').length
     const homeReboundPost = homeShots.filter((e) => e.metadata?.scoreType === 'rebound_post').length
-    const homeOther = homeShots.filter((e) => e.metadata?.scoreType === 'other' || (!e.metadata?.scoreType && e.type === 'shot')).length - homeGoals - homePoints - homeWides - homeShortKeeper - homeSaved - home45M - homeReboundPost
+    const homeOther = homeShots.filter((e) => {
+      const type = e.metadata?.scoreType
+      return !type || (type !== 'goal' && type !== 'point' && type !== 'wide' && type !== 'short_keeper' && type !== 'short' && type !== 'saved' && type !== '45m' && type !== 'rebound_post')
+    }).length
     
     const awayGoals = awayShots.filter((e) => e.metadata?.scoreType === 'goal').length
     const awayPoints = awayShots.filter((e) => e.metadata?.scoreType === 'point').length
@@ -48,7 +51,10 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
     const awaySaved = awayShots.filter((e) => e.metadata?.scoreType === 'saved').length
     const away45M = awayShots.filter((e) => e.metadata?.scoreType === '45m').length
     const awayReboundPost = awayShots.filter((e) => e.metadata?.scoreType === 'rebound_post').length
-    const awayOther = awayShots.filter((e) => e.metadata?.scoreType === 'other' || (!e.metadata?.scoreType && e.type === 'shot')).length - awayGoals - awayPoints - awayWides - awayShortKeeper - awaySaved - away45M - awayReboundPost
+    const awayOther = awayShots.filter((e) => {
+      const type = e.metadata?.scoreType
+      return !type || (type !== 'goal' && type !== 'point' && type !== 'wide' && type !== 'short_keeper' && type !== 'short' && type !== 'saved' && type !== '45m' && type !== 'rebound_post')
+    }).length
 
     const homeScores = homeGoals + homePoints
     const awayScores = awayGoals + awayPoints

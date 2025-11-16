@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { auth, setToken } from '@/lib/api-client'
+import { PitchFinder } from '@/components/pitch-finder/PitchFinder'
 import VideoPlayer from '@/components/games/VideoPlayer'
 import UnifiedSidebar from '@/components/games/UnifiedSidebar'
 import { transformDatabaseEventsToGameEvents } from '@/lib/event-transformer'
@@ -300,49 +301,15 @@ function HomePage() {
               </div>
             </div>
 
-            {/* Features Section */}
-            <div className="max-w-5xl mx-auto px-4 py-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
-                What You Get
+            {/* Pitch Finder Section */}
+            <div className="max-w-7xl mx-auto px-4 py-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-white">
+                Find Your Club
               </h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Feature 1 */}
-                <div className="rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl p-6 shadow-lg">
-                  <div className="text-3xl mb-3">🎯</div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Event Tracking</h3>
-                  <p className="text-white/70">Automatic detection of shots, kickouts, turnovers, and fouls throughout the match</p>
-                </div>
-
-                {/* Feature 2 */}
-                <div className="rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl p-6 shadow-lg">
-                  <div className="text-3xl mb-3">📊</div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Match Statistics</h3>
-                  <p className="text-white/70">Detailed stats on possession, conversion rates, shot outcomes, and team performance</p>
-                </div>
-
-                {/* Feature 3 */}
-                <div className="rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl p-6 shadow-lg">
-                  <div className="text-3xl mb-3">🎬</div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Event Timeline</h3>
-                  <p className="text-white/70">Navigate through the game with timestamped events and instant video replay</p>
-                </div>
-
-                {/* Feature 4 */}
-                <div className="rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl p-6 shadow-lg">
-                  <div className="text-3xl mb-3">🤖</div>
-                  <h3 className="text-xl font-semibold text-white mb-2">AI Coach</h3>
-                  <p className="text-white/70">Get tactical insights and strategic recommendations based on match analysis</p>
-                </div>
-              </div>
-
-              <div className="text-center mt-12">
-                <button
-                  onClick={openGetStarted}
-                  className="px-8 py-4 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white font-semibold rounded-xl transition-all duration-200 shadow-xl text-lg"
-                >
-                  Start Analyzing Today
-                </button>
-              </div>
+              <p className="text-gray-300 text-center mb-8">
+                Search for your GAA club on the map of Ireland
+              </p>
+              <PitchFinder />
             </div>
           </div>
         </div>

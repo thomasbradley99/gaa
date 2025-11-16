@@ -258,19 +258,19 @@ function HomePage() {
             <div className="max-w-7xl mx-auto px-4 mb-8 mt-20">
               <div className="grid grid-cols-3 gap-3 md:gap-6">
                 {/* Step 1 */}
-                <div className="rounded-3xl bg-black/40 border border-gray-700/30 overflow-hidden relative">
+                <div className="rounded-2xl bg-black/60 border border-white/10 backdrop-blur-xl overflow-hidden relative shadow-lg">
                   <div className="p-3 md:p-5 text-center">
-                    <div className="text-xs md:text-sm font-bold mb-1" style={{ color: 'var(--gaa-bright-green)' }}>Step 1</div>
-                    <h3 className="text-sm md:text-lg font-bold text-white mb-1">📹 Upload footage</h3>
-                    <p className="text-xs md:text-sm text-white/90 mb-2 md:mb-3">VEO, Trace, Spiideo or any MP4</p>
+                    <div className="text-xs md:text-sm font-medium mb-1 text-white/60">Step 1</div>
+                    <h3 className="text-sm md:text-lg font-semibold text-white mb-1">📹 Upload footage</h3>
+                    <p className="text-xs md:text-sm text-white/70 mb-2 md:mb-3">VEO, Trace, Spiideo or any MP4</p>
                   </div>
                 </div>
 
                 {/* Step 2 */}
-                <div className="rounded-3xl bg-black/40 border border-gray-700/30 p-3 md:p-5 text-center">
-                  <div className="text-xs md:text-sm font-bold mb-1" style={{ color: 'var(--gaa-blue)' }}>Step 2</div>
-                  <h3 className="text-sm md:text-lg font-bold text-white mb-2">ClannAI creates</h3>
-                  <div className="text-xs md:text-sm text-white/90 space-y-1">
+                <div className="rounded-2xl bg-black/60 border border-white/10 backdrop-blur-xl p-3 md:p-5 text-center shadow-lg">
+                  <div className="text-xs md:text-sm font-medium mb-1 text-white/60">Step 2</div>
+                  <h3 className="text-sm md:text-lg font-semibold text-white mb-2">ClannAI creates</h3>
+                  <div className="text-xs md:text-sm text-white/70 space-y-1">
                     <div className="flex items-center justify-center gap-1">
                       <span>🎬</span>
                       <span className={activeLineIndex === 0 ? 'text-[var(--gaa-bright-green)]' : ''}>
@@ -327,13 +327,13 @@ function HomePage() {
                 </div>
 
                 {/* Step 3 */}
-                <div className="rounded-3xl bg-black/40 border border-gray-700/30 p-3 md:p-5 text-center">
-                  <div className="text-xs md:text-sm font-bold mb-1" style={{ color: 'var(--gaa-light-blue)' }}>Step 3</div>
-                  <h3 className="text-sm md:text-lg font-bold text-white mb-1">🔒 Sign up now</h3>
-                  <p className="text-xs md:text-sm text-white/90 mb-2 md:mb-3">Get started with GAA analysis</p>
+                <div className="rounded-2xl bg-black/60 border border-white/10 backdrop-blur-xl p-3 md:p-5 text-center shadow-lg">
+                  <div className="text-xs md:text-sm font-medium mb-1 text-white/60">Step 3</div>
+                  <h3 className="text-sm md:text-lg font-semibold text-white mb-1">🔒 Sign up now</h3>
+                  <p className="text-xs md:text-sm text-white/70 mb-2 md:mb-3">Get started with GAA analysis</p>
                   <button
                     onClick={openGetStarted}
-                    className="px-3 md:px-4 py-2 md:py-2.5 rounded-lg font-semibold text-xs md:text-sm bg-[var(--gaa-green)] hover:bg-[#015928] text-white transition-all"
+                    className="px-3 md:px-4 py-2 md:py-2.5 rounded-lg font-medium text-xs md:text-sm bg-white/10 hover:bg-white/15 border border-white/20 hover:border-white/30 text-white transition-all"
                   >
                     Join Now
                   </button>
@@ -346,7 +346,7 @@ function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <button
                   onClick={openGetStarted}
-                  className="px-6 py-3 bg-[var(--gaa-green)] hover:bg-[#015928] text-white font-semibold rounded-lg transition-all duration-200 text-sm hover:shadow-lg transform hover:scale-105"
+                  className="px-6 py-3 bg-white/10 hover:bg-white/15 backdrop-blur-xl border border-white/20 hover:border-white/30 text-white font-medium rounded-xl transition-all duration-200 shadow-lg"
                 >
                   Get Started Free
                 </button>
@@ -361,7 +361,7 @@ function HomePage() {
               <p className="text-gray-300 text-center mb-8">
                 Watch a full GAA match with AI-powered event tracking and stats
               </p>
-              <div className="flex gap-0 rounded-2xl overflow-hidden border border-gray-700/50 bg-black/40 backdrop-blur-sm relative" style={{ height: '600px' }}>
+              <div className="flex gap-0 rounded-2xl overflow-hidden border border-white/5 bg-black/60 backdrop-blur-xl relative shadow-2xl" style={{ height: '600px' }}>
                 {/* Video Player */}
                 <div 
                   className="flex-1 relative transition-all duration-300"
@@ -404,12 +404,12 @@ function HomePage() {
                   {!showDemoSidebar && (
                     <button
                       onClick={() => setShowDemoSidebar(true)}
-                      className="absolute top-4 right-4 flex items-center gap-3 px-6 py-4 bg-[#2D8B4D] hover:bg-[#236B3D] text-white font-bold rounded-2xl shadow-2xl transition-all duration-300 hover:scale-110 hover:shadow-green-500/50 z-50 animate-pulse"
+                      className="absolute top-4 right-4 flex items-center gap-2 px-4 py-3 bg-black/40 hover:bg-black/60 backdrop-blur-xl border border-white/10 hover:border-white/20 text-white/90 hover:text-white font-medium rounded-xl shadow-lg transition-all duration-200 z-50"
                     >
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                       </svg>
-                      <span className="text-lg">View Insights & Stats</span>
+                      <span className="text-sm">Insights</span>
                     </button>
                   )}
                 </div>
@@ -442,7 +442,7 @@ function HomePage() {
               <div className="text-center mt-6">
                 <button
                   onClick={openGetStarted}
-                  className="px-8 py-3 bg-[var(--gaa-green)] hover:bg-[#015928] text-white font-semibold rounded-lg transition-all duration-200 hover:shadow-lg transform hover:scale-105"
+                  className="px-8 py-3 bg-white/10 hover:bg-white/15 backdrop-blur-xl border border-white/20 hover:border-white/30 text-white font-medium rounded-xl transition-all duration-200 shadow-lg"
                 >
                   Create Account to Get AI Coach
                 </button>

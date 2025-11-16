@@ -269,7 +269,7 @@ function HomePage() {
             {/* Hero Message */}
             <div className="max-w-3xl mx-auto text-center mb-20">
               <p className="text-sm md:text-base text-white/40 mb-6 font-light uppercase tracking-wide">
-                The first automated system for GAA
+                Automated AI system for GAA
               </p>
               
               <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">

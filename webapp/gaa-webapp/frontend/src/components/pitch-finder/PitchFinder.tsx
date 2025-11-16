@@ -49,7 +49,7 @@ const pitches: Pitch[] = rawPitches as Pitch[];
 
 // Constants matching the original Python script
 const MAP_CENTER = [53.4129, -7.9135]; // Center of Ireland
-const MAP_ZOOM = 7;
+const MAP_ZOOM = 6; // More zoomed out to show full Ireland
 const MAP_OPACITY_NORMALIZATION = 2500; // Max rainfall for opacity calculation
 
 interface PitchFinderProps {
@@ -90,12 +90,12 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
     });
   }, [isClient, leaflet]);
 
-  // Create icon only on client side
+  // Create icon only on client side - smaller and more transparent
   const icon = isClient && leaflet ? leaflet.divIcon({
     className: 'custom-dot',
-    html: '<div style="background-color: gold; width: 8px; height: 8px; border-radius: 50%; border: 1px solid white;"></div>',
-    iconSize: [8, 8],
-    iconAnchor: [4, 4]
+    html: '<div style="background-color: rgba(255, 215, 0, 0.6); width: 5px; height: 5px; border-radius: 50%; border: 0.5px solid rgba(255,255,255,0.5);"></div>',
+    iconSize: [5, 5],
+    iconAnchor: [2.5, 2.5]
   }) : null;
   
   // Province to counties mapping
@@ -154,13 +154,13 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
   if (!isClient) {
     return (
       <div className="max-w-7xl mx-auto p-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start min-h-[400px] md:min-h-[500px] lg:h-[600px]">
-          {/* Left Side - Loading placeholder */}
-          <div className="w-full h-[400px] md:h-[500px] lg:h-[600px] rounded-lg overflow-hidden bg-gray-800 flex items-center justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+          {/* Loading placeholder for map */}
+          <div className="w-full h-[300px] sm:h-[400px] lg:h-[600px] rounded-lg overflow-hidden bg-gray-800 flex items-center justify-center order-2 lg:order-1">
             <div className="text-gray-400">Loading map...</div>
           </div>
-          {/* Right Side - Controls and Data */}
-          <div className="flex flex-col h-[400px] md:h-[500px] lg:h-[600px] space-y-2 text-gray-100">
+          {/* Controls placeholder */}
+          <div className="flex flex-col space-y-2 text-gray-100 order-1 lg:order-2 lg:h-[600px]">
             {/* Search and Filters */}
             <div className="space-y-2 bg-black/80 rounded-lg p-3 border border-gray-900 shadow-lg">
               <h3 className="text-sm font-semibold text-gray-200">Filters & Search</h3>
@@ -253,8 +253,8 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
                 </span>
               )}
             </div>
-            {/* Results List - Force Dark Mode Sidebar Style */}
-            <div className="dark bg-black text-gray-100 rounded-lg shadow-lg mt-2 overflow-hidden max-h-[220px] md:max-h-[320px] lg:max-h-[420px]">
+            {/* Results List - Responsive height */}
+            <div className="dark bg-black text-gray-100 rounded-lg shadow-lg mt-2 overflow-hidden max-h-[250px] sm:max-h-[300px] lg:max-h-[420px]">
               <ul className="overflow-y-auto space-y-1 bg-black p-2 border border-gray-900 custom-scrollbar h-full">
                 {filtered.slice(0, 50).map((p: Pitch, i: number) => {
                   // Find the original index of this pitch in the full dataset
@@ -302,10 +302,10 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
 
   return (
     <div className="max-w-7xl mx-auto p-4">
-      {/* Main Layout - Map on Left, Controls on Right */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start min-h-[400px] md:min-h-[500px] lg:h-[600px]">
-        {/* Left Side - Interactive Map */}
-        <div className="w-full h-[400px] md:h-[500px] lg:h-[600px] rounded-lg overflow-hidden">
+      {/* Main Layout - Stacked on mobile, side-by-side on desktop */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+        {/* Map - Full height on mobile, proportional on desktop */}
+        <div className="w-full h-[300px] sm:h-[400px] lg:h-[600px] rounded-lg overflow-hidden order-2 lg:order-1">
           <MapContainer 
             center={MAP_CENTER as [number, number]} 
             zoom={MAP_ZOOM} 
@@ -342,8 +342,8 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
             })}
           </MapContainer>
         </div>
-        {/* Right Side - Controls and Data */}
-        <div className="flex flex-col h-[400px] md:h-[500px] lg:h-[600px] space-y-2 text-gray-100">
+        {/* Controls and Data - On top on mobile, right side on desktop */}
+        <div className="flex flex-col space-y-2 text-gray-100 order-1 lg:order-2 lg:h-[600px]">
           {/* Search and Filters */}
           <div className="space-y-2 bg-black/80 rounded-lg p-3 border border-gray-900 shadow-lg">
             <h3 className="text-sm font-semibold text-gray-200">Filters & Search</h3>

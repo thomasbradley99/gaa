@@ -409,11 +409,13 @@ def lambda_handler(event, context):
         if not direct_video_url:
             raise Exception("Failed to extract video URL from VEO page")
         
-        # Create temp directory
-        with tempfile.TemporaryDirectory() as temp_dir:
-            temp_path = Path(temp_dir)
-            video_path = temp_path / "video.mp4"
-            
+        # Create temp directory in /tmp (Lambda has 10GB here)
+        temp_dir = "/tmp/gaa-veo-download"
+        os.makedirs(temp_dir, exist_ok=True)
+        temp_path = Path(temp_dir)
+        video_path = temp_path / "video.mp4"
+        
+        try:
             # Download video
             if not downloader.download_video(direct_video_url, video_path):
                 raise Exception("Failed to download video")
@@ -488,6 +490,11 @@ def lambda_handler(event, context):
                     'note': 'AI analysis will be added when pipeline is ready'
                 })
             }
+        finally:
+            # Cleanup: Remove downloaded video to free up /tmp space
+            if video_path.exists():
+                video_path.unlink()
+                print(f"🧹 Cleaned up temp file: {video_path}")
             
     except Exception as e:
         print(f"❌ Lambda failed: {e}")

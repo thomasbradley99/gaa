@@ -49,7 +49,8 @@ const pitches: Pitch[] = rawPitches as Pitch[];
 
 // Constants matching the original Python script
 const MAP_CENTER = [53.4129, -7.9135]; // Center of Ireland
-const MAP_ZOOM = 7; // Balanced zoom for desktop/landscape
+const MAP_ZOOM_DESKTOP = 7; // Balanced zoom for desktop/landscape
+const MAP_ZOOM_MOBILE = 6; // More zoomed out for mobile/portrait
 const MAP_OPACITY_NORMALIZATION = 2500; // Max rainfall for opacity calculation
 
 interface PitchFinderProps {
@@ -68,6 +69,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
   const [isClient, setIsClient] = useState(false);
   const [leaflet, setLeaflet] = useState<any>(null);
   const mapRef = useRef<any>(null);
+  const [mapZoom, setMapZoom] = useState(MAP_ZOOM_DESKTOP);
   
   // Ensure we're on the client side and load Leaflet
   useEffect(() => {
@@ -76,6 +78,23 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
     import('leaflet').then((L) => {
       setLeaflet(L.default);
     });
+  }, []);
+
+  // Detect orientation and set appropriate zoom
+  useEffect(() => {
+    const updateZoom = () => {
+      const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+      setMapZoom(isPortrait ? MAP_ZOOM_MOBILE : MAP_ZOOM_DESKTOP);
+    };
+    
+    updateZoom();
+    window.addEventListener('resize', updateZoom);
+    window.addEventListener('orientationchange', updateZoom);
+    
+    return () => {
+      window.removeEventListener('resize', updateZoom);
+      window.removeEventListener('orientationchange', updateZoom);
+    };
   }, []);
 
   // Fix Leaflet default icons and create icon only on client side
@@ -306,20 +325,21 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
         {/* Map - Full height on mobile, proportional on desktop */}
         <div className="w-full h-[300px] sm:h-[400px] lg:h-[600px] rounded-lg overflow-hidden order-2 lg:order-1">
-          <MapContainer 
-            center={MAP_CENTER as [number, number]} 
-            zoom={MAP_ZOOM} 
-            style={{ height: '100%', width: '100%' }}
-            ref={mapRef}
-            zoomControl={false}
-            attributionControl={false}
-            dragging={false}
-            scrollWheelZoom={false}
-            doubleClickZoom={false}
-            boxZoom={false}
-            keyboard={false}
-            touchZoom={false}
-          >
+            <MapContainer 
+              center={MAP_CENTER as [number, number]} 
+              zoom={mapZoom} 
+              style={{ height: '100%', width: '100%' }}
+              ref={mapRef}
+              zoomControl={false}
+              attributionControl={false}
+              dragging={false}
+              scrollWheelZoom={false}
+              doubleClickZoom={false}
+              boxZoom={false}
+              keyboard={false}
+              touchZoom={false}
+              key={mapZoom}
+            >
             <TileLayer 
               url="https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png"
             />

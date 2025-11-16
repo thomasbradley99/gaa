@@ -7,7 +7,7 @@ echo "🚀 Deploying GAA AI Analyzer Lambda"
 FUNCTION_NAME="gaa-ai-analyzer"
 REGION="eu-west-1"
 RUNTIME="python3.11"
-MEMORY=10240  # 10GB
+MEMORY=3008  # 3GB (AWS Lambda max)
 TIMEOUT=900   # 15 minutes
 
 # Create deployment package
@@ -50,8 +50,8 @@ if aws lambda get-function --function-name $FUNCTION_NAME --region $REGION 2>/de
 else
     echo "🆕 Creating new Lambda function..."
     
-    # You'll need to set this IAM role ARN
-    ROLE_ARN="arn:aws:iam::YOUR_ACCOUNT_ID:role/lambda-execution-role"
+    # IAM role ARN for Lambda execution
+    ROLE_ARN="arn:aws:iam::905418018179:role/clann-gaa-lambda-role-nov25"
     
     aws lambda create-function \
         --function-name $FUNCTION_NAME \
@@ -62,11 +62,7 @@ else
         --timeout $TIMEOUT \
         --memory-size $MEMORY \
         --region $REGION \
-        --environment "Variables={
-            GEMINI_API_KEY=YOUR_KEY_HERE,
-            BACKEND_API_URL=https://your-backend.com,
-            LAMBDA_API_KEY=your-lambda-key
-        }"
+        --environment "Variables={GEMINI_API_KEY=AIzaSyDjpe_vHrJmwc7P9-93Bg7ICFSw195CaP0,BACKEND_API_URL=http://localhost:4011,LAMBDA_API_KEY=gaa-lambda-secret-key-2024}"
 fi
 
 # Add ffmpeg layer (you'll need to create this layer first)

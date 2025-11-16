@@ -1,0 +1,166 @@
+00000s (00m00s): White/Black vs Black/White. Keepers not visible. WARMUP/PRACTICE.
+00030s (00m30s): White/Black jerseys vs Black/White jerseys. N/A LEFT, N/A RIGHT. White/Black attacks right-to-left, Black/White attacks left-to-right. ACTIVE
+00060s (01m00s): Black/White jerseys vs White jerseys. White LEFT, White RIGHT. WARMUP/PRACTICE.
+00090s (01m30s): White/Black jerseys vs Black/White jerseys. Dark Blue/Black keeper at RIGHT goal. White/Black attacks left-to-right, Black/White attacks right-to-left. ACTIVE
+00120s (02m00s): White/Black jerseys vs Dark/Yellow jerseys. Not visible LEFT, Not visible RIGHT. White/Black attacks left-to-right, Dark/Yellow attacks right-to-left. ACTIVE
+00150s (02m30s): White/Light Blue vs Black. No keepers visible. White/Light Blue attacks left-to-right, Black attacks right-to-left. ACTIVE.
+00180s (03m00s): Dark Blue/Black vs White/Orange. Keepers not visible. White/Orange attacks left-to-right, Dark Blue/Black attacks right-to-left. ACTIVE.
+00210s (03m30s): Black/White jerseys vs White/Black jerseys. Not visible LEFT, Not visible RIGHT. N/A. WARMUP/PRACTICE.
+00240s (04m00s): White/Dark Blue vs Black/Orange. Keepers not visible. White/Dark Blue attacks left-to-right, Black/Orange attacks right-to-left. ACTIVE.
+00270s (04m30s): Black/White vs White/Dark. Keepers not visible. WARMUP/PRACTICE
+00300s (05m00s): Black/White jerseys vs White/Black jerseys. No keepers visible. WARMUP/PRACTICE.
+00330s (05m30s): Dark Blue vs White. WARMUP/PRACTICE
+00360s (06m00s): Black/White vs White/Black. No keepers visible. White/Black attacks left-to-right, Black/White attacks right-to-left. ACTIVE
+00390s (06m30s): Dark Blue/Black vs White/Blue. Not visible LEFT, Not visible RIGHT. Dark Blue/Black attacks left-to-right, White/Blue attacks right-to-left. ACTIVE
+00420s (07m00s): Black vs White/Black. Not visible LEFT, Not visible RIGHT. Black attacks left-to-right, White/Black attacks right-to-left. ACTIVE
+00450s (07m30s): White/Black vs Black/White. No keepers visible. WARMUP/PRACTICE.
+00480s (08m00s): White vs Black. Not visible LEFT, Not visible RIGHT. Black attacks left-to-right, White attacks right-to-left. ACTIVE
+00510s (08m30s): White vs Dark Blue. White keeper at LEFT goal, White keeper at RIGHT goal. WARMUP/PRACTICE
+00540s (09m00s): Black/White jerseys vs White/Dark Blue jerseys. Not visible LEFT, Not visible RIGHT. WARMUP/PRACTICE
+00570s (09m30s): Tan vs White/Dark. Keepers not visible. Tan attacks left-to-right, White/Dark attacks right-to-left. ACTIVE
+00600s (10m00s): White vs Dark Blue/Black. White LEFT, White RIGHT. WARMUP/PRACTICE
+00630s (10m30s): Black vs White. White keeper at RIGHT goal. Black attacks left-to-right, White attacks right-to-left. ACTIVE.
+00660s (11m00s): White/Green vs Black/White. Keepers not visible. White/Green attacks left-to-right, Black/White attacks right-to-left. ACTIVE
+00690s (11m30s): White/Blue vs Dark Blue. White/Blue attacks left-to-right, Dark Blue attacks right-to-left. ACTIVE
+00720s (12m00s): Black/Dark Blue vs White/Light Blue. Not visible LEFT, Not visible RIGHT. Black/Dark Blue attacks left-to-right, White/Light Blue attacks right-to-left. ACTIVE.
+00750s (12m30s): Black vs White/Black. No keepers visible. Black attacks left-to-right, White/Black attacks right-to-left. ACTIVE.
+00780s (13m00s): Dark Blue/White vs White/Dark Blue. Not visible LEFT, Not visible RIGHT. Dark Blue/White attacks left-to-right, White/Dark Blue attacks right-to-left. ACTIVE.
+00810s (13m30s): White/Blue jerseys vs Black/White jerseys. Keepers not visible. White/Blue attacks right-to-left, Black/White attacks left-to-right. ACTIVE.
+00840s (14m00s): White vs Dark Blue/Black. Keepers not visible. Dark Blue/Black attacks left-to-right, White attacks right-to-left. ACTIVE.
+00870s (14m30s): White/Black jerseys vs Black/White jerseys. No keepers visible. White/Black attacks left-to-right, Black/White attacks right-to-left. ACTIVE.
+00900s (15m00s): White/Black vs Dark Blue/White. Keepers not visible. White/Black attacks left-to-right, Dark Blue/White attacks right-to-left. ACTIVE.
+00930s (15m30s): White/Black jerseys vs Black/White jerseys. Keepers not distinct. White/Black attacks left-to-right, Black/White attacks right-to-left. ACTIVE.
+00960s (16m00s): Black/White jerseys vs Blue/White jerseys. No keepers visible. Black/White attacks left-to-right, Blue/White attacks right-to-left. ACTIVE.
+00990s (16m30s): Dark/White jerseys vs White/Dark jerseys. No keepers visible. Dark/White attacks left-to-right, White/Dark attacks right-to-left. ACTIVE
+01020s (17m00s): White/Black vs Dark Red/Maroon/White. N/A LEFT, N/A RIGHT. N/A. WARMUP/PRACTICE
+01050s (17m30s): Dark Blue/White vs White. Not visible LEFT, Not visible RIGHT. Dark Blue/White attacks left-to-right, White attacks right-to-left. ACTIVE
+01080s (18m00s): White/Dark vs Dark Blue/Orange. Not visible LEFT, Not visible RIGHT. White/Dark attacks left-to-right, Dark Blue/Orange attacks right-to-left. ACTIVE
+01110s (18m30s): White vs Black. Keepers not visible. White attacks left-to-right, Black attacks right-to-left. ACTIVE.
+01140s (19m00s): Dark Blue/Black & White jerseys vs White & Dark Blue jerseys. No distinct keeper colors visible. Dark Blue/Black & White attacks left-to-right, White & Dark Blue attacks right-to-left. ACTIVE.
+01170s (19m30s): White/Dark Blue vs Dark Blue/White. No keepers visible. White/Dark Blue attacks left-to-right, Dark Blue/White attacks right-to-left. ACTIVE
+01200s (20m00s): Dark Blue/White vs White/Black. No keepers visible. White/Black attacks left-to-right, Dark Blue/White attacks right-to-left. ACTIVE.
+01230s (20m30s): Black/Green vs White/Light Blue. Not visible LEFT, Not visible RIGHT. Black/Green attacks left-to-right, White/Light Blue attacks right-to-left. ACTIVE
+01260s (21m00s): White jerseys vs Black jerseys. Keepers not visible. WARMUP/PRACTICE
+01290s (21m30s): White/Dark vs Black/White. No keepers visible. WARMUP/PRACTICE.
+01320s (22m00s): Black/White vs White/Black. N/A LEFT, N/A RIGHT. Black/White attacks left-to-right, White/Black attacks right-to-left. ACTIVE
+01350s (22m30s): White/Dark Blue vs Dark Blue. No keepers visible. White/Dark Blue attacks left-to-right, Dark Blue attacks right-to-left. ACTIVE.
+01380s (23m00s): Cream/Black vs White/Black. Not visible LEFT, Not visible RIGHT. Cream/Black attacks left-to-right, White/Black attacks right-to-left. ACTIVE
+01410s (23m30s): Dark Blue/Black & White vs White & Dark Blue/Black. Keepers not visible. WARMUP/PRACTICE.
+01440s (24m00s): White/Black vs Black/White. Not visible LEFT, Not visible RIGHT. White/Black attacks left-to-right, Black/White attacks right-to-left. ACTIVE
+01470s (24m30s): Black/White vs White/Dark Blue. Not visible LEFT, Not visible RIGHT. Black/White attacks left-to-right, White/Dark Blue attacks right-to-left. ACTIVE
+01500s (25m00s): Dark Blue/White vs White/Dark. Bright Blue LEFT. WARMUP/PRACTICE.
+01530s (25m30s): White/Black vs Black/White. Light Blue keeper at RIGHT goal. White/Black attacks left-to-right, Black/White attacks right-to-left. ACTIVE.
+01560s (26m00s): White/Black vs Black/White. Keepers not visible. WARMUP/PRACTICE.
+01590s (26m30s): Black/White jerseys vs White/Black jerseys. Not visible LEFT, White RIGHT. Black/White attacks left-to-right, White/Black attacks right-to-left. ACTIVE
+01620s (27m00s): White vs Black. N/A LEFT, N/A RIGHT. N/A. WARMUP/PRACTICE
+01650s (27m30s): White/Black vs Black/White. Keeper colors not visible. White/Black attacks left-to-right, Black/White attacks right-to-left. ACTIVE
+01680s (28m00s): Black/White vs White/Black. N/A LEFT, N/A RIGHT. Black/White attacks left-to-right, White/Black attacks right-to-left. ACTIVE
+01710s (28m30s): White/Black vs Black/White. Not visible LEFT, Not visible RIGHT. White/Black attacks left-to-right, Black/White attacks right-to-left. ACTIVE
+01740s (29m00s): Black/White vs White/Black. Black keeper at LEFT goal, Not visible at RIGHT goal. Black/White attacks left-to-right, White/Black attacks right-to-left. ACTIVE
+01770s (29m30s): Black/White jerseys vs White/Black jerseys. Not visible LEFT, Not visible RIGHT. Black/White attacks left-to-right, White/Black attacks right-to-left. ACTIVE
+01800s (30m00s): Dark Blue/White jerseys vs White/Dark Blue jerseys. Keepers not visible. Attack direction not applicable. WARMUP/PRACTICE.
+01830s (30m30s): White/Black vs Black/White. White/Black attacks left-to-right, Black/White attacks right-to-left. ACTIVE
+01860s (31m00s): Dark Green/White vs White/Dark. WARMUP/PRACTICE
+01890s (31m30s): Black/White vs White. Keepers not visible. Black/White attacks left-to-right, White attacks right-to-left. ACTIVE
+01920s (32m00s): Black vs White. Not visible LEFT, Not visible RIGHT. Black attacks left-to-right, White attacks right-to-left. ACTIVE
+01950s (32m30s): White/Black vs Black/White. Not visible LEFT, Not visible RIGHT. Black/White attacks left-to-right, White/Black attacks right-to-left. ACTIVE
+01980s (33m00s): White/Black vs Black/White. Keepers not visible. WARMUP/PRACTICE.
+02010s (33m30s): Dark Blue/White jerseys vs Light Blue jerseys. Keepers not visible. WARMUP/PRACTICE
+02040s (34m00s): Orange vs Dark Blue/Black. No keepers visible. Not applicable. WARMUP/PRACTICE.
+02070s (34m30s): N/A vs N/A. N/A LEFT, N/A RIGHT. Attack direction not applicable. WARMUP/PRACTICE
+02100s (35m00s): N/A vs N/A. N/A LEFT, N/A RIGHT. Not applicable. WARMUP/PRACTICE
+02130s (35m30s): Green/Yellow vs Black/White. Keepers not visible. Not applicable. WARMUP/PRACTICE
+02160s (36m00s): Green/Yellow jerseys vs Black jerseys. Keeper colors not visible. WARMUP/PRACTICE.
+02190s (36m30s): Fluorescent Yellow jerseys (one team visible). No distinct keepers. Not applicable. WARMUP/PRACTICE
+02220s (37m00s): Green/Yellow jerseys vs Black jerseys. Not visible. Not applicable. WARMUP/PRACTICE
+02250s (37m30s): Lime Green/Yellow jerseys vs Dark Green/Black jerseys. WARMUP/PRACTICE
+02280s (38m00s): Lime Green/Yellow jerseys. N/A LEFT, N/A RIGHT. WARMUP/PRACTICE.
+02310s (38m30s): Lime Green/Yellow vs Dark Blue/Black. N/A LEFT, N/A RIGHT. N/A. WARMUP/PRACTICE.
+02340s (39m00s): Lime Green/Yellow vs Black. WARMUP/PRACTICE
+02370s (39m30s): Yellow/Green jerseys. WARMUP/PRACTICE.
+02400s (40m00s): Green/Yellow vs Green/Yellow. Keepers not visible. Not applicable. WARMUP/PRACTICE.
+02430s (40m30s): Lime Green/Yellow vs White. Not visible LEFT, Not visible RIGHT. Not applicable. WARMUP/PRACTICE
+02460s (41m00s): Bright Green/Yellow jerseys (one team visible). No keepers visible. Not applicable. WARMUP/PRACTICE.
+02490s (41m30s): Lime Green/Yellow vs Dark Blue/Black. Keepers not visible. WARMUP/PRACTICE
+02520s (42m00s): Green/Yellow jerseys vs Dark jerseys. Not visible LEFT, Not visible RIGHT. WARMUP/PRACTICE.
+02550s (42m30s): Green/Black. Not applicable. WARMUP/PRACTICE.
+02580s (43m00s): Light Green/Yellow jerseys vs N/A. N/A LEFT, N/A RIGHT. N/A. WARMUP/PRACTICE
+02610s (43m30s): Green/Yellow vs N/A. N/A LEFT, N/A RIGHT. N/A. WARMUP/PRACTICE.
+02640s (44m00s): Green/Yellow vs Dark Grey/Black. WARMUP/PRACTICE
+02670s (44m30s): Green/Yellow jerseys vs White jerseys. Not visible LEFT, Not visible RIGHT. Not applicable. WARMUP/PRACTICE
+02700s (45m00s): Lime Green/Yellow vs Dark Grey/Blue. Keeper colors not visible. Not applicable. WARMUP/PRACTICE
+02730s (45m30s): Lime Green/Dark Green vs Blue. No keepers visible. WARMUP/PRACTICE.
+02760s (46m00s): Dark Blue/Yellow vs White. No keepers visible. WARMUP/PRACTICE.
+02790s (46m30s): Black/White vs Blue. Keepers not visible. Not applicable. WARMUP/PRACTICE.
+02820s (47m00s): White jerseys vs Black jerseys. No keepers visible. Not determinable. ACTIVE
+02850s (47m30s): White/Black vs Black/White. No keepers visible. White attacks left-to-right, Black attacks right-to-left. ACTIVE.
+02880s (48m00s): White/Light Blue vs Dark Blue. Not visible LEFT, Not visible RIGHT. WARMUP/PRACTICE.
+02910s (48m30s): White vs Dark Blue. Not applicable keepers. Not applicable attack direction. WARMUP/PRACTICE
+02940s (49m00s): White/Dark Blue jerseys vs Black/White jerseys. White keeper at LEFT goal, Black keeper at RIGHT goal. White/Dark Blue attacks left-to-right, Black/White attacks right-to-left. ACTIVE
+02970s (49m30s): White vs Black. Keepers not visible. White attacks left-to-right, Black attacks right-to-left. ACTIVE.
+03000s (50m00s): White/Black vs Black/White. Keepers not visible. White/Black attacks left-to-right, Black/White attacks right-to-left. ACTIVE.
+03030s (50m30s): Black/White jerseys vs White/Dark Blue jerseys. N/A LEFT, N/A RIGHT. Black/White attacks left-to-right, White/Dark Blue attacks right-to-left. ACTIVE
+03060s (51m00s): Dark Blue/White vs White/Blue. White RIGHT. Dark Blue/White attacks left-to-right, White/Blue attacks right-to-left. ACTIVE.
+03090s (51m30s): White/Dark vs Black/White. Unknown LEFT, Light Blue RIGHT. WARMUP/PRACTICE
+03120s (52m00s): White/Black jerseys vs Black/White jerseys. Keepers not visible. White/Black attacks left-to-right, Black/White attacks right-to-left. ACTIVE.
+03150s (52m30s): White/Dark Blue jerseys vs Black/White jerseys. Keepers not visible. White/Dark Blue attacks left-to-right, Black/White attacks right-to-left. ACTIVE.
+03180s (53m00s): White vs Dark Blue/Black. Not visible LEFT, Not visible RIGHT. White attacks left-to-right, Dark Blue/Black attacks right-to-left. ACTIVE
+03210s (53m30s): White/Dark jerseys vs Lime Green/Dark jerseys. Not visible LEFT, Not visible RIGHT. White/Dark attacks left-to-right, Lime Green/Dark attacks right-to-left. ACTIVE.
+03240s (54m00s): Dark Navy Blue/White vs White/Dark Navy Blue. Dark Navy Blue/White attacks left-to-right, White/Dark Navy Blue attacks right-to-left. ACTIVE
+03270s (54m30s): Dark Blue/Black & White vs White & Blue. WARMUP/PRACTICE.
+03300s (55m00s): Black/White jerseys vs White/Dark jerseys. Keepers not visible. Black/White attacks right-to-left, White/Dark attacks left-to-right. ACTIVE
+03330s (55m30s): White/Dark Blue vs Dark Blue/Black. Keepers not visible. White/Dark Blue attacks left-to-right, Dark Blue/Black attacks right-to-left. ACTIVE.
+03360s (56m00s): Dark Blue/Light Blue vs White. Keepers NOT visible. Dark Blue/Light Blue attacks left-to-right, White attacks right-to-left. ACTIVE.
+03390s (56m30s): White/Dark Blue vs Dark Blue/White. Keepers not visible. White/Dark Blue attacks left-to-right, Dark Blue/White attacks right-to-left. ACTIVE
+03420s (57m00s): Dark Blue/White vs White/Blue. Light Green/Yellow keeper at RIGHT goal. Dark Blue/White attacks left-to-right, White/Blue attacks right-to-left. ACTIVE
+03450s (57m30s): Dark Blue/White jerseys vs White/Dark Blue jerseys. Dark Blue/White attacks left-to-right, White/Dark Blue attacks right-to-left. ACTIVE
+03480s (58m00s): Light Blue/White vs Black. No keepers visible. WARMUP/PRACTICE.
+03510s (58m30s): Dark Blue/Black vs White. No keepers visible. WARMUP/PRACTICE.
+03540s (59m00s): Dark Blue/White jerseys vs White/Dark Blue jerseys. N/A LEFT, N/A RIGHT. N/A. WARMUP/PRACTICE
+03570s (59m30s): White/Blue jerseys vs Dark Blue/Black jerseys. N/A LEFT, N/A RIGHT. WARMUP/PRACTICE.
+03600s (60m00s): Light Blue/White vs Dark Blue & White. Light Blue/White attacks left-to-right, Dark Blue & White attacks right-to-left. ACTIVE
+03630s (60m30s): Dark Blue/White vs White/Dark Blue. No keepers visible. WARMUP/PRACTICE.
+03660s (61m00s): Dark Blue/White vs White/Dark Blue. Keepers not visible. Dark Blue/White attacks left-to-right, White/Dark Blue attacks right-to-left. ACTIVE.
+03690s (61m30s): White/Dark vs Black/White. No keepers visible. Black/White attacks left-to-right, White/Dark attacks right-to-left. ACTIVE.
+03720s (62m00s): Dark Blue/White vs White/Dark Blue. Keepers not visible. Dark Blue/White attacks left-to-right, White/Dark Blue attacks right-to-left. ACTIVE.
+03750s (62m30s): Dark Grey/White jerseys vs White/Dark Grey jerseys. Keepers not visible. Dark Grey/White attacks left-to-right, White/Dark Grey attacks right-to-left. ACTIVE
+03780s (63m00s): Black/White vs White/Black. Not visible LEFT, Not visible RIGHT. Not applicable. WARMUP/PRACTICE.
+03810s (63m30s): Black/White jerseys vs White/Black jerseys. Keepers not visible. Black/White attacks left-to-right, White/Black attacks right-to-left. ACTIVE.
+03840s (64m00s): White/Dark Blue vs Dark Blue/Black. Keepers not visible. Dark Blue/Black attacks left-to-right, White/Dark Blue attacks right-to-left. ACTIVE.
+03870s (64m30s): White vs Lime Green/Dark Blue. Keepers not visible. White attacks left-to-right, Lime Green/Dark Blue attacks right-to-left. ACTIVE.
+03900s (65m00s): Dark vs White/Black. Dark LEFT, White/Black RIGHT. White/Black attacks left-to-right, Dark attacks right-to-left. ACTIVE
+03930s (65m30s): Black/White jerseys vs White/Black jerseys. Light Blue keeper at LEFT goal, Not visible keeper at RIGHT goal. Black/White attacks left-to-right, White/Black attacks right-to-left. ACTIVE.
+03960s (66m00s): White/Black jerseys vs Black/White jerseys. Keepers not visible. White/Black attacks left-to-right, Black/White attacks right-to-left. ACTIVE.
+03990s (66m30s): Lime Green/Black vs White/Black. Not visible LEFT, Not visible RIGHT. White/Black attacks left-to-right, Lime Green/Black attacks right-to-left. ACTIVE
+04020s (67m00s): Black/White jerseys vs White/Black jerseys. Keepers not visible. Black/White attacks left-to-right, White/Black attacks right-to-left. ACTIVE.
+04050s (67m30s): Black/White vs White/Black. Keepers not visible. WARMUP/PRACTICE.
+04080s (68m00s): Black/White vs White. Keepers not visible. Black/White attacks left-to-right, White attacks right-to-left. ACTIVE
+04110s (68m30s): Cream vs Dark Blue/White. Keepers not visible. Cream attacks left-to-right, Dark Blue/White attacks right-to-left. ACTIVE.
+04140s (69m00s): White/Black vs Black/White. Not visible LEFT, Not visible RIGHT. Black/White attacks left-to-right, White/Black attacks right-to-left. ACTIVE.
+04170s (69m30s): White/Dark jerseys vs Dark Blue/White jerseys. Keepers not visible. White/Dark attacks right-to-left, Dark Blue/White attacks left-to-right. ACTIVE.
+04200s (70m00s): White/Black vs Black/White. Not visible at LEFT goal, Not visible at RIGHT goal. WARMUP/PRACTICE.
+04230s (70m30s): White vs Dark Green & White. Keepers not visible. White attacks left-to-right, Dark Green & White attacks right-to-left. ACTIVE
+04260s (71m00s): Black vs White. White LEFT, Black RIGHT. Black attacks left-to-right, White attacks right-to-left. ACTIVE.
+04290s (71m30s): White/Black jerseys vs Black/White jerseys. Keepers not visible. Black/White attacks left-to-right, White/Black attacks right-to-left. ACTIVE.
+04320s (72m00s): Black/Dark Blue & White vs Blue & White. WARMUP/PRACTICE.
+04350s (72m30s): White/Dark Blue vs Dark Blue/White. No keepers visible. White/Dark Blue attacks left-to-right, Dark Blue/White attacks right-to-left. ACTIVE.
+04380s (73m00s): Black/White jerseys vs White/Black jerseys. Not visible LEFT, Not visible RIGHT. Black/White attacks left-to-right, White/Black attacks right-to-left. ACTIVE.
+04410s (73m30s): Black/White vs White/Black. No keepers visible. White/Black attacks left-to-right, Black/White attacks right-to-left. ACTIVE.
+04440s (74m00s): White/Black vs Black/White. Keepers not visible. WARMUP/PRACTICE
+04470s (74m30s): White/Dark Blue vs Dark Blue/White. Light Blue keeper at LEFT goal, no keeper visible at RIGHT goal. Dark Blue/White attacks left-to-right, White/Dark Blue attacks right-to-left. ACTIVE
+04500s (75m00s): Black/White vs White/Light Blue. White/Light Blue LEFT, Not visible RIGHT. White/Light Blue attacks left-to-right, Black/White attacks right-to-left. ACTIVE
+04530s (75m30s): Dark Blue/Black vs White/Blue. Light Blue/White LEFT, Yellow/Black RIGHT. Dark Blue/Black attacks left-to-right, White/Blue attacks right-to-left. ACTIVE.
+04560s (76m00s): White/Light Blue vs Black. White/Black keeper at LEFT goal, No keeper at RIGHT goal. White/Light Blue attacks left-to-right, Black attacks right-to-left. ACTIVE.
+04590s (76m30s): White/Black vs Dark Blue/Black. None visible. Dark Blue/Black attacks left-to-right, White/Black attacks right-to-left. ACTIVE
+04620s (77m00s): White/Dark Blue jerseys vs Dark Blue/White jerseys. Keeper colors: Not visible. White/Dark Blue attacks left-to-right, Dark Blue/White attacks right-to-left. ACTIVE.
+04650s (77m30s): Black/White jerseys vs White/Dark jerseys. Keepers not visible. WARMUP/PRACTICE.
+04680s (78m00s): Black/White vs White/Black. Not visible LEFT, Not visible RIGHT. White/Black attacks left-to-right, Black/White attacks right-to-left. ACTIVE.
+04710s (78m30s): Dark Blue/White vs White/Dark. Keepers not visible. Dark Blue/White attacks left-to-right, White/Dark attacks right-to-left. ACTIVE.
+04740s (79m00s): Black/Blue jerseys vs White/Black jerseys. WARMUP/PRACTICE.
+04770s (79m30s): White/Dark Blue jerseys vs Dark Blue jerseys. Keepers not visible. White/Dark Blue attacks left-to-right, Dark Blue attacks right-to-left. ACTIVE.
+04800s (80m00s): White/Dark Blue vs Dark Blue. Keepers not visible. Dark Blue attacks left-to-right, White/Dark Blue attacks right-to-left. ACTIVE.
+04830s (80m30s): White/Dark vs Dark Blue/White. Yellow/Lime Green RIGHT. White/Dark attacks left-to-right, Dark Blue/White attacks right-to-left. ACTIVE.
+04860s (81m00s): White/Dark vs Dark Blue/White. Not visible LEFT, Not visible RIGHT. White/Dark attacks left-to-right, Dark Blue/White attacks right-to-left. ACTIVE
+04890s (81m30s): Black vs White. Keepers not visible. Black attacks left-to-right, White attacks right-to-left. ACTIVE.
+04920s (82m00s): Black/White jerseys vs White/Black jerseys. No keepers visible. Black/White attacks left-to-right, White/Black attacks right-to-left. ACTIVE.
+04950s (82m30s): Orange/Black vs White/Black. WARMUP/PRACTICE

@@ -171,14 +171,14 @@ export default function VideoPlayer({
     const eventTeam = event.team?.toLowerCase() || ''
     
     if (eventTeam === 'home' || eventTeam === 'red') {
-      return '#DC2626' // Red
+      return '#FFFFFF' // White for home team
     }
     
     if (eventTeam === 'away' || eventTeam === 'blue') {
-      return '#EAB308' // Yellow
+      return '#000000' // Black for away team
     }
     
-    return '#016F32' // Default green
+    return '#6B7280' // Gray for neutral
   }
 
   const handleTimeUpdate = () => {

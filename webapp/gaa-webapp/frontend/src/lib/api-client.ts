@@ -82,7 +82,7 @@ export const teams = {
       method: 'PUT',
       body: JSON.stringify(data),
     }),
-  updateTeamColors: (teamId: string, data: { home_color: string; away_color: string; accent_color?: string | null }) =>
+  updateTeamColors: (teamId: string, data: { primary_color: string; secondary_color: string; accent_color?: string | null }) =>
     apiRequest(`/api/teams/${teamId}/colors`, {
       method: 'PATCH',
       body: JSON.stringify(data),

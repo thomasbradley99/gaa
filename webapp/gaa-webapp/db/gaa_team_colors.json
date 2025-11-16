@@ -1,125 +1,145 @@
 {
-  "comment": "Common GAA team colors - makes it easier to fill out team information",
+  "comment": "Common GAA team colors - Each team has ONE kit with TWO colors",
   "teams": {
     "Dublin": {
-      "home_color": "#0066CC",
-      "away_color": "#87CEEB",
+      "primary_color": "#0066CC",
+      "secondary_color": "#87CEEB",
       "accent_color": null,
-      "county": "Dublin"
+      "county": "Dublin",
+      "description": "Sky Blue & Navy"
     },
     "Kerry": {
-      "home_color": "#016F32",
-      "away_color": "#FFD700",
+      "primary_color": "#016F32",
+      "secondary_color": "#FFD700",
       "accent_color": null,
-      "county": "Kerry"
+      "county": "Kerry",
+      "description": "Green & Gold"
     },
     "Mayo": {
-      "home_color": "#DC143C",
-      "away_color": "#016F32",
+      "primary_color": "#DC143C",
+      "secondary_color": "#016F32",
       "accent_color": null,
-      "county": "Mayo"
+      "county": "Mayo",
+      "description": "Red & Green"
     },
     "Tyrone": {
-      "home_color": "#FFFFFF",
-      "away_color": "#DC143C",
+      "primary_color": "#FFFFFF",
+      "secondary_color": "#DC143C",
       "accent_color": null,
-      "county": "Tyrone"
+      "county": "Tyrone",
+      "description": "White & Red"
     },
     "Cork": {
-      "home_color": "#DC143C",
-      "away_color": "#FFFFFF",
+      "primary_color": "#DC143C",
+      "secondary_color": "#FFFFFF",
       "accent_color": null,
-      "county": "Cork"
+      "county": "Cork",
+      "description": "Red & White"
     },
     "Galway": {
-      "home_color": "#8B0000",
-      "away_color": "#FFFFFF",
+      "primary_color": "#8B0000",
+      "secondary_color": "#FFFFFF",
       "accent_color": null,
-      "county": "Galway"
+      "county": "Galway",
+      "description": "Maroon & White"
     },
     "Donegal": {
-      "home_color": "#016F32",
-      "away_color": "#FFD700",
+      "primary_color": "#016F32",
+      "secondary_color": "#FFD700",
       "accent_color": null,
-      "county": "Donegal"
+      "county": "Donegal",
+      "description": "Green & Gold"
     },
     "Kilkenny": {
-      "home_color": "#000000",
-      "away_color": "#FFB300",
+      "primary_color": "#000000",
+      "secondary_color": "#FFB300",
       "accent_color": null,
-      "county": "Kilkenny"
+      "county": "Kilkenny",
+      "description": "Black & Amber"
     },
     "Limerick": {
-      "home_color": "#016F32",
-      "away_color": "#FFFFFF",
+      "primary_color": "#016F32",
+      "secondary_color": "#FFFFFF",
       "accent_color": null,
-      "county": "Limerick"
+      "county": "Limerick",
+      "description": "Green & White"
     },
     "Tipperary": {
-      "home_color": "#0066CC",
-      "away_color": "#FFD700",
+      "primary_color": "#0066CC",
+      "secondary_color": "#FFD700",
       "accent_color": null,
-      "county": "Tipperary"
+      "county": "Tipperary",
+      "description": "Blue & Gold"
     },
     "Waterford": {
-      "home_color": "#0066CC",
-      "away_color": "#FFFFFF",
+      "primary_color": "#0066CC",
+      "secondary_color": "#FFFFFF",
       "accent_color": null,
-      "county": "Waterford"
+      "county": "Waterford",
+      "description": "Blue & White"
     },
     "Clare": {
-      "home_color": "#FFB300",
-      "away_color": "#0066CC",
+      "primary_color": "#FFB300",
+      "secondary_color": "#0066CC",
       "accent_color": null,
-      "county": "Clare"
+      "county": "Clare",
+      "description": "Saffron & Blue"
     },
     "Wexford": {
-      "home_color": "#800080",
-      "away_color": "#FFD700",
+      "primary_color": "#800080",
+      "secondary_color": "#FFD700",
       "accent_color": null,
-      "county": "Wexford"
+      "county": "Wexford",
+      "description": "Purple & Gold"
     },
     "Meath": {
-      "home_color": "#016F32",
-      "away_color": "#FFD700",
+      "primary_color": "#016F32",
+      "secondary_color": "#FFD700",
       "accent_color": null,
-      "county": "Meath"
+      "county": "Meath",
+      "description": "Green & Gold"
     },
     "Kildare": {
-      "home_color": "#FFFFFF",
-      "away_color": "#C0C0C0",
+      "primary_color": "#FFFFFF",
+      "secondary_color": "#C0C0C0",
       "accent_color": null,
-      "county": "Kildare"
+      "county": "Kildare",
+      "description": "White"
     },
     "Armagh": {
-      "home_color": "#FF6600",
-      "away_color": "#FFFFFF",
+      "primary_color": "#FF6600",
+      "secondary_color": "#FFFFFF",
       "accent_color": null,
-      "county": "Armagh"
+      "county": "Armagh",
+      "description": "Orange & White"
     },
     "Roscommon": {
-      "home_color": "#FFD700",
-      "away_color": "#0066CC",
+      "primary_color": "#FFD700",
+      "secondary_color": "#0066CC",
       "accent_color": null,
-      "county": "Roscommon"
+      "county": "Roscommon",
+      "description": "Primrose & Blue"
     },
     "Down": {
-      "home_color": "#DC143C",
-      "away_color": "#000000",
+      "primary_color": "#DC143C",
+      "secondary_color": "#000000",
       "accent_color": null,
-      "county": "Down"
+      "county": "Down",
+      "description": "Red & Black"
     },
     "Monaghan": {
-      "home_color": "#FFFFFF",
-      "away_color": "#0066CC",
+      "primary_color": "#FFFFFF",
+      "secondary_color": "#0066CC",
       "accent_color": null,
-      "county": "Monaghan"
+      "county": "Monaghan",
+      "description": "White & Blue"
     },
     "Derry": {
-      "home_color": "#DC143C",
-      "away_color": "#FFFFFF",
+      "primary_color": "#DC143C",
+      "secondary_color": "#FFFFFF",
       "accent_color": null,
-      "county": "Derry"
+      "county": "Derry",
+      "description": "Red & White"
     }
   }
 }

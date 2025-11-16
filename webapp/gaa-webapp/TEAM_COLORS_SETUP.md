@@ -71,35 +71,38 @@ npm run dev
 ## How Team Colors Work
 
 ### In the Database
-- `home_color`: Primary team color (hex format, e.g., `#0066CC` for Dublin blue)
-- `away_color`: Secondary team color (hex format, e.g., `#FFFFFF` for white)
+- `primary_color`: First color on the team's kit (hex format, e.g., `#016F32` for Kerry green)
+- `secondary_color`: Second color on the team's kit (hex format, e.g., `#FFD700` for Kerry gold)
 - `accent_color`: Optional third color for teams with multiple colors
 
+### Important: GAA Teams Have ONE Kit
+Unlike soccer teams with home/away kits, **GAA teams have ONE kit with TWO colors**:
+- Kerry: Green & Gold (one kit)
+- Dublin: Sky Blue & Navy (one kit)
+- Mayo: Red & Green (one kit)
+
 ### In the Webapp
-When viewing game videos and events:
-- Events from the "red" team will display in your team's `home_color`
-- Events from the "blue" team will display in your team's `away_color`
-- This makes it much easier to see which team did what during the match
+When viewing game videos and events, your team's kit colors will be displayed accurately, making it easy to identify your team during matches
 
 ## Common GAA Team Colors Included
 
-The color picker includes quick presets for these teams:
-- Dublin (Sky Blue)
+The color picker includes quick presets for these teams (with their kit colors):
+- Dublin (Sky Blue & Navy)
 - Kerry (Green & Gold)
 - Mayo (Red & Green)
 - Tyrone (White & Red)
-- Cork (Red)
-- Galway (Maroon)
+- Cork (Red & White)
+- Galway (Maroon & White)
 - Donegal (Green & Gold)
 - Kilkenny (Black & Amber)
-- Limerick (Green)
+- Limerick (Green & White)
 - Tipperary (Blue & Gold)
-- Waterford (Blue)
+- Waterford (Blue & White)
 - Clare (Saffron & Blue)
 - Wexford (Purple & Gold)
 - Meath (Green & Gold)
 - Kildare (White)
-- Armagh (Orange)
+- Armagh (Orange & White)
 - Roscommon (Primrose & Blue)
 - Down (Red & Black)
 - Monaghan (White & Blue)

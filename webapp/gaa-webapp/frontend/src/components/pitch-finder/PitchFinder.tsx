@@ -162,7 +162,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
           {/* Right Side - Controls and Data */}
           <div className="flex flex-col h-[600px] space-y-2 text-gray-100">
             {/* Search and Filters */}
-            <div className="space-y-2 bg-gray-800 rounded-lg p-3 border border-gray-800 shadow-lg">
+            <div className="space-y-2 bg-black/80 rounded-lg p-3 border border-gray-900 shadow-lg">
               <h3 className="text-sm font-semibold text-gray-200">Filters & Search</h3>
               <div className="space-y-2">
                 <input
@@ -173,13 +173,13 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
                     setSearch(e.target.value);
                     if (selectedClub !== 'all') setSelectedClub('all');
                   }}
-                  className="w-full p-2 rounded-lg bg-gray-900 border border-gray-700 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  className="w-full p-2 rounded-lg bg-black border border-gray-700 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
                 />
                 <div className="grid grid-cols-3 gap-2 items-center">
                   <select
                     value={selectedProvince}
                     onChange={e => setSelectedProvince(e.target.value)}
-                    className="w-full p-2 rounded-lg bg-gray-900 border border-gray-700 text-gray-100"
+                    className="w-full p-2 rounded-lg bg-black border border-gray-700 text-gray-100"
                   >
                     <option value="all">All Provinces</option>
                     {provinces.map(province => (
@@ -189,7 +189,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
                   <select
                     value={selectedCounty}
                     onChange={e => setSelectedCounty(e.target.value)}
-                    className="w-full p-2 rounded-lg bg-gray-900 border border-gray-700 text-gray-100"
+                    className="w-full p-2 rounded-lg bg-black border border-gray-700 text-gray-100"
                   >
                     <option value="all">All Counties</option>
                     {counties.map(county => (
@@ -200,7 +200,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
                     <select
                       value={selectedClub}
                       onChange={e => setSelectedClub(e.target.value)}
-                      className="w-full p-2 rounded-lg bg-gray-900 border border-gray-700 text-gray-100"
+                      className="w-full p-2 rounded-lg bg-black border border-gray-700 text-gray-100"
                     >
                       <option value="all">All Clubs</option>
                       {uniqueClubs.map((club, index) => (
@@ -228,8 +228,8 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
               </div>
             </div>
             {/* Number of Clubs and Selected Filters Badges */}
-            <div className="mb-2 flex flex-wrap gap-2 justify-center items-center rounded-lg bg-gray-800 p-2 border border-gray-800 shadow-lg">
-              <span className="bg-blue-800/60 text-blue-200 text-xs font-semibold px-3 py-1 rounded-full border border-blue-400">
+            <div className="mb-2 flex flex-wrap gap-2 justify-center items-center rounded-lg bg-black/80 p-2 border border-gray-900 shadow-lg">
+              <span className="bg-gray-800 text-gray-200 text-xs font-semibold px-3 py-1 rounded-full border border-gray-600">
                 {filtered.length} clubs
               </span>
               {selectedProvince !== 'all' && (
@@ -254,8 +254,8 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
               )}
             </div>
             {/* Results List - Force Dark Mode Sidebar Style */}
-            <div className="dark bg-gray-900 text-gray-100 rounded-lg shadow-lg mt-2 overflow-hidden" style={{ maxHeight: 'calc(600px - 180px)' }}>
-              <ul className="overflow-y-auto space-y-1 bg-gray-900 p-2 border border-gray-800 custom-scrollbar" style={{ maxHeight: '100%' }}>
+            <div className="dark bg-black text-gray-100 rounded-lg shadow-lg mt-2 overflow-hidden" style={{ maxHeight: 'calc(600px - 180px)' }}>
+              <ul className="overflow-y-auto space-y-1 bg-black p-2 border border-gray-900 custom-scrollbar" style={{ maxHeight: '100%' }}>
                 {filtered.slice(0, 50).map((p: Pitch, i: number) => {
                   // Find the original index of this pitch in the full dataset
                   const originalIndex = pitches.findIndex(pitch => 
@@ -268,7 +268,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
                     <li
                       key={`result-${originalIndex}`}
                       className={`flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer transition-colors
-                        ${selectedClub !== 'all' && p.Club === selectedClub ? 'bg-blue-800/60 border border-blue-400 text-white' : 'bg-gray-800 hover:bg-gray-700 text-gray-100 border border-transparent'}`}
+                        ${selectedClub !== 'all' && p.Club === selectedClub ? 'bg-gray-900 border border-gray-600 text-white' : 'bg-gray-900/50 hover:bg-gray-900 text-gray-100 border border-transparent'}`}
                       onClick={() => {
                         setSelectedClub(p.Club);
                         setSelectedClubData(p);
@@ -321,7 +321,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
             touchZoom={false}
           >
             <TileLayer 
-              url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+              url="https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png"
             />
             {mapPitches.map((p, i) => {
               // Find the original index of this pitch in the full dataset
@@ -345,7 +345,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
         {/* Right Side - Controls and Data */}
         <div className="flex flex-col h-[600px] space-y-2 text-gray-100">
           {/* Search and Filters */}
-          <div className="space-y-2 bg-gray-800 rounded-lg p-3 border border-gray-800 shadow-lg">
+          <div className="space-y-2 bg-black/80 rounded-lg p-3 border border-gray-900 shadow-lg">
             <h3 className="text-sm font-semibold text-gray-200">Filters & Search</h3>
             <div className="space-y-2">
               <input
@@ -356,13 +356,13 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
                   setSearch(e.target.value);
                   if (selectedClub !== 'all') setSelectedClub('all');
                 }}
-                className="w-full p-2 rounded-lg bg-gray-900 border border-gray-700 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full p-2 rounded-lg bg-black border border-gray-700 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-600"
               />
               <div className="grid grid-cols-3 gap-2 items-center">
                 <select
                   value={selectedProvince}
                   onChange={e => setSelectedProvince(e.target.value)}
-                  className="w-full p-2 rounded-lg bg-gray-900 border border-gray-700 text-gray-100"
+                  className="w-full p-2 rounded-lg bg-black border border-gray-700 text-gray-100"
                 >
                   <option value="all">All Provinces</option>
                   {provinces.map(province => (
@@ -372,7 +372,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
                 <select
                   value={selectedCounty}
                   onChange={e => setSelectedCounty(e.target.value)}
-                  className="w-full p-2 rounded-lg bg-gray-900 border border-gray-700 text-gray-100"
+                  className="w-full p-2 rounded-lg bg-black border border-gray-700 text-gray-100"
                 >
                   <option value="all">All Counties</option>
                   {counties.map(county => (
@@ -397,7 +397,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
                         setSelectedClubData(null);
                       }
                     }}
-                    className="w-full p-2 rounded-lg bg-gray-900 border border-gray-700 text-gray-100"
+                    className="w-full p-2 rounded-lg bg-black border border-gray-700 text-gray-100"
                   >
                     <option value="all">All Clubs</option>
                     {uniqueClubs.map((club, index) => (
@@ -425,8 +425,8 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
             </div>
           </div>
           {/* Number of Clubs and Selected Filters Badges */}
-          <div className="mb-2 flex flex-wrap gap-2 justify-center items-center rounded-lg bg-gray-800 p-2 border border-gray-800 shadow-lg">
-            <span className="bg-blue-800/60 text-blue-200 text-xs font-semibold px-3 py-1 rounded-full border border-blue-400">
+          <div className="mb-2 flex flex-wrap gap-2 justify-center items-center rounded-lg bg-black/80 p-2 border border-gray-900 shadow-lg">
+            <span className="bg-gray-800 text-gray-200 text-xs font-semibold px-3 py-1 rounded-full border border-gray-600">
               {filtered.length} clubs
             </span>
             {selectedProvince !== 'all' && (
@@ -451,8 +451,8 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
             )}
           </div>
           {/* Results List - Force Dark Mode Sidebar Style */}
-          <div className="dark bg-gray-900 text-gray-100 rounded-lg shadow-lg mt-2 overflow-hidden" style={{ maxHeight: 'calc(600px - 180px)' }}>
-            <ul className="overflow-y-auto space-y-1 bg-gray-900 p-2 border border-gray-800 custom-scrollbar" style={{ maxHeight: '100%' }}>
+          <div className="dark bg-black text-gray-100 rounded-lg shadow-lg mt-2 overflow-hidden" style={{ maxHeight: 'calc(600px - 180px)' }}>
+            <ul className="overflow-y-auto space-y-1 bg-black p-2 border border-gray-900 custom-scrollbar" style={{ maxHeight: '100%' }}>
               {filtered.slice(0, 50).map((p: Pitch, i: number) => {
                 // Find the original index of this pitch in the full dataset
                 const originalIndex = pitches.findIndex(pitch => 
@@ -467,8 +467,8 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
                     key={`result-${originalIndex}`}
                     className={`rounded-lg transition-all ${
                       isSelected 
-                        ? 'bg-gradient-to-r from-green-900/40 to-blue-900/40 border-2 border-green-500' 
-                        : 'bg-gray-800 hover:bg-gray-700 border-2 border-transparent'
+                        ? 'bg-gray-900 border-2 border-gray-600' 
+                        : 'bg-gray-900/50 hover:bg-gray-900 border-2 border-transparent'
                     }`}
                   >
                     <div
@@ -483,7 +483,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
                     >
                       <div className="flex items-center gap-3 flex-1 min-w-0">
                         {isSelected && (
-                          <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
+                          <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gray-700 flex items-center justify-center">
                             <Check className="w-4 h-4 text-white" />
                           </div>
                         )}
@@ -498,7 +498,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
                       </div>
                     </div>
                     {isSelected && onCreateTeam && (
-                      <div className="px-3 pb-3 pt-2 border-t border-green-500/30">
+                      <div className="px-3 pb-3 pt-2 border-t border-gray-700">
                         <button
                           onClick={(e) => {
                             e.stopPropagation();

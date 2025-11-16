@@ -152,7 +152,7 @@ router.post('/join-by-code', authenticateToken, async (req, res) => {
 router.put('/:teamId', authenticateToken, async (req, res) => {
   try {
     const { teamId } = req.params;
-    const { name, description, home_color, away_color, accent_color } = req.body;
+    const { name, description, primary_color, secondary_color, accent_color } = req.body;
 
     if (!name) {
       return res.status(400).json({ error: 'Team name is required' });
@@ -185,13 +185,13 @@ router.put('/:teamId', authenticateToken, async (req, res) => {
       `UPDATE teams 
        SET name = $1, 
            description = $2, 
-           home_color = COALESCE($3, home_color),
-           away_color = COALESCE($4, away_color),
+           primary_color = COALESCE($3, primary_color),
+           secondary_color = COALESCE($4, secondary_color),
            accent_color = $5,
            updated_at = NOW()
        WHERE id = $6
        RETURNING *`,
-      [name.trim(), description || null, home_color, away_color, accent_color, teamId]
+      [name.trim(), description || null, primary_color, secondary_color, accent_color, teamId]
     );
 
     if (result.rows.length === 0) {
@@ -217,7 +217,7 @@ router.put('/:teamId', authenticateToken, async (req, res) => {
 router.patch('/:teamId/colors', authenticateToken, async (req, res) => {
   try {
     const { teamId } = req.params;
-    const { home_color, away_color, accent_color } = req.body;
+    const { primary_color, secondary_color, accent_color } = req.body;
 
     // Verify user is admin of team
     const memberCheck = await query(
@@ -232,13 +232,13 @@ router.patch('/:teamId/colors', authenticateToken, async (req, res) => {
     // Update colors
     const result = await query(
       `UPDATE teams 
-       SET home_color = COALESCE($1, home_color),
-           away_color = COALESCE($2, away_color),
+       SET primary_color = COALESCE($1, primary_color),
+           secondary_color = COALESCE($2, secondary_color),
            accent_color = $3,
            updated_at = NOW()
        WHERE id = $4
        RETURNING *`,
-      [home_color, away_color, accent_color, teamId]
+      [primary_color, secondary_color, accent_color, teamId]
     );
 
     if (result.rows.length === 0) {

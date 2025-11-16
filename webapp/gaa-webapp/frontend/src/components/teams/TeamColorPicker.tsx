@@ -3,56 +3,57 @@
 import { useState, useEffect } from 'react'
 import { Check, Palette } from 'lucide-react'
 
-// Common GAA team colors for quick selection
+// GAA team colors - Each team has ONE kit with TWO colors
 const GAA_TEAM_COLORS = {
-  'Dublin': { home: '#0066CC', away: '#87CEEB', name: 'Dublin (Sky Blue)' },
-  'Kerry': { home: '#016F32', away: '#FFD700', name: 'Kerry (Green & Gold)' },
-  'Mayo': { home: '#DC143C', away: '#016F32', name: 'Mayo (Red & Green)' },
-  'Tyrone': { home: '#FFFFFF', away: '#DC143C', name: 'Tyrone (White & Red)' },
-  'Cork': { home: '#DC143C', away: '#FFFFFF', name: 'Cork (Red)' },
-  'Galway': { home: '#8B0000', away: '#FFFFFF', name: 'Galway (Maroon)' },
-  'Donegal': { home: '#016F32', away: '#FFD700', name: 'Donegal (Green & Gold)' },
-  'Kilkenny': { home: '#000000', away: '#FFB300', name: 'Kilkenny (Black & Amber)' },
-  'Limerick': { home: '#016F32', away: '#FFFFFF', name: 'Limerick (Green)' },
-  'Tipperary': { home: '#0066CC', away: '#FFD700', name: 'Tipperary (Blue & Gold)' },
-  'Waterford': { home: '#0066CC', away: '#FFFFFF', name: 'Waterford (Blue)' },
-  'Clare': { home: '#FFB300', away: '#0066CC', name: 'Clare (Saffron & Blue)' },
-  'Wexford': { home: '#800080', away: '#FFD700', name: 'Wexford (Purple & Gold)' },
-  'Meath': { home: '#016F32', away: '#FFD700', name: 'Meath (Green & Gold)' },
-  'Kildare': { home: '#FFFFFF', away: '#C0C0C0', name: 'Kildare (White)' },
-  'Armagh': { home: '#FF6600', away: '#FFFFFF', name: 'Armagh (Orange)' },
-  'Roscommon': { home: '#FFD700', away: '#0066CC', name: 'Roscommon (Primrose & Blue)' },
-  'Down': { home: '#DC143C', away: '#000000', name: 'Down (Red & Black)' },
-  'Monaghan': { home: '#FFFFFF', away: '#0066CC', name: 'Monaghan (White & Blue)' },
-  'Derry': { home: '#DC143C', away: '#FFFFFF', name: 'Derry (Red & White)' },
+  'Dublin': { primary: '#0066CC', secondary: '#87CEEB', name: 'Dublin (Sky Blue & Navy)' },
+  'Kerry': { primary: '#016F32', secondary: '#FFD700', name: 'Kerry (Green & Gold)' },
+  'Mayo': { primary: '#DC143C', secondary: '#016F32', name: 'Mayo (Red & Green)' },
+  'Tyrone': { primary: '#FFFFFF', secondary: '#DC143C', name: 'Tyrone (White & Red)' },
+  'Cork': { primary: '#DC143C', secondary: '#FFFFFF', name: 'Cork (Red & White)' },
+  'Galway': { primary: '#8B0000', secondary: '#FFFFFF', name: 'Galway (Maroon & White)' },
+  'Donegal': { primary: '#016F32', secondary: '#FFD700', name: 'Donegal (Green & Gold)' },
+  'Kilkenny': { primary: '#000000', secondary: '#FFB300', name: 'Kilkenny (Black & Amber)' },
+  'Limerick': { primary: '#016F32', secondary: '#FFFFFF', name: 'Limerick (Green & White)' },
+  'Tipperary': { primary: '#0066CC', secondary: '#FFD700', name: 'Tipperary (Blue & Gold)' },
+  'Waterford': { primary: '#0066CC', secondary: '#FFFFFF', name: 'Waterford (Blue & White)' },
+  'Clare': { primary: '#FFB300', secondary: '#0066CC', name: 'Clare (Saffron & Blue)' },
+  'Wexford': { primary: '#800080', secondary: '#FFD700', name: 'Wexford (Purple & Gold)' },
+  'Meath': { primary: '#016F32', secondary: '#FFD700', name: 'Meath (Green & Gold)' },
+  'Kildare': { primary: '#FFFFFF', secondary: '#C0C0C0', name: 'Kildare (White)' },
+  'Armagh': { primary: '#FF6600', secondary: '#FFFFFF', name: 'Armagh (Orange & White)' },
+  'Roscommon': { primary: '#FFD700', secondary: '#0066CC', name: 'Roscommon (Primrose & Blue)' },
+  'Down': { primary: '#DC143C', secondary: '#000000', name: 'Down (Red & Black)' },
+  'Monaghan': { primary: '#FFFFFF', secondary: '#0066CC', name: 'Monaghan (White & Blue)' },
+  'Derry': { primary: '#DC143C', secondary: '#FFFFFF', name: 'Derry (Red & White)' },
 } as const
 
 interface TeamColorPickerProps {
   teamId: string
-  currentHomeColor?: string
-  currentAwayColor?: string
+  currentPrimaryColor?: string
+  currentSecondaryColor?: string
   onColorsUpdated?: () => void
   apiClient: any
 }
 
 export default function TeamColorPicker({
   teamId,
-  currentHomeColor = '#016F32',
-  currentAwayColor = '#FFFFFF',
+  currentPrimaryColor = '#016F32',
+  currentSecondaryColor = '#FFD700',
   onColorsUpdated,
   apiClient
 }: TeamColorPickerProps) {
-  const [homeColor, setHomeColor] = useState(currentHomeColor)
-  const [awayColor, setAwayColor] = useState(currentAwayColor)
+  const [primaryColor, setPrimaryColor] = useState(currentPrimaryColor)
+  const [secondaryColor, setSecondaryColor] = useState(currentSecondaryColor)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
   const [showPresets, setShowPresets] = useState(true)
+  const [isExpanded, setIsExpanded] = useState(false)
 
   useEffect(() => {
-    setHomeColor(currentHomeColor)
-    setAwayColor(currentAwayColor)
-  }, [currentHomeColor, currentAwayColor])
+    setPrimaryColor(currentPrimaryColor)
+    setSecondaryColor(currentSecondaryColor)
+  }, [currentPrimaryColor, currentSecondaryColor])
 
   const handleSave = async () => {
     setSaving(true)
@@ -61,8 +62,8 @@ export default function TeamColorPicker({
 
     try {
       await apiClient.updateTeamColors(teamId, {
-        home_color: homeColor,
-        away_color: awayColor,
+        primary_color: primaryColor,
+        secondary_color: secondaryColor,
       })
       setSuccess(true)
       onColorsUpdated?.()
@@ -75,41 +76,62 @@ export default function TeamColorPicker({
     }
   }
 
-  const applyPreset = (preset: { home: string; away: string }) => {
-    setHomeColor(preset.home)
-    setAwayColor(preset.away)
+  const applyPreset = (preset: { primary: string; secondary: string }) => {
+    setPrimaryColor(preset.primary)
+    setSecondaryColor(preset.secondary)
   }
 
   return (
-    <div className="bg-[#1a1a1a] p-6 rounded-lg border border-gray-800">
-      <div className="flex items-center gap-2 mb-4">
-        <Palette className="w-5 h-5 text-[#D1FB7A]" />
-        <h3 className="text-lg font-semibold text-white">Team Colors</h3>
-      </div>
+    <div className="bg-[#1a1a1a] rounded-lg border border-gray-800">
+      {/* Collapsible Header */}
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-colors rounded-lg"
+      >
+        <div className="flex items-center gap-3">
+          <Palette className="w-5 h-5 text-[#D1FB7A]" />
+          <div className="text-left">
+            <h3 className="text-lg font-semibold text-white">Team Kit Colors</h3>
+            <p className="text-sm text-gray-400">
+              {isExpanded ? 'Click to collapse' : primaryColor && secondaryColor ? `${primaryColor} • ${secondaryColor}` : 'Click to set your team colors'}
+            </p>
+          </div>
+        </div>
+        <div className="text-gray-400">
+          {isExpanded ? '▲' : '▼'}
+        </div>
+      </button>
+
+      {/* Expandable Content */}
+      {isExpanded && (
+        <div className="px-6 pb-6 border-t border-gray-800 pt-6">
+          <p className="text-sm text-gray-400 mb-4">
+            GAA teams have one kit with two colors (e.g., Kerry: Green & Gold)
+          </p>
 
       {/* Color Pickers */}
       <div className="space-y-4 mb-6">
         <div>
           <label className="block text-sm font-medium text-gray-300 mb-2">
-            Home Color
+            Primary Color
           </label>
           <div className="flex items-center gap-3">
             <div
               className="w-12 h-12 rounded-lg border-2 border-gray-700 cursor-pointer"
-              style={{ backgroundColor: homeColor }}
-              onClick={() => document.getElementById('home-color-input')?.click()}
+              style={{ backgroundColor: primaryColor }}
+              onClick={() => document.getElementById('primary-color-input')?.click()}
             />
             <input
-              id="home-color-input"
+              id="primary-color-input"
               type="color"
-              value={homeColor}
-              onChange={(e) => setHomeColor(e.target.value)}
+              value={primaryColor}
+              onChange={(e) => setPrimaryColor(e.target.value)}
               className="w-24 h-10 cursor-pointer bg-transparent"
             />
             <input
               type="text"
-              value={homeColor}
-              onChange={(e) => setHomeColor(e.target.value)}
+              value={primaryColor}
+              onChange={(e) => setPrimaryColor(e.target.value)}
               className="flex-1 px-3 py-2 bg-[#0f0f0f] border border-gray-700 rounded text-white font-mono text-sm"
               placeholder="#016F32"
             />
@@ -118,27 +140,27 @@ export default function TeamColorPicker({
 
         <div>
           <label className="block text-sm font-medium text-gray-300 mb-2">
-            Away Color
+            Secondary Color
           </label>
           <div className="flex items-center gap-3">
             <div
               className="w-12 h-12 rounded-lg border-2 border-gray-700 cursor-pointer"
-              style={{ backgroundColor: awayColor }}
-              onClick={() => document.getElementById('away-color-input')?.click()}
+              style={{ backgroundColor: secondaryColor }}
+              onClick={() => document.getElementById('secondary-color-input')?.click()}
             />
             <input
-              id="away-color-input"
+              id="secondary-color-input"
               type="color"
-              value={awayColor}
-              onChange={(e) => setAwayColor(e.target.value)}
+              value={secondaryColor}
+              onChange={(e) => setSecondaryColor(e.target.value)}
               className="w-24 h-10 cursor-pointer bg-transparent"
             />
             <input
               type="text"
-              value={awayColor}
-              onChange={(e) => setAwayColor(e.target.value)}
+              value={secondaryColor}
+              onChange={(e) => setSecondaryColor(e.target.value)}
               className="flex-1 px-3 py-2 bg-[#0f0f0f] border border-gray-700 rounded text-white font-mono text-sm"
-              placeholder="#FFFFFF"
+              placeholder="#FFD700"
             />
           </div>
         </div>
@@ -164,11 +186,11 @@ export default function TeamColorPicker({
                 <div className="flex gap-1">
                   <div
                     className="w-6 h-6 rounded border border-gray-700"
-                    style={{ backgroundColor: colors.home }}
+                    style={{ backgroundColor: colors.primary }}
                   />
                   <div
                     className="w-6 h-6 rounded border border-gray-700"
-                    style={{ backgroundColor: colors.away }}
+                    style={{ backgroundColor: colors.secondary }}
                   />
                 </div>
                 <span className="text-sm text-gray-400 group-hover:text-white">
@@ -182,21 +204,21 @@ export default function TeamColorPicker({
 
       {/* Preview */}
       <div className="mb-6 p-4 bg-[#0f0f0f] rounded border border-gray-800">
-        <p className="text-sm text-gray-400 mb-2">Preview:</p>
+        <p className="text-sm text-gray-400 mb-2">Kit Preview:</p>
         <div className="flex gap-4">
           <div className="text-center">
             <div
               className="w-16 h-16 rounded-lg mb-2"
-              style={{ backgroundColor: homeColor }}
+              style={{ backgroundColor: primaryColor }}
             />
-            <p className="text-xs text-gray-500">Home</p>
+            <p className="text-xs text-gray-500">Primary</p>
           </div>
           <div className="text-center">
             <div
               className="w-16 h-16 rounded-lg mb-2"
-              style={{ backgroundColor: awayColor }}
+              style={{ backgroundColor: secondaryColor }}
             />
-            <p className="text-xs text-gray-500">Away</p>
+            <p className="text-xs text-gray-500">Secondary</p>
           </div>
         </div>
       </div>
@@ -223,9 +245,11 @@ export default function TeamColorPicker({
         )}
       </div>
 
-      <p className="text-xs text-gray-500 mt-4 text-center">
-        These colors will be used to display your team in game videos and match events
-      </p>
+          <p className="text-xs text-gray-500 mt-4 text-center">
+            Your team's kit colors will be displayed in game videos and match events
+          </p>
+        </div>
+      )}
     </div>
   )
 }

@@ -362,8 +362,8 @@ export default function TeamPage() {
                 <div className="mb-6">
                   <TeamColorPicker 
                     teamId={currentTeam.id}
-                    currentHomeColor={currentTeam.home_color}
-                    currentAwayColor={currentTeam.away_color}
+                    currentPrimaryColor={currentTeam.primary_color}
+                    currentSecondaryColor={currentTeam.secondary_color}
                     onColorsUpdated={fetchTeams}
                     apiClient={teams}
                   />

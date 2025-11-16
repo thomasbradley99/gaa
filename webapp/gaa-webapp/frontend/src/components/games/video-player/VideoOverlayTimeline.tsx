@@ -20,10 +20,10 @@ export function VideoOverlayTimeline({
     return `${mins}:${secs.toString().padStart(2, '0')}`
   }
 
-  // Get color for team - using Clann green (#2D8B4D)
+  // Get color for team - white for home, black for away
   const getTeamColor = (team?: string) => {
-    if (team === 'home' || team === 'red') return 'bg-[#2D8B4D] border-[#2D8B4D]/70'
-    if (team === 'away' || team === 'blue') return 'bg-yellow-400 border-yellow-600'
+    if (team === 'home' || team === 'red') return 'bg-white border-white/70'
+    if (team === 'away' || team === 'blue') return 'bg-black border-black/70'
     return 'bg-gray-500 border-gray-700' // Default for unknown teams
   }
 
@@ -119,8 +119,8 @@ export function VideoOverlayTimeline({
             {/* Current event info */}
             <div className="flex items-center gap-2 min-w-[180px]">
               <div
-                className={`px-2 py-1 rounded text-xs font-semibold text-white ${
-                  currentEvent.team === 'home' ? 'bg-green-600' : 'bg-yellow-500'
+                className={`px-2 py-1 rounded text-xs font-semibold ${
+                  currentEvent.team === 'home' ? 'bg-white text-black' : 'bg-black text-white'
                 }`}
               >
                 {currentEvent.team === 'home' ? 'Home' : 'Away'}

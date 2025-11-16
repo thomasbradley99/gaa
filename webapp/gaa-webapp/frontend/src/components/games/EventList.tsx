@@ -43,7 +43,7 @@ export function EventList({
   const getEventTypeColor = (type: GameEvent['type']) => {
     switch (type) {
       case 'shot':
-        // Color based on outcome - use Clann green for shots
+        // Color based on outcome - use green for shots
         return CLANN_GREEN
       case 'kickout':
         return 'bg-orange-500'
@@ -84,9 +84,9 @@ export function EventList({
     return event.type.charAt(0).toUpperCase() + event.type.slice(1).replace('-', ' ')
   }
 
-  // Get team color
+  // Get team color - white for home, black for away
   const getTeamColor = (team: 'home' | 'away') => {
-    return team === 'home' ? CLANN_GREEN : 'bg-yellow-400'
+    return team === 'home' ? 'bg-white' : 'bg-black'
   }
 
   // Check if event is near current time
@@ -159,8 +159,8 @@ export function EventList({
                   <div className="flex items-center gap-2 mb-1">
                     <span
                       className={`px-2 py-0.5 rounded text-xs font-semibold ${
-                        event.team === 'home' ? 'bg-[#2D8B4D]' : 'bg-yellow-500'
-                      } text-white`}
+                        event.team === 'home' ? 'bg-white text-black' : 'bg-black text-white'
+                      }`}
                     >
                       {event.team === 'home' ? 'Home' : 'Away'}
                     </span>

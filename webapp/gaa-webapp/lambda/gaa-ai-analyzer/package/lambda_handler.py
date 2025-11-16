@@ -8,7 +8,16 @@ import json
 import os
 import tempfile
 import requests
+import boto3
 from pathlib import Path
+from utils import (
+    update_video_status,
+    update_processing_progress,
+    update_thumbnail,
+    extract_thumbnail,
+    upload_to_s3,
+    download_video
+)
 from stages import (
     stage_0_0_download_calibration_frames,
     stage_0_5_calibrate_game,
@@ -72,17 +81,34 @@ def lambda_handler(event, context):
     if not game_id or not video_url:
         raise ValueError("Missing required fields: game_id, video_url")
     
+    # Update status to 'processing' 
+    update_video_status(game_id, 'processing')
+    update_processing_progress(game_id, 'Starting analysis', 0)
+    
     # Create working directory in /tmp
     work_dir = Path(tempfile.mkdtemp(prefix='gaa-analysis-'))
     print(f"📁 Working directory: {work_dir}")
     
+    # Get S3 bucket from environment
+    bucket_name = os.environ.get('AWS_BUCKET_NAME', 'clann-gaa-videos-nov25')
+    
     try:
+        # Download full video to /tmp first (ffmpeg can't stream HTTPS reliably)
+        print("\n" + "="*60)
+        print("DOWNLOADING VIDEO")
+        print("="*60)
+        update_processing_progress(game_id, 'Downloading video from VEO', 3)
+        video_file = work_dir / "full_video.mp4"
+        if not download_video(video_url, str(video_file)):
+            raise RuntimeError("Failed to download video")
+        
         # Stage 0.0: Download calibration frames (fast - just a few frames)
         print("\n" + "="*60)
         print("STAGE 0.0: Download Calibration Frames")
         print("="*60)
+        update_processing_progress(game_id, 'Extracting calibration frames', 8)
         frames_dir = stage_0_0_download_calibration_frames.run(
-            video_url=video_url,
+            video_url=str(video_file),  # Use local file instead of URL
             work_dir=work_dir
         )
         
@@ -90,6 +116,7 @@ def lambda_handler(event, context):
         print("\n" + "="*60)
         print("STAGE 0.5: Calibrate Game")
         print("="*60)
+        update_processing_progress(game_id, 'Calibrating game (detecting teams)', 15)
         game_profile = stage_0_5_calibrate_game.run(
             frames_dir=frames_dir,
             work_dir=work_dir,
@@ -101,16 +128,33 @@ def lambda_handler(event, context):
         print("\n" + "="*60)
         print("STAGE 0.1: Extract First 10 Minutes")
         print("="*60)
+        update_processing_progress(game_id, 'Extracting first 10 minutes', 25)
         video_path = stage_0_1_extract_first_10mins.run(
-            video_url=video_url,
+            video_url=str(video_file),  # Use local file instead of URL
             game_profile=game_profile,
             work_dir=work_dir
         )
+        
+        # Generate and upload thumbnail
+        print("\n" + "="*60)
+        print("GENERATING THUMBNAIL")
+        print("="*60)
+        thumbnail_path = work_dir / "thumbnail.jpg"
+        if extract_thumbnail(str(video_path), str(thumbnail_path), timestamp=5):
+            thumbnail_s3_key = f"videos/{game_id}/thumbnail.jpg"
+            if upload_to_s3(str(thumbnail_path), thumbnail_s3_key, bucket_name, 'image/jpeg'):
+                update_thumbnail(game_id, thumbnail_s3_key)
+                print(f"✅ Thumbnail uploaded: {thumbnail_s3_key}")
+            else:
+                print("⚠️ Thumbnail upload failed (continuing)")
+        else:
+            print("⚠️ Thumbnail extraction failed (continuing)")
         
         # Stage 0.2: Generate clips (10 x 60s clips)
         print("\n" + "="*60)
         print("STAGE 0.2: Generate Clips")
         print("="*60)
+        update_processing_progress(game_id, 'Generating video clips', 35)
         clips_dir = stage_0_2_generate_clips.run(
             video_path=video_path,
             work_dir=work_dir
@@ -120,6 +164,7 @@ def lambda_handler(event, context):
         print("\n" + "="*60)
         print("STAGE 1: Clips to Descriptions (Parallel)")
         print("="*60)
+        update_processing_progress(game_id, 'Analyzing clips with AI (parallel)', 45)
         descriptions = stage_1_clips_to_descriptions.run(
             clips_dir=clips_dir,
             game_profile=game_profile,
@@ -131,6 +176,7 @@ def lambda_handler(event, context):
         print("\n" + "="*60)
         print("STAGE 2: Create Coherent Narrative")
         print("="*60)
+        update_processing_progress(game_id, 'Creating narrative', 60)
         narrative = stage_2_create_coherent_narrative.run(
             descriptions=descriptions,
             game_profile=game_profile,
@@ -142,6 +188,7 @@ def lambda_handler(event, context):
         print("\n" + "="*60)
         print("STAGE 3: Event Classification")
         print("="*60)
+        update_processing_progress(game_id, 'Classifying events (goals, points, fouls)', 75)
         classified_events = stage_3_event_classification.run(
             narrative=narrative,
             game_profile=game_profile,
@@ -153,6 +200,7 @@ def lambda_handler(event, context):
         print("\n" + "="*60)
         print("STAGE 4: Extract JSON")
         print("="*60)
+        update_processing_progress(game_id, 'Extracting structured data', 85)
         events_json = stage_4_json_extraction.run(
             classified_events=classified_events,
             game_profile=game_profile,
@@ -164,6 +212,7 @@ def lambda_handler(event, context):
         print("\n" + "="*60)
         print("STAGE 5: Export to Anadi XML")
         print("="*60)
+        update_processing_progress(game_id, 'Generating XML analysis', 92)
         xml_content = stage_5_export_to_anadi_xml.run(
             events_json=events_json,
             game_profile=game_profile,
@@ -174,12 +223,17 @@ def lambda_handler(event, context):
         print("\n" + "="*60)
         print("POSTING RESULTS TO BACKEND")
         print("="*60)
+        update_processing_progress(game_id, 'Saving results', 95)
         post_results_to_backend(game_id, xml_content, events_json)
         
         print("\n" + "="*60)
         print("✅ PIPELINE COMPLETE!")
         print("="*60)
         print(f"📊 Total events detected: {len(events_json.get('events', []))}")
+        
+        # Update status to completed
+        update_processing_progress(game_id, 'Complete', 100)
+        update_video_status(game_id, 'completed')
         
         return {
             'statusCode': 200,
@@ -195,6 +249,9 @@ def lambda_handler(event, context):
         print(f"\n❌ Pipeline failed: {e}")
         import traceback
         traceback.print_exc()
+        
+        # Update status to failed
+        update_video_status(game_id, 'failed', error=str(e))
         
         return {
             'statusCode': 500,

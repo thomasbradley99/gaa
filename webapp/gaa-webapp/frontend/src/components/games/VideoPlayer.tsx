@@ -196,7 +196,13 @@ export default function VideoPlayer({
       if (isPlaying) {
         videoRef.current.pause()
       } else {
-        videoRef.current.play()
+        const playPromise = videoRef.current.play()
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            // Auto-play was prevented or interrupted
+            console.log('Play interrupted:', error)
+          })
+        }
       }
       setIsPlaying(!isPlaying)
     }
@@ -289,7 +295,10 @@ export default function VideoPlayer({
       if (videoRef.current) {
         videoRef.current.currentTime = timestamp
         if (videoRef.current.paused) {
-          videoRef.current.play()
+          const playPromise = videoRef.current.play()
+          if (playPromise !== undefined) {
+            playPromise.catch(error => console.log('Play interrupted:', error))
+          }
         }
       }
     }

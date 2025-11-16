@@ -225,7 +225,10 @@ export default function GameDetailPage() {
     const video = (window as any).videoElement as HTMLVideoElement
     if (video) {
       video.currentTime = event.timestamp
-      video.play()
+      const playPromise = video.play()
+      if (playPromise !== undefined) {
+        playPromise.catch(error => console.log('Play interrupted:', error))
+      }
       setCurrentTime(event.timestamp)
     }
   }
@@ -235,7 +238,10 @@ export default function GameDetailPage() {
     if (video) {
       video.currentTime = timestamp
       if (video.paused) {
-        video.play()
+        const playPromise = video.play()
+        if (playPromise !== undefined) {
+          playPromise.catch(error => console.log('Play interrupted:', error))
+        }
       }
     }
   }

@@ -58,7 +58,10 @@ export function VideoPlayerContainer({
     const video = (window as any).videoElement as HTMLVideoElement
     if (video) {
       if (video.paused) {
-        video.play()
+        const playPromise = video.play()
+        if (playPromise !== undefined) {
+          playPromise.catch(error => console.log('Play interrupted:', error))
+        }
       } else {
         video.pause()
       }

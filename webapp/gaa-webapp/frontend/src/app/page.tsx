@@ -68,7 +68,10 @@ function DemoMobileVideoPlayer({ demoEvents, filteredDemoEvents, setDemoCurrentT
             const video = (window as any).videoElement as HTMLVideoElement
             if (video) {
               video.currentTime = event.timestamp
-              video.play()
+              const playPromise = video.play()
+              if (playPromise !== undefined) {
+                playPromise.catch(error => console.log('Play interrupted:', error))
+              }
             }
           }}
           onSeekToTimestamp={(timestamp: number) => {
@@ -323,7 +326,10 @@ function HomePage() {
                         const video = (window as any).videoElement as HTMLVideoElement
                         if (video) {
                           video.currentTime = event.timestamp
-                          video.play()
+                          const playPromise = video.play()
+                          if (playPromise !== undefined) {
+                            playPromise.catch(error => console.log('Play interrupted:', error))
+                          }
                           setDemoCurrentTime(event.timestamp)
                         }
                       }}
@@ -336,7 +342,10 @@ function HomePage() {
                         if (video) {
                           video.currentTime = timestamp
                           if (video.paused) {
-                            video.play()
+                            const playPromise = video.play()
+                            if (playPromise !== undefined) {
+                              playPromise.catch(error => console.log('Play interrupted:', error))
+                            }
                           }
                         }
                       }}
@@ -373,7 +382,10 @@ function HomePage() {
                       const video = (window as any).videoElement as HTMLVideoElement
                       if (video) {
                         video.currentTime = event.timestamp
-                        video.play()
+                        const playPromise = video.play()
+                        if (playPromise !== undefined) {
+                          playPromise.catch(error => console.log('Play interrupted:', error))
+                        }
                         setDemoCurrentTime(event.timestamp)
                       }
                     }}
@@ -409,7 +421,10 @@ function HomePage() {
                       const video = (window as any).videoElement as HTMLVideoElement
                       if (video) {
                         video.currentTime = event.timestamp
-                        video.play()
+                        const playPromise = video.play()
+                        if (playPromise !== undefined) {
+                          playPromise.catch(error => console.log('Play interrupted:', error))
+                        }
                         setDemoCurrentTime(event.timestamp)
                       }
                     }}

@@ -19,6 +19,8 @@ import tempfile
 import boto3
 import psycopg2
 import requests
+import gc
+import subprocess
 from pathlib import Path
 
 # AWS clients
@@ -157,6 +159,57 @@ def upload_to_s3(local_path, s3_key):
         return True
     except Exception as e:
         print(f"❌ Failed to upload to S3: {e}")
+        return False
+
+
+def extract_thumbnail(video_path, thumbnail_path, timestamp=5):
+    """
+    Extract a thumbnail frame from video at specified timestamp
+    
+    Args:
+        video_path: Path to video file
+        thumbnail_path: Path to save thumbnail
+        timestamp: Time in seconds to extract frame (default: 5)
+    
+    Returns:
+        True if successful, False otherwise
+    """
+    try:
+        print(f"🖼️  Extracting thumbnail at {timestamp}s...")
+        
+        # Use ffmpeg to extract frame (if available in Lambda layer)
+        # Otherwise fall back to just marking success
+        try:
+            cmd = [
+                'ffmpeg',
+                '-i', str(video_path),
+                '-ss', str(timestamp),
+                '-vframes', '1',
+                '-vf', 'scale=480:-1',
+                '-q:v', '2',
+                str(thumbnail_path),
+                '-y'
+            ]
+            
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                timeout=30
+            )
+            
+            if result.returncode == 0 and thumbnail_path.exists():
+                print(f"✅ Thumbnail extracted: {thumbnail_path.stat().st_size / 1024:.1f} KB")
+                return True
+            else:
+                print(f"⚠️  ffmpeg not available, skipping thumbnail")
+                return False
+                
+        except FileNotFoundError:
+            print(f"⚠️  ffmpeg not found, skipping thumbnail")
+            return False
+            
+    except Exception as e:
+        print(f"❌ Error extracting thumbnail: {e}")
         return False
 
 
@@ -420,6 +473,24 @@ def lambda_handler(event, context):
             if not downloader.download_video(direct_video_url, video_path):
                 raise Exception("Failed to download video")
             
+            # Extract thumbnail
+            thumbnail_path = temp_path / "thumbnail.jpg"
+            thumbnail_s3_key = None
+            if extract_thumbnail(video_path, thumbnail_path):
+                # Upload thumbnail to S3
+                thumbnail_s3_key = f"videos/{game_id}/thumbnail.jpg"
+                try:
+                    s3_client.upload_file(
+                        Filename=str(thumbnail_path),
+                        Bucket=BUCKET_NAME,
+                        Key=thumbnail_s3_key,
+                        ExtraArgs={'ContentType': 'image/jpeg'}
+                    )
+                    print(f"✅ Thumbnail uploaded to S3: {thumbnail_s3_key}")
+                except Exception as e:
+                    print(f"⚠️  Failed to upload thumbnail: {e}")
+                    thumbnail_s3_key = None
+            
             # Generate S3 key: videos/{game_id}/video.mp4
             s3_key = f"videos/{game_id}/video.mp4"
             
@@ -428,6 +499,26 @@ def lambda_handler(event, context):
                 raise Exception("Failed to upload video to S3")
             
             print(f"✅ Video uploaded to S3: {s3_key}")
+            
+            # Update database with video and thumbnail keys
+            if thumbnail_s3_key:
+                try:
+                    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+                    cur = conn.cursor()
+                    cur.execute("""
+                        UPDATE games 
+                        SET s3_key = %s, 
+                            thumbnail_key = %s,
+                            status = 'downloaded',
+                            updated_at = NOW()
+                        WHERE id = %s
+                    """, (s3_key, thumbnail_s3_key, game_id))
+                    conn.commit()
+                    cur.close()
+                    conn.close()
+                    print(f"✅ Database updated with video and thumbnail")
+                except Exception as e:
+                    print(f"⚠️  Failed to update thumbnail in database: {e}")
             
             # TODO: Run AI analysis on video
             # For now, use placeholder events from the existing events API
@@ -491,10 +582,15 @@ def lambda_handler(event, context):
                 })
             }
         finally:
-            # Cleanup: Remove downloaded video to free up /tmp space
+            # Cleanup: Remove downloaded files to free up /tmp space
             if video_path.exists():
                 video_path.unlink()
-                print(f"🧹 Cleaned up temp file: {video_path}")
+                print(f"🧹 Cleaned up temp video: {video_path}")
+            
+            thumbnail_path = temp_path / "thumbnail.jpg"
+            if thumbnail_path.exists():
+                thumbnail_path.unlink()
+                print(f"🧹 Cleaned up temp thumbnail: {thumbnail_path}")
             
     except Exception as e:
         print(f"❌ Lambda failed: {e}")

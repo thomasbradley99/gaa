@@ -14,6 +14,8 @@
 
 const express = require('express');
 const { LambdaClient, InvokeCommand } = require('@aws-sdk/client-lambda');
+const { S3Client, GetObjectCommand } = require('@aws-sdk/client-s3');
+const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 const { query } = require('../utils/database');
 const { authenticateToken, authenticateLambda } = require('../middleware/auth');
 const { getPresignedUploadUrl, getPresignedDownloadUrl } = require('../utils/s3');
@@ -22,8 +24,18 @@ const router = express.Router();
 
 // Lambda client (only initialize if AWS credentials are available)
 let lambdaClient = null;
+let s3Client = null;
+
 if (process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY) {
   lambdaClient = new LambdaClient({
+    region: process.env.AWS_REGION || 'eu-west-1',
+    credentials: {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    },
+  });
+  
+  s3Client = new S3Client({
     region: process.env.AWS_REGION || 'eu-west-1',
     credentials: {
       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -103,7 +115,25 @@ router.get('/', authenticateToken, async (req, res) => {
     
     const result = await query(queryText, params);
 
-    res.json({ games: result.rows });
+    // Generate presigned URLs for thumbnails
+    const gamesWithThumbnails = await Promise.all(
+      result.rows.map(async (game) => {
+        if (game.thumbnail_key && s3Client) {
+          try {
+            const command = new GetObjectCommand({
+              Bucket: process.env.AWS_BUCKET_NAME,
+              Key: game.thumbnail_key,
+            });
+            game.thumbnail_url = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
+          } catch (error) {
+            console.error(`Failed to generate thumbnail URL for game ${game.id}:`, error);
+          }
+        }
+        return game;
+      })
+    );
+
+    res.json({ games: gamesWithThumbnails });
   } catch (error) {
     console.error('Get games error:', error);
     res.status(500).json({ error: 'Failed to get games' });

@@ -177,11 +177,13 @@ def extract_thumbnail(video_path, thumbnail_path, timestamp=5):
     try:
         print(f"🖼️  Extracting thumbnail at {timestamp}s...")
         
-        # Use ffmpeg to extract frame (if available in Lambda layer)
-        # Otherwise fall back to just marking success
+        # Use ffmpeg to extract frame (if available in Lambda layer or bin directory)
+        # Check for ffmpeg in bin directory first (bundled static binary)
+        ffmpeg_path = '/var/task/bin/ffmpeg' if os.path.exists('/var/task/bin/ffmpeg') else 'ffmpeg'
+        
         try:
             cmd = [
-                'ffmpeg',
+                ffmpeg_path,
                 '-i', str(video_path),
                 '-ss', str(timestamp),
                 '-vframes', '1',
@@ -457,10 +459,16 @@ def lambda_handler(event, context):
         # Initialize downloader
         downloader = VeoDownloader()
         
-        # Extract direct video URL from VEO
-        direct_video_url = downloader.extract_video_url(veo_url)
-        if not direct_video_url:
-            raise Exception("Failed to extract video URL from VEO page")
+        # Check if URL is already a direct video URL
+        if veo_url.endswith('.mp4') or 'veocdn.com' in veo_url:
+            print(f"✅ Direct video URL detected, skipping extraction")
+            direct_video_url = veo_url
+        else:
+            # Extract direct video URL from VEO page
+            print(f"🔍 VEO page URL detected, extracting video URL...")
+            direct_video_url = downloader.extract_video_url(veo_url)
+            if not direct_video_url:
+                raise Exception("Failed to extract video URL from VEO page")
         
         # Create temp directory in /tmp (Lambda has 10GB here)
         temp_dir = "/tmp/gaa-veo-download"

@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { auth, setToken } from '@/lib/api-client'
-import { PitchFinder } from '@/components/pitch-finder/PitchFinder'
 import VideoPlayer from '@/components/games/VideoPlayer'
 import UnifiedSidebar from '@/components/games/UnifiedSidebar'
 import { transformDatabaseEventsToGameEvents } from '@/lib/event-transformer'
@@ -30,10 +29,6 @@ function HomePage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  // Typing animation state
-  const [activeLineIndex, setActiveLineIndex] = useState(0)
-  const [typingText, setTypingText] = useState('')
-
   // Demo player state
   const [demoCurrentTime, setDemoCurrentTime] = useState(0)
   const [demoDuration, setDemoDuration] = useState(0)
@@ -45,59 +40,6 @@ function HomePage() {
   const filteredDemoEvents = demoTeamFilter === 'all' 
     ? demoEvents 
     : demoEvents.filter(e => e.team === demoTeamFilter)
-
-  // Typing animation effect
-  useEffect(() => {
-    const lines = [
-      'Match highlights & key moments',
-      'Complete game analysis',
-      'AI tactical insights',
-      'Player performance stats'
-    ]
-
-    let currentIndex = 0
-    let charIndex = 0
-    let isDeleting = false
-    let timeout: NodeJS.Timeout
-
-    const typeText = () => {
-      const currentText = lines[currentIndex]
-      
-      if (!isDeleting) {
-        setTypingText(currentText.substring(0, charIndex + 1))
-        charIndex++
-        
-        if (charIndex === currentText.length) {
-          timeout = setTimeout(() => {
-            currentIndex = (currentIndex + 1) % lines.length
-            setActiveLineIndex(currentIndex)
-            isDeleting = true
-            charIndex = currentText.length
-            typeText()
-          }, 2000)
-          return
-        }
-      } else {
-        setTypingText(currentText.substring(0, charIndex - 1))
-        charIndex--
-        
-        if (charIndex === 0) {
-          isDeleting = false
-        }
-      }
-      
-      const speed = isDeleting ? 30 : 60
-      timeout = setTimeout(typeText, speed)
-    }
-
-    typeText()
-
-    return () => {
-      if (timeout) {
-        clearTimeout(timeout)
-      }
-    }
-  }, [])
 
   // Check API URL
   useEffect(() => {
@@ -252,105 +194,22 @@ function HomePage() {
           {/* Hero Content */}
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Empty space above hero text */}
-            <div className="h-[35vh]" />
+            <div className="h-[30vh]" />
 
-            {/* Three simple step cards */}
-            <div className="max-w-7xl mx-auto px-4 mb-8 mt-20">
-              <div className="grid grid-cols-3 gap-3 md:gap-6">
-                {/* Step 1 */}
-                <div className="rounded-2xl bg-black/60 border border-white/10 backdrop-blur-xl overflow-hidden relative shadow-lg">
-                  <div className="p-3 md:p-5 text-center">
-                    <div className="text-xs md:text-sm font-medium mb-1 text-white/60">Step 1</div>
-                    <h3 className="text-sm md:text-lg font-semibold text-white mb-1">📹 Upload footage</h3>
-                    <p className="text-xs md:text-sm text-white/70 mb-2 md:mb-3">VEO, Trace, Spiideo or any MP4</p>
-                  </div>
-                </div>
-
-                {/* Step 2 */}
-                <div className="rounded-2xl bg-black/60 border border-white/10 backdrop-blur-xl p-3 md:p-5 text-center shadow-lg">
-                  <div className="text-xs md:text-sm font-medium mb-1 text-white/60">Step 2</div>
-                  <h3 className="text-sm md:text-lg font-semibold text-white mb-2">ClannAI creates</h3>
-                  <div className="text-xs md:text-sm text-white/70 space-y-1">
-                    <div className="flex items-center justify-center gap-1">
-                      <span>🎬</span>
-                      <span className={activeLineIndex === 0 ? 'text-[var(--gaa-bright-green)]' : ''}>
-                        {activeLineIndex === 0 ? (
-                          <>
-                            {typingText}
-                            <span className="animate-pulse">|</span>
-                          </>
-                        ) : (
-                          'Match highlights & key moments'
-                        )}
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-center gap-1">
-                      <span>📊</span>
-                      <span className={activeLineIndex === 1 ? 'text-[var(--gaa-bright-green)]' : ''}>
-                        {activeLineIndex === 1 ? (
-                          <>
-                            {typingText}
-                            <span className="animate-pulse">|</span>
-                          </>
-                        ) : (
-                          'Complete game analysis'
-                        )}
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-center gap-1">
-                      <span>🤖</span>
-                      <span className={activeLineIndex === 2 ? 'text-[var(--gaa-bright-green)]' : ''}>
-                        {activeLineIndex === 2 ? (
-                          <>
-                            {typingText}
-                            <span className="animate-pulse">|</span>
-                          </>
-                        ) : (
-                          'AI tactical insights'
-                        )}
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-center gap-1">
-                      <span>⚽</span>
-                      <span className={activeLineIndex === 3 ? 'text-[var(--gaa-bright-green)]' : ''}>
-                        {activeLineIndex === 3 ? (
-                          <>
-                            {typingText}
-                            <span className="animate-pulse">|</span>
-                          </>
-                        ) : (
-                          'Player performance stats'
-                        )}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Step 3 */}
-                <div className="rounded-2xl bg-black/60 border border-white/10 backdrop-blur-xl p-3 md:p-5 text-center shadow-lg">
-                  <div className="text-xs md:text-sm font-medium mb-1 text-white/60">Step 3</div>
-                  <h3 className="text-sm md:text-lg font-semibold text-white mb-1">🔒 Sign up now</h3>
-                  <p className="text-xs md:text-sm text-white/70 mb-2 md:mb-3">Get started with GAA analysis</p>
-                  <button
-                    onClick={openGetStarted}
-                    className="px-3 md:px-4 py-2 md:py-2.5 rounded-lg font-medium text-xs md:text-sm bg-white/10 hover:bg-white/15 border border-white/20 hover:border-white/30 text-white transition-all"
-                  >
-                    Join Now
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="max-w-2xl mx-auto px-4 pt-4 pb-10 text-center">
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <button
-                  onClick={openGetStarted}
-                  className="px-6 py-3 bg-white/10 hover:bg-white/15 backdrop-blur-xl border border-white/20 hover:border-white/30 text-white font-medium rounded-xl transition-all duration-200 shadow-lg"
-                >
-                  Get Started Free
-                </button>
-              </div>
+            {/* Simple Hero Message */}
+            <div className="max-w-3xl mx-auto text-center mb-16">
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                AI for GAA
+              </h1>
+              <p className="text-xl md:text-2xl text-white/80 mb-8">
+                Upload your footage and get automated insights.
+              </p>
+              <button
+                onClick={openGetStarted}
+                className="px-8 py-4 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white font-semibold rounded-xl transition-all duration-200 shadow-xl text-lg"
+              >
+                Get Started Free
+              </button>
             </div>
 
             {/* Demo Game Section */}
@@ -439,25 +298,51 @@ function HomePage() {
                   onTeamFilterChange={setDemoTeamFilter}
                 />
               </div>
-              <div className="text-center mt-6">
-                <button
-                  onClick={openGetStarted}
-                  className="px-8 py-3 bg-white/10 hover:bg-white/15 backdrop-blur-xl border border-white/20 hover:border-white/30 text-white font-medium rounded-xl transition-all duration-200 shadow-lg"
-                >
-                  Create Account to Get AI Coach
-                </button>
-              </div>
             </div>
 
-            {/* Pitch Finder Section */}
-            <div className="max-w-7xl mx-auto px-4 py-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center text-white">
-                Find Your Club
+            {/* Features Section */}
+            <div className="max-w-5xl mx-auto px-4 py-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
+                What You Get
               </h2>
-              <p className="text-gray-300 text-center mb-8">
-                Search for your GAA club on the map of Ireland
-              </p>
-              <PitchFinder />
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Feature 1 */}
+                <div className="rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl p-6 shadow-lg">
+                  <div className="text-3xl mb-3">🎯</div>
+                  <h3 className="text-xl font-semibold text-white mb-2">Event Tracking</h3>
+                  <p className="text-white/70">Automatic detection of shots, kickouts, turnovers, and fouls throughout the match</p>
+                </div>
+
+                {/* Feature 2 */}
+                <div className="rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl p-6 shadow-lg">
+                  <div className="text-3xl mb-3">📊</div>
+                  <h3 className="text-xl font-semibold text-white mb-2">Match Statistics</h3>
+                  <p className="text-white/70">Detailed stats on possession, conversion rates, shot outcomes, and team performance</p>
+                </div>
+
+                {/* Feature 3 */}
+                <div className="rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl p-6 shadow-lg">
+                  <div className="text-3xl mb-3">🎬</div>
+                  <h3 className="text-xl font-semibold text-white mb-2">Event Timeline</h3>
+                  <p className="text-white/70">Navigate through the game with timestamped events and instant video replay</p>
+                </div>
+
+                {/* Feature 4 */}
+                <div className="rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl p-6 shadow-lg">
+                  <div className="text-3xl mb-3">🤖</div>
+                  <h3 className="text-xl font-semibold text-white mb-2">AI Coach</h3>
+                  <p className="text-white/70">Get tactical insights and strategic recommendations based on match analysis</p>
+                </div>
+              </div>
+
+              <div className="text-center mt-12">
+                <button
+                  onClick={openGetStarted}
+                  className="px-8 py-4 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white font-semibold rounded-xl transition-all duration-200 shadow-xl text-lg"
+                >
+                  Start Analyzing Today
+                </button>
+              </div>
             </div>
           </div>
         </div>

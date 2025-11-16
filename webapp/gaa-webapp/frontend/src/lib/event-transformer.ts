@@ -65,10 +65,11 @@ function mapTeamColor(team: string, teamMapping?: { red: 'home' | 'away', blue: 
 /**
  * Extract score type from outcome
  */
-function getScoreType(outcome: string): 'goal' | 'point' | 'wide' | 'saved' | undefined {
+function getScoreType(outcome: string): 'goal' | 'point' | 'wide' | 'saved' | 'short_keeper' | undefined {
   switch (outcome) {
     case 'Goal':
       return 'goal'
+    case 'Point':
     case '1Point':
     case '2Point':
       return 'point'
@@ -76,6 +77,8 @@ function getScoreType(outcome: string): 'goal' | 'point' | 'wide' | 'saved' | un
       return 'wide'
     case 'Saved':
       return 'saved'
+    case 'Short Keeper':
+      return 'short_keeper'
     default:
       return undefined
   }

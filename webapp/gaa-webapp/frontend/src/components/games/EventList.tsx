@@ -149,11 +149,6 @@ export function EventList({
               }`}
             >
               <div className="flex items-start gap-3">
-                {/* Event Type Indicator */}
-                <div
-                  className={`w-2 h-2 rounded-full mt-2 ${getEventTypeColor(event.type)}`}
-                />
-
                 {/* Event Details */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">

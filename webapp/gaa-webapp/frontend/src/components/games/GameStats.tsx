@@ -20,10 +20,6 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
   const stats = useMemo(() => {
     const homeEvents = events.filter((e) => e.team === 'home')
     const awayEvents = events.filter((e) => e.team === 'away')
-    
-    console.log('GameStats - Total events:', events.length)
-    console.log('GameStats - Home events:', homeEvents.length, 'Away events:', awayEvents.length)
-    console.log('GameStats - Sample teams:', events.slice(0, 5).map(e => e.team))
 
     // Calculate possession (simplified - based on events)
     const totalPossessions = events.length

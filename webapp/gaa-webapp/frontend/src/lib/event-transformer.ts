@@ -49,6 +49,7 @@ function mapActionToType(action: string): GameEvent['type'] {
  * Map team color to home/away
  */
 function mapTeamColor(team: 'red' | 'blue', teamMapping?: { red: 'home' | 'away', blue: 'home' | 'away' }): 'home' | 'away' {
+  console.log('mapTeamColor called with:', team, 'result:', team === 'red' ? 'home' : 'away')
   if (!teamMapping) {
     // Default: red = home, blue = away
     return team === 'red' ? 'home' : 'away'

@@ -420,8 +420,8 @@ function HomePage() {
               )}
             </div>
 
-            {/* Pitch Finder Section */}
-            <div className="max-w-7xl mx-auto px-4 py-16">
+            {/* Pitch Finder Section - Hidden on mobile */}
+            <div className="hidden md:block max-w-7xl mx-auto px-4 py-16">
               <PitchFinder 
                 onClubSelect={() => {
                   setIsLogin(false) // Default to sign up

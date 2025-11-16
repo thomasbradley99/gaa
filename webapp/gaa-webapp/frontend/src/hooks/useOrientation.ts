@@ -1,14 +1,21 @@
+'use client'
+
 import { useState, useEffect } from 'react'
 
+export type Orientation = 'portrait' | 'landscape'
+
 export function useOrientation() {
-  const [orientation, setOrientation] = useState<'portrait' | 'landscape'>('landscape')
+  const [orientation, setOrientation] = useState<Orientation>('landscape')
   const [isPortrait, setIsPortrait] = useState(false)
   const [isLandscape, setIsLandscape] = useState(true)
 
   useEffect(() => {
+    // Function to update orientation state
     const updateOrientation = () => {
       const isPortraitMode = window.innerHeight > window.innerWidth
-      setOrientation(isPortraitMode ? 'portrait' : 'landscape')
+      const newOrientation: Orientation = isPortraitMode ? 'portrait' : 'landscape'
+      
+      setOrientation(newOrientation)
       setIsPortrait(isPortraitMode)
       setIsLandscape(!isPortraitMode)
     }
@@ -16,12 +23,11 @@ export function useOrientation() {
     // Initial check
     updateOrientation()
 
-    // Listen for resize
+    // Listen for resize events
     window.addEventListener('resize', updateOrientation)
-    
-    // Listen for orientation change
     window.addEventListener('orientationchange', updateOrientation)
 
+    // Cleanup
     return () => {
       window.removeEventListener('resize', updateOrientation)
       window.removeEventListener('orientationchange', updateOrientation)
@@ -30,4 +36,3 @@ export function useOrientation() {
 
   return { orientation, isPortrait, isLandscape }
 }
-

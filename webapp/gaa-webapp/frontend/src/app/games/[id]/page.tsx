@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { games, auth, getToken } from '@/lib/api-client'
 import Sidebar from '@/components/shared/Sidebar'
@@ -9,11 +9,102 @@ import GameHeader from '@/components/games/GameHeader'
 import UnifiedSidebar from '@/components/games/UnifiedSidebar'
 import type { GameEvent } from '@/components/games/video-player/types'
 import { transformDatabaseEventsToGameEvents } from '@/lib/event-transformer'
+import { useOrientation } from '@/hooks/useOrientation'
+
+// Mobile Video Player Component with auto-hide overlay (YouTube-style)
+function MobileVideoPlayer({
+  game,
+  filteredEvents,
+  allEvents,
+  currentEventIndex,
+  handleTimeUpdate,
+  handleEventClick,
+  seekToTimestamp,
+}: {
+  game: any
+  filteredEvents: GameEvent[]
+  allEvents: GameEvent[]
+  currentEventIndex: number
+  handleTimeUpdate: (time: number, duration: number) => void
+  handleEventClick: (event: GameEvent) => void
+  seekToTimestamp: (timestamp: number) => void
+}) {
+  const [showOverlay, setShowOverlay] = useState(true)
+  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+  // Auto-hide overlay after 4 seconds
+  const resetHideTimer = useCallback(() => {
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current)
+    }
+    
+    setShowOverlay(true)
+    hideTimeoutRef.current = setTimeout(() => {
+      setShowOverlay(false)
+    }, 4000)
+  }, [])
+
+  // Toggle overlay on tap
+  const handleVideoTap = useCallback(() => {
+    if (showOverlay) {
+      setShowOverlay(false)
+      if (hideTimeoutRef.current) {
+        clearTimeout(hideTimeoutRef.current)
+      }
+    } else {
+      resetHideTimer()
+    }
+  }, [showOverlay, resetHideTimer])
+
+  // Reset timer on mount
+  useEffect(() => {
+    resetHideTimer()
+    return () => {
+      if (hideTimeoutRef.current) {
+        clearTimeout(hideTimeoutRef.current)
+      }
+    }
+  }, [resetHideTimer])
+
+  return (
+    <div className="relative" onClick={handleVideoTap}>
+      {/* Mobile Game Header - fades in/out */}
+      <div 
+        className={`absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/90 to-transparent p-4 transition-opacity duration-300 ${
+          showOverlay ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        <div className="text-white">
+          <h1 className="text-lg font-semibold truncate">{game.title}</h1>
+        </div>
+      </div>
+      
+      {/* Video Player - full width, aspect ratio maintained */}
+      <div 
+        className="w-full aspect-video bg-black relative"
+        style={{ WebkitTapHighlightColor: 'transparent' }}
+      >
+        <VideoPlayer
+          game={game}
+          events={filteredEvents}
+          allEvents={allEvents}
+          currentEventIndex={currentEventIndex}
+          onTimeUpdate={handleTimeUpdate}
+          onEventClick={handleEventClick}
+          onSeekToTimestamp={seekToTimestamp}
+          overlayVisible={showOverlay}
+          onUserInteract={resetHideTimer}
+        />
+      </div>
+    </div>
+  )
+}
 
 export default function GameDetailPage() {
   const params = useParams()
   const router = useRouter()
   const gameId = params.id as string
+  const { isPortrait, isLandscape } = useOrientation()
 
   const [user, setUser] = useState<any>(null)
   const [game, setGame] = useState<any>(null)
@@ -182,66 +273,115 @@ export default function GameDetailPage() {
     )
   }
 
-  return (
-    <div className="flex h-screen bg-black">
-      {/* Left Navigation - Toggleable */}
-      <div
-        className={`transition-all duration-300 ${
-          showLeftSidebar ? 'w-64' : 'w-0'
-        } overflow-hidden`}
-      >
-        <Sidebar user={user} />
-      </div>
-
-      {/* Middle - Video Fullscreen */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <GameHeader
-          game={game}
-          currentTime={currentTime}
-          showRightSidebar={showRightSidebar}
-          showLeftSidebar={showLeftSidebar}
-          onToggleRightSidebar={() => setShowRightSidebar(!showRightSidebar)}
-          onToggleLeftSidebar={() => setShowLeftSidebar(!showLeftSidebar)}
-        />
-
+  // Desktop/Landscape Layout
+  if (isLandscape) {
+    return (
+      <div className="flex h-screen bg-black">
+        {/* Left Navigation - Toggleable */}
         <div
-          className={`flex-1 relative transition-all duration-300 ${showRightSidebar ? 'md:mr-[400px]' : ''}`}
+          className={`transition-all duration-300 ${
+            showLeftSidebar ? 'w-64' : 'w-0'
+          } overflow-hidden`}
         >
-          {game.video_url ? (
-            <VideoPlayer
+          <Sidebar user={user} />
+        </div>
+
+        {/* Middle - Video Fullscreen */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <GameHeader
+            game={game}
+            currentTime={currentTime}
+            showRightSidebar={showRightSidebar}
+            showLeftSidebar={showLeftSidebar}
+            onToggleRightSidebar={() => setShowRightSidebar(!showRightSidebar)}
+            onToggleLeftSidebar={() => setShowLeftSidebar(!showLeftSidebar)}
+          />
+
+          <div
+            className={`flex-1 relative transition-all duration-300 ${showRightSidebar ? 'md:mr-[400px]' : ''}`}
+          >
+            {game.video_url ? (
+              <VideoPlayer
+                game={{
+                  video_url: game.video_url,
+                  hls_url: game.hls_url,
+                  title: game.title,
+                }}
+                events={filteredEvents}
+                allEvents={gameEvents}
+                currentEventIndex={currentEventIndex}
+                onTimeUpdate={handleTimeUpdate}
+                onEventClick={handleEventClick}
+                onSeekToTimestamp={seekToTimestamp}
+              />
+            ) : (
+              <div className="h-full flex items-center justify-center">
+                <div className="text-center text-gray-400">
+                  <p className="text-lg mb-2">Video not available</p>
+                  <p className="text-sm">
+                    {game.status === 'pending'
+                      ? 'Video is being processed...'
+                      : game.s3_key
+                      ? 'Video URL is being generated...'
+                      : 'No video URL found'}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Right Sidebar - Toggleable */}
+        <UnifiedSidebar
+          isOpen={showRightSidebar}
+          onClose={() => setShowRightSidebar(false)}
+          game={game}
+          events={filteredEvents}
+          currentTime={currentTime}
+          duration={duration}
+          onEventClick={handleEventClick}
+          teamFilter={teamFilter}
+          onTeamFilterChange={setTeamFilter}
+        />
+      </div>
+    )
+  }
+
+  // Mobile/Portrait Layout (YouTube-style)
+  return (
+    <div className="min-h-screen bg-black">
+      <UnifiedSidebar
+        isOpen={true} // Always open on mobile
+        onClose={() => {}} // No close on mobile
+        isMobile={true}
+        mobileVideoComponent={
+          game.video_url ? (
+            <MobileVideoPlayer
               game={{
                 video_url: game.video_url,
                 hls_url: game.hls_url,
                 title: game.title,
               }}
-              events={filteredEvents}
+              filteredEvents={filteredEvents}
               allEvents={gameEvents}
               currentEventIndex={currentEventIndex}
-              onTimeUpdate={handleTimeUpdate}
-              onEventClick={handleEventClick}
-              onSeekToTimestamp={seekToTimestamp}
+              handleTimeUpdate={handleTimeUpdate}
+              handleEventClick={handleEventClick}
+              seekToTimestamp={seekToTimestamp}
             />
           ) : (
-            <div className="h-full flex items-center justify-center">
+            <div className="w-full aspect-video bg-black flex items-center justify-center">
               <div className="text-center text-gray-400">
                 <p className="text-lg mb-2">Video not available</p>
                 <p className="text-sm">
                   {game.status === 'pending'
                     ? 'Video is being processed...'
-                    : game.s3_key
-                    ? 'Video URL is being generated...'
                     : 'No video URL found'}
                 </p>
               </div>
             </div>
-          )}
-        </div>
-      </div>
-
-      {/* Right Sidebar - Toggleable */}
-      <UnifiedSidebar
-        isOpen={showRightSidebar}
-        onClose={() => setShowRightSidebar(false)}
+          )
+        }
         game={game}
         events={filteredEvents}
         currentTime={currentTime}

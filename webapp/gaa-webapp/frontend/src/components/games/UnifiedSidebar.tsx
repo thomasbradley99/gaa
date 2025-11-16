@@ -16,6 +16,8 @@ interface UnifiedSidebarProps {
   onEventClick: (event: GameEvent) => void
   teamFilter: 'all' | 'home' | 'away'
   onTeamFilterChange: (filter: 'all' | 'home' | 'away') => void
+  isMobile?: boolean
+  mobileVideoComponent?: React.ReactNode
 }
 
 type TabType = 'events' | 'stats' | 'ai'
@@ -30,13 +32,15 @@ export default function UnifiedSidebar({
   onEventClick,
   teamFilter,
   onTeamFilterChange,
+  isMobile = false,
+  mobileVideoComponent,
 }: UnifiedSidebarProps) {
   const [activeTab, setActiveTab] = useState<TabType>('stats')
 
   return (
     <>
-      {/* Backdrop (mobile only) */}
-      {isOpen && (
+      {/* Backdrop (mobile only on desktop view) */}
+      {!isMobile && isOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 md:hidden"
           onClick={onClose}
@@ -45,13 +49,23 @@ export default function UnifiedSidebar({
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-full bg-black/90 backdrop-blur-lg border-l border-white/10 z-50 transition-transform duration-300 w-full md:w-[400px] ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        className={`${
+          isMobile
+            ? 'relative w-full min-h-screen bg-black/90 backdrop-blur-sm'
+            : 'fixed top-0 right-0 h-full bg-black/90 backdrop-blur-lg border-l border-white/10 z-50 transition-transform duration-300 w-full md:w-[400px]'
+        } ${!isMobile && (isOpen ? 'translate-x-0' : 'translate-x-full')}`}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
-          <div className="flex items-center gap-2">
+        {/* Mobile Video Header - sticky so it stays at top */}
+        {isMobile && mobileVideoComponent && (
+          <div className="sticky top-0 z-30 bg-black">
+            {mobileVideoComponent}
+          </div>
+        )}
+        {/* Header - sticky on mobile with offset for video */}
+        <div className={`flex items-center justify-between px-4 py-3 border-b border-white/10 bg-black/90 backdrop-blur-sm z-10 ${
+          isMobile ? 'sticky top-[56.25vw]' : ''
+        }`}>
+          <div className="flex items-center gap-2 flex-1">
             {/* Tabs */}
             <button
               onClick={() => setActiveTab('stats')}
@@ -85,17 +99,19 @@ export default function UnifiedSidebar({
             </button>
           </div>
 
-          {/* Close Button */}
-          <button
-            onClick={onClose}
-            className="p-1.5 text-white/60 hover:text-white hover:bg-white/10 rounded-xl transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          {/* Close Button - Hidden on Mobile */}
+          {!isMobile && (
+            <button
+              onClick={onClose}
+              className="p-1.5 text-white/60 hover:text-white hover:bg-white/10 rounded-xl transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          )}
         </div>
 
         {/* Content */}
-        <div className="h-[calc(100%-57px)] overflow-y-auto">
+        <div className={`${isMobile ? 'min-h-screen' : 'h-[calc(100%-57px)]'} overflow-y-auto`}>
           {activeTab === 'events' && (
             <div className="p-4">
               <h2 className="text-xl font-semibold text-white mb-4">Game Events</h2>

@@ -37,7 +37,7 @@ function HomePage() {
   const [demoTeamFilter, setDemoTeamFilter] = useState<'all' | 'home' | 'away'>('all')
 
   // Transform demo events
-  const demoEvents = transformDatabaseEventsToGameEvents(DEMO_GAME_DATA.events)
+  const demoEvents = transformDatabaseEventsToGameEvents(DEMO_GAME_DATA.events as any)
   const filteredDemoEvents = demoTeamFilter === 'all' 
     ? demoEvents 
     : demoEvents.filter(e => e.team === demoTeamFilter)

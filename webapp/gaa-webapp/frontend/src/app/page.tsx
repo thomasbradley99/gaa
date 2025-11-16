@@ -48,11 +48,11 @@ function DemoMobileVideoPlayer({ demoEvents, filteredDemoEvents, setDemoCurrentT
   return (
     <div className="relative" onClick={handleVideoTap}>
       <div 
-        className={`absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/90 to-transparent p-4 transition-opacity duration-300 ${
+        className={`absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/90 to-transparent p-3 transition-opacity duration-300 ${
           showOverlay ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >
-        <h3 className="text-white text-lg font-semibold">{DEMO_GAME_DATA.title}</h3>
+        <h3 className="text-white text-sm font-semibold">{DEMO_GAME_DATA.title}</h3>
       </div>
       <div className="w-full aspect-video bg-black relative" style={{ WebkitTapHighlightColor: 'transparent' }}>
         <VideoPlayer
@@ -107,6 +107,16 @@ function HomePage() {
   const [demoDuration, setDemoDuration] = useState(0)
   const [showDemoSidebar, setShowDemoSidebar] = useState(true)
   const [demoTeamFilter, setDemoTeamFilter] = useState<'all' | 'home' | 'away'>('all')
+  
+  // Check if mobile for default sidebar state
+  useEffect(() => {
+    const checkMobile = () => {
+      setShowDemoSidebar(window.innerWidth >= 1024) // Show sidebar by default only on desktop
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   // Transform demo events
   const demoEvents = transformDatabaseEventsToGameEvents(DEMO_GAME_DATA.events as any)
@@ -396,41 +406,70 @@ function HomePage() {
               ) : (
                 /* Mobile/Portrait: YouTube-style stacked */
                 <div className="rounded-2xl overflow-hidden border border-white/5 bg-black/60 backdrop-blur-xl shadow-2xl">
-                  <UnifiedSidebar
-                    isOpen={true}
-                    onClose={() => {}}
-                    isMobile={true}
-                    mobileVideoComponent={
-                      <DemoMobileVideoPlayer
-                        demoEvents={demoEvents}
-                        filteredDemoEvents={filteredDemoEvents}
-                        setDemoCurrentTime={setDemoCurrentTime}
-                        setDemoDuration={setDemoDuration}
-                      />
-                    }
-                    game={{
-                      id: 'demo',
-                      title: DEMO_GAME_DATA.title,
-                      video_url: DEMO_GAME_DATA.videoUrl,
-                      events: DEMO_GAME_DATA.events
-                    }}
-                    events={filteredDemoEvents}
-                    currentTime={demoCurrentTime}
-                    duration={demoDuration}
-                    onEventClick={(event: GameEvent) => {
-                      const video = (window as any).videoElement as HTMLVideoElement
-                      if (video) {
-                        video.currentTime = event.timestamp
-                        const playPromise = video.play()
-                        if (playPromise !== undefined) {
-                          playPromise.catch(error => console.log('Play interrupted:', error))
-                        }
-                        setDemoCurrentTime(event.timestamp)
-                      }
-                    }}
-                    teamFilter={demoTeamFilter}
-                    onTeamFilterChange={setDemoTeamFilter}
+                  {/* Video Player */}
+                  <DemoMobileVideoPlayer
+                    demoEvents={demoEvents}
+                    filteredDemoEvents={filteredDemoEvents}
+                    setDemoCurrentTime={setDemoCurrentTime}
+                    setDemoDuration={setDemoDuration}
                   />
+                  
+                  {/* Show Stats Button */}
+                  {!showDemoSidebar && (
+                    <div className="p-4 border-t border-white/10">
+                      <button
+                        onClick={() => setShowDemoSidebar(true)}
+                        className="w-full px-6 py-3 bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/20 hover:border-white/30 text-white font-medium rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                        View Match Stats & Events
+                      </button>
+                    </div>
+                  )}
+                  
+                  {/* Stats/Events Sidebar (collapsible on mobile) */}
+                  {showDemoSidebar && (
+                    <>
+                      <UnifiedSidebar
+                        isOpen={true}
+                        onClose={() => {}}
+                        isMobile={true}
+                        mobileVideoComponent={null}
+                        game={{
+                          id: 'demo',
+                          title: DEMO_GAME_DATA.title,
+                          video_url: DEMO_GAME_DATA.videoUrl,
+                          events: DEMO_GAME_DATA.events
+                        }}
+                        events={filteredDemoEvents}
+                        currentTime={demoCurrentTime}
+                        duration={demoDuration}
+                        onEventClick={(event: GameEvent) => {
+                          const video = (window as any).videoElement as HTMLVideoElement
+                          if (video) {
+                            video.currentTime = event.timestamp
+                            const playPromise = video.play()
+                            if (playPromise !== undefined) {
+                              playPromise.catch(error => console.log('Play interrupted:', error))
+                            }
+                            setDemoCurrentTime(event.timestamp)
+                          }
+                        }}
+                        teamFilter={demoTeamFilter}
+                        onTeamFilterChange={setDemoTeamFilter}
+                      />
+                      <div className="p-4 border-t border-white/10 bg-black/90">
+                        <button
+                          onClick={() => setShowDemoSidebar(false)}
+                          className="w-full px-6 py-2 bg-white/5 hover:bg-white/10 text-white/80 font-medium rounded-lg transition-all duration-200 text-sm"
+                        >
+                          Hide Stats
+                        </button>
+                      </div>
+                    </>
+                  )}
                 </div>
               )}
             </div>

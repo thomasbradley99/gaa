@@ -68,17 +68,6 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
     const homeKickouts = homeEvents.filter((e) => e.type === 'kickout')
     const awayKickouts = awayEvents.filter((e) => e.type === 'kickout')
     
-    console.log('Home kickouts:', homeKickouts.length, homeKickouts.map(k => ({ 
-      type: k.metadata?.kickoutType, 
-      possessionOutcome: k.metadata?.possessionOutcome,
-      fullMetadata: k.metadata 
-    })))
-    console.log('Away kickouts:', awayKickouts.length, awayKickouts.map(k => ({ 
-      type: k.metadata?.kickoutType, 
-      possessionOutcome: k.metadata?.possessionOutcome,
-      fullMetadata: k.metadata 
-    })))
-    
     // Home kickouts won (when home team wins their own kickout)
     const homeKickoutsWon = homeKickouts.filter((e) => e.metadata?.possessionOutcome === 'won').length
     const homeKickoutsLong = homeKickouts.filter((e) => e.metadata?.kickoutType === 'long' && e.metadata?.possessionOutcome === 'won').length

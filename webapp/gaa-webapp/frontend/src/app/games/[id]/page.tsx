@@ -32,7 +32,9 @@ export default function GameDetailPage() {
     ? (() => {
         // If events is an object with 'events' array (GAA Events Schema format)
         if (game.events && typeof game.events === 'object' && 'events' in game.events) {
-          return transformDatabaseEventsToGameEvents(game.events as any)
+          const transformed = transformDatabaseEventsToGameEvents(game.events as any)
+          console.log('Transformed events sample:', transformed.slice(0, 5).map(e => ({id: e.id, team: e.team})))
+          return transformed
         }
         // If events is already an array (legacy format)
         if (Array.isArray(game.events)) {

@@ -5,13 +5,13 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT || 5011;
 
 // Middleware
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
     ? process.env.CORS_ORIGIN?.split(',') || ['https://gaa.clannai.com']
-    : ['http://localhost:4012', 'http://localhost:3013'],
+    : ['http://localhost:5012', 'http://localhost:3013'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']

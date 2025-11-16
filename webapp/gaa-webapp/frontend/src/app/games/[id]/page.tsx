@@ -204,11 +204,8 @@ export default function GameDetailPage() {
           onToggleLeftSidebar={() => setShowLeftSidebar(!showLeftSidebar)}
         />
 
-        <div 
-          className="flex-1 relative transition-all duration-300"
-          style={{
-            marginRight: showRightSidebar ? '400px' : '0'
-          }}
+        <div
+          className={`flex-1 relative transition-all duration-300 ${showRightSidebar ? 'md:mr-[400px]' : ''}`}
         >
           {game.video_url ? (
             <VideoPlayer

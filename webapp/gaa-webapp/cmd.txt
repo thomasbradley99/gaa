@@ -2,10 +2,10 @@
 # Run from: /Users/thomasbradley/clann-repos
 
 # If ports are in use, kill existing processes:
-# Kill backend on port 4011:
-lsof -ti:4011 | xargs kill -9
-# Kill frontend on port 4012:
-lsof -ti:4012 | xargs kill -9
+# Kill backend on port 5011:
+lsof -ti:5011 | xargs kill -9
+# Kill frontend on port 5012:
+lsof -ti:5012 | xargs kill -9
 
 # Terminal 1 - Backend Server
 cd gaa/webapp/gaa-webapp/backend && npm run dev
@@ -13,13 +13,13 @@ cd gaa/webapp/gaa-webapp/backend && npm run dev
 # Terminal 2 - Frontend Server
 cd gaa/webapp/gaa-webapp/frontend && npm run dev
 
-# Backend runs on: http://localhost:4011
-# Frontend runs on: http://localhost:4012
-# Open http://localhost:4012 in your browser
+# Backend runs on: http://localhost:5011
+# Frontend runs on: http://localhost:5012
+# Open http://localhost:5012 in your browser
 
 # Quick restart (copy/paste these commands):
-lsof -ti:4011 | xargs kill -9 2>/dev/null
-lsof -ti:4012 | xargs kill -9 2>/dev/null
+lsof -ti:5011 | xargs kill -9 2>/dev/null
+lsof -ti:5012 | xargs kill -9 2>/dev/null
 cd /Users/thomasbradley/clann-repos/gaa/webapp/gaa-webapp/backend && npm run dev > /dev/null 2>&1 &
 cd /Users/thomasbradley/clann-repos/gaa/webapp/gaa-webapp/frontend && npm run dev
 

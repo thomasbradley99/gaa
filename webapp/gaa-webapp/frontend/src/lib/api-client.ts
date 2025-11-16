@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4011';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5011';
 
 // Get token from localStorage
 export const getToken = () => {

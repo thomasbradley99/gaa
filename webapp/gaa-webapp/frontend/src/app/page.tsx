@@ -132,7 +132,7 @@ function HomePage() {
 
       {/* Header Navigation */}
       <header className="fixed top-0 left-0 right-0 bg-gray-800/0 backdrop-blur-sm z-50">
-        <div className="max-w-7xl mx-auto px-8 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4">
           <div className="flex justify-between items-center">
             {/* Logo */}
             <div className="cursor-pointer">
@@ -141,23 +141,23 @@ function HomePage() {
                 alt="ClannAI"
                 width={140}
                 height={24}
-                className="h-6 w-auto"
+                className="h-5 sm:h-6 w-auto"
                 style={{ width: 'auto', height: 'auto' }}
                 priority
               />
             </div>
 
             {/* Auth Buttons */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               <button
                 onClick={openSignIn}
-                className="bg-white text-black text-sm font-semibold px-4 py-2 rounded-md shadow-sm hover:bg-gray-100 hover:shadow"
+                className="bg-white text-black text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-md shadow-sm hover:bg-gray-100 hover:shadow"
               >
                 Sign in
               </button>
               <button
                 onClick={openGetStarted}
-                className="bg-[#2D8B4D] px-4 py-2 rounded-md text-sm font-semibold text-white hover:bg-[#2D8B4D]/80"
+                className="bg-[#2D8B4D] px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-semibold text-white hover:bg-[#2D8B4D]/80"
               >
                 Get started
               </button>
@@ -235,13 +235,10 @@ function HomePage() {
 
             {/* Demo Game Section */}
             <div id="demo-section" className="max-w-[1800px] mx-auto px-4 py-16 scroll-mt-20">
-              <div className="flex gap-0 rounded-2xl overflow-hidden border border-white/5 bg-black/60 backdrop-blur-xl relative shadow-2xl" style={{ height: '600px' }}>
+              <div className="flex gap-0 rounded-2xl overflow-hidden border border-white/5 bg-black/60 backdrop-blur-xl relative shadow-2xl h-[400px] md:h-[500px] lg:h-[600px]">
                 {/* Video Player */}
                 <div 
-                  className="flex-1 relative transition-all duration-300"
-                  style={{
-                    marginRight: showDemoSidebar ? '400px' : '0'
-                  }}
+                  className={`flex-1 relative transition-all duration-300 ${showDemoSidebar ? 'md:mr-[400px]' : ''}`}
                 >
                   <VideoPlayer
                     game={{
@@ -359,15 +356,15 @@ function HomePage() {
       {showAuthModal && (
         <div className="fixed inset-0 flex items-center justify-center z-30" style={{ pointerEvents: 'none' }}>
           <div
-            className="rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl"
+            className="rounded-2xl p-6 sm:p-8 max-w-md w-full mx-4 shadow-2xl"
             style={{
               backgroundColor: 'rgba(0, 0, 0, 0.95)',
               border: '1px solid rgba(75, 85, 99, 0.5)',
               pointerEvents: 'auto',
             }}
           >
-            <div className="flex justify-between items-center mb-8">
-              <h2 className="text-2xl font-semibold text-white">
+            <div className="flex justify-between items-center mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-semibold text-white">
                 {isLogin ? 'Sign In' : 'Create Account'}
               </h2>
               <button 
@@ -392,7 +389,7 @@ function HomePage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Name"
-                  className="w-full rounded-xl px-5 py-4 text-white placeholder-gray-400 focus:outline-none transition-all bg-black/60 border border-gray-600/50 focus:bg-black/80"
+                  className="w-full rounded-xl px-4 sm:px-5 py-3 sm:py-4 text-white placeholder-gray-400 focus:outline-none transition-all bg-black/60 border border-gray-600/50 focus:bg-black/80"
                 />
               )}
 
@@ -401,7 +398,7 @@ function HomePage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
-                className="w-full rounded-xl px-5 py-4 text-white placeholder-gray-400 focus:outline-none transition-all bg-black/60 border border-gray-600/50 focus:bg-black/80"
+                className="w-full rounded-xl px-4 sm:px-5 py-3 sm:py-4 text-white placeholder-gray-400 focus:outline-none transition-all bg-black/60 border border-gray-600/50 focus:bg-black/80"
                 required
               />
               
@@ -411,13 +408,13 @@ function HomePage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
-                  className="w-full rounded-xl px-5 py-4 text-white placeholder-gray-400 focus:outline-none transition-all bg-black/60 border border-gray-600/50 focus:bg-black/80"
+                  className="w-full rounded-xl px-4 sm:px-5 py-3 sm:py-4 text-white placeholder-gray-400 focus:outline-none transition-all bg-black/60 border border-gray-600/50 focus:bg-black/80"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-300 transition-colors"
+                  className="absolute inset-y-0 right-0 pr-3 sm:pr-4 flex items-center text-gray-400 hover:text-gray-300 transition-colors"
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? '🙈' : '👁️'}
@@ -430,7 +427,7 @@ function HomePage() {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="Phone Number (Optional)"
-                  className="w-full rounded-xl px-5 py-4 text-white placeholder-gray-400 focus:outline-none transition-all bg-black/60 border border-gray-600/50 focus:bg-black/80"
+                  className="w-full rounded-xl px-4 sm:px-5 py-3 sm:py-4 text-white placeholder-gray-400 focus:outline-none transition-all bg-black/60 border border-gray-600/50 focus:bg-black/80"
                 />
               )}
               

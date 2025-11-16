@@ -154,13 +154,13 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
   if (!isClient) {
     return (
       <div className="max-w-7xl mx-auto p-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start" style={{ minHeight: '600px', height: '600px' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start min-h-[400px] md:min-h-[500px] lg:h-[600px]">
           {/* Left Side - Loading placeholder */}
-          <div className="w-full h-[600px] rounded-lg overflow-hidden bg-gray-800 flex items-center justify-center">
+          <div className="w-full h-[400px] md:h-[500px] lg:h-[600px] rounded-lg overflow-hidden bg-gray-800 flex items-center justify-center">
             <div className="text-gray-400">Loading map...</div>
           </div>
           {/* Right Side - Controls and Data */}
-          <div className="flex flex-col h-[600px] space-y-2 text-gray-100">
+          <div className="flex flex-col h-[400px] md:h-[500px] lg:h-[600px] space-y-2 text-gray-100">
             {/* Search and Filters */}
             <div className="space-y-2 bg-black/80 rounded-lg p-3 border border-gray-900 shadow-lg">
               <h3 className="text-sm font-semibold text-gray-200">Filters & Search</h3>
@@ -254,8 +254,8 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
               )}
             </div>
             {/* Results List - Force Dark Mode Sidebar Style */}
-            <div className="dark bg-black text-gray-100 rounded-lg shadow-lg mt-2 overflow-hidden" style={{ maxHeight: 'calc(600px - 180px)' }}>
-              <ul className="overflow-y-auto space-y-1 bg-black p-2 border border-gray-900 custom-scrollbar" style={{ maxHeight: '100%' }}>
+            <div className="dark bg-black text-gray-100 rounded-lg shadow-lg mt-2 overflow-hidden max-h-[220px] md:max-h-[320px] lg:max-h-[420px]">
+              <ul className="overflow-y-auto space-y-1 bg-black p-2 border border-gray-900 custom-scrollbar h-full">
                 {filtered.slice(0, 50).map((p: Pitch, i: number) => {
                   // Find the original index of this pitch in the full dataset
                   const originalIndex = pitches.findIndex(pitch => 
@@ -303,9 +303,9 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
   return (
     <div className="max-w-7xl mx-auto p-4">
       {/* Main Layout - Map on Left, Controls on Right */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start" style={{ minHeight: '600px', height: '600px' }}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start min-h-[400px] md:min-h-[500px] lg:h-[600px]">
         {/* Left Side - Interactive Map */}
-        <div className="w-full h-[600px] rounded-lg overflow-hidden">
+        <div className="w-full h-[400px] md:h-[500px] lg:h-[600px] rounded-lg overflow-hidden">
           <MapContainer 
             center={MAP_CENTER as [number, number]} 
             zoom={MAP_ZOOM} 
@@ -343,7 +343,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
           </MapContainer>
         </div>
         {/* Right Side - Controls and Data */}
-        <div className="flex flex-col h-[600px] space-y-2 text-gray-100">
+        <div className="flex flex-col h-[400px] md:h-[500px] lg:h-[600px] space-y-2 text-gray-100">
           {/* Search and Filters */}
           <div className="space-y-2 bg-black/80 rounded-lg p-3 border border-gray-900 shadow-lg">
             <h3 className="text-sm font-semibold text-gray-200">Filters & Search</h3>

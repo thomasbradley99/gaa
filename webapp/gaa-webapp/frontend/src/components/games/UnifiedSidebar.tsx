@@ -45,10 +45,9 @@ export default function UnifiedSidebar({
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-full bg-black/90 backdrop-blur-lg border-l border-white/10 z-50 transition-transform duration-300 ${
+        className={`fixed top-0 right-0 h-full bg-black/90 backdrop-blur-lg border-l border-white/10 z-50 transition-transform duration-300 w-full md:w-[400px] ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
-        style={{ width: '400px', maxWidth: '100vw' }}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">

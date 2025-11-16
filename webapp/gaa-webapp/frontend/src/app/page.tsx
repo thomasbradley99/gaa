@@ -207,12 +207,8 @@ function HomePage() {
                 Detect. Analyze. Coach.
               </h1>
               
-              <p className="text-xl md:text-2xl text-white/70 mb-4 max-w-2xl mx-auto">
+              <p className="text-xl md:text-2xl text-white/70 mb-10 max-w-2xl mx-auto">
                 Automatically detect every shot, turnover, and key moment. Get instant tactical insights that help your team win.
-              </p>
-              
-              <p className="text-lg text-white/50 mb-10">
-                Used by clubs across Ireland to gain the competitive edge.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

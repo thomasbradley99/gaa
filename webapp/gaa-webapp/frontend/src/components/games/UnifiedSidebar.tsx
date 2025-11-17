@@ -90,10 +90,8 @@ export default function UnifiedSidebar({
     player: '',
   })
 
-  // Trimmer state
-  const [showTrimmers, setShowTrimmers] = useState(false)
-  const [eventPaddings, setEventPaddings] = useState<Map<number, { beforePadding: number, afterPadding: number }>>(new Map())
-
+  // Helper functions
+  
   // Get padding for an event (with defaults)
   const getEventPadding = (eventIndex: number) => {
     return eventPaddings.get(eventIndex) || { beforePadding: 5, afterPadding: 3 }

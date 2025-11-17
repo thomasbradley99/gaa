@@ -759,8 +759,8 @@ export default function UnifiedSidebar({
                                   />
                                 </div>
                               ) : (
-                                <div className="w-full flex items-center justify-between gap-2">
-                                  <div className="flex items-center gap-2">
+                                <div className="w-full">
+                                  <div className="flex items-center gap-2 mb-1">
                                     <span className="text-xs text-gray-400 font-mono">
                                       {formatTime(event.timestamp)}
                                     </span>
@@ -775,45 +775,26 @@ export default function UnifiedSidebar({
                                       {event.team === 'home' ? 'Home' : 'Away'}
                                     </span>
                                   </div>
+                                  {event.description && (
+                                    <p className="text-xs text-gray-400 mt-1">{event.description}</p>
+                                  )}
+                                  {event.player && (
+                                    <p className="text-xs text-gray-500 mt-1 italic">{event.player}</p>
+                                  )}
                                   
-                                  {/* Simple Padding Controls */}
+                                  {/* Apple-Style Trimmer */}
                                   {showTrimmers && (
-                                    <div className="flex items-center gap-1 text-xs text-gray-400">
-                                      <button
-                                        onClick={(e) => {
-                                          e.stopPropagation()
-                                          const current = getEventPadding(originalIndex)
-                                          updateEventPadding(originalIndex, Math.max(0, current.beforePadding - 1), current.afterPadding)
+                                    <div className="mt-3">
+                                      <AppleStyleTrimmer
+                                        eventTimestamp={event.timestamp}
+                                        beforePadding={getEventPadding(originalIndex).beforePadding}
+                                        afterPadding={getEventPadding(originalIndex).afterPadding}
+                                        maxPadding={15}
+                                        currentTime={currentTime}
+                                        onPaddingChange={(before, after) => {
+                                          updateEventPadding(originalIndex, before, after)
                                         }}
-                                        className="px-1.5 py-0.5 hover:bg-white/10 rounded"
-                                      >-</button>
-                                      <span className="px-1">{getEventPadding(originalIndex).beforePadding}s</span>
-                                      <button
-                                        onClick={(e) => {
-                                          e.stopPropagation()
-                                          const current = getEventPadding(originalIndex)
-                                          updateEventPadding(originalIndex, Math.min(15, current.beforePadding + 1), current.afterPadding)
-                                        }}
-                                        className="px-1.5 py-0.5 hover:bg-white/10 rounded"
-                                      >+</button>
-                                      <span className="text-gray-600">|</span>
-                                      <button
-                                        onClick={(e) => {
-                                          e.stopPropagation()
-                                          const current = getEventPadding(originalIndex)
-                                          updateEventPadding(originalIndex, current.beforePadding, Math.max(0, current.afterPadding - 1))
-                                        }}
-                                        className="px-1.5 py-0.5 hover:bg-white/10 rounded"
-                                      >-</button>
-                                      <span className="px-1">{getEventPadding(originalIndex).afterPadding}s</span>
-                                      <button
-                                        onClick={(e) => {
-                                          e.stopPropagation()
-                                          const current = getEventPadding(originalIndex)
-                                          updateEventPadding(originalIndex, current.beforePadding, Math.min(15, current.afterPadding + 1))
-                                        }}
-                                        className="px-1.5 py-0.5 hover:bg-white/10 rounded"
-                                      >+</button>
+                                      />
                                     </div>
                                   )}
                                 </div>

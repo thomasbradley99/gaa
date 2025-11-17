@@ -385,7 +385,7 @@ export default function UnifiedSidebar({
                       onClick={() => onTeamFilterChange('home')}
                       className={`py-2 text-xs font-semibold rounded-lg border-2 transition-colors ${
                         teamFilter === 'home'
-                          ? 'bg-green-500/20 text-green-300 border-green-500/50'
+                          ? 'bg-black/80 text-white border-white/30'
                           : 'bg-gray-500/10 text-gray-400 border-gray-500/30 hover:bg-gray-500/20'
                       }`}
                     >
@@ -395,7 +395,7 @@ export default function UnifiedSidebar({
                       onClick={() => onTeamFilterChange('away')}
                       className={`py-2 text-xs font-semibold rounded-lg border-2 transition-colors ${
                         teamFilter === 'away'
-                          ? 'bg-blue-500/20 text-blue-300 border-blue-500/50'
+                          ? 'bg-white/90 text-black border-white/50'
                           : 'bg-gray-500/10 text-gray-400 border-gray-500/30 hover:bg-gray-500/20'
                       }`}
                     >
@@ -536,7 +536,7 @@ export default function UnifiedSidebar({
                         onClick={() => setShowTrimmers(!showTrimmers)}
                         className={`w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 transition-all ${
                           showTrimmers
-                            ? 'bg-blue-500/20 hover:bg-blue-500/30 border-blue-400/50 text-blue-300'
+                            ? 'bg-black/80 hover:bg-black border-white/30 text-white'
                             : 'bg-gray-500/10 hover:bg-gray-500/20 border-gray-400/30 text-gray-300'
                         }`}
                       >
@@ -783,8 +783,8 @@ export default function UnifiedSidebar({
                                     </span>
                                     <span className={`text-xs px-2 py-0.5 rounded ${
                                       event.team === 'home'
-                                        ? 'bg-green-500/20 text-green-300'
-                                        : 'bg-blue-500/20 text-blue-300'
+                                        ? 'bg-black/80 text-white border border-white/30'
+                                        : 'bg-white/90 text-black border border-white/50'
                                     }`}>
                                       {event.team === 'home' ? 'Home' : 'Away'}
                                     </span>

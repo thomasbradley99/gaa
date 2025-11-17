@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { X } from 'lucide-react'
 import { EventList } from './EventList'
 import { GameStats } from './GameStats'
+import { XMLUpload } from './XmlUpload'
 import type { GameEvent } from './video-player/types'
 
 interface UnifiedSidebarProps {
@@ -18,6 +19,8 @@ interface UnifiedSidebarProps {
   onTeamFilterChange: (filter: 'all' | 'home' | 'away') => void
   isMobile?: boolean
   mobileVideoComponent?: React.ReactNode
+  onRefresh?: () => void
+  onEventsUploaded?: (events: GameEvent[]) => void
 }
 
 type TabType = 'events' | 'stats' | 'ai'
@@ -34,6 +37,8 @@ export default function UnifiedSidebar({
   onTeamFilterChange,
   isMobile = false,
   mobileVideoComponent,
+  onRefresh,
+  onEventsUploaded,
 }: UnifiedSidebarProps) {
   const [activeTab, setActiveTab] = useState<TabType>('stats')
 
@@ -143,12 +148,10 @@ export default function UnifiedSidebar({
                   duration={duration}
                 />
               ) : (
-                <div className="text-center py-8 text-gray-400 text-sm">
-                  <p>No statistics available</p>
-                  {game.status === 'pending' && (
-                    <p className="mt-2 text-xs">Stats will appear after analysis</p>
-                  )}
-                </div>
+                <XMLUpload 
+                  gameId={game.id}
+                  onEventsUploaded={onEventsUploaded || (() => {})}
+                />
               )}
             </div>
           )}

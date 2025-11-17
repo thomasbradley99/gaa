@@ -4,9 +4,11 @@ import { useMemo } from 'react'
 import { Download } from 'lucide-react'
 import jsPDF from 'jspdf'
 import type { GameEvent } from './video-player/types'
+import { XMLUpload } from './XMLUpload'
 
 interface GameStatsProps {
   game: {
+    id: string
     title: string
     team_name?: string
     created_at?: string
@@ -14,6 +16,7 @@ interface GameStatsProps {
   }
   events: GameEvent[]
   duration: number
+  onEventsUploaded?: (events: GameEvent[]) => void
 }
 
 export function GameStats({ game, events, duration }: GameStatsProps) {

@@ -246,6 +246,25 @@ export default function GameDetailPage() {
     }
   }
 
+  // Handle XML upload
+  const handleEventsUploaded = (events: GameEvent[]) => {
+    console.log(`📤 Uploaded ${events.length} events from XML`)
+    // Update game state with uploaded events
+    setGame({
+      ...game,
+      events: {
+        events: events.map(event => ({
+          id: event.id,
+          team: event.team,
+          time: event.timestamp,
+          action: event.type,
+          outcome: event.metadata?.outcome || 'N/A',
+          metadata: event.metadata || {},
+        })),
+      },
+    })
+  }
+
   // Filter events based on team filter
   const filteredEvents = teamFilter === 'all' 
     ? gameEvents 
@@ -348,6 +367,7 @@ export default function GameDetailPage() {
           onEventClick={handleEventClick}
           teamFilter={teamFilter}
           onTeamFilterChange={setTeamFilter}
+          onEventsUploaded={handleEventsUploaded}
         />
       </div>
     )
@@ -395,6 +415,7 @@ export default function GameDetailPage() {
         onEventClick={handleEventClick}
         teamFilter={teamFilter}
         onTeamFilterChange={setTeamFilter}
+        onEventsUploaded={handleEventsUploaded}
       />
     </div>
   )

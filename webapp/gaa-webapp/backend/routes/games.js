@@ -19,8 +19,13 @@ const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 const { query } = require('../utils/database');
 const { authenticateToken, authenticateLambda } = require('../middleware/auth');
 const { getPresignedUploadUrl, getPresignedDownloadUrl } = require('../utils/s3');
+const multer = require('multer');
+const xml2js = require('xml2js');
 
 const router = express.Router();
+
+// Configure multer for file uploads (memory storage)
+const upload = multer({ storage: multer.memoryStorage() });
 
 // Lambda client (only initialize if AWS credentials are available)
 let lambdaClient = null;
@@ -370,6 +375,199 @@ router.post('/:id/events', authenticateLambda, async (req, res) => {
     res.status(500).json({ error: 'Failed to store events' });
   }
 });
+
+/**
+ * POST /api/games/:id/events/upload-xml
+ * 
+ * Upload VEO XML file and parse events
+ * Allows manual event upload without Lambda
+ * 
+ * Auth: User token
+ */
+router.post('/:id/events/upload-xml', authenticateToken, upload.single('xml'), async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    // Validate game exists and belongs to user
+    const gameResult = await query(
+      'SELECT g.* FROM games g WHERE g.id = $1 AND g.user_id = $2',
+      [id, req.user.id]
+    );
+    
+    if (gameResult.rows.length === 0) {
+      return res.status(404).json({ error: 'Game not found' });
+    }
+    
+    // Validate XML file
+    if (!req.file) {
+      return res.status(400).json({ error: 'No XML file uploaded' });
+    }
+    
+    // Parse XML
+    const parser = new xml2js.Parser();
+    const xmlString = req.file.buffer.toString('utf-8');
+    
+    let xmlData;
+    try {
+      xmlData = await parser.parseStringPromise(xmlString);
+    } catch (parseError) {
+      console.error('XML parse error:', parseError);
+      return res.status(400).json({ error: 'Invalid XML format' });
+    }
+    
+    // Convert VEO XML to our event format
+    const events = parseVeoXmlToEvents(xmlData);
+    
+    if (!events || events.length === 0) {
+      return res.status(400).json({ error: 'No events found in XML' });
+    }
+    
+    // Build events JSONB object
+    const eventsData = {
+      match_info: {
+        source: 'manual_xml_upload',
+        total_events: events.length,
+        uploaded_at: new Date().toISOString()
+      },
+      events: events,
+      team_mapping: null,
+      updated_at: new Date().toISOString()
+    };
+    
+    // Update database
+    const updateResult = await query(
+      `UPDATE games 
+       SET events = $1::jsonb, 
+           status = 'analyzed',
+           updated_at = NOW()
+       WHERE id = $2
+       RETURNING id, status`,
+      [JSON.stringify(eventsData), id]
+    );
+    
+    console.log(`✅ XML events uploaded for game ${id}: ${events.length} events`);
+    
+    res.json({
+      success: true,
+      game_id: id,
+      events_count: events.length,
+      status: updateResult.rows[0].status
+    });
+  } catch (error) {
+    console.error('XML upload error:', error);
+    res.status(500).json({ error: 'Failed to process XML upload' });
+  }
+});
+
+/**
+ * Parse VEO XML format to our event schema
+ * 
+ * Handles VEO XML structure and converts to GAA Events Schema format
+ */
+function parseVeoXmlToEvents(xmlData) {
+  const events = [];
+  
+  try {
+    // VEO XML typically has structure like:
+    // <file><ALL_INSTANCES><instance>...</instance></ALL_INSTANCES></file>
+    // or <file><instance>...</instance></file>
+    
+    let instances = [];
+    
+    // Try different XML structures
+    if (xmlData.file && xmlData.file.ALL_INSTANCES && xmlData.file.ALL_INSTANCES[0]) {
+      instances = xmlData.file.ALL_INSTANCES[0].instance || [];
+    } else if (xmlData.file && xmlData.file.instance) {
+      instances = xmlData.file.instance;
+    } else if (xmlData.ALL_INSTANCES && xmlData.ALL_INSTANCES[0]) {
+      instances = xmlData.ALL_INSTANCES[0].instance || [];
+    } else if (xmlData.instance) {
+      instances = xmlData.instance;
+    }
+    
+    // Parse each instance
+    instances.forEach((instance, index) => {
+      try {
+        // Extract event data from instance
+        const code = instance.code ? instance.code[0] : '';
+        const start = instance.start ? parseFloat(instance.start[0]) : 0;
+        const team = instance.team ? instance.team[0].toLowerCase() : 'neutral';
+        
+        // Map VEO codes to our event types
+        const eventType = mapVeoCodeToEventType(code);
+        
+        if (eventType) {
+          events.push({
+            id: `event_${index + 1}`,
+            team: team === '0' || team === 'neutral' ? 'neutral' : (team === '1' ? 'home' : 'away'),
+            timestamp: start,
+            type: eventType.type,
+            outcome: eventType.outcome || 'N/A',
+            description: eventType.description || '',
+            metadata: {
+              veo_code: code,
+              validated: false,
+              autoGenerated: false,
+              source: 'xml_upload'
+            }
+          });
+        }
+      } catch (err) {
+        console.error('Error parsing instance:', err);
+      }
+    });
+    
+  } catch (error) {
+    console.error('Error parsing VEO XML:', error);
+  }
+  
+  return events;
+}
+
+/**
+ * Map VEO action codes to our event schema
+ */
+function mapVeoCodeToEventType(code) {
+  const codeUpper = code.toUpperCase();
+  
+  // Common VEO codes
+  const mapping = {
+    'SHOT': { type: 'shot', outcome: 'Shot' },
+    'GOAL': { type: 'shot', outcome: 'Goal' },
+    'POINT': { type: 'shot', outcome: 'Point' },
+    'WIDE': { type: 'shot', outcome: 'Wide' },
+    'SAVE': { type: 'shot', outcome: 'Saved' },
+    'KICKOUT': { type: 'kickout', outcome: 'N/A' },
+    'KICK-OUT': { type: 'kickout', outcome: 'N/A' },
+    'TURNOVER': { type: 'turnover', outcome: 'N/A' },
+    'FOUL': { type: 'foul', outcome: 'N/A' },
+    'FREE': { type: 'foul', outcome: 'Free' },
+    'YELLOW': { type: 'card', outcome: 'Yellow Card' },
+    'BLACK': { type: 'card', outcome: 'Black Card' },
+    'RED': { type: 'card', outcome: 'Red Card' },
+    'THROW-UP': { type: 'throw-up', outcome: 'N/A' },
+    'THROWUP': { type: 'throw-up', outcome: 'N/A' }
+  };
+  
+  // Try exact match
+  if (mapping[codeUpper]) {
+    return mapping[codeUpper];
+  }
+  
+  // Try partial match
+  for (const key in mapping) {
+    if (codeUpper.includes(key)) {
+      return mapping[key];
+    }
+  }
+  
+  // Default: treat as generic event
+  return {
+    type: code.toLowerCase().replace(/[^a-z-]/g, ''),
+    outcome: 'N/A',
+    description: code
+  };
+}
 
 module.exports = router;
 

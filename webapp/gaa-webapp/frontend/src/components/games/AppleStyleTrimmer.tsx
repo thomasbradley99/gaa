@@ -166,8 +166,8 @@ export default function AppleStyleTrimmer({
 
         {/* Left handle */}
         <div
-          className={`absolute top-0 bottom-0 w-3 bg-white/80 rounded-l cursor-ew-resize flex items-center justify-center group hover:bg-white transition-colors ${
-            isDragging === 'left' ? 'bg-white' : ''
+          className={`absolute top-0 bottom-0 w-3 rounded-l cursor-ew-resize flex items-center justify-center ${
+            isDragging === 'left' ? 'bg-white' : 'bg-white/80'
           }`}
           style={{ left: `${startPosition - 6}px` }}
           onMouseDown={(e) => handleMouseDown(e, 'left')}
@@ -177,8 +177,8 @@ export default function AppleStyleTrimmer({
 
         {/* Right handle */}
         <div
-          className={`absolute top-0 bottom-0 w-3 bg-white/80 rounded-r cursor-ew-resize flex items-center justify-center group hover:bg-white transition-colors ${
-            isDragging === 'right' ? 'bg-white' : ''
+          className={`absolute top-0 bottom-0 w-3 rounded-r cursor-ew-resize flex items-center justify-center ${
+            isDragging === 'right' ? 'bg-white' : 'bg-white/80'
           }`}
           style={{ left: `${endPosition - 6}px` }}
           onMouseDown={(e) => handleMouseDown(e, 'right')}

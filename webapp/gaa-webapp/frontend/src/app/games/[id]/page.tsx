@@ -265,6 +265,25 @@ export default function GameDetailPage() {
     })
   }
 
+  // Handle event updates from edit mode
+  const handleEventsUpdate = (updatedEvents: GameEvent[]) => {
+    console.log(`📝 Updated ${updatedEvents.length} events`)
+    // Update game state with edited events
+    setGame({
+      ...game,
+      events: {
+        events: updatedEvents.map(event => ({
+          id: event.id,
+          team: event.team,
+          time: event.timestamp,
+          action: event.type,
+          outcome: event.metadata?.outcome || 'N/A',
+          metadata: event.metadata || {},
+        })),
+      },
+    })
+  }
+
   // Filter events based on team filter
   const filteredEvents = teamFilter === 'all' 
     ? gameEvents 
@@ -362,12 +381,14 @@ export default function GameDetailPage() {
           onClose={() => setShowRightSidebar(false)}
           game={game}
           events={filteredEvents}
+          allEvents={gameEvents}
           currentTime={currentTime}
           duration={duration}
           onEventClick={handleEventClick}
           teamFilter={teamFilter}
           onTeamFilterChange={setTeamFilter}
           onEventsUploaded={handleEventsUploaded}
+          onEventsUpdate={handleEventsUpdate}
         />
       </div>
     )
@@ -410,12 +431,14 @@ export default function GameDetailPage() {
         }
         game={game}
         events={filteredEvents}
+        allEvents={gameEvents}
         currentTime={currentTime}
         duration={duration}
         onEventClick={handleEventClick}
         teamFilter={teamFilter}
         onTeamFilterChange={setTeamFilter}
         onEventsUploaded={handleEventsUploaded}
+        onEventsUpdate={handleEventsUpdate}
       />
     </div>
   )

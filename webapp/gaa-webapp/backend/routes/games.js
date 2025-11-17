@@ -460,6 +460,88 @@ router.post('/:id/events/upload-xml', authenticateToken, upload.single('xml'), a
 });
 
 /**
+ * PUT /api/games/:id/events
+ * 
+ * Update game events after editing in frontend
+ * Used by Edit Mode to persist event changes
+ * 
+ * Auth: User token
+ */
+router.put('/:id/events', authenticateToken, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { events } = req.body;
+    
+    // Validate game exists and belongs to user
+    const gameResult = await query(
+      'SELECT g.* FROM games g WHERE g.id = $1 AND g.user_id = $2',
+      [id, req.user.id]
+    );
+    
+    if (gameResult.rows.length === 0) {
+      return res.status(404).json({ error: 'Game not found' });
+    }
+    
+    // Validate events array
+    if (!Array.isArray(events)) {
+      return res.status(400).json({ error: 'Events must be an array' });
+    }
+    
+    // Convert frontend GameEvent format to database format
+    const dbEvents = events.map(event => ({
+      id: event.id,
+      team: event.team,
+      time: event.timestamp,
+      action: event.type,
+      outcome: event.metadata?.outcome || 'N/A',
+      metadata: {
+        ...event.metadata,
+        player: event.player,
+        description: event.description,
+        validated: true, // Mark as validated by user
+        userEdited: true,
+        editedAt: new Date().toISOString(),
+      }
+    }));
+    
+    // Wrap in GAA Events Schema format
+    const eventsData = {
+      match_info: {
+        source: 'user_edited',
+        total_events: dbEvents.length,
+        edited_at: new Date().toISOString(),
+      },
+      events: dbEvents,
+      team_mapping: null,
+      updated_at: new Date().toISOString()
+    };
+    
+    // Update database
+    const updateResult = await query(
+      `UPDATE games
+       SET events = $1::jsonb,
+           status = 'analyzed',
+           updated_at = NOW()
+       WHERE id = $2
+       RETURNING id, status`,
+      [JSON.stringify(eventsData), id]
+    );
+    
+    console.log(`✅ Events updated for game ${id}: ${dbEvents.length} events`);
+    
+    res.json({
+      success: true,
+      game_id: id,
+      events_count: dbEvents.length,
+      status: updateResult.rows[0].status
+    });
+  } catch (error) {
+    console.error('Update events error:', error);
+    res.status(500).json({ error: 'Failed to update events' });
+  }
+});
+
+/**
  * Parse VEO XML format to our event schema
  * 
  * Handles VEO XML structure and converts to GAA Events Schema format

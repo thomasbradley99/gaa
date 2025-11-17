@@ -1,6 +1,8 @@
 'use client'
 
 import { Calendar, Users } from 'lucide-react'
+import type { GameEvent } from './video-player/types'
+import { calculateScore } from '@/lib/score-calculator'
 
 interface GameHeaderProps {
   game: any
@@ -9,6 +11,7 @@ interface GameHeaderProps {
   showLeftSidebar: boolean
   onToggleRightSidebar: () => void
   onToggleLeftSidebar: () => void
+  events?: GameEvent[]
 }
 
 export default function GameHeader({
@@ -18,6 +21,7 @@ export default function GameHeader({
   showLeftSidebar,
   onToggleRightSidebar,
   onToggleLeftSidebar,
+  events = [],
 }: GameHeaderProps) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
@@ -33,6 +37,9 @@ export default function GameHeader({
     const seconds = Math.floor(time % 60)
     return `${minutes}:${seconds.toString().padStart(2, '0')}`
   }
+
+  // Calculate score from events
+  const score = calculateScore(events)
 
   return (
     <div className="bg-black/80 backdrop-blur-md border-b border-white/10 px-4 sm:px-6 py-3">
@@ -89,9 +96,26 @@ export default function GameHeader({
           </div>
         </div>
 
-        {/* Center: Current Time */}
-        <div className="hidden sm:flex items-center gap-2 text-white font-mono text-sm">
-          {formatTime(currentTime)}
+        {/* Center: Score & Current Time */}
+        <div className="hidden sm:flex items-center gap-4">
+          {/* Score Display */}
+          {events.length > 0 && (score.home.goals > 0 || score.home.points > 0 || score.away.goals > 0 || score.away.points > 0) && (
+            <div className="flex items-center gap-3 px-4 py-1.5 bg-black/60 rounded-xl border border-white/10">
+              <div className="flex flex-col items-center">
+                <span className="text-[10px] text-gray-400 font-medium uppercase">Home</span>
+                <span className="text-lg font-bold text-white font-mono">{score.home.display}</span>
+              </div>
+              <div className="w-px h-8 bg-white/20" />
+              <div className="flex flex-col items-center">
+                <span className="text-[10px] text-gray-400 font-medium uppercase">Away</span>
+                <span className="text-lg font-bold text-white font-mono">{score.away.display}</span>
+              </div>
+            </div>
+          )}
+          {/* Current Time */}
+          <div className="text-white/70 font-mono text-xs">
+            {formatTime(currentTime)}
+          </div>
         </div>
 
         {/* Right: Toggle Right Sidebar Button */}

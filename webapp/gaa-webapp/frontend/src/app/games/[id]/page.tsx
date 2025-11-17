@@ -10,6 +10,7 @@ import UnifiedSidebar from '@/components/games/UnifiedSidebar'
 import type { GameEvent } from '@/components/games/video-player/types'
 import { transformDatabaseEventsToGameEvents } from '@/lib/event-transformer'
 import { useOrientation } from '@/hooks/useOrientation'
+import { calculateScore } from '@/lib/score-calculator'
 
 // Mobile Video Player Component with auto-hide overlay (YouTube-style)
 function MobileVideoPlayer({
@@ -68,6 +69,9 @@ function MobileVideoPlayer({
     }
   }, [resetHideTimer])
 
+  const score = calculateScore(allEvents)
+  const hasScore = score.home.goals > 0 || score.home.points > 0 || score.away.goals > 0 || score.away.points > 0
+
   return (
     <div className="relative" onClick={handleVideoTap}>
       {/* Mobile Game Header - fades in/out */}
@@ -77,7 +81,16 @@ function MobileVideoPlayer({
         }`}
       >
         <div className="text-white">
-          <h1 className="text-lg font-semibold truncate">{game.title}</h1>
+          <div className="flex items-center justify-between gap-3">
+            <h1 className="text-lg font-semibold truncate flex-1">{game.title}</h1>
+            {hasScore && (
+              <div className="flex items-center gap-2 text-sm font-mono bg-black/60 px-3 py-1 rounded-lg border border-white/20">
+                <span className="font-bold">{score.home.display}</span>
+                <span className="text-white/40">-</span>
+                <span className="font-bold">{score.away.display}</span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       
@@ -343,6 +356,7 @@ export default function GameDetailPage() {
             showLeftSidebar={showLeftSidebar}
             onToggleRightSidebar={() => setShowRightSidebar(!showRightSidebar)}
             onToggleLeftSidebar={() => setShowLeftSidebar(!showLeftSidebar)}
+            events={gameEvents}
           />
 
           <div

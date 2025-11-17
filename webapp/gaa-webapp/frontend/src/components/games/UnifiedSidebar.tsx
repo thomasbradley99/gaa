@@ -500,27 +500,27 @@ export default function UnifiedSidebar({
                   <label className="text-gray-300 block mb-2 text-sm font-medium">Actions:</label>
                   {!isEditMode ? (
                     <div className="space-y-2">
-                      <button
-                        onClick={() => {
-                          const newAutoplay = !autoplayMode
-                          setAutoplayMode(newAutoplay)
-                          // Auto-show trimmers when autoplay is enabled
-                          if (newAutoplay) {
-                            setShowTrimmers(true)
-                          }
-                        }}
-                        className={`w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 transition-all ${
-                          autoplayMode
-                            ? 'bg-white/90 hover:bg-white text-black border-white/50'
-                            : 'bg-gray-500/10 hover:bg-gray-500/20 border-gray-400/30 text-gray-300'
-                        }`}
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span>{autoplayMode ? 'Stop' : 'Auto'} Play</span>
-                      </button>
+                      {/* Apple-Style Toggle */}
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium text-gray-300">Auto Play Mode</span>
+                        <button
+                          onClick={() => {
+                            const newAutoplay = !autoplayMode
+                            setAutoplayMode(newAutoplay)
+                            // Auto-show trimmers when autoplay is enabled, hide when disabled
+                            setShowTrimmers(newAutoplay)
+                          }}
+                          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                            autoplayMode ? 'bg-white' : 'bg-gray-600'
+                          }`}
+                        >
+                          <span
+                            className={`inline-block h-4 w-4 transform rounded-full bg-black transition-transform ${
+                              autoplayMode ? 'translate-x-6' : 'translate-x-1'
+                            }`}
+                          />
+                        </button>
+                      </div>
                       
                       <button
                         onClick={handleToggleEditMode}

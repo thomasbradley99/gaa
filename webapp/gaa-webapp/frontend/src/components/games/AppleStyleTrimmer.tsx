@@ -119,21 +119,21 @@ export default function AppleStyleTrimmer({
   }
 
   return (
-    <div className={`bg-gray-800 rounded-lg p-3 ${className}`}>
+    <div className={`bg-black rounded-lg p-3 ${className}`}>
       {/* Header with time info */}
       <div className="flex justify-between items-center mb-3 text-xs">
-        <span className="text-gray-400 font-medium">-{beforePadding}s</span>
+        <span className="text-white/60 font-medium">-{beforePadding}s</span>
         <span className="text-white font-bold flex items-center gap-1">
           <span>⚽</span>
           {formatTime(eventTimestamp)}
         </span>
-        <span className="text-gray-400 font-medium">+{afterPadding}s</span>
+        <span className="text-white/60 font-medium">+{afterPadding}s</span>
       </div>
 
       {/* Timeline Container */}
       <div 
         ref={containerRef}
-        className="relative bg-gray-900 rounded-lg h-12 mx-auto cursor-pointer select-none overflow-visible"
+        className="relative bg-black rounded-lg h-12 mx-auto cursor-pointer select-none overflow-visible"
         style={{ width: `${containerWidth}px` }}
       >
         {/* Tick marks - at bottom edge of timeline */}
@@ -172,7 +172,7 @@ export default function AppleStyleTrimmer({
           style={{ left: `${startPosition - 6}px` }}
           onMouseDown={(e) => handleMouseDown(e, 'left')}
         >
-          <div className="w-0.5 h-4 bg-gray-800 rounded-full" />
+          <div className="w-0.5 h-4 bg-black rounded-full" />
         </div>
 
         {/* Right handle */}
@@ -183,7 +183,7 @@ export default function AppleStyleTrimmer({
           style={{ left: `${endPosition - 6}px` }}
           onMouseDown={(e) => handleMouseDown(e, 'right')}
         >
-          <div className="w-0.5 h-4 bg-gray-800 rounded-full" />
+          <div className="w-0.5 h-4 bg-black rounded-full" />
         </div>
       </div>
     </div>

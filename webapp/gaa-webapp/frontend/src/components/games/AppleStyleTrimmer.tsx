@@ -159,7 +159,7 @@ export default function AppleStyleTrimmer({
         {/* Playhead marker (current time) */}
         {showPlayhead && (
           <div
-            className="absolute top-0 bottom-0 w-1 bg-green-500 z-20 pointer-events-none transition-all duration-100"
+            className="absolute top-0 bottom-0 w-1 bg-white z-20 pointer-events-none transition-all duration-100"
             style={{ left: `${playheadPosition}px` }}
           />
         )}

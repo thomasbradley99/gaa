@@ -18,6 +18,10 @@ interface GameCardProps {
 
 export default function GameCard({ game }: GameCardProps) {
   const router = useRouter()
+  
+  // 🔍 DEBUG LOG
+  console.log('🎴 GameCard rendering:', game.title)
+  console.log('   Full URL:', game.thumbnail_url)
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -77,6 +81,14 @@ export default function GameCard({ game }: GameCardProps) {
             src={game.thumbnail_url}
             alt={game.title}
             className="w-full h-full object-cover"
+            onLoad={() => console.log('✅ Thumbnail loaded:', game.title)}
+            onError={(e) => {
+              console.error('❌ Thumbnail failed to load:', {
+                title: game.title,
+                url: game.thumbnail_url,
+                error: e
+              })
+            }}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">

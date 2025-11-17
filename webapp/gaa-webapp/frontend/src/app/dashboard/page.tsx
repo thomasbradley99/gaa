@@ -42,6 +42,20 @@ export default function DashboardPage() {
       // Fetch games for user's team (if they have one)
       const teamId = userTeams.length > 0 ? userTeams[0].id : undefined
       const data = await games.list(teamId)
+      
+      // 🔍 DEBUG LOGS
+      console.log('📦 API Response:', data)
+      console.log('📦 Number of games:', data.games?.length || 0)
+      data.games?.forEach((game: any, index: number) => {
+        console.log(`🎮 Game ${index + 1}:`, {
+          id: game.id,
+          title: game.title,
+          thumbnail_key: game.thumbnail_key,
+          thumbnail_url: game.thumbnail_url,
+          has_thumbnail: !!game.thumbnail_url
+        })
+      })
+      
       setGamesList(data.games || [])
     } catch (err: any) {
       setError(err.message || 'Failed to load games')

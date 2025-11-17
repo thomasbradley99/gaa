@@ -61,6 +61,7 @@ export default function UnifiedSidebar({
     afterPadding: number
   }>>(new Map())
   const [showTrimmers, setShowTrimmers] = useState(false)
+  const [autoplayMode, setAutoplayMode] = useState(false)
   
   // Event type filters for GAA
   const [eventTypeFilters, setEventTypeFilters] = useState({
@@ -291,14 +292,6 @@ export default function UnifiedSidebar({
     setIsCreatingEvent(false)
   }
 
-  // Debug logging
-  console.log('UnifiedSidebar - allEvents:', {
-    type: typeof allEvents,
-    isArray: Array.isArray(allEvents),
-    length: allEvents?.length,
-    sample: allEvents?.[0]
-  })
-
   // Filter events by type
   const filteredByType = (allEvents || []).filter(event => {
     const type = event.type.toLowerCase()
@@ -445,10 +438,36 @@ export default function UnifiedSidebar({
                           <button
                             key={type}
                             onClick={() => {
-                              setEventTypeFilters(prev => ({
-                                ...prev,
-                                [type]: !(prev as any)[type]
-                              }))
+                              setEventTypeFilters(prev => {
+                                const currentValues = Object.values(prev)
+                                const allSelected = currentValues.every(val => val === true)
+                                const selectedCount = currentValues.filter(val => val === true).length
+                                
+                                // Smart toggle behavior (like footy app):
+                                // If all are selected, clicking one shows only that one
+                                if (allSelected) {
+                                  const newFilters = Object.keys(prev).reduce((acc, key) => {
+                                    (acc as any)[key] = key === type
+                                    return acc
+                                  }, {} as typeof prev)
+                                  return newFilters
+                                }
+                                
+                                // If only this one is selected, clicking it shows all
+                                if (selectedCount === 1 && (prev as any)[type]) {
+                                  const newFilters = Object.keys(prev).reduce((acc, key) => {
+                                    (acc as any)[key] = true
+                                    return acc
+                                  }, {} as typeof prev)
+                                  return newFilters
+                                }
+                                
+                                // Otherwise, normal toggle
+                                return {
+                                  ...prev,
+                                  [type]: !(prev as any)[type]
+                                }
+                              })
                             }}
                             className={`py-1.5 text-xs font-medium rounded border transition-colors ${
                               (eventTypeFilters as any)[type]
@@ -492,6 +511,28 @@ export default function UnifiedSidebar({
                       </button>
                       
                       <button
+                        onClick={() => {
+                          const newAutoplay = !autoplayMode
+                          setAutoplayMode(newAutoplay)
+                          // Auto-show trimmers when autoplay is enabled
+                          if (newAutoplay) {
+                            setShowTrimmers(true)
+                          }
+                        }}
+                        className={`w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 transition-all ${
+                          autoplayMode
+                            ? 'bg-green-500/20 hover:bg-green-500/30 border-green-400/50 text-green-300'
+                            : 'bg-gray-500/10 hover:bg-gray-500/20 border-gray-400/30 text-gray-300'
+                        }`}
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>{autoplayMode ? 'Stop' : 'Auto'} Play</span>
+                      </button>
+                      
+                      <button
                         onClick={() => setShowTrimmers(!showTrimmers)}
                         className={`w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 transition-all ${
                           showTrimmers
@@ -500,8 +541,7 @@ export default function UnifiedSidebar({
                         }`}
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                         </svg>
                         <span>{showTrimmers ? 'Hide' : 'Show'} Trimmers</span>
                       </button>
@@ -835,9 +875,9 @@ export default function UnifiedSidebar({
                           })}
                         </div>
                       </div>
-                    )}
-                  </div>
-                )}
+                  )}
+                </div>
+              )}
               </div>
             </div>
           )}

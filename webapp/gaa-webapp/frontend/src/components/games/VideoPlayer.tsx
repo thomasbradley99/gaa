@@ -678,7 +678,7 @@ export default function VideoPlayer({
           className="absolute top-0 left-0 w-1/5 h-full cursor-pointer"
           onClick={() => triggerFlash('prev', handlePreviousEvent)}
         >
-          <div className={`absolute inset-0 bg-blue-500 pointer-events-none transition-opacity duration-150 ${
+          <div className={`absolute inset-0 bg-white pointer-events-none transition-opacity duration-150 ${
             flashRegion === 'prev' ? 'opacity-20' : 'opacity-0'
           }`} />
         </div>

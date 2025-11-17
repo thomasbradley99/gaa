@@ -5,6 +5,7 @@ import { X } from 'lucide-react'
 import { EventList } from './EventList'
 import { GameStats } from './GameStats'
 import { XMLUpload } from './XmlUpload'
+import AppleStyleTrimmer from './AppleStyleTrimmer'
 import type { GameEvent } from './video-player/types'
 
 interface UnifiedSidebarProps {
@@ -23,6 +24,7 @@ interface UnifiedSidebarProps {
   onEventsUploaded?: (events: GameEvent[]) => void
   allEvents: GameEvent[]
   onEventsUpdate?: (events: GameEvent[]) => void
+  onEventPaddingsChange?: (paddings: Map<number, { beforePadding: number, afterPadding: number }>) => void
 }
 
 type TabType = 'events' | 'stats' | 'ai'
@@ -43,6 +45,7 @@ export default function UnifiedSidebar({
   onEventsUploaded,
   allEvents,
   onEventsUpdate,
+  onEventPaddingsChange,
 }: UnifiedSidebarProps) {
   const [activeTab, setActiveTab] = useState<TabType>('stats')
   
@@ -51,6 +54,13 @@ export default function UnifiedSidebar({
   const [editModeEvents, setEditModeEvents] = useState<Map<number, GameEvent>>(new Map())
   const [binnedEvents, setBinnedEvents] = useState<Set<number>>(new Set())
   const [isSavingEvents, setIsSavingEvents] = useState(false)
+  
+  // Event padding state (for visual trimmer)
+  const [eventPaddings, setEventPaddings] = useState<Map<number, {
+    beforePadding: number
+    afterPadding: number
+  }>>(new Map())
+  const [showTrimmers, setShowTrimmers] = useState(false)
   
   // Event type filters for GAA
   const [eventTypeFilters, setEventTypeFilters] = useState({
@@ -79,6 +89,25 @@ export default function UnifiedSidebar({
     description: '',
     player: '',
   })
+
+  // Trimmer state
+  const [showTrimmers, setShowTrimmers] = useState(false)
+  const [eventPaddings, setEventPaddings] = useState<Map<number, { beforePadding: number, afterPadding: number }>>(new Map())
+
+  // Get padding for an event (with defaults)
+  const getEventPadding = (eventIndex: number) => {
+    return eventPaddings.get(eventIndex) || { beforePadding: 5, afterPadding: 3 }
+  }
+
+  // Update padding for an event
+  const updateEventPadding = (eventIndex: number, beforePadding: number, afterPadding: number) => {
+    const newPaddings = new Map(eventPaddings)
+    newPaddings.set(eventIndex, { beforePadding, afterPadding })
+    setEventPaddings(newPaddings)
+    
+    // Notify parent so it can pass to VideoPlayer
+    onEventPaddingsChange?.(newPaddings)
+  }
 
   // Helper functions
   const formatTime = (seconds: number) => {
@@ -188,8 +217,27 @@ export default function UnifiedSidebar({
         }
       })
       
-      // Remove binned events
-      updatedEvents = updatedEvents.filter((_, index) => !binnedEvents.has(index))
+      // Remove binned events (need to track original indices)
+      const binnedIndices = Array.from(binnedEvents).sort((a, b) => b - a) // Sort descending
+      binnedIndices.forEach(index => {
+        updatedEvents.splice(index, 1)
+      })
+      
+      // Apply padding data to event metadata
+      const finalEvents = updatedEvents.map((event, newIndex) => {
+        // Find original index before deletions
+        const originalIndex = allEvents.indexOf(event)
+        const padding = getEventPadding(originalIndex)
+        
+        return {
+          ...event,
+          metadata: {
+            ...event.metadata,
+            beforePadding: padding.beforePadding,
+            afterPadding: padding.afterPadding,
+          }
+        }
+      })
       
       // Save to backend API
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/games/${game.id}/events`, {
@@ -198,7 +246,7 @@ export default function UnifiedSidebar({
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
-        body: JSON.stringify({ events: updatedEvents })
+        body: JSON.stringify({ events: finalEvents })
       })
       
       if (!response.ok) {
@@ -209,12 +257,16 @@ export default function UnifiedSidebar({
       console.log('✅ Saved changes to backend:', data)
       
       // Update parent
-      onEventsUpdate?.(updatedEvents)
+      onEventsUpdate?.(finalEvents)
+      
+      // Notify parent about padding changes
+      onEventPaddingsChange?.(eventPaddings)
       
       console.log('✅ Applied changes locally:', {
         edited: editModeEvents.size,
         deleted: binnedEvents.size,
-        total: updatedEvents.length
+        paddings: eventPaddings.size,
+        total: finalEvents.length
       })
       
       // Reset edit mode
@@ -239,6 +291,18 @@ export default function UnifiedSidebar({
     setEditModeEvents(new Map())
     setBinnedEvents(new Set())
     setIsCreatingEvent(false)
+  }
+
+  // Helper to get padding for an event (with defaults)
+  const getEventPadding = (eventIndex: number) => {
+    return eventPaddings.get(eventIndex) || { beforePadding: 5, afterPadding: 3 }
+  }
+
+  // Helper to update padding for an event
+  const updateEventPadding = (eventIndex: number, beforePadding: number, afterPadding: number) => {
+    const newPaddings = new Map(eventPaddings)
+    newPaddings.set(eventIndex, { beforePadding, afterPadding })
+    setEventPaddings(newPaddings)
   }
 
   // Filter events by type
@@ -422,15 +486,32 @@ export default function UnifiedSidebar({
                 <div>
                   <label className="text-gray-300 block mb-2 text-sm font-medium">Actions:</label>
                   {!isEditMode ? (
-                    <button
-                      onClick={handleToggleEditMode}
-                      className="w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-purple-500/10 hover:bg-purple-500/20 border-purple-400/30 text-purple-300 transition-all"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                      </svg>
-                      <span>Edit Events</span>
-                    </button>
+                    <div className="space-y-2">
+                      <button
+                        onClick={handleToggleEditMode}
+                        className="w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-purple-500/10 hover:bg-purple-500/20 border-purple-400/30 text-purple-300 transition-all"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+                        <span>Edit Events</span>
+                      </button>
+                      
+                      <button
+                        onClick={() => setShowTrimmers(!showTrimmers)}
+                        className={`w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 transition-all ${
+                          showTrimmers
+                            ? 'bg-blue-500/20 hover:bg-blue-500/30 border-blue-400/50 text-blue-300'
+                            : 'bg-gray-500/10 hover:bg-gray-500/20 border-gray-400/30 text-gray-300'
+                        }`}
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>{showTrimmers ? 'Hide' : 'Show'} Trimmers</span>
+                      </button>
+                    </div>
                   ) : (
                     <div className="space-y-2">
                       <div className="grid grid-cols-2 gap-2">
@@ -553,12 +634,12 @@ export default function UnifiedSidebar({
               {/* Events List */}
               <div className="flex-1 overflow-y-auto p-4">
                 {filteredByType.length === 0 ? (
-                  <div className="text-center py-8 text-gray-400 text-sm">
-                    No events available
-                    {game.status === 'pending' && (
-                      <p className="mt-2 text-xs">Events will appear after analysis</p>
-                    )}
-                  </div>
+                <div className="text-center py-8 text-gray-400 text-sm">
+                  No events available
+                  {game.status === 'pending' && (
+                    <p className="mt-2 text-xs">Events will appear after analysis</p>
+                  )}
+                </div>
                 ) : (
                   <div className="space-y-2">
                     {filteredByType.map((event, displayIndex) => {
@@ -658,7 +739,7 @@ export default function UnifiedSidebar({
                                   />
                                 </div>
                               ) : (
-                                <div>
+                                <div className="w-full">
                                   <div className="flex items-center gap-2 mb-1">
                                     <span className="text-xs text-gray-400 font-mono">
                                       {formatTime(event.timestamp)}
@@ -679,6 +760,22 @@ export default function UnifiedSidebar({
                                   )}
                                   {event.player && (
                                     <p className="text-xs text-gray-500 mt-1 italic">{event.player}</p>
+                                  )}
+                                  
+                                  {/* Apple-Style Trimmer */}
+                                  {showTrimmers && (
+                                    <div className="mt-3">
+                                      <AppleStyleTrimmer
+                                        eventTimestamp={event.timestamp}
+                                        beforePadding={getEventPadding(originalIndex).beforePadding}
+                                        afterPadding={getEventPadding(originalIndex).afterPadding}
+                                        maxPadding={15}
+                                        currentTime={currentTime}
+                                        onPaddingChange={(before, after) => {
+                                          updateEventPadding(originalIndex, before, after)
+                                        }}
+                                      />
+                                    </div>
                                   )}
                                 </div>
                               )}

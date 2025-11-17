@@ -20,6 +20,7 @@ function MobileVideoPlayer({
   handleTimeUpdate,
   handleEventClick,
   seekToTimestamp,
+  eventPaddings,
 }: {
   game: any
   filteredEvents: GameEvent[]
@@ -28,6 +29,7 @@ function MobileVideoPlayer({
   handleTimeUpdate: (time: number, duration: number) => void
   handleEventClick: (event: GameEvent) => void
   seekToTimestamp: (timestamp: number) => void
+  eventPaddings?: Map<number, { beforePadding: number, afterPadding: number }>
 }) {
   const [showOverlay, setShowOverlay] = useState(true)
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null)
@@ -94,6 +96,7 @@ function MobileVideoPlayer({
           onSeekToTimestamp={seekToTimestamp}
           overlayVisible={showOverlay}
           onUserInteract={resetHideTimer}
+          eventPaddings={eventPaddings}
         />
       </div>
     </div>
@@ -116,6 +119,7 @@ export default function GameDetailPage() {
   const [showRightSidebar, setShowRightSidebar] = useState(true)
   const [showLeftSidebar, setShowLeftSidebar] = useState(true)
   const [teamFilter, setTeamFilter] = useState<'all' | 'home' | 'away'>('all')
+  const [eventPaddings, setEventPaddings] = useState<Map<number, { beforePadding: number, afterPadding: number }>>(new Map())
 
   // Parse events from game data
   // Check if events are in GAA Events Schema format (from AI pipeline)
@@ -357,6 +361,7 @@ export default function GameDetailPage() {
                 onTimeUpdate={handleTimeUpdate}
                 onEventClick={handleEventClick}
                 onSeekToTimestamp={seekToTimestamp}
+                eventPaddings={eventPaddings}
               />
             ) : (
               <div className="h-full flex items-center justify-center">
@@ -389,6 +394,7 @@ export default function GameDetailPage() {
           onTeamFilterChange={setTeamFilter}
           onEventsUploaded={handleEventsUploaded}
           onEventsUpdate={handleEventsUpdate}
+          onEventPaddingsChange={setEventPaddings}
         />
       </div>
     )
@@ -415,6 +421,7 @@ export default function GameDetailPage() {
               handleTimeUpdate={handleTimeUpdate}
               handleEventClick={handleEventClick}
               seekToTimestamp={seekToTimestamp}
+              eventPaddings={eventPaddings}
             />
           ) : (
             <div className="w-full aspect-video bg-black flex items-center justify-center">
@@ -439,6 +446,7 @@ export default function GameDetailPage() {
         onTeamFilterChange={setTeamFilter}
         onEventsUploaded={handleEventsUploaded}
         onEventsUpdate={handleEventsUpdate}
+        onEventPaddingsChange={setEventPaddings}
       />
     </div>
   )

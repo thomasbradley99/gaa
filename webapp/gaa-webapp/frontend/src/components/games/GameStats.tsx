@@ -4,7 +4,6 @@ import { useMemo } from 'react'
 import { Download } from 'lucide-react'
 import jsPDF from 'jspdf'
 import type { GameEvent } from './video-player/types'
-import { XMLUpload } from './XMLUpload'
 
 interface GameStatsProps {
   game: {

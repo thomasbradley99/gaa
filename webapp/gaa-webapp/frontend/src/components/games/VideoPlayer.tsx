@@ -321,8 +321,8 @@ export default function VideoPlayer({
   }, [isPreviewMode, previewSegments.length, jumpToNextSegment, jumpToPrevSegment])
 
   // Get team colors from metadata
-  const homeTeam = game.metadata?.teams?.home_team || { name: 'Home', jersey_color: '#2D8B4D' }
-  const awayTeam = game.metadata?.teams?.away_team || { name: 'Away', jersey_color: '#1E3A8A' }
+  const homeTeam = game.metadata?.teams?.home_team || { name: 'Home', jersey_color: '#000000' }
+  const awayTeam = game.metadata?.teams?.away_team || { name: 'Away', jersey_color: '#FFFFFF' }
   
   // Convert team color descriptions to CSS colors
   const getTeamCSSColor = (jerseyColor: string) => {

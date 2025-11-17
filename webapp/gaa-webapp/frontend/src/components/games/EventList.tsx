@@ -36,34 +36,6 @@ export function EventList({
     })
   }, [events, teamFilter, selectedEventType])
 
-  // Clann green from logo - #2D8B4D
-  const CLANN_GREEN = 'bg-[#2D8B4D]'
-  
-  // Get event type color
-  const getEventTypeColor = (type: GameEvent['type']) => {
-    switch (type) {
-      case 'shot':
-        // Color based on outcome - use green for shots
-        return CLANN_GREEN
-      case 'kickout':
-        return 'bg-orange-500'
-      case 'turnover':
-        return 'bg-red-500'
-      case 'throw-up':
-        return 'bg-gray-400'
-      case 'foul':
-        return 'bg-yellow-500'
-      case 'card':
-        return 'bg-red-600'
-      case 'whistle':
-        return 'bg-pink-500'
-      case 'kick-in':
-        return 'bg-teal-500'
-      default:
-        return 'bg-gray-500'
-    }
-  }
-  
   // Get event type label
   const getEventTypeLabel = (event: GameEvent) => {
     if (event.type === 'shot') {
@@ -82,11 +54,6 @@ export function EventList({
       return 'Card'
     }
     return event.type.charAt(0).toUpperCase() + event.type.slice(1).replace('-', ' ')
-  }
-
-  // Get team color - white for home, black for away
-  const getTeamColor = (team: 'home' | 'away') => {
-    return team === 'home' ? 'bg-white' : 'bg-black'
   }
 
   // Check if event is near current time

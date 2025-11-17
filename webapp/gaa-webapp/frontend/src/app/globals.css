@@ -8,9 +8,15 @@
   --gaa-light-blue: #B9E8EB;
 }
 
-body {
+html, body {
   color: rgb(var(--foreground));
   background: rgb(var(--background));
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 /* Leaflet map styles */

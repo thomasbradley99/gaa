@@ -116,8 +116,13 @@ router.get('/', authenticateToken, async (req, res) => {
     const result = await query(queryText, params);
 
     // Generate presigned URLs for thumbnails
+    console.log(`🔍 Generating thumbnail URLs for ${result.rows.length} games`);
+    console.log(`🪣 S3 Client available: ${!!s3Client}`);
+    console.log(`🪣 Bucket: ${process.env.AWS_BUCKET_NAME}`);
+    
     const gamesWithThumbnails = await Promise.all(
       result.rows.map(async (game) => {
+        console.log(`📹 Game ${game.id}: thumbnail_key=${game.thumbnail_key}`);
         if (game.thumbnail_key && s3Client) {
           try {
             const command = new GetObjectCommand({
@@ -125,9 +130,12 @@ router.get('/', authenticateToken, async (req, res) => {
               Key: game.thumbnail_key,
             });
             game.thumbnail_url = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
+            console.log(`✅ Generated thumbnail URL for game ${game.id}`);
           } catch (error) {
-            console.error(`Failed to generate thumbnail URL for game ${game.id}:`, error);
+            console.error(`❌ Failed to generate thumbnail URL for game ${game.id}:`, error);
           }
+        } else {
+          console.log(`⚠️  Skipping thumbnail for game ${game.id}: thumbnail_key=${game.thumbnail_key}, s3Client=${!!s3Client}`);
         }
         return game;
       })

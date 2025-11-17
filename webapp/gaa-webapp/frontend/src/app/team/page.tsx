@@ -222,45 +222,45 @@ export default function TeamPage() {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
-        <div className="flex-1 overflow-y-auto">
-          <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="flex-1 overflow-y-auto pt-16 lg:pt-0">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
             {/* Header */}
             <div className="mb-6">
-              <h1 className="text-3xl font-bold text-white mb-2">Team</h1>
-              <p className="text-gray-400">Manage your GAA team</p>
+              <h1 className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2">Squad</h1>
+              <p className="text-sm sm:text-base text-gray-400">Manage your GAA team</p>
             </div>
 
             {/* No Team State */}
             {!currentTeam && (
               <>
                 {!showMap ? (
-                  <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-8 text-center mb-6">
-                    <Users className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-                    <h2 className="text-xl font-semibold text-white mb-2">No Team Yet</h2>
-                    <p className="text-gray-400 mb-6">
-                      Find your GAA club on the map or create/join a team manually.
+                  <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-6 sm:p-8 text-center mb-6">
+                    <Users className="w-12 h-12 sm:w-16 sm:h-16 text-gray-600 mx-auto mb-4" />
+                    <h2 className="text-lg sm:text-xl font-semibold text-white mb-2">No Squad Yet</h2>
+                    <p className="text-sm sm:text-base text-gray-400 mb-6">
+                      Find your GAA club on the map or create/join a squad manually.
                     </p>
-                    <div className="flex gap-4 justify-center">
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                       <button
                         onClick={() => setShowMap(true)}
-                        className="px-6 py-3 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white font-semibold rounded-lg transition-colors flex items-center gap-2"
+                        className="w-full sm:w-auto px-6 py-3 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
                       >
                         <MapPin className="w-5 h-5" />
                         Find Club on Map
                       </button>
                       <button
                         onClick={() => setShowCreateModal(true)}
-                        className="px-6 py-3 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg transition-colors flex items-center gap-2"
+                        className="w-full sm:w-auto px-6 py-3 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
                       >
                         <Plus className="w-5 h-5" />
-                        Create Team Manually
+                        Create Manually
                       </button>
                       <button
                         onClick={() => setShowJoinModal(true)}
-                        className="px-6 py-3 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg transition-colors flex items-center gap-2"
+                        className="w-full sm:w-auto px-6 py-3 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
                       >
                         <UserPlus className="w-5 h-5" />
-                        Join Team
+                        Join Squad
                       </button>
                     </div>
                   </div>
@@ -301,18 +301,18 @@ export default function TeamPage() {
             {currentTeam && (
               <>
                 {/* Team Header */}
-                <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-6 mb-6">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h2 className="text-2xl font-bold text-white mb-2">{currentTeam.name}</h2>
+                <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-4 sm:p-6 mb-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1 min-w-0">
+                      <h2 className="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2 truncate">{currentTeam.name}</h2>
                       {currentTeam.description && (
-                        <p className="text-gray-400">{currentTeam.description}</p>
+                        <p className="text-sm sm:text-base text-gray-400">{currentTeam.description}</p>
                       )}
                     </div>
                     <button
                       onClick={openEditModal}
-                      className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
-                      title="Edit team"
+                      className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors flex-shrink-0"
+                      title="Edit squad"
                     >
                       <Edit className="w-5 h-5" />
                     </button>
@@ -320,29 +320,31 @@ export default function TeamPage() {
                 </div>
 
                 {/* Team Info */}
-                <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-6 mb-6">
-                  <h3 className="text-lg font-semibold text-white mb-4">Team Information</h3>
+                <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-4 sm:p-6 mb-6">
+                  <h3 className="text-base sm:text-lg font-semibold text-white mb-4">Squad Information</h3>
                   <div className="space-y-4">
                     <div>
-                      <label className="text-sm text-gray-400">Invite Code</label>
-                      <div className="flex items-center gap-2 mt-1">
-                        <code className="px-4 py-2 bg-black/50 border border-white/10 rounded-lg text-white font-mono text-lg">
+                      <label className="text-xs sm:text-sm text-gray-400">Invite Code</label>
+                      <div className="flex items-center gap-2 mt-1 flex-wrap sm:flex-nowrap">
+                        <code className="px-3 sm:px-4 py-2 bg-black/50 border border-white/10 rounded-lg text-white font-mono text-base sm:text-lg flex-1 min-w-0 text-center">
                           {currentTeam.invite_code}
                         </code>
-                        <button
-                          onClick={() => copyInviteCode(currentTeam.invite_code)}
-                          className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-white transition-colors"
-                          title="Copy invite code"
-                        >
-                          <Copy className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => copyInviteLink(currentTeam.invite_code)}
-                          className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-white transition-colors"
-                          title="Copy invite link"
-                        >
-                          <Share2 className="w-4 h-4" />
-                        </button>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => copyInviteCode(currentTeam.invite_code)}
+                            className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-white transition-colors"
+                            title="Copy invite code"
+                          >
+                            <Copy className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => copyInviteLink(currentTeam.invite_code)}
+                            className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-white transition-colors"
+                            title="Copy invite link"
+                          >
+                            <Share2 className="w-4 h-4" />
+                          </button>
+                        </div>
                       </div>
                     </div>
                     <div>
@@ -370,14 +372,14 @@ export default function TeamPage() {
                 </div>
 
                 {/* Team Members */}
-                <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-semibold text-white">
+                <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-4 sm:p-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+                    <h3 className="text-base sm:text-lg font-semibold text-white">
                       Members ({teamMembers.length})
                     </h3>
                     <button
                       onClick={() => copyInviteCode(currentTeam.invite_code)}
-                      className="px-4 py-2 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white text-sm font-semibold rounded-lg transition-colors flex items-center gap-2"
+                      className="w-full sm:w-auto px-4 py-2 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white text-sm font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
                     >
                       <UserPlus className="w-4 h-4" />
                       Invite Member
@@ -385,29 +387,29 @@ export default function TeamPage() {
                   </div>
 
                   {teamMembers.length === 0 ? (
-                    <p className="text-gray-400">No members yet</p>
+                    <p className="text-sm sm:text-base text-gray-400">No members yet</p>
                   ) : (
                     <div className="space-y-3">
                       {teamMembers.map((member) => (
                         <div
                           key={member.id}
-                          className="flex items-center justify-between p-4 bg-black/50 border border-white/10 rounded-lg"
+                          className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 bg-black/50 border border-white/10 rounded-lg"
                         >
-                          <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">
+                          <div className="flex items-center gap-3 min-w-0 flex-1">
+                            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0">
                               <Users className="w-5 h-5 text-gray-400" />
                             </div>
-                            <div>
-                              <p className="text-white font-medium">{member.name}</p>
-                              <p className="text-sm text-gray-400">{member.email}</p>
+                            <div className="min-w-0 flex-1">
+                              <p className="text-white font-medium truncate">{member.name}</p>
+                              <p className="text-xs sm:text-sm text-gray-400 truncate">{member.email}</p>
                             </div>
                           </div>
-                          <div className="flex items-center gap-4">
+                          <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
                             <span className="px-3 py-1 bg-[#2D8B4D] text-white text-xs font-semibold rounded-full">
                               {member.role}
                             </span>
-                            <span className="text-sm text-gray-400">
-                              Joined {new Date(member.joined_at).toLocaleDateString()}
+                            <span className="text-xs sm:text-sm text-gray-400 whitespace-nowrap">
+                              Joined {new Date(member.joined_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                             </span>
                           </div>
                         </div>

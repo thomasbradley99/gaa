@@ -400,11 +400,11 @@ export default function VideoPlayer({
 
       {/* Floating Play Controls - Above Timeline */}
       <div
-        className={`absolute bottom-16 left-0 right-0 flex items-center justify-center z-30 transition-opacity duration-300 ${
+        className={`absolute bottom-12 sm:bottom-16 left-0 right-0 flex items-center justify-center z-30 transition-opacity duration-300 ${
           overlayVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >
-        <div className="flex items-center space-x-8">
+        <div className="flex items-center space-x-4 sm:space-x-8">
           {/* Previous Event */}
           <button
             onClick={() => triggerFlash('prev', handlePreviousEvent)}
@@ -413,7 +413,7 @@ export default function VideoPlayer({
             title="Previous Event"
             style={{ filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.8))' }}
           >
-            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
+            <svg className="w-6 h-6 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
@@ -421,7 +421,7 @@ export default function VideoPlayer({
           {/* Jump Backward 5s */}
           <button
             onClick={() => triggerFlash('back', handleJumpBackward)}
-            className="flex items-center justify-center text-white hover:text-gray-300 transition-colors text-lg font-bold"
+            className="flex items-center justify-center text-white hover:text-gray-300 transition-colors text-sm sm:text-lg font-bold"
             title="Jump Backward 5s"
             style={{ filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.8))' }}
           >
@@ -435,11 +435,11 @@ export default function VideoPlayer({
             style={{ filter: 'drop-shadow(3px 3px 6px rgba(0,0,0,0.9))' }}
           >
             {isPlaying ? (
-              <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-10 h-10 sm:w-16 sm:h-16" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
               </svg>
             ) : (
-              <svg className="w-16 h-16 ml-1" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-10 h-10 sm:w-16 sm:h-16 ml-1" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z"/>
               </svg>
             )}
@@ -448,7 +448,7 @@ export default function VideoPlayer({
           {/* Jump Forward 5s */}
           <button
             onClick={() => triggerFlash('forward', handleJumpForward)}
-            className="flex items-center justify-center text-white hover:text-gray-300 transition-colors text-lg font-bold"
+            className="flex items-center justify-center text-white hover:text-gray-300 transition-colors text-sm sm:text-lg font-bold"
             title="Jump Forward 5s"
             style={{ filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.8))' }}
           >
@@ -463,7 +463,7 @@ export default function VideoPlayer({
             title="Next Event"
             style={{ filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.8))' }}
           >
-            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
+            <svg className="w-6 h-6 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
             </svg>
           </button>
@@ -478,10 +478,10 @@ export default function VideoPlayer({
       >
         <div className="bg-transparent">
           {/* Bottom Timeline Bar */}
-          <div className="mx-3 sm:mx-6 mb-[max(env(safe-area-inset-bottom),8px)]">
-            <div className="flex items-center space-x-3">
+          <div className="mx-2 sm:mx-6 mb-[max(env(safe-area-inset-bottom),6px)]">
+            <div className="flex items-center space-x-2 sm:space-x-3">
               {/* Current Time */}
-              <span className="text-white text-sm font-mono whitespace-nowrap">
+              <span className="text-white text-xs sm:text-sm font-mono whitespace-nowrap">
                 {formatTime(currentTime)}
               </span>
 
@@ -524,30 +524,30 @@ export default function VideoPlayer({
               </div>
 
               {/* Duration */}
-              <span className="text-white/80 text-sm font-mono whitespace-nowrap">
+              <span className="text-white/80 text-xs sm:text-sm font-mono whitespace-nowrap">
                 {formatTime(duration)}
               </span>
 
               {/* Volume */}
               <button
                 onClick={handleMuteToggle}
-                className="flex items-center justify-center w-6 h-6 text-white hover:text-gray-300 transition-colors"
+                className="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 text-white hover:text-gray-300 transition-colors"
                 title={isMuted ? "Unmute" : "Mute"}
               >
                 {isMuted ? (
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clipRule="evenodd" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
                   </svg>
                 ) : (
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                   </svg>
                 )}
               </button>
 
-              {/* Playback Speed */}
-              <div className="relative group">
+              {/* Playback Speed - Hidden on mobile */}
+              <div className="relative group hidden sm:block">
                 <button
                   className="flex items-center justify-center w-8 h-6 text-white hover:text-gray-300 transition-colors text-xs font-mono"
                   title="Playback Speed"
@@ -575,8 +575,8 @@ export default function VideoPlayer({
                 </div>
               </div>
 
-              {/* Zoom */}
-              <div className="relative group">
+              {/* Zoom - Hidden on mobile */}
+              <div className="relative group hidden sm:block">
                 <button
                   className="flex items-center justify-center w-6 h-6 text-white hover:text-gray-300 transition-colors"
                   title="Zoom"

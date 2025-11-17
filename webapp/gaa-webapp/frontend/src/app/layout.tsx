@@ -16,6 +16,11 @@ export const metadata: Metadata = {
   title: "ClannAI GAA - Gaelic Games Analysis Platform",
   description: "Professional video analysis platform for GAA teams. Upload matches, get AI-powered tactical insights, and improve your team's performance.",
   keywords: ["GAA", "Gaelic Games", "analysis", "video", "tactics", "AI", "coaching", "team management"],
+  icons: {
+    icon: '/clann-logo-white.png',
+    shortcut: '/clann-logo-white.png',
+    apple: '/clann-logo-white.png',
+  },
 };
 
 export default function RootLayout({

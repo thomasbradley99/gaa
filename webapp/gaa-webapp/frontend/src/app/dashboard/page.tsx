@@ -101,18 +101,18 @@ export default function DashboardPage() {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
-        <div className="flex-1 overflow-y-auto">
-          <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="flex-1 overflow-y-auto pt-16 lg:pt-0">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
             {/* Header with Upload Button */}
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
               <div>
-                <h1 className="text-3xl font-bold text-white mb-2">Matches</h1>
-                <p className="text-gray-400">Manage and analyze your GAA matches</p>
+                <h1 className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2">Matches</h1>
+                <p className="text-sm sm:text-base text-gray-400">Manage and analyze your GAA matches</p>
               </div>
               {userTeams.length > 0 && (
                 <button
                   onClick={() => setShowUploadForm(!showUploadForm)}
-                  className="px-6 py-3 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white font-semibold rounded-xl transition-all flex items-center gap-2 shadow-lg hover:shadow-xl"
+                  className="w-full sm:w-auto px-6 py-3 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />

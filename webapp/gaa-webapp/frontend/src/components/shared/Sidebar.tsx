@@ -1,9 +1,10 @@
 'use client'
 
+import { useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import Image from 'next/image'
 import { removeToken } from '@/lib/api-client'
-import { Gamepad2, Users, LogOut, User } from 'lucide-react'
+import { Gamepad2, Users, LogOut, User, Menu, X } from 'lucide-react'
 
 interface SidebarProps {
   user: {
@@ -15,6 +16,7 @@ interface SidebarProps {
 export default function Sidebar({ user }: SidebarProps) {
   const router = useRouter()
   const pathname = usePathname()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const handleLogout = () => {
     removeToken()
@@ -37,7 +39,42 @@ export default function Sidebar({ user }: SidebarProps) {
   ]
 
   return (
-    <div className="w-64 bg-black/90 backdrop-blur-lg border-r border-white/10 min-h-screen flex flex-col">
+    <>
+      {/* Mobile Header */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-lg border-b border-white/10">
+        <div className="flex items-center justify-between px-4 py-3">
+          <Image
+            src="/clann-logo-text-white.png"
+            alt="ClannAI"
+            width={120}
+            height={20}
+            className="h-5 w-auto"
+            style={{ width: 'auto', height: 'auto' }}
+          />
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/80 z-40"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <div className={`
+        fixed lg:relative inset-y-0 left-0 z-40
+        w-64 bg-black/90 backdrop-blur-lg border-r border-white/10 min-h-screen flex flex-col
+        transform transition-transform duration-300 lg:transform-none
+        ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+      `}>
       {/* Logo */}
       <div className="p-6 border-b border-white/10">
         <Image
@@ -73,7 +110,10 @@ export default function Sidebar({ user }: SidebarProps) {
             return (
               <li key={item.path}>
                 <button
-                  onClick={() => router.push(item.path)}
+                  onClick={() => {
+                    router.push(item.path)
+                    setMobileMenuOpen(false)
+                  }}
                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${
                     item.active
                       ? 'bg-[#2D8B4D] text-white shadow-lg'
@@ -100,6 +140,7 @@ export default function Sidebar({ user }: SidebarProps) {
         </button>
       </div>
     </div>
+    </>
   )
 }
 

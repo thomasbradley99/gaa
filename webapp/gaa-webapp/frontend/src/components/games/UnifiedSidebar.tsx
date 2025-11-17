@@ -55,10 +55,6 @@ export default function UnifiedSidebar({
   const [binnedEvents, setBinnedEvents] = useState<Set<number>>(new Set())
   const [isSavingEvents, setIsSavingEvents] = useState(false)
   
-  // Download mode state
-  const [isDownloadMode, setIsDownloadMode] = useState(false)
-  const [selectedDownloadEvents, setSelectedDownloadEvents] = useState<Set<number>>(new Set())
-  
   // Event padding state (for visual trimmer)
   const [eventPaddings, setEventPaddings] = useState<Map<number, {
     beforePadding: number
@@ -502,8 +498,8 @@ export default function UnifiedSidebar({
                 {/* Action Buttons */}
                 <div>
                   <label className="text-gray-300 block mb-2 text-sm font-medium">Actions:</label>
-                  {!isEditMode && !isDownloadMode ? (
-                    <div className="grid grid-cols-3 gap-2">
+                  {!isEditMode ? (
+                    <div className="grid grid-cols-2 gap-2">
                       {/* Auto Play Button with Toggle */}
                       <button
                         onClick={() => {
@@ -512,21 +508,21 @@ export default function UnifiedSidebar({
                           // Auto-show trimmers when autoplay is enabled, hide when disabled
                           setShowTrimmers(newAutoplay)
                         }}
-                        className={`flex flex-col items-center justify-center gap-1.5 py-2.5 text-xs font-medium rounded-lg border-2 transition-all ${
+                        className={`flex flex-col items-center justify-center gap-1.5 py-2.5 text-sm font-medium rounded-lg border-2 transition-all ${
                           autoplayMode
                             ? 'bg-white/90 hover:bg-white text-black border-white/50'
                             : 'bg-gray-500/10 hover:bg-gray-500/20 border-gray-400/30 text-gray-300'
                         }`}
                       >
-                        <span className="text-[10px]">Auto Play</span>
+                        <span className="text-xs">Auto Play</span>
                         <div
-                          className={`relative inline-flex h-4 w-8 items-center rounded-full transition-colors ${
+                          className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
                             autoplayMode ? 'bg-black' : 'bg-gray-600'
                           }`}
                         >
                           <span
-                            className={`inline-block h-2.5 w-2.5 transform rounded-full bg-white transition-transform ${
-                              autoplayMode ? 'translate-x-4' : 'translate-x-1'
+                            className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                              autoplayMode ? 'translate-x-5' : 'translate-x-1'
                             }`}
                           />
                         </div>
@@ -534,49 +530,12 @@ export default function UnifiedSidebar({
                       
                       <button
                         onClick={handleToggleEditMode}
-                        className="flex items-center justify-center gap-1.5 py-2.5 text-xs font-medium rounded-lg border-2 bg-purple-500/10 hover:bg-purple-500/20 border-purple-400/30 text-purple-300 transition-all"
+                        className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-purple-500/10 hover:bg-purple-500/20 border-purple-400/30 text-purple-300 transition-all"
                       >
-                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                         </svg>
-                        <span>Edit</span>
-                      </button>
-                      
-                      <button
-                        onClick={() => setIsDownloadMode(true)}
-                        className="flex items-center justify-center gap-1.5 py-2.5 text-xs font-medium rounded-lg border-2 bg-gray-500/10 hover:bg-gray-500/20 border-gray-400/30 text-gray-300 transition-all"
-                      >
-                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                        </svg>
-                        <span>Download</span>
-                      </button>
-                    </div>
-                  ) : isDownloadMode ? (
-                    <div className="space-y-2">
-                      <button
-                        onClick={() => {
-                          setIsDownloadMode(false)
-                          setSelectedDownloadEvents(new Set())
-                        }}
-                        className="w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-gray-500/10 hover:bg-gray-500/20 border-gray-400/30 text-gray-300 transition-all"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                        <span>Cancel Download</span>
-                      </button>
-                      <button
-                        onClick={() => {
-                          alert(`Download ${selectedDownloadEvents.size} clips (Backend not ready yet!)`)
-                        }}
-                        disabled={selectedDownloadEvents.size === 0}
-                        className="w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-white/90 hover:bg-white border-white/50 text-black disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                        </svg>
-                        <span>Download {selectedDownloadEvents.size > 0 ? `(${selectedDownloadEvents.size})` : ''}</span>
+                        <span>Edit Events</span>
                       </button>
                     </div>
                   ) : (
@@ -717,45 +676,17 @@ export default function UnifiedSidebar({
                       
                       const displayEvent = editModeEvents.get(originalIndex) || event
                       
-                      const isSelected = selectedDownloadEvents.has(originalIndex)
-                      
                       return (
                         <div
                           key={`${event.id}-${originalIndex}`}
-                          onClick={() => {
-                            if (isDownloadMode) {
-                              const newSet = new Set(selectedDownloadEvents)
-                              if (newSet.has(originalIndex)) {
-                                newSet.delete(originalIndex)
-                              } else {
-                                newSet.add(originalIndex)
-                              }
-                              setSelectedDownloadEvents(newSet)
-                            } else if (!isEditMode) {
-                              onEventClick(event)
-                            }
-                          }}
+                          onClick={() => !isEditMode && onEventClick(event)}
                           className={`p-3 rounded-lg border transition-all ${
-                            isDownloadMode && isSelected
-                              ? 'bg-white/10 border-white/50 ring-1 ring-white/50 cursor-pointer'
-                              : isEditMode
+                            isEditMode
                               ? 'bg-gray-800/50 border-gray-600 cursor-default'
                               : 'bg-gray-800/30 border-gray-700 hover:bg-gray-800/60 hover:border-gray-600 cursor-pointer'
                           }`}
                         >
                           <div className="flex items-start justify-between gap-2">
-                            {/* Download Mode Checkbox */}
-                            {isDownloadMode && (
-                              <div className="flex items-center justify-center mt-1">
-                                <input
-                                  type="checkbox"
-                                  checked={isSelected}
-                                  onChange={() => {}}
-                                  className="w-4 h-4 rounded border-white/30 bg-transparent checked:bg-white"
-                                />
-                              </div>
-                            )}
-                            
                             <div className="flex-1 min-w-0">
                               {isEditMode ? (
                                 <div className="space-y-2">

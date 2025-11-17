@@ -16,10 +16,15 @@ export const metadata: Metadata = {
   title: "ClannAI GAA - Gaelic Games Analysis Platform",
   description: "Professional video analysis platform for GAA teams. Upload matches, get AI-powered tactical insights, and improve your team's performance.",
   keywords: ["GAA", "Gaelic Games", "analysis", "video", "tactics", "AI", "coaching", "team management"],
+  manifest: '/site.webmanifest',
   icons: {
-    icon: '/clann-logo-white.png',
-    shortcut: '/clann-logo-white.png',
-    apple: '/clann-logo-white.png',
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
   },
 };
 

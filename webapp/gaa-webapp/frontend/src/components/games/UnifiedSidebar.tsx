@@ -471,7 +471,7 @@ export default function UnifiedSidebar({
                             }}
                             className={`py-1.5 text-xs font-medium rounded border transition-colors ${
                               (eventTypeFilters as any)[type]
-                                ? 'bg-green-500/20 text-green-300 border-green-500/50'
+                                ? 'bg-white/90 text-black border-white/50'
                                 : 'bg-gray-500/10 text-gray-500 border-gray-500/30'
                             }`}
                           >
@@ -521,7 +521,7 @@ export default function UnifiedSidebar({
                         }}
                         className={`w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 transition-all ${
                           autoplayMode
-                            ? 'bg-green-500/20 hover:bg-green-500/30 border-green-400/50 text-green-300'
+                            ? 'bg-white/90 hover:bg-white text-black border-white/50'
                             : 'bg-gray-500/10 hover:bg-gray-500/20 border-gray-400/30 text-gray-300'
                         }`}
                       >
@@ -552,7 +552,7 @@ export default function UnifiedSidebar({
                         <button
                           onClick={handleStartCreatingEvent}
                           disabled={isSavingEvents}
-                          className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-green-500/10 hover:bg-green-500/20 border-green-400/30 text-green-300 disabled:opacity-50 transition-all"
+                          className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-white/90 hover:bg-white border-white/50 text-black disabled:opacity-50 transition-all"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -574,11 +574,11 @@ export default function UnifiedSidebar({
                         <button
                           onClick={handleSaveChanges}
                           disabled={isSavingEvents || (editModeEvents.size === 0 && binnedEvents.size === 0)}
-                          className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-blue-500/10 hover:bg-blue-500/20 border-blue-400/30 text-blue-300 disabled:opacity-50 transition-all"
+                          className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-black/80 hover:bg-black border-white/30 text-white disabled:opacity-50 transition-all"
                         >
                           {isSavingEvents ? (
                             <>
-                              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-300"></div>
+                              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
                               <span>Saving...</span>
                             </>
                           ) : (
@@ -863,7 +863,7 @@ export default function UnifiedSidebar({
                                 <button
                                   onClick={() => handleUnbinEvent(index)}
                                   disabled={isSavingEvents}
-                                  className="p-1 text-green-400 hover:text-green-300 hover:bg-green-500/10 rounded transition-colors"
+                                  className="p-1 text-white hover:text-white/80 hover:bg-white/10 rounded transition-colors"
                                   title="Restore event"
                                 >
                                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

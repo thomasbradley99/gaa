@@ -291,18 +291,6 @@ export default function UnifiedSidebar({
     setIsCreatingEvent(false)
   }
 
-  // Helper to get padding for an event (with defaults)
-  const getEventPadding = (eventIndex: number) => {
-    return eventPaddings.get(eventIndex) || { beforePadding: 5, afterPadding: 3 }
-  }
-
-  // Helper to update padding for an event
-  const updateEventPadding = (eventIndex: number, beforePadding: number, afterPadding: number) => {
-    const newPaddings = new Map(eventPaddings)
-    newPaddings.set(eventIndex, { beforePadding, afterPadding })
-    setEventPaddings(newPaddings)
-  }
-
   // Filter events by type
   const filteredByType = allEvents.filter(event => {
     const type = event.type.toLowerCase()

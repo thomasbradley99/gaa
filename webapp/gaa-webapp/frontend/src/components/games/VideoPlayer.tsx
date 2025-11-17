@@ -87,6 +87,8 @@ export default function VideoPlayer({
 
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
         console.log('✅ HLS manifest loaded successfully')
+        // Autoplay when video is ready
+        video.play().catch(err => console.log('Autoplay prevented:', err))
       })
 
       hls.on(Hls.Events.ERROR, (event, data) => {
@@ -102,11 +104,19 @@ export default function VideoPlayer({
       // Native HLS support (Safari)
       console.log('🍎 Using native HLS support:', game.hls_url)
       video.src = game.hls_url
+      // Autoplay when loaded
+      video.onloadeddata = () => {
+        video.play().catch(err => console.log('Autoplay prevented:', err))
+      }
     } else {
       // Fallback to MP4
       console.log('📹 Using MP4 fallback:', game.video_url)
       if (game.video_url) {
         video.src = game.video_url
+        // Autoplay when loaded
+        video.onloadeddata = () => {
+          video.play().catch(err => console.log('Autoplay prevented:', err))
+        }
       } else {
         console.error('❌ No video URL available')
       }
@@ -339,6 +349,7 @@ export default function VideoPlayer({
           })
         }}
         preload="metadata"
+        autoPlay
         playsInline
         controls={false}
         webkit-playsinline="true"

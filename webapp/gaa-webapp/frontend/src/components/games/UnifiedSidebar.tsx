@@ -499,32 +499,38 @@ export default function UnifiedSidebar({
                 <div>
                   <label className="text-gray-300 block mb-2 text-sm font-medium">Actions:</label>
                   {!isEditMode ? (
-                    <div className="space-y-2">
-                      {/* Apple-Style Toggle */}
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm font-medium text-gray-300">Auto Play Mode</span>
-                        <button
-                          onClick={() => {
-                            const newAutoplay = !autoplayMode
-                            setAutoplayMode(newAutoplay)
-                            // Auto-show trimmers when autoplay is enabled, hide when disabled
-                            setShowTrimmers(newAutoplay)
-                          }}
-                          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                            autoplayMode ? 'bg-white' : 'bg-gray-600'
+                    <div className="grid grid-cols-2 gap-2">
+                      {/* Auto Play Button with Toggle */}
+                      <button
+                        onClick={() => {
+                          const newAutoplay = !autoplayMode
+                          setAutoplayMode(newAutoplay)
+                          // Auto-show trimmers when autoplay is enabled, hide when disabled
+                          setShowTrimmers(newAutoplay)
+                        }}
+                        className={`flex flex-col items-center justify-center gap-1.5 py-2.5 text-sm font-medium rounded-lg border-2 transition-all ${
+                          autoplayMode
+                            ? 'bg-white/90 hover:bg-white text-black border-white/50'
+                            : 'bg-gray-500/10 hover:bg-gray-500/20 border-gray-400/30 text-gray-300'
+                        }`}
+                      >
+                        <span className="text-xs">Auto Play</span>
+                        <div
+                          className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
+                            autoplayMode ? 'bg-black' : 'bg-gray-600'
                           }`}
                         >
                           <span
-                            className={`inline-block h-4 w-4 transform rounded-full bg-black transition-transform ${
-                              autoplayMode ? 'translate-x-6' : 'translate-x-1'
+                            className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                              autoplayMode ? 'translate-x-5' : 'translate-x-1'
                             }`}
                           />
-                        </button>
-                      </div>
+                        </div>
+                      </button>
                       
                       <button
                         onClick={handleToggleEditMode}
-                        className="w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-purple-500/10 hover:bg-purple-500/20 border-purple-400/30 text-purple-300 transition-all"
+                        className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-purple-500/10 hover:bg-purple-500/20 border-purple-400/30 text-purple-300 transition-all"
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />

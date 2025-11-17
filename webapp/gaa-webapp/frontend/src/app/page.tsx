@@ -386,6 +386,7 @@ function HomePage() {
                       events: DEMO_GAME_DATA.events
                     }}
                     events={filteredDemoEvents}
+                    allEvents={DEMO_GAME_DATA.events}
                     currentTime={demoCurrentTime}
                     duration={demoDuration}
                     onEventClick={(event: GameEvent) => {

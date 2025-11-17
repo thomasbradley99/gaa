@@ -65,7 +65,7 @@ export default function UnifiedSidebar({
         <div className={`flex items-center justify-between px-4 py-3 border-b border-white/10 bg-black/90 backdrop-blur-sm z-10 ${
           isMobile ? 'sticky top-[56.25vw]' : ''
         }`}>
-          <div className="flex items-center gap-2 flex-1">
+          <div className="flex items-center justify-center gap-2 flex-1">
             {/* Tabs */}
             <button
               onClick={() => setActiveTab('stats')}

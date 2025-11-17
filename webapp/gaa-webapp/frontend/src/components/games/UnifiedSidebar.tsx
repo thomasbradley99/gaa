@@ -676,14 +676,18 @@ export default function UnifiedSidebar({
                       
                       const displayEvent = editModeEvents.get(originalIndex) || event
                       
+                      const isCurrentEvent = originalIndex === currentEventIndex
+                      
                       return (
                         <div
                           key={`${event.id}-${originalIndex}`}
                           onClick={() => !isEditMode && onEventClick(event)}
-                          className={`p-3 rounded-lg border transition-all ${
-                            isEditMode
+                          className={`w-full text-left p-3 rounded-lg transition-all duration-200 border cursor-pointer ${
+                            isCurrentEvent
+                              ? 'bg-gray-800 text-white border-white ring-0.5 ring-white'
+                              : isEditMode
                               ? 'bg-gray-800/50 border-gray-600 cursor-default'
-                              : 'bg-gray-800/30 border-gray-700 hover:bg-gray-800/60 hover:border-gray-600 cursor-pointer'
+                              : 'bg-gray-800/60 text-gray-300 hover:bg-gray-700/60 border-gray-700 hover:border-gray-600'
                           }`}
                         >
                           <div className="flex items-start justify-between gap-2">
@@ -766,24 +770,39 @@ export default function UnifiedSidebar({
                                 </div>
                               ) : (
                                 <div className="w-full">
-                                  <div className="flex items-center gap-2 mb-1">
-                                    <span className="text-xs text-gray-400 font-mono">
-                                      {formatTime(event.timestamp)}
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    {/* Time Badge with Icon */}
+                                    <div className="flex items-center gap-1">
+                                      <svg className="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                      </svg>
+                                      <span className="text-xs text-gray-400 font-mono">
+                                        {formatTime(event.timestamp)}
+                                      </span>
+                                    </div>
+                                    
+                                    {/* Event Type Badge */}
+                                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium border bg-gray-500/20 text-gray-300 border-gray-500/30">
+                                      <span>{getEventEmoji(event.type)}</span>
+                                      <span>{event.type.charAt(0).toUpperCase() + event.type.slice(1)}</span>
                                     </span>
-                                    <span className="text-sm font-medium text-white">
-                                      {getEventEmoji(event.type)} {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
-                                    </span>
-                                    <span className={`text-xs px-2 py-0.5 rounded ${
+                                    
+                                    {/* Team Badge */}
+                                    <span className={`inline-flex items-center px-2 py-1 rounded-md text-xs font-medium border ${
                                       event.team === 'home'
-                                        ? 'bg-black/80 text-white border border-white/30'
-                                        : 'bg-white/90 text-black border border-white/50'
+                                        ? 'bg-black/60 text-white border-white/30'
+                                        : 'bg-white/90 text-black border-white/50'
                                     }`}>
                                       {event.team === 'home' ? 'Home' : 'Away'}
                                     </span>
                                   </div>
+                                  
+                                  {/* Description */}
                                   {event.description && (
-                                    <p className="text-xs text-gray-400 mt-1">{event.description}</p>
+                                    <p className="text-xs text-gray-400 mt-2">{event.description}</p>
                                   )}
+                                  
+                                  {/* Player */}
                                   {event.player && (
                                     <p className="text-xs text-gray-500 mt-1 italic">{event.player}</p>
                                   )}

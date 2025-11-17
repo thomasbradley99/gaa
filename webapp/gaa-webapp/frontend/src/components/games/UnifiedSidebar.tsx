@@ -291,8 +291,16 @@ export default function UnifiedSidebar({
     setIsCreatingEvent(false)
   }
 
+  // Debug logging
+  console.log('UnifiedSidebar - allEvents:', {
+    type: typeof allEvents,
+    isArray: Array.isArray(allEvents),
+    length: allEvents?.length,
+    sample: allEvents?.[0]
+  })
+
   // Filter events by type
-  const filteredByType = allEvents.filter(event => {
+  const filteredByType = (allEvents || []).filter(event => {
     const type = event.type.toLowerCase()
     return (eventTypeFilters as any)[type] !== false
   })

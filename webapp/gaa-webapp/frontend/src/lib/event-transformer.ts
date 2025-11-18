@@ -121,6 +121,11 @@ function getPossessionOutcome(outcome: string): 'won' | 'lost' | undefined {
 function generateDescription(action: string, outcome: string, team: 'home' | 'away'): string {
   const teamName = team === 'home' ? 'Home' : 'Away'
   
+  // Handle undefined/null action
+  if (!action) {
+    return `${teamName} event`
+  }
+  
   switch (action) {
     case 'Shot':
       switch (outcome) {

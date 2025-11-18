@@ -398,7 +398,7 @@ export default function UnifiedSidebar({
               onClick={() => setActiveTab('stats')}
               className={`flex-1 flex items-center justify-center space-x-2 px-3 py-2.5 rounded-md text-sm font-medium transition-all duration-200 ${
                 activeTab === 'stats'
-                  ? 'bg-purple-500/20 text-purple-200 border border-purple-500/30'
+                  ? 'bg-green-500/10 text-green-300 border border-green-500/20'
                   : 'text-gray-400 hover:text-white hover:bg-white/10'
               }`}
             >
@@ -428,7 +428,7 @@ export default function UnifiedSidebar({
               onClick={() => setActiveTab('ai')}
               className={`flex-1 flex items-center justify-center space-x-2 px-3 py-2.5 rounded-md text-sm font-medium transition-all duration-200 ${
                 activeTab === 'ai'
-                  ? 'bg-blue-500/20 text-blue-200 border border-blue-500/30'
+                  ? 'bg-green-500/10 text-green-300 border border-green-500/20'
                   : 'text-gray-400 hover:text-white hover:bg-white/10'
               }`}
             >

@@ -259,10 +259,9 @@ function HomePage() {
               muted
               playsInline
               aria-hidden="true"
+              src="/hero-video.mp4"
               className="absolute inset-0 w-full h-full object-cover opacity-80"
-            >
-              <source src="/hero-video.mp4" type="video/mp4" />
-            </video>
+            />
 
             {/* Gradient Overlay */}
             <div

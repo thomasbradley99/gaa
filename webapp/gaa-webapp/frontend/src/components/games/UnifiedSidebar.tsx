@@ -453,7 +453,7 @@ export default function UnifiedSidebar({
         {/* Content */}
         <div className={`${isMobile ? 'h-[calc(100vh-57px)]' : 'h-[calc(100%-57px)]'} flex flex-col`}>
           {activeTab === 'events' && (
-            <div className="flex-1 flex flex-col">
+            <div className="flex-1 flex flex-col overflow-hidden">
               {/* Filters and Actions Section */}
               <div className="p-4 border-b border-white/10 space-y-3">
                 {/* Team Filters */}
@@ -737,7 +737,7 @@ export default function UnifiedSidebar({
               </div>
 
               {/* Events List */}
-              <div className="flex-1 overflow-y-auto p-4">
+              <div className="flex-1 min-h-0 overflow-y-auto p-4">
                 {filteredByType.length === 0 ? (
                 <div className="text-center py-8 text-gray-400 text-sm">
                   No events available

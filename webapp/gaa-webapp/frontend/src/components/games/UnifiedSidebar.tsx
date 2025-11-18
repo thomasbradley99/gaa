@@ -1004,8 +1004,8 @@ export default function UnifiedSidebar({
                       onClick={() => setSelectedCoach(coach)}
                       className={`p-3 rounded-lg border-2 transition-all hover:scale-105 ${
                         selectedCoach.id === coach.id
-                          ? 'border-white/40 bg-gray-800'
-                          : 'border-gray-600 bg-gray-800 hover:border-gray-500'
+                          ? 'border-white/40 bg-black'
+                          : 'border-gray-700 bg-black hover:border-gray-600'
                       }`}
                     >
                       <div className="text-center">

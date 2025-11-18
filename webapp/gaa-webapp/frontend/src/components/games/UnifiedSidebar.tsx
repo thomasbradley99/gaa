@@ -349,7 +349,7 @@ export default function UnifiedSidebar({
 
   // Filter events by type
   const filteredByType = (allEvents || []).filter(event => {
-    const type = event.type?.toLowerCase() || event.action?.toLowerCase() || ''
+    const type = event.type?.toLowerCase() || ''
     return (eventTypeFilters as any)[type] !== false
   })
 

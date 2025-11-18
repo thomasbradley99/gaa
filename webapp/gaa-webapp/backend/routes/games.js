@@ -339,7 +339,7 @@ router.get('/:id', authenticateToken, async (req, res) => {
 router.post('/:id/events', authenticateLambda, async (req, res) => {
   try {
     const { id } = req.params;
-    const { events, match_info, team_mapping } = req.body;
+    const { events, match_info, team_mapping, metadata } = req.body;
 
     // Validate game exists
     const gameResult = await query('SELECT id FROM games WHERE id = $1', [id]);
@@ -365,15 +365,16 @@ router.post('/:id/events', authenticateLambda, async (req, res) => {
       updated_at: new Date().toISOString()
     };
 
-    // Update database: store events and update status
+    // Update database: store events, metadata, and update status
     const updateResult = await query(
       `UPDATE games 
-       SET events = $1::jsonb, 
+       SET events = $1::jsonb,
+           metadata = $2::jsonb,
            status = 'analyzed',
            updated_at = NOW()
-       WHERE id = $2
+       WHERE id = $3
        RETURNING id, status`,
-      [JSON.stringify(eventsData), id]
+      [JSON.stringify(eventsData), JSON.stringify(metadata || {}), id]
     );
 
     console.log(`✅ Events stored for game ${id}: ${events.length} events`);

@@ -40,6 +40,26 @@ AWS_REGION = os.environ.get('AWS_REGION', 'eu-west-1')
 s3_client = boto3.client('s3', region_name=AWS_REGION)
 
 
+def parse_team_names_from_title(title):
+    """Extract team names from title like 'Team A vs Team B'"""
+    separators = [' vs ', ' v ', ' - ', ' VS ', ' V ']
+    
+    for sep in separators:
+        if sep in title:
+            parts = title.split(sep, 1)
+            if len(parts) == 2:
+                return {
+                    'home_team': parts[0].strip(),
+                    'away_team': parts[1].strip()
+                }
+    
+    # Fallback
+    return {
+        'home_team': 'Home',
+        'away_team': 'Away'
+    }
+
+
 def download_video_from_s3(s3_key, local_path):
     """Download video from S3 to local file"""
     try:
@@ -68,9 +88,12 @@ def download_video_from_s3(s3_key, local_path):
         return False
 
 
-def post_results_to_backend(game_id, events_json, team_mapping=None):
-    """Post analysis results back to backend API"""
+def post_results_to_backend(game_id, events_json, team_mapping=None, game_title=None, team_colors=None):
+    """Post analysis results back to backend API with team metadata"""
     try:
+        # Parse team names from title
+        team_names = parse_team_names_from_title(game_title or 'Match')
+        
         payload = {
             'events': events_json.get('events', []),
             'match_info': {
@@ -84,6 +107,21 @@ def post_results_to_backend(game_id, events_json, team_mapping=None):
         # Add team mapping if available
         if team_mapping:
             payload['team_mapping'] = team_mapping
+        
+        # Add metadata with team colors if available
+        if team_colors:
+            payload['metadata'] = {
+                'teams': {
+                    'home_team': {
+                        'name': team_names['home_team'],
+                        'jersey_color': team_colors.get('home', 'black')
+                    },
+                    'away_team': {
+                        'name': team_names['away_team'],
+                        'jersey_color': team_colors.get('away', 'white')
+                    }
+                }
+            }
         
         print(f"📤 Posting {len(payload['events'])} events to backend...")
         
@@ -269,12 +307,18 @@ def lambda_handler(event, context):
             'blue': 'away'
         }
         
+        # Package team colors for backend
+        team_colors = {
+            'home': team_a_color,
+            'away': team_b_color
+        }
+        
         # Post results back to backend
         print("\n" + "="*60)
         print("POSTING RESULTS TO BACKEND")
         print("="*60)
         update_processing_progress(game_id, 'Saving results to database', 95)
-        post_results_to_backend(game_id, events_json, team_mapping)
+        post_results_to_backend(game_id, events_json, team_mapping, title, team_colors)
         
         print("\n" + "="*60)
         print("✅ PIPELINE COMPLETE!")

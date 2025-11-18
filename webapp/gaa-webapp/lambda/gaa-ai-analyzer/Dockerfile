@@ -20,10 +20,11 @@ COPY requirements.txt ${LAMBDA_TASK_ROOT}/
 RUN pip install --no-cache-dir -r ${LAMBDA_TASK_ROOT}/requirements.txt
 
 # Copy Lambda function code
-COPY lambda_handler.py ${LAMBDA_TASK_ROOT}/
+COPY lambda_handler_s3.py ${LAMBDA_TASK_ROOT}/
 COPY utils.py ${LAMBDA_TASK_ROOT}/
 COPY stages/ ${LAMBDA_TASK_ROOT}/stages/
+COPY utils/ ${LAMBDA_TASK_ROOT}/utils/
 
 # Set the CMD to your handler
-CMD ["lambda_handler.lambda_handler"]
+CMD ["lambda_handler_s3.lambda_handler"]
 

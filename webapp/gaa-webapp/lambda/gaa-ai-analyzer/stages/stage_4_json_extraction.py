@@ -40,18 +40,36 @@ def run(classified_events, game_profile, work_dir, api_key):
 {{
   "events": [
     {{
-      "id": "unique-id",
-      "timestamp": seconds (integer),
-      "type": "kickout|shot|turnover|foul|throw-up|mark|free|45|penalty",
-      "team": "home|away",
-      "description": "Brief description",
+      "id": "event_001",
+      "time": 65,
+      "team": "home",
+      "action": "Shot",
+      "outcome": "Point",
       "metadata": {{
-        "scoreType": "point|goal|wide|saved" (for shots only),
-        "player": "player name if known"
+        "scoreType": "point",
+        "from": "play"
       }}
+    }},
+    {{
+      "id": "event_002",
+      "time": 120,
+      "team": "away",
+      "action": "Kickout",
+      "outcome": "Won"
     }}
   ]
 }}
+
+**CRITICAL FIELD NAMES (must match exactly):**
+- Use "time" NOT "timestamp"
+- Use "action" NOT "type"
+- Include "outcome" field
+
+**ACTION VALUES (capitalized):**
+Shot, Kickout, Turnover, Throw-up, Foul, Yellow Card, Black Card, Red Card, Kick-in, Half Time Whistle, Full Time Whistle
+
+**OUTCOME VALUES (capitalized):**
+Point, Goal, Wide, Saved, Won, Lost, N/A
 
 **RULES:**
 - Convert timestamps to seconds (e.g., "1:05" → 65)

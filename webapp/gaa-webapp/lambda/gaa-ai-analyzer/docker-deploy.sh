@@ -9,7 +9,7 @@ echo "=================================================="
 echo ""
 
 # Configuration
-FUNCTION_NAME="gaa-ai-analyzer"
+FUNCTION_NAME="gaa-ai-analyzer-nov25"
 REGION="eu-west-1"
 AWS_ACCOUNT_ID="905418018179"
 ECR_REPOSITORY="${FUNCTION_NAME}"

@@ -182,8 +182,11 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
       <div className="max-w-7xl mx-auto p-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
           {/* Loading placeholder for map */}
-          <div className="w-full h-[300px] sm:h-[400px] lg:h-[600px] rounded-lg overflow-hidden bg-gray-800 flex items-center justify-center order-2 lg:order-1">
-            <div className="text-gray-400">Loading map...</div>
+          <div className="w-full h-[300px] sm:h-[400px] lg:h-[600px] rounded-lg overflow-hidden bg-black flex items-center justify-center order-2 lg:order-1">
+            <div className="flex flex-col items-center gap-4">
+              <img src="/clann-logo-white.png" alt="Clann AI" className="w-16 h-16 animate-pulse" />
+              <div className="text-gray-400 text-sm">Loading map...</div>
+            </div>
           </div>
           {/* Controls placeholder */}
           <div className="flex flex-col space-y-2 text-gray-100 order-1 lg:order-2 lg:h-[600px]">
@@ -331,7 +334,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
       {/* Main Layout - Stacked on mobile, side-by-side on desktop */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
         {/* Map - Full height on mobile, proportional on desktop */}
-        <div className="w-full h-[300px] sm:h-[400px] lg:h-[600px] rounded-lg overflow-hidden order-2 lg:order-1" style={{ backgroundColor: 'transparent' }}>
+        <div className="w-full h-[300px] sm:h-[400px] lg:h-[600px] overflow-hidden order-2 lg:order-1" style={{ backgroundColor: 'transparent' }}>
             <MapContainer 
               center={MAP_CENTER as [number, number]} 
               zoom={mapZoom} 
@@ -350,10 +353,10 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
             <GeoJSON 
               data={irelandBoundary as any}
               style={{
-                fillColor: '#2d3748',
-                fillOpacity: 0.8,
-                color: '#4a5568',
-                weight: 2
+                fillColor: '#000000',
+                fillOpacity: 1,
+                color: '#1a1a1a',
+                weight: 1
               }}
             />
             <style>{`
@@ -383,7 +386,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
         {/* Controls and Data - On top on mobile, right side on desktop */}
         <div className="flex flex-col space-y-2 text-gray-100 order-1 lg:order-2 lg:h-[600px]">
           {/* Search and Filters */}
-          <div className="space-y-2 bg-black/80 rounded-lg p-3 border border-gray-900 shadow-lg">
+          <div className="space-y-2 bg-black rounded-lg p-3 border border-gray-800 shadow-lg">
             <h3 className="text-sm font-semibold text-gray-200">Filters & Search</h3>
             <div className="space-y-2">
               <input
@@ -463,8 +466,8 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
             </div>
           </div>
           {/* Number of Clubs and Selected Filters Badges */}
-          <div className="mb-2 flex flex-wrap gap-2 justify-center items-center rounded-lg bg-black/80 p-2 border border-gray-900 shadow-lg">
-            <span className="bg-gray-800 text-gray-200 text-xs font-semibold px-3 py-1 rounded-full border border-gray-600">
+          <div className="mb-2 flex flex-wrap gap-2 justify-center items-center rounded-lg bg-black p-2 border border-gray-800 shadow-lg">
+            <span className="bg-black text-gray-200 text-xs font-semibold px-3 py-1 rounded-full border border-gray-600">
               {filtered.length} clubs
             </span>
             {selectedProvince !== 'all' && (
@@ -490,7 +493,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
           </div>
           {/* Results List - Force Dark Mode Sidebar Style */}
           <div className="dark bg-black text-gray-100 rounded-lg shadow-lg mt-2 overflow-hidden" style={{ maxHeight: 'calc(600px - 180px)' }}>
-            <ul className="overflow-y-auto space-y-1 bg-black p-2 border border-gray-900 custom-scrollbar" style={{ maxHeight: '100%' }}>
+            <ul className="overflow-y-auto space-y-1 bg-black p-2 border border-gray-800 custom-scrollbar" style={{ maxHeight: '100%' }}>
               {filtered.slice(0, 50).map((p: Pitch, i: number) => {
                 // Find the original index of this pitch in the full dataset
                 const originalIndex = pitches.findIndex(pitch => 

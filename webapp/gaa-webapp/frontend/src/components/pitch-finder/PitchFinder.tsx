@@ -49,8 +49,8 @@ const pitches: Pitch[] = rawPitches as Pitch[];
 
 // Constants matching the original Python script
 const MAP_CENTER = [53.4129, -7.9135]; // Center of Ireland
-const MAP_ZOOM_DESKTOP = 7; // Balanced zoom for desktop/landscape
-const MAP_ZOOM_MOBILE = 5.5; // Much more zoomed out for mobile/portrait
+const MAP_ZOOM_DESKTOP = 6.5; // Balanced zoom for desktop/landscape
+const MAP_ZOOM_MOBILE = 5; // Much more zoomed out for mobile/portrait
 
 const MAP_OPACITY_NORMALIZATION = 2500; // Max rainfall for opacity calculation
 
@@ -325,11 +325,11 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
       {/* Main Layout - Stacked on mobile, side-by-side on desktop */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
         {/* Map - Full height on mobile, proportional on desktop */}
-        <div className="w-full h-[300px] sm:h-[400px] lg:h-[600px] rounded-lg overflow-hidden order-2 lg:order-1" style={{ backgroundColor: 'transparent' }}>
+        <div className="w-full h-[300px] sm:h-[400px] lg:h-[600px] rounded-lg overflow-hidden order-2 lg:order-1">
             <MapContainer 
               center={MAP_CENTER as [number, number]} 
               zoom={mapZoom} 
-              style={{ height: '100%', width: '100%', backgroundColor: 'transparent' }}
+              style={{ height: '100%', width: '100%' }}
               ref={mapRef}
               zoomControl={false}
               attributionControl={false}
@@ -343,13 +343,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
             >
             <TileLayer 
               url="https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png"
-              opacity={0.4}
             />
-            <style>{`
-              .leaflet-container {
-                background: transparent !important;
-              }
-            `}</style>
             {mapPitches.map((p, i) => {
               // Find the original index of this pitch in the full dataset
               const originalIndex = pitches.findIndex(pitch => 

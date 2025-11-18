@@ -298,6 +298,17 @@ export default function UnifiedSidebar({
     return (eventTypeFilters as any)[type] !== false
   })
 
+  // Find current event index based on video time
+  const currentEventIndex = (allEvents || []).findIndex((event, index) => {
+    const nextEvent = allEvents[index + 1]
+    if (!nextEvent) {
+      // Last event - it's current if we're past its timestamp
+      return currentTime >= event.timestamp
+    }
+    // Current if we're between this event and the next
+    return currentTime >= event.timestamp && currentTime < nextEvent.timestamp
+  })
+
   return (
     <>
       {/* Backdrop (mobile only on desktop view) */}

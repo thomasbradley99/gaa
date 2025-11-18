@@ -379,6 +379,7 @@ function HomePage() {
                   <UnifiedSidebar
                     isOpen={showDemoSidebar}
                     onClose={() => setShowDemoSidebar(false)}
+                    gameId="demo"
                     game={{
                       id: 'demo',
                       title: DEMO_GAME_DATA.title,
@@ -438,6 +439,7 @@ function HomePage() {
                         onClose={() => {}}
                         isMobile={true}
                         mobileVideoComponent={null}
+                        gameId="demo"
                         game={{
                           id: 'demo',
                           title: DEMO_GAME_DATA.title,

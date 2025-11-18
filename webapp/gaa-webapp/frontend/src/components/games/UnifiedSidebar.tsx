@@ -13,6 +13,7 @@ interface UnifiedSidebarProps {
   isOpen: boolean
   onClose: () => void
   game: any
+  gameId?: string
   events: GameEvent[]
   currentTime: number
   duration: number
@@ -34,6 +35,7 @@ export default function UnifiedSidebar({
   isOpen,
   onClose,
   game,
+  gameId,
   events,
   currentTime,
   duration,
@@ -971,7 +973,8 @@ export default function UnifiedSidebar({
           )}
 
           {activeTab === 'stats' && (
-            <div className="p-4">
+            <div className="flex-1 flex flex-col overflow-hidden">
+              <div className="flex-1 overflow-y-auto p-4">
               {events.length > 0 ? (
                 <GameStats
                   game={game}
@@ -979,11 +982,12 @@ export default function UnifiedSidebar({
                   duration={duration}
                 />
               ) : (
-                <XMLUpload 
-                  gameId={game.id}
-                  onEventsUploaded={onEventsUploaded || (() => {})}
-                />
-              )}
+                  <XMLUpload 
+                    gameId={game.id}
+                    onEventsUploaded={onEventsUploaded || (() => {})}
+                  />
+                  )}
+                </div>
             </div>
           )}
 
@@ -1026,21 +1030,32 @@ export default function UnifiedSidebar({
                   <div className="text-center py-8 text-gray-400">
                     <svg
                       className="w-12 h-12 mx-auto mb-3 text-gray-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
                         d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
                       />
                     </svg>
-                    <p className="text-sm mb-2">Start a conversation</p>
-                    <p className="text-xs text-gray-500">
-                      Ask {selectedCoach.name} about tactics, training, or match analysis
-                    </p>
+                    {gameId === 'demo' ? (
+                      <>
+                        <p className="text-sm mb-2">Log in to access AI Coach</p>
+                        <p className="text-xs text-gray-500">
+                          Sign up to get personalized coaching insights from GAA legends
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-sm mb-2">Start a conversation</p>
+                        <p className="text-xs text-gray-500">
+                          Ask {selectedCoach.name} about tactics, training, or match analysis
+                        </p>
+                      </>
+                    )}
                   </div>
                 ) : (
                   chatMessages.map((msg, idx) => (
@@ -1077,22 +1092,22 @@ export default function UnifiedSidebar({
               <div className="sticky bottom-0 z-20 bg-black/95 border-t border-gray-700 p-4">
                 <div className="flex items-end space-x-3">
                   <textarea
-                    placeholder={`Ask ${selectedCoach.name}...`}
+                    placeholder={gameId === 'demo' ? 'Log in to chat with coaches...' : `Ask ${selectedCoach.name}...`}
                     value={chatInput}
                     onChange={(e) => setChatInput(e.target.value)}
                     onKeyPress={handleChatKeyPress}
-                    disabled={isAIChatLoading}
+                    disabled={isAIChatLoading || gameId === 'demo'}
                     rows={1}
-                    className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-sm placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-none"
+                    className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-sm placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <button
                     onClick={handleSendChatMessage}
-                    disabled={!chatInput.trim() || isAIChatLoading}
+                    disabled={!chatInput.trim() || isAIChatLoading || gameId === 'demo'}
                     className="px-4 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-xl transition-colors flex-shrink-0"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                    </svg>
+                </svg>
                   </button>
                 </div>
               </div>

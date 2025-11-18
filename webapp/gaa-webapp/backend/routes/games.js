@@ -25,8 +25,18 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const router = express.Router();
 
-// Initialize Gemini client
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+// Initialize Gemini client (lazy initialization to ensure env vars are loaded)
+let genAI = null;
+const getGeminiClient = () => {
+  if (!genAI) {
+    if (!process.env.GEMINI_API_KEY) {
+      throw new Error('GEMINI_API_KEY environment variable is not set');
+    }
+    genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    console.log('✅ Gemini AI client initialized');
+  }
+  return genAI;
+};
 
 // Configure multer for file uploads (memory storage)
 const upload = multer({ storage: multer.memoryStorage() });
@@ -674,8 +684,12 @@ router.post('/:id/chat', authenticateToken, async (req, res) => {
     // Get game details with events
     console.log(`🎮 Fetching game data for: ${id}`)
     const gameResult = await query(
-      'SELECT g.* FROM games g WHERE g.id = $1 AND g.user_id = $2',
-      [id, req.user.id]
+      `SELECT g.*, t.name as team_name
+       FROM games g
+       INNER JOIN team_members tm ON g.team_id = tm.team_id
+       INNER JOIN teams t ON g.team_id = t.id
+       WHERE g.id = $1 AND tm.user_id = $2`,
+      [id, req.user.userId]
     )
     
     if (gameResult.rows.length === 0) {
@@ -764,7 +778,8 @@ ${gameContext}` : defaultSystemPrompt
     conversationText += `Human: ${message}\n\nAssistant: `
 
     // Get Gemini model and generate response
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" })
+    const geminiClient = getGeminiClient()
+    const model = geminiClient.getGenerativeModel({ model: "gemini-2.5-flash" })
     
     const result = await model.generateContent(conversationText)
     const aiResponse = result.response.text()

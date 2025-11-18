@@ -76,6 +76,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
   const [isClient, setIsClient] = useState(false);
   const [leaflet, setLeaflet] = useState<any>(null);
   const mapRef = useRef<any>(null);
+  const leafletMapRef = useRef<any>(null);
   const [mapZoom, setMapZoom] = useState(MAP_ZOOM_DESKTOP);
   
   // Ensure we're on the client side and load Leaflet
@@ -123,6 +124,32 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
     iconSize: [5, 5],
     iconAnchor: [2.5, 2.5]
   }) : null;
+
+  // Create highlighted icon for selected club - bigger and brighter
+  const highlightedIcon = isClient && leaflet ? leaflet.divIcon({
+    className: 'custom-dot-highlighted',
+    html: '<div style="background-color: #FFD700; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 8px rgba(255, 215, 0, 0.8);"></div>',
+    iconSize: [12, 12],
+    iconAnchor: [6, 6]
+  }) : null;
+
+  // Center map on selected club
+  useEffect(() => {
+    if (selectedClubData && selectedClubData.Latitude && selectedClubData.Longitude) {
+      // Small delay to ensure map is ready
+      const timer = setTimeout(() => {
+        if (leafletMapRef.current) {
+          const map = leafletMapRef.current;
+          map.setView(
+            [selectedClubData.Latitude!, selectedClubData.Longitude!],
+            Math.max(mapZoom + 2, 10), // Zoom in a bit when highlighting
+            { animate: true, duration: 0.5 }
+          );
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [selectedClubData, mapZoom]);
   
   // Province to counties mapping
   const provinceToCounties: Record<string, string[]> = {
@@ -256,32 +283,6 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
                 </div>
               </div>
             </div>
-            {/* Number of Clubs and Selected Filters Badges */}
-            <div className="mb-2 flex flex-wrap gap-2 justify-center items-center rounded-lg bg-black/80 p-2 border border-gray-900 shadow-lg">
-              <span className="bg-gray-800 text-gray-200 text-xs font-semibold px-3 py-1 rounded-full border border-gray-600">
-                {filtered.length} clubs
-              </span>
-              {selectedProvince !== 'all' && (
-                <span className="bg-gray-800 text-gray-200 text-xs font-semibold px-3 py-1 rounded-full border border-gray-700">
-                  {selectedProvince}
-                </span>
-              )}
-              {selectedCounty !== 'all' && (
-                <span className="bg-gray-800 text-gray-200 text-xs font-semibold px-3 py-1 rounded-full border border-gray-700">
-                  {selectedCounty}
-                </span>
-              )}
-              {selectedClub !== 'all' && (
-                <span className="bg-gray-800 text-gray-200 text-xs font-semibold px-3 py-1 rounded-full border border-gray-700">
-                  {selectedClub}
-                </span>
-              )}
-              {search.trim() !== '' && (
-                <span className="bg-gray-800 text-gray-200 text-xs font-semibold px-3 py-1 rounded-full border border-gray-700">
-                  Search: "{search}"
-                </span>
-              )}
-            </div>
             {/* Results List - Responsive height */}
             <div className="dark bg-black text-gray-100 rounded-lg shadow-lg mt-2 overflow-hidden max-h-[250px] sm:max-h-[300px] lg:max-h-[420px]">
               <ul className="overflow-y-auto space-y-1 bg-black p-2 border border-gray-900 custom-scrollbar h-full">
@@ -340,6 +341,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
               zoom={mapZoom} 
               style={{ height: '100%', width: '100%', backgroundColor: 'transparent' }}
               ref={mapRef}
+              whenCreated={(map) => { leafletMapRef.current = map; }}
               zoomControl={false}
               attributionControl={false}
               dragging={false}
@@ -372,11 +374,16 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
                 pitch.Latitude === p.Latitude && 
                 pitch.Longitude === p.Longitude
               );
+              // Check if this is the selected club
+              const isSelected = selectedClubData && 
+                selectedClubData.Club === p.Club && 
+                selectedClubData.Latitude === p.Latitude && 
+                selectedClubData.Longitude === p.Longitude;
               return (
                 <Marker
                   key={`marker-${originalIndex}`}
                   position={[p.Latitude!, p.Longitude!]}
-                  icon={icon}
+                  icon={isSelected ? highlightedIcon : icon}
                   interactive={false}
                 />
               );
@@ -464,32 +471,6 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
                 </div>
               </div>
             </div>
-          </div>
-          {/* Number of Clubs and Selected Filters Badges */}
-          <div className="mb-2 flex flex-wrap gap-2 justify-center items-center rounded-lg bg-black p-2 border border-gray-800 shadow-lg">
-            <span className="bg-black text-gray-200 text-xs font-semibold px-3 py-1 rounded-full border border-gray-600">
-              {filtered.length} clubs
-            </span>
-            {selectedProvince !== 'all' && (
-              <span className="bg-gray-800 text-gray-200 text-xs font-semibold px-3 py-1 rounded-full border border-gray-700">
-                {selectedProvince}
-              </span>
-            )}
-            {selectedCounty !== 'all' && (
-              <span className="bg-gray-800 text-gray-200 text-xs font-semibold px-3 py-1 rounded-full border border-gray-700">
-                {selectedCounty}
-              </span>
-            )}
-            {selectedClub !== 'all' && (
-              <span className="bg-gray-800 text-gray-200 text-xs font-semibold px-3 py-1 rounded-full border border-gray-700">
-                {selectedClub}
-              </span>
-            )}
-            {search.trim() !== '' && (
-              <span className="bg-gray-800 text-gray-200 text-xs font-semibold px-3 py-1 rounded-full border border-gray-700">
-                Search: "{search}"
-              </span>
-            )}
           </div>
           {/* Results List - Force Dark Mode Sidebar Style */}
           <div className="dark bg-black text-gray-100 rounded-lg shadow-lg mt-2 overflow-hidden" style={{ maxHeight: 'calc(600px - 180px)' }}>

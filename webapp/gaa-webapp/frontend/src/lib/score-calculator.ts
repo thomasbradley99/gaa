@@ -22,20 +22,20 @@ export function calculateScore(events: GameEvent[]): GameScore {
 
   // Count goals and points for home team
   const homeGoals = homeEvents.filter((e) => 
-    e.type.toLowerCase() === 'goal' || e.metadata?.scoreType === 'goal'
+    e.type?.toLowerCase() === 'goal' || e.metadata?.scoreType === 'goal'
   ).length
   
   const homePoints = homeEvents.filter((e) => 
-    e.type.toLowerCase() === 'point' || e.metadata?.scoreType === 'point'
+    e.type?.toLowerCase() === 'point' || e.metadata?.scoreType === 'point'
   ).length
 
   // Count goals and points for away team
   const awayGoals = awayEvents.filter((e) => 
-    e.type.toLowerCase() === 'goal' || e.metadata?.scoreType === 'goal'
+    e.type?.toLowerCase() === 'goal' || e.metadata?.scoreType === 'goal'
   ).length
   
   const awayPoints = awayEvents.filter((e) => 
-    e.type.toLowerCase() === 'point' || e.metadata?.scoreType === 'point'
+    e.type?.toLowerCase() === 'point' || e.metadata?.scoreType === 'point'
   ).length
 
   return {

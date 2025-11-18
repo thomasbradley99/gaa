@@ -25,7 +25,13 @@ const Popup = dynamic(
   { ssr: false }
 );
 
+const GeoJSON = dynamic(
+  () => import('react-leaflet').then((mod) => mod.GeoJSON),
+  { ssr: false }
+);
+
 import rawPitches from './gaapitchfinder_data.json';
+import irelandBoundary from './ireland-boundary.json';
 
 interface Pitch {
   File: string;
@@ -325,11 +331,11 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
       {/* Main Layout - Stacked on mobile, side-by-side on desktop */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
         {/* Map - Full height on mobile, proportional on desktop */}
-        <div className="w-full h-[300px] sm:h-[400px] lg:h-[600px] rounded-lg overflow-hidden order-2 lg:order-1">
+        <div className="w-full h-[300px] sm:h-[400px] lg:h-[600px] rounded-lg overflow-hidden order-2 lg:order-1" style={{ backgroundColor: 'transparent' }}>
             <MapContainer 
               center={MAP_CENTER as [number, number]} 
               zoom={mapZoom} 
-              style={{ height: '100%', width: '100%' }}
+              style={{ height: '100%', width: '100%', backgroundColor: 'transparent' }}
               ref={mapRef}
               zoomControl={false}
               attributionControl={false}
@@ -341,9 +347,20 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
               touchZoom={false}
               key={mapZoom}
             >
-            <TileLayer 
-              url="https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png"
+            <GeoJSON 
+              data={irelandBoundary as any}
+              style={{
+                fillColor: '#2d3748',
+                fillOpacity: 0.8,
+                color: '#4a5568',
+                weight: 2
+              }}
             />
+            <style>{`
+              .leaflet-container {
+                background: transparent !important;
+              }
+            `}</style>
             {mapPitches.map((p, i) => {
               // Find the original index of this pitch in the full dataset
               const originalIndex = pitches.findIndex(pitch => 

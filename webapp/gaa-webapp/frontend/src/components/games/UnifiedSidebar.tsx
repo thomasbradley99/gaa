@@ -6,6 +6,7 @@ import { EventList } from './EventList'
 import { GameStats } from './GameStats'
 import { XMLUpload } from './XmlUpload'
 import AppleStyleTrimmer from './AppleStyleTrimmer'
+import { GAA_COACHES, getDefaultCoach, type Coach } from './gaa-coaches'
 import type { GameEvent } from './video-player/types'
 
 interface UnifiedSidebarProps {
@@ -62,6 +63,12 @@ export default function UnifiedSidebar({
   }>>(new Map())
   const [showTrimmers, setShowTrimmers] = useState(false)
   const [autoplayMode, setAutoplayMode] = useState(false)
+  
+  // AI Chat state
+  const [selectedCoach, setSelectedCoach] = useState<Coach>(getDefaultCoach())
+  const [chatMessages, setChatMessages] = useState<Array<{ role: 'user' | 'assistant', content: string }>>([])
+  const [chatInput, setChatInput] = useState('')
+  const [isAIChatLoading, setIsAIChatLoading] = useState(false)
   
   // Event type filters for GAA
   const [eventTypeFilters, setEventTypeFilters] = useState({
@@ -290,6 +297,53 @@ export default function UnifiedSidebar({
     setEditModeEvents(new Map())
     setBinnedEvents(new Set())
     setIsCreatingEvent(false)
+  }
+
+  // AI Chat functions
+  const handleSendChatMessage = async () => {
+    if (!chatInput.trim() || isAIChatLoading) return
+
+    const userMessage = chatInput.trim()
+    setChatInput('')
+    setChatMessages(prev => [...prev, { role: 'user', content: userMessage }])
+    setIsAIChatLoading(true)
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/games/${game.id}/chat`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({
+          message: userMessage,
+          history: chatMessages,
+          systemPrompt: selectedCoach.systemPrompt
+        })
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to get AI response')
+      }
+
+      const data = await response.json()
+      setChatMessages(prev => [...prev, { role: 'assistant', content: data.response }])
+    } catch (error) {
+      console.error('AI Chat error:', error)
+      setChatMessages(prev => [...prev, { 
+        role: 'assistant', 
+        content: '⚠️ Sorry, I encountered an error. Please try again.' 
+      }])
+    } finally {
+      setIsAIChatLoading(false)
+    }
+  }
+
+  const handleChatKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      handleSendChatMessage()
+    }
   }
 
   // Filter events by type
@@ -935,25 +989,113 @@ export default function UnifiedSidebar({
           )}
 
           {activeTab === 'ai' && (
-            <div className="p-4">
-              <div className="text-center py-12 text-white/60">
-                <svg
-                  className="w-16 h-16 mx-auto mb-4 text-[#2D8B4D]/50"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                  />
-                </svg>
-                <p className="text-sm font-medium text-white mb-2">AI Coaching</p>
-                <p className="text-xs text-white/50">
-                  Personalized tactical insights and match recommendations
+            <div className="h-full flex flex-col">
+              <div className="p-4 border-b border-gray-700">
+                <h4 className="text-lg font-semibold text-white mb-3">AI Coach</h4>
+                
+                {/* Coach Selection Cards */}
+                <div className="grid grid-cols-3 gap-2 mb-3">
+                  {GAA_COACHES.map((coach) => (
+                    <button
+                      key={coach.id}
+                      onClick={() => setSelectedCoach(coach)}
+                      className={`p-3 rounded-lg border-2 transition-all hover:scale-105 ${
+                        selectedCoach.id === coach.id
+                          ? 'border-blue-500 bg-blue-500/10'
+                          : 'border-gray-600 bg-gray-800 hover:border-gray-500'
+                      }`}
+                    >
+                      <div className="text-center">
+                        <div className="w-12 h-12 rounded-full bg-gray-700 mx-auto mb-2 flex items-center justify-center text-2xl">
+                          👨‍💼
+                        </div>
+                        <div className="font-medium text-sm text-white">{coach.name.split(' ').pop()}</div>
+                        <div className="text-[10px] text-gray-400 mt-0.5">{coach.title}</div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+
+                <p className="text-xs text-gray-400 text-center">
+                  Chatting with <span className="text-white font-medium">{selectedCoach.name}</span>
                 </p>
+              </div>
+
+              {/* Chat Messages */}
+              <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                {chatMessages.length === 0 ? (
+                  <div className="text-center py-8 text-gray-400">
+                    <svg
+                      className="w-12 h-12 mx-auto mb-3 text-gray-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                      />
+                    </svg>
+                    <p className="text-sm mb-2">Start a conversation</p>
+                    <p className="text-xs text-gray-500">
+                      Ask {selectedCoach.name} about tactics, training, or match analysis
+                    </p>
+                  </div>
+                ) : (
+                  chatMessages.map((msg, idx) => (
+                    <div
+                      key={idx}
+                      className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                    >
+                      <div
+                        className={`rounded-lg p-3 max-w-[80%] ${
+                          msg.role === 'user'
+                            ? 'bg-blue-500 text-white'
+                            : 'bg-gray-700 text-gray-100'
+                        }`}
+                      >
+                        <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
+                      </div>
+                    </div>
+                  ))
+                )}
+
+                {isAIChatLoading && (
+                  <div className="flex justify-start">
+                    <div className="bg-gray-700 text-gray-100 rounded-lg p-3 max-w-[80%]">
+                      <div className="flex items-center space-x-2">
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-400"></div>
+                        <span className="text-sm">AI Coach is thinking...</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Chat Input */}
+              <div className="sticky bottom-0 z-20 bg-black/95 border-t border-gray-700 p-4">
+                <div className="flex items-end space-x-3">
+                  <textarea
+                    placeholder={`Ask ${selectedCoach.name}...`}
+                    value={chatInput}
+                    onChange={(e) => setChatInput(e.target.value)}
+                    onKeyPress={handleChatKeyPress}
+                    disabled={isAIChatLoading}
+                    rows={1}
+                    className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-sm placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-none"
+                  />
+                  <button
+                    onClick={handleSendChatMessage}
+                    disabled={!chatInput.trim() || isAIChatLoading}
+                    className="px-4 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-xl transition-colors flex-shrink-0"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
           )}

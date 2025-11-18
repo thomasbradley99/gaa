@@ -21,8 +21,12 @@ const { authenticateToken, authenticateLambda } = require('../middleware/auth');
 const { getPresignedUploadUrl, getPresignedDownloadUrl } = require('../utils/s3');
 const multer = require('multer');
 const xml2js = require('xml2js');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const router = express.Router();
+
+// Initialize Gemini client
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // Configure multer for file uploads (memory storage)
 const upload = multer({ storage: multer.memoryStorage() });
@@ -650,6 +654,135 @@ function mapVeoCodeToEventType(code) {
     description: code
   };
 }
+
+// AI Chat endpoint
+router.post('/:id/chat', authenticateToken, async (req, res) => {
+  console.log(`🤖 AI Chat request for game: ${req.params.id}`)
+  
+  try {
+    const { id } = req.params
+    const { message, history = [], systemPrompt } = req.body
+
+    console.log(`🤖 Message received: ${message}`)
+    console.log(`🤖 Chat history length: ${history.length}`)
+
+    if (!message) {
+      console.log('❌ No message provided')
+      return res.status(400).json({ error: 'Message is required' })
+    }
+
+    // Get game details with events
+    console.log(`🎮 Fetching game data for: ${id}`)
+    const gameResult = await query(
+      'SELECT g.* FROM games g WHERE g.id = $1 AND g.user_id = $2',
+      [id, req.user.id]
+    )
+    
+    if (gameResult.rows.length === 0) {
+      console.log('❌ Game not found in database')
+      return res.status(404).json({ error: 'Game not found' })
+    }
+
+    const game = gameResult.rows[0]
+    console.log(`✅ Game found: ${game.title}`)
+    
+    // Parse events from events JSONB column
+    let events = []
+    if (game.events && game.events.events) {
+      events = game.events.events
+    }
+    console.log(`📊 Events parsed: ${events.length} events`)
+
+    // Calculate GAA stats
+    const stats = {
+      totalEvents: events.length,
+      goals: events.filter(e => e.action === 'goal').length,
+      points: events.filter(e => e.action === 'point').length,
+      wides: events.filter(e => e.action === 'wide').length,
+      frees: events.filter(e => e.action === 'free').length,
+      homeGoals: events.filter(e => e.team === 'home' && e.action === 'goal').length,
+      awayGoals: events.filter(e => e.team === 'away' && e.action === 'goal').length,
+      homePoints: events.filter(e => e.team === 'home' && e.action === 'point').length,
+      awayPoints: events.filter(e => e.team === 'away' && e.action === 'point').length,
+    }
+
+    // Build context for AI
+    const gameContext = `
+Game Information:
+- Title: ${game.title}
+- Status: ${game.status}
+- Created: ${game.created_at}
+
+Match Statistics:
+- Total Events: ${stats.totalEvents}
+- Home Score: ${stats.homeGoals}-${stats.homePoints}
+- Away Score: ${stats.awayGoals}-${stats.awayPoints}
+- Goals: ${stats.goals}
+- Points: ${stats.points}
+- Wides: ${stats.wides}
+- Frees: ${stats.frees}
+
+Recent Events:
+${events.slice(-10).map(event => 
+  `- ${Math.floor(event.time / 60)}:${(event.time % 60).toString().padStart(2, '0')} - ${event.action}${event.team ? ` (${event.team} team)` : ''}${event.metadata?.description ? `: ${event.metadata.description}` : ''}${event.metadata?.player ? ` by ${event.metadata.player}` : ''}`
+).join('\n')}
+    `
+
+    // Use coach-specific system prompt or default
+    const defaultSystemPrompt = `You are an AI GAA analyst and coach assistant. You have access to detailed game data and events. Provide helpful analysis, tactical insights, and coaching advice based on the game context provided. Be specific and reference actual events when possible.
+
+Current Game Context:
+${gameContext}
+
+Guidelines:
+- Provide tactical analysis and coaching insights for GAA (Gaelic football/hurling)
+- Reference specific events when relevant  
+- Suggest improvements or highlight positive plays
+- Answer questions about training, team strengths/weaknesses
+- Be encouraging but constructive
+- Keep responses concise but informative
+- Focus on actionable advice for players and coaches`
+
+    const finalSystemPrompt = systemPrompt ? `${systemPrompt}
+
+Current Game Context:
+${gameContext}` : defaultSystemPrompt
+
+    // Build conversation history for Gemini
+    let conversationText = finalSystemPrompt + '\n\n'
+    
+    // Add chat history
+    history.forEach(msg => {
+      if (msg.role === 'user') {
+        conversationText += `Human: ${msg.content}\n\n`
+      } else {
+        conversationText += `Assistant: ${msg.content}\n\n`
+      }
+    })
+
+    // Add current message
+    conversationText += `Human: ${message}\n\nAssistant: `
+
+    // Get Gemini model and generate response
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" })
+    
+    const result = await model.generateContent(conversationText)
+    const aiResponse = result.response.text()
+
+    res.json({
+      response: aiResponse,
+      gameStats: stats,
+      timestamp: new Date().toISOString()
+    })
+
+  } catch (error) {
+    console.error('AI Chat error:', error)
+    res.status(500).json({ 
+      error: 'Failed to process chat request',
+      details: error.message 
+    })
+  }
+})
 
 module.exports = router;
 

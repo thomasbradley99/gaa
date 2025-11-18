@@ -123,7 +123,7 @@ export default function UnifiedSidebar({
   }
 
   const getEventEmoji = (type: string) => {
-    switch (type.toLowerCase()) {
+    switch (type?.toLowerCase()) {
       case 'goal': return '⚽'
       case 'point': return '🎯'
       case 'shot': return '🏃'
@@ -347,7 +347,7 @@ export default function UnifiedSidebar({
 
   // Filter events by type
   const filteredByType = (allEvents || []).filter(event => {
-    const type = event.type.toLowerCase()
+    const type = event.type?.toLowerCase() || event.action?.toLowerCase() || ''
     return (eventTypeFilters as any)[type] !== false
   })
 

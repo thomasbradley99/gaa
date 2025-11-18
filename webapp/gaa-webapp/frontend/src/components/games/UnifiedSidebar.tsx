@@ -451,7 +451,7 @@ export default function UnifiedSidebar({
         </div>
 
         {/* Content */}
-        <div className={`${isMobile ? 'min-h-screen' : 'h-[calc(100%-57px)]'} flex flex-col`}>
+        <div className={`${isMobile ? 'h-[calc(100vh-57px)]' : 'h-[calc(100%-57px)]'} flex flex-col`}>
           {activeTab === 'events' && (
             <div className="flex-1 flex flex-col">
               {/* Filters and Actions Section */}
@@ -1009,8 +1009,12 @@ export default function UnifiedSidebar({
                       }`}
                     >
                       <div className="text-center">
-                        <div className="w-12 h-12 rounded-full bg-gray-700 mx-auto mb-2 flex items-center justify-center text-2xl">
-                          👨‍💼
+                        <div className="w-12 h-12 rounded-full bg-gray-700 mx-auto mb-2 overflow-hidden">
+                          <img 
+                            src={coach.image} 
+                            alt={coach.name}
+                            className="w-full h-full object-cover"
+                          />
                         </div>
                         <div className="font-medium text-sm text-white">{coach.name.split(' ').pop()}</div>
                         <div className="text-[10px] text-gray-400 mt-0.5">{coach.title}</div>

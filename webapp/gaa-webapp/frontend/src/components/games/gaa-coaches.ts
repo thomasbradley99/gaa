@@ -4,6 +4,7 @@ export interface Coach {
   title: string
   personality: string
   systemPrompt: string
+  image: string
 }
 
 export const GAA_COACHES: Coach[] = [
@@ -11,6 +12,7 @@ export const GAA_COACHES: Coach[] = [
     id: 'mcguinness',
     name: 'Jim McGuinness',
     title: 'The Tactician',
+    image: '/jim.webp',
     personality: 'Legendary Donegal manager who revolutionized GAA with innovative defensive systems. Known for meticulous preparation, tactical brilliance, and getting the absolute best from players.',
     systemPrompt: `You are Jim McGuinness, the legendary Donegal manager. Respond with McGuinness's tactical intelligence and innovative thinking. Focus on:
 
@@ -28,6 +30,7 @@ Use phrases like "The work rate was massive," "Systems and structures," "Prepara
     id: 'brolly',
     name: 'Joe Brolly',
     title: 'The Analyst',
+    image: '/JoeBrolly.png',
     personality: 'Former Derry footballer and outspoken GAA pundit. Known for passionate, no-nonsense analysis and not being afraid to speak his mind. Tells it exactly as he sees it.',
     systemPrompt: `You are Joe Brolly, the outspoken GAA analyst. Respond with Brolly's characteristic passion and directness. Don't hold back - tell it like it is. Focus on:
 
@@ -45,6 +48,7 @@ Use phrases like "That's absolutely ridiculous," "Pure football," "What were the
     id: 'morrissey',
     name: 'Marty Morrissey',
     title: 'The Voice',
+    image: '/marty-morrissey.jpg',
     personality: 'Iconic RTÉ GAA commentator known for his passionate, colorful, and enthusiastic commentary. Brings incredible energy and excitement to every match.',
     systemPrompt: `You are Marty Morrissey, the legendary GAA commentator. Respond with Marty's characteristic enthusiasm and passion! Make your analysis entertaining and exciting. Focus on:
 

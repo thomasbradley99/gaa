@@ -3,6 +3,16 @@
 import { useState, useRef } from 'react'
 import { Upload, Link as LinkIcon, X, FileVideo } from 'lucide-react'
 import { games } from '@/lib/api-client'
+import clubsData from '@/components/pitch-finder/gaapitchfinder_data.json'
+
+interface Club {
+  Club: string
+  County: string
+  Province: string
+  Code: string
+}
+
+const clubs: Club[] = clubsData as Club[]
 
 interface UploadSectionProps {
   teamId: string
@@ -10,10 +20,17 @@ interface UploadSectionProps {
   onGameCreated: () => void
 }
 
+// Get unique counties for filtering
+const counties = Array.from(new Set(clubs.map(c => c.County))).sort()
+
 export default function UploadSection({ teamId, teamName, onGameCreated }: UploadSectionProps) {
   const [videoUrl, setVideoUrl] = useState('')
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
+  const [oppositionCounty, setOppositionCounty] = useState('')
+  const [oppositionClub, setOppositionClub] = useState('')
+  const [showOppositionDropdown, setShowOppositionDropdown] = useState(false)
+  const [filteredClubs, setFilteredClubs] = useState<Club[]>([])
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [uploadProgress, setUploadProgress] = useState(0)
   const [loading, setLoading] = useState(false)
@@ -45,6 +62,37 @@ export default function UploadSection({ teamId, teamName, onGameCreated }: Uploa
     if (fileInputRef.current) {
       fileInputRef.current.value = ''
     }
+  }
+
+  const handleOppositionChange = (value: string) => {
+    setOppositionClub(value)
+    if (value.trim()) {
+      // Filter clubs by county (if selected) and search term
+      let filtered = clubs.filter(club => {
+        const matchesSearch = club.Club.toLowerCase().includes(value.toLowerCase())
+        const matchesCounty = !oppositionCounty || club.County === oppositionCounty
+        return matchesSearch && matchesCounty
+      })
+      
+      // Remove duplicates by club name
+      const uniqueClubs = filtered.reduce((acc: Club[], club) => {
+        if (!acc.find(c => c.Club === club.Club)) {
+          acc.push(club)
+        }
+        return acc
+      }, [])
+      
+      setFilteredClubs(uniqueClubs.slice(0, 10)) // Show max 10 suggestions
+      setShowOppositionDropdown(true)
+    } else {
+      setShowOppositionDropdown(false)
+    }
+  }
+
+  const selectOpposition = (club: Club) => {
+    setOppositionClub(club.Club)
+    setOppositionCounty(club.County)
+    setShowOppositionDropdown(false)
   }
 
   const uploadFileToS3 = async (file: File, uploadUrl: string): Promise<void> => {
@@ -126,6 +174,8 @@ export default function UploadSection({ teamId, teamName, onGameCreated }: Uploa
       setVideoUrl('')
       setTitle('')
       setDescription('')
+      setOppositionCounty('')
+      setOppositionClub('')
       setSelectedFile(null)
       setUseFileUpload(false)
       setUploadProgress(0)
@@ -175,6 +225,60 @@ export default function UploadSection({ teamId, teamName, onGameCreated }: Uploa
             rows={2}
             className="w-full px-4 py-2 bg-black/50 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2D8B4D]"
           />
+        </div>
+
+        {/* Opposition Club Selector */}
+        <div className="grid grid-cols-2 gap-4">
+          {/* County Filter */}
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Opposition County
+            </label>
+            <select
+              value={oppositionCounty}
+              onChange={(e) => {
+                setOppositionCounty(e.target.value)
+                setOppositionClub('') // Reset club when county changes
+              }}
+              className="w-full px-4 py-2 bg-black/50 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#2D8B4D]"
+            >
+              <option value="">All Counties</option>
+              {counties.map(county => (
+                <option key={county} value={county}>{county}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Club Autocomplete */}
+          <div className="relative">
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Opposition Club
+            </label>
+            <input
+              type="text"
+              value={oppositionClub}
+              onChange={(e) => handleOppositionChange(e.target.value)}
+              onFocus={() => oppositionClub && setShowOppositionDropdown(true)}
+              onBlur={() => setTimeout(() => setShowOppositionDropdown(false), 200)}
+              placeholder="Type club name..."
+              className="w-full px-4 py-2 bg-black/50 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2D8B4D]"
+            />
+            {showOppositionDropdown && filteredClubs.length > 0 && (
+              <div className="absolute z-10 w-full mt-1 bg-[#0f0f0f] border border-white/10 rounded-lg shadow-xl max-h-60 overflow-y-auto">
+                {filteredClubs.map((club, index) => (
+                  <button
+                    key={`${club.Club}-${index}`}
+                    type="button"
+                    onClick={() => selectOpposition(club)}
+                    className="w-full px-4 py-2 text-left hover:bg-white/10 transition-colors text-white text-sm border-b border-white/5 last:border-0"
+                  >
+                    <div className="font-medium">{club.Club}</div>
+                    <div className="text-xs text-gray-400">{club.County}</div>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Toggle between URL and File Upload */}

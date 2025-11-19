@@ -1,32 +1,35 @@
-# TODO
+# todo
 
-## Critical
-- Verify event timestamps sync with video playback
-- Fix team colors metadata (Lambda → Backend)
+## critical
+- verify event timestamps sync with video playback
+- fix team colors metadata (lambda → backend)
 
-## AI Quality
-- Improve event detection accuracy
-- Better event descriptions (more detailed)
-- Fix score accuracy (missing points/goals)
+## ai quality
+- improve event detection accuracy
+- better event descriptions (more detailed)
+- fix score accuracy (missing points/goals)
 
-## User Experience
-- Add HLS streaming (large videos are slow)
-- Fix presigned URL expiry (videos break after 1 hour)
-- Show "Only first 10 mins analyzed" banner
-- Stats editing system
-  - Allow users to edit event stats (scores, fouls, etc.)
-  - Commit stat changes to database
-  - AI coach reads current stats from DB (including user edits)
-  - Mark edited events (userEdited flag in metadata)
-- User company / sales / admin accounts
-- User adds colour to team and AI picks it up
+## crm
+- get crm link in the sales accounts 
 
-## Nice to Have
-- Keyboard shortcuts help ("?" overlay)
-- Thumbnail fallbacks for missing images
-- Event validation status badges
-- Player name detection
+## user experience
+- add hls streaming (large videos are slow)
+- fix presigned url expiry (videos break after 1 hour)
+- show "only first 10 mins analyzed" banner
+- stats editing system
+  - allow users to edit event stats (scores, fouls, etc.)
+  - commit stat changes to database
+  - ai coach reads current stats from db (including user edits)
+  - mark edited events (useredited flag in metadata)
+- user company / sales / admin accounts
+- user adds colour to team and ai picks it up
 
-## Future Enhancements
-- Club color database for automatic home/away detection
-- "Swap Teams" button (manual override)
+## nice to have
+- keyboard shortcuts help ("?" overlay)
+- thumbnail fallbacks for missing images
+- event validation status badges
+- player name detection
+
+## future enhancements
+- club color database for automatic home/away detection
+- "swap teams" button (manual override)

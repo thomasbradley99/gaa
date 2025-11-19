@@ -16,10 +16,15 @@
             max-width: 2400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 350px 1fr;
+            grid-template-columns: 300px 1fr 300px;
             gap: 20px;
         }
-        .sidebar {
+        .sidebar-left {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .sidebar-right {
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -28,6 +33,33 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+        }
+        .filters-section {
+            grid-column: 1 / -1;
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .filters {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .event-type-filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 5px;
+            margin-top: 5px;
+        }
+        .filter-btn {
+            align-self: flex-start;
+            margin-top: 10px;
         }
         h1 {
             grid-column: 1 / -1;
@@ -315,12 +347,10 @@
             <strong id="gameTitle">Loading...</strong> | <span id="testType">Loading...</span>
         </div>
         
-        <!-- Left Sidebar -->
-        <div class="sidebar">
-            <!-- Compact Filters -->
-            <div style="background: #2a2a2a; padding: 15px; border-radius: 8px;">
-                <h3 style="margin-top: 0; font-size: 16px;">🔍 Filters</h3>
-                <div class="filters">
+        <!-- Filters at top -->
+        <div class="filters-section">
+            <h3 style="margin-top: 0; font-size: 16px;">🔍 Filters</h3>
+            <div class="filters">
                 <div class="filter-group">
                     <label>Teams</label>
                     <div style="display: flex; gap: 15px;">
@@ -364,21 +394,16 @@
                 <button class="filter-btn" onclick="applyFilters()">Apply Filters</button>
             </div>
         </div>
-            
-            <!-- AI Events -->
+        
+        <!-- Left Sidebar: AI Events -->
+        <div class="sidebar-left">
             <div style="background: #2a2a2a; padding: 15px; border-radius: 8px;">
                 <h3 style="margin-top: 0; font-size: 16px;">🤖 AI Events</h3>
-                <div id="aiEventsList" style="max-height: 400px; overflow-y: auto;">Loading...</div>
-            </div>
-            
-            <!-- Professional Events -->
-            <div style="background: #2a2a2a; padding: 15px; border-radius: 8px;">
-                <h3 style="margin-top: 0; font-size: 16px;">🏆 Pro Events</h3>
-                <div id="professionalList" style="max-height: 400px; overflow-y: auto;">Loading...</div>
+                <div id="aiEventsList" style="max-height: 800px; overflow-y: auto;">Loading...</div>
             </div>
         </div>
         
-        <!-- Main Content: Video + Descriptions -->
+        <!-- Center: Video + Descriptions -->
         <div class="main-content">
             <div class="video-section">
             <video id="gameVideo" controls>
@@ -404,7 +429,15 @@
                 <h3>🤖 AI Descriptions</h3>
                 <div id="descriptionsList" style="max-height: 400px; overflow-y: auto;">Loading descriptions...</div>
             </div>
+            </div>
         </div>
+        
+        <!-- Right Sidebar: Professional Events -->
+        <div class="sidebar-right">
+            <div style="background: #2a2a2a; padding: 15px; border-radius: 8px;">
+                <h3 style="margin-top: 0; font-size: 16px;">🏆 Pro Events</h3>
+                <div id="professionalList" style="max-height: 800px; overflow-y: auto;">Loading...</div>
+            </div>
         </div>
     </div>
 
@@ -582,7 +615,7 @@
                 applyFilters();
             }
             // Start at match start (calibration will determine this)
-            video.currentTime = 540; // Default 9:00, will be adjusted by calibration
+            video.currentTime = 0; // Start from beginning
             console.log('⏩ Starting at match start');
         });
 

@@ -267,7 +267,7 @@ router.post('/', authenticateToken, async (req, res) => {
     const teamData = memberResult.rows[0];
     const teamColors = {
       primary: teamData.primary_color,
-      secondary: teamData.secondary_color
+      secondary: teamData.secondary_color || null  // Can be null for single-color kits
     };
 
     // Determine file type based on videoUrl or s3Key

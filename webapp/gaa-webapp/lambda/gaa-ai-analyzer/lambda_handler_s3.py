@@ -223,22 +223,22 @@ def lambda_handler(event, context):
         # Match detected colors to user's team colors
         # If user's team color matches team_a → team_a is home
         # If user's team color matches team_b → team_b is home
-        user_primary = team_colors.get('primary', '').lower()
-        user_secondary = team_colors.get('secondary', '').lower()
+        user_primary = team_colors.get('primary', '').lower() if team_colors.get('primary') else ''
+        user_secondary = team_colors.get('secondary', '').lower() if team_colors.get('secondary') else ''
         team_name = team_colors.get('team_name', 'Home Team')
         
         team_a_is_user = False
         team_b_is_user = False
         
-        if user_primary or user_secondary:
+        if user_primary:
             # Check if team_a matches user's colors
-            if user_primary and user_primary in team_a_color.lower():
+            if user_primary in team_a_color.lower():
                 team_a_is_user = True
             elif user_secondary and user_secondary in team_a_color.lower():
                 team_a_is_user = True
             
             # Check if team_b matches user's colors
-            if user_primary and user_primary in team_b_color.lower():
+            if user_primary in team_b_color.lower():
                 team_b_is_user = True
             elif user_secondary and user_secondary in team_b_color.lower():
                 team_b_is_user = True

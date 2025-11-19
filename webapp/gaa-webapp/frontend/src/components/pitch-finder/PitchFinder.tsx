@@ -341,7 +341,7 @@ export function PitchFinder({ onClubSelect, showSelectButton = false, onCreateTe
               zoom={mapZoom} 
               style={{ height: '100%', width: '100%', backgroundColor: 'transparent' }}
               ref={mapRef}
-              whenCreated={(map) => { leafletMapRef.current = map; }}
+              whenReady={() => { leafletMapRef.current = mapRef.current; }}
               zoomControl={false}
               attributionControl={false}
               dragging={false}

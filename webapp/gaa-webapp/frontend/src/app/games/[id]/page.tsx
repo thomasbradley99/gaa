@@ -147,20 +147,35 @@ export default function GameDetailPage() {
         // If events is already an array (direct format from database)
         if (Array.isArray(game.events)) {
           // Transform database format to frontend GameEvent format
-          return game.events.map((e: any, index: number) => ({
-            id: e.id || `event-${index}`,
-            type: (e.action || e.type || 'shot').toLowerCase(), // Map 'action' to 'type'
-            timestamp: e.time || e.timestamp || 0, // Map 'time' to 'timestamp'
-            team: e.team === 'home' || e.team === 'red' ? 'home' : 'away',
-            player: e.player,
-            description: e.description || `${e.action || e.type} - ${e.outcome || 'N/A'}`,
-            metadata: {
-              ...e.metadata,
-              action: e.action,
-              outcome: e.outcome,
-              scoreType: e.metadata?.scoreType || (e.outcome === 'Point' ? 'point' : e.outcome === 'Goal' ? 'goal' : undefined),
-            },
-          }))
+          return game.events.map((e: any, index: number) => {
+            // Determine type based on action and outcome
+            let eventType = (e.action || e.type || 'shot').toLowerCase()
+            
+            // For shots, use the outcome as the type (point, wide, goal, etc.)
+            if (e.action === 'Shot' && e.outcome) {
+              const outcome = e.outcome.toLowerCase()
+              if (outcome === 'point' || outcome === 'wide' || outcome === 'goal' || outcome === 'saved') {
+                eventType = outcome
+              } else {
+                eventType = 'shot' // Generic shot for other outcomes
+              }
+            }
+            
+            return {
+              id: e.id || `event-${index}`,
+              type: eventType,
+              timestamp: e.time || e.timestamp || 0, // Map 'time' to 'timestamp'
+              team: e.team === 'home' || e.team === 'red' ? 'home' : 'away',
+              player: e.player,
+              description: e.description || `${e.action || e.type} - ${e.outcome || 'N/A'}`,
+              metadata: {
+                ...e.metadata,
+                action: e.action,
+                outcome: e.outcome,
+                scoreType: e.metadata?.scoreType || (e.outcome === 'Point' ? 'point' : e.outcome === 'Goal' ? 'goal' : undefined),
+              },
+            }
+          })
         }
         return []
       })()

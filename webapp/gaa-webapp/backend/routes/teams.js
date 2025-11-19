@@ -45,19 +45,8 @@ router.post('/create', authenticateToken, async (req, res) => {
       });
     }
 
-    // Check if team name already exists
-    const nameCheckResult = await query(
-      'SELECT id, name FROM teams WHERE name = $1',
-      [name.trim()]
-    );
-
-    if (nameCheckResult.rows.length > 0) {
-      return res.status(409).json({ 
-        error: `A team named "${name}" already exists. Each club can only have one team.`,
-        existingTeam: nameCheckResult.rows[0]
-      });
-    }
-
+    // Note: Multiple teams can have the same name (removed unique constraint for dev testing)
+    
     // Generate invite code (ensure it's unique)
     let inviteCode;
     let codeExists = true;
@@ -89,16 +78,6 @@ router.post('/create', authenticateToken, async (req, res) => {
     res.status(201).json({ team });
   } catch (error) {
     console.error('Create team error:', error);
-    
-    // Handle unique constraint violation
-    if (error.code === '23505') {
-      if (error.constraint === 'unique_team_name') {
-        return res.status(409).json({ 
-          error: `A team named "${req.body.name}" already exists. Each club can only have one team.`
-        });
-      }
-    }
-    
     res.status(500).json({ error: 'Failed to create team' });
   }
 });

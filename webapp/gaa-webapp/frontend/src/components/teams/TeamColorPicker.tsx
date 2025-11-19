@@ -44,6 +44,7 @@ export default function TeamColorPicker({
 }: TeamColorPickerProps) {
   const [primaryColor, setPrimaryColor] = useState(currentPrimaryColor)
   const [secondaryColor, setSecondaryColor] = useState(currentSecondaryColor)
+  const [hasSecondaryColor, setHasSecondaryColor] = useState(!!currentSecondaryColor)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
@@ -52,7 +53,8 @@ export default function TeamColorPicker({
 
   useEffect(() => {
     setPrimaryColor(currentPrimaryColor)
-    setSecondaryColor(currentSecondaryColor)
+    setSecondaryColor(currentSecondaryColor || '#FFD700')
+    setHasSecondaryColor(!!currentSecondaryColor)
   }, [currentPrimaryColor, currentSecondaryColor])
 
   const handleSave = async () => {
@@ -63,7 +65,7 @@ export default function TeamColorPicker({
     try {
       await apiClient.updateTeamColors(teamId, {
         primary_color: primaryColor,
-        secondary_color: secondaryColor,
+        secondary_color: hasSecondaryColor ? secondaryColor : null,
       })
       setSuccess(true)
       onColorsUpdated?.()
@@ -79,6 +81,7 @@ export default function TeamColorPicker({
   const applyPreset = (preset: { primary: string; secondary: string }) => {
     setPrimaryColor(preset.primary)
     setSecondaryColor(preset.secondary)
+    setHasSecondaryColor(true) // Presets always have secondary colors
   }
 
   return (
@@ -93,7 +96,7 @@ export default function TeamColorPicker({
           <div className="text-left">
             <h3 className="text-lg font-semibold text-white">Team Kit Colors</h3>
             <p className="text-sm text-gray-400">
-              {isExpanded ? 'Click to collapse' : primaryColor && secondaryColor ? `${primaryColor} • ${secondaryColor}` : 'Click to set your team colors'}
+              {isExpanded ? 'Click to collapse' : primaryColor ? (hasSecondaryColor && secondaryColor ? `${primaryColor} • ${secondaryColor}` : `${primaryColor} (single-color)`) : 'Click to set your team colors'}
             </p>
           </div>
         </div>
@@ -106,7 +109,7 @@ export default function TeamColorPicker({
       {isExpanded && (
         <div className="px-6 pb-6 border-t border-gray-800 pt-6">
           <p className="text-sm text-gray-400 mb-4">
-            GAA teams have one kit with two colors (e.g., Kerry: Green & Gold)
+            Set your team's jersey color(s) for automatic home/away detection
           </p>
 
       {/* Color Pickers */}
@@ -139,30 +142,43 @@ export default function TeamColorPicker({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
-            Secondary Color
-          </label>
-          <div className="flex items-center gap-3">
-            <div
-              className="w-12 h-12 rounded-lg border-2 border-gray-700 cursor-pointer"
-              style={{ backgroundColor: secondaryColor }}
-              onClick={() => document.getElementById('secondary-color-input')?.click()}
-            />
+          <div className="flex items-center gap-2 mb-2">
             <input
-              id="secondary-color-input"
-              type="color"
-              value={secondaryColor}
-              onChange={(e) => setSecondaryColor(e.target.value)}
-              className="w-24 h-10 cursor-pointer bg-transparent"
+              type="checkbox"
+              id="has-secondary-color"
+              checked={hasSecondaryColor}
+              onChange={(e) => setHasSecondaryColor(e.target.checked)}
+              className="w-4 h-4 rounded border-gray-700 bg-[#0f0f0f] text-[#D1FB7A] focus:ring-[#D1FB7A] focus:ring-offset-0"
             />
-            <input
-              type="text"
-              value={secondaryColor}
-              onChange={(e) => setSecondaryColor(e.target.value)}
-              className="flex-1 px-3 py-2 bg-[#0f0f0f] border border-gray-700 rounded text-white font-mono text-sm"
-              placeholder="#FFD700"
-            />
+            <label htmlFor="has-secondary-color" className="text-sm font-medium text-gray-300 cursor-pointer">
+              Has Secondary Color
+            </label>
+            <span className="text-xs text-gray-500">(Optional - for single-color kits)</span>
           </div>
+          
+          {hasSecondaryColor && (
+            <div className="flex items-center gap-3">
+              <div
+                className="w-12 h-12 rounded-lg border-2 border-gray-700 cursor-pointer"
+                style={{ backgroundColor: secondaryColor }}
+                onClick={() => document.getElementById('secondary-color-input')?.click()}
+              />
+              <input
+                id="secondary-color-input"
+                type="color"
+                value={secondaryColor}
+                onChange={(e) => setSecondaryColor(e.target.value)}
+                className="w-24 h-10 cursor-pointer bg-transparent"
+              />
+              <input
+                type="text"
+                value={secondaryColor}
+                onChange={(e) => setSecondaryColor(e.target.value)}
+                className="flex-1 px-3 py-2 bg-[#0f0f0f] border border-gray-700 rounded text-white font-mono text-sm"
+                placeholder="#FFD700"
+              />
+            </div>
+          )}
         </div>
       </div>
 
@@ -213,13 +229,20 @@ export default function TeamColorPicker({
             />
             <p className="text-xs text-gray-500">Primary</p>
           </div>
-          <div className="text-center">
-            <div
-              className="w-16 h-16 rounded-lg mb-2"
-              style={{ backgroundColor: secondaryColor }}
-            />
-            <p className="text-xs text-gray-500">Secondary</p>
-          </div>
+          {hasSecondaryColor && (
+            <div className="text-center">
+              <div
+                className="w-16 h-16 rounded-lg mb-2"
+                style={{ backgroundColor: secondaryColor }}
+              />
+              <p className="text-xs text-gray-500">Secondary</p>
+            </div>
+          )}
+          {!hasSecondaryColor && (
+            <div className="text-center flex items-center">
+              <p className="text-xs text-gray-500 italic">Single-color kit</p>
+            </div>
+          )}
         </div>
       </div>
 

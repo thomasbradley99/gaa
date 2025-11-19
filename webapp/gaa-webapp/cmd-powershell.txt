@@ -1,0 +1,51 @@
+# Commands to run GAA Webapp (PowerShell/Windows)
+# Run from: C:\Users\cu4pr\Documents\ClannAI\ClapRepos
+
+# IMPORTANT: Fix PowerShell Execution Policy First!
+# Run this command in PowerShell (as Administrator if needed):
+# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+# Or for this session only:
+# Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+
+# If ports are in use, kill existing processes:
+# Kill backend on port 5011:
+# Get-Process -Id (Get-NetTCPConnection -LocalPort 5011).OwningProcess | Stop-Process -Force
+# Or use: netstat -ano | findstr :5011 (then taskkill /PID <pid> /F)
+
+# Kill frontend on port 5012:
+# Get-Process -Id (Get-NetTCPConnection -LocalPort 5012).OwningProcess | Stop-Process -Force
+# Or use: netstat -ano | findstr :5012 (then taskkill /PID <pid> /F)
+
+# Terminal 1 - Backend Server
+# Option 1: Two separate commands (recommended):
+cd gaa\webapp\gaa-webapp\backend
+npm run dev
+
+# Option 2: One line with semicolon:
+cd gaa\webapp\gaa-webapp\backend; npm run dev
+
+# Terminal 2 - Frontend Server
+# Option 1: Two separate commands (recommended):
+cd gaa\webapp\gaa-webapp\frontend
+npm run dev
+
+# Option 2: One line with semicolon:
+cd gaa\webapp\gaa-webapp\frontend; npm run dev
+
+# Backend runs on: http://localhost:5011
+# Frontend runs on: http://localhost:5012
+# Open http://localhost:5012 in your browser
+
+# Quick restart (PowerShell version):
+# Stop processes on ports 5011 and 5012:
+$port5011 = Get-NetTCPConnection -LocalPort 5011 -ErrorAction SilentlyContinue
+$port5012 = Get-NetTCPConnection -LocalPort 5012 -ErrorAction SilentlyContinue
+if ($port5011) { Stop-Process -Id $port5011.OwningProcess -Force }
+if ($port5012) { Stop-Process -Id $port5012.OwningProcess -Force }
+
+# Start backend in background:
+Start-Job -ScriptBlock { Set-Location "C:\Users\cu4pr\Documents\ClannAI\ClapRepos\gaa\webapp\gaa-webapp\backend"; npm run dev }
+
+# Start frontend (foreground):
+Set-Location gaa\webapp\gaa-webapp\frontend; npm run dev
+

@@ -396,6 +396,7 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
           opponentShort={stats.away.kickoutsShort}
           opponentMid={stats.away.kickoutsMid}
           opponentVoid={stats.away.kickoutsVoid}
+          metricFirst={true}
         />
         <KickoutBreakdown 
           title="AWAY KICKOUTS WON" 
@@ -481,7 +482,8 @@ function StatRow({ label, home, away }: { label: string; home: string; away: str
 function KickoutBreakdown({ 
   title, 
   long, short, mid, void: voidCount,
-  opponentLong, opponentShort, opponentMid, opponentVoid
+  opponentLong, opponentShort, opponentMid, opponentVoid,
+  metricFirst = false
 }: { 
   title: string
   long: number
@@ -492,31 +494,36 @@ function KickoutBreakdown({
   opponentShort: number
   opponentMid: number
   opponentVoid: number
+  metricFirst?: boolean
 }) {
+  const renderRow = (label: string, value: number) => {
+    if (metricFirst) {
+      // Metric first, then description
+      return (
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{value}</div>
+          <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">{label}</div>
+        </div>
+      )
+    } else {
+      // Description first, then metric
+      return (
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">{label}</div>
+          <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{value}</div>
+        </div>
+      )
+    }
+  }
+
   return (
     <div className="bg-gray-700 rounded-lg p-2.5 sm:p-4">
       <h3 className="text-[10px] sm:text-sm font-bold text-green-400 mb-2 sm:mb-3 uppercase tracking-wide text-center">{title}</h3>
       <div className="space-y-1">
-        <div className="flex items-center justify-between gap-1.5 sm:gap-2">
-          <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{long}</div>
-          <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Long</div>
-          <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{opponentLong}</div>
-        </div>
-        <div className="flex items-center justify-between gap-1.5 sm:gap-2">
-          <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{short}</div>
-          <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Short</div>
-          <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{opponentShort}</div>
-        </div>
-        <div className="flex items-center justify-between gap-1.5 sm:gap-2">
-          <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{mid}</div>
-          <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Mid</div>
-          <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{opponentMid}</div>
-        </div>
-        <div className="flex items-center justify-between gap-1.5 sm:gap-2">
-          <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{voidCount}</div>
-          <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Void</div>
-          <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{opponentVoid}</div>
-        </div>
+        {renderRow('Long', long)}
+        {renderRow('Short', short)}
+        {renderRow('Mid', mid)}
+        {renderRow('Void', voidCount)}
       </div>
     </div>
   )

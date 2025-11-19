@@ -1070,7 +1070,7 @@ export default function UnifiedSidebar({
                       <div
                         className={`rounded-lg p-3 max-w-[80%] ${
                           msg.role === 'user'
-                            ? 'bg-blue-500 text-white'
+                            ? 'bg-white/90 text-black'
                             : 'bg-gray-700 text-gray-100'
                         }`}
                       >
@@ -1084,7 +1084,7 @@ export default function UnifiedSidebar({
                   <div className="flex justify-start">
                     <div className="bg-gray-700 text-gray-100 rounded-lg p-3 max-w-[80%]">
                       <div className="flex items-center space-x-2">
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-400"></div>
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
                         <span className="text-sm">AI Coach is thinking...</span>
                       </div>
                     </div>
@@ -1102,12 +1102,12 @@ export default function UnifiedSidebar({
                     onKeyPress={handleChatKeyPress}
                     disabled={isAIChatLoading || gameId === 'demo'}
                     rows={1}
-                    className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-sm placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-none disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white text-sm placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <button
                     onClick={handleSendChatMessage}
                     disabled={!chatInput.trim() || isAIChatLoading || gameId === 'demo'}
-                    className="px-4 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-xl transition-colors flex-shrink-0"
+                    className="px-4 py-3 bg-white hover:bg-white/90 disabled:bg-gray-600 disabled:cursor-not-allowed text-black rounded-xl transition-colors flex-shrink-0"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />

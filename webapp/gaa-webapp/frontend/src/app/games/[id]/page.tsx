@@ -93,6 +93,12 @@ function MobileVideoPlayer({
           </div>
         </div>
       </div>
+
+      {/* 10 Minute Analysis Banner - Mobile */}
+      <div className="absolute top-16 left-0 right-0 z-10 bg-yellow-500/90 px-3 py-2 text-black text-xs flex items-center gap-2">
+        <span>ℹ️</span>
+        <span className="font-medium">Only first 10 minutes analyzed</span>
+      </div>
       
       {/* Video Player - full width, aspect ratio maintained */}
       <div 
@@ -379,6 +385,12 @@ export default function GameDetailPage() {
             onToggleLeftSidebar={() => setShowLeftSidebar(!showLeftSidebar)}
             events={gameEvents}
           />
+
+          {/* 10 Minute Analysis Banner */}
+          <div className="bg-yellow-500/10 border-l-4 border-yellow-500 px-4 py-2 text-yellow-200 text-sm flex items-center gap-2">
+            <span className="text-yellow-500">ℹ️</span>
+            <span>Only the first 10 minutes of the match have been analyzed</span>
+          </div>
 
           <div
             className={`flex-1 relative transition-all duration-300 ${showRightSidebar ? 'md:mr-[400px]' : ''}`}

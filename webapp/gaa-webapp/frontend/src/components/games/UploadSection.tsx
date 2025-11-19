@@ -25,11 +25,13 @@ export default function UploadSection({ teamId, teamName, onGameCreated }: Uploa
   const [oppositionCounty, setOppositionCounty] = useState('')
   const [showOppositionDropdown, setShowOppositionDropdown] = useState(false)
   const [filteredClubs, setFilteredClubs] = useState<Club[]>([])
+  const [highlightedIndex, setHighlightedIndex] = useState(-1)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
   const handleOppositionChange = (value: string) => {
     setOppositionClub(value)
+    setHighlightedIndex(-1) // Reset highlight on typing
     if (value.trim()) {
       // Search all clubs
       let filtered = clubs.filter(club =>
@@ -55,6 +57,34 @@ export default function UploadSection({ teamId, teamName, onGameCreated }: Uploa
     setOppositionClub(club.Club)
     setOppositionCounty(club.County)
     setShowOppositionDropdown(false)
+    setHighlightedIndex(-1)
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!showOppositionDropdown || filteredClubs.length === 0) return
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault()
+        setHighlightedIndex(prev => 
+          prev < filteredClubs.length - 1 ? prev + 1 : prev
+        )
+        break
+      case 'ArrowUp':
+        e.preventDefault()
+        setHighlightedIndex(prev => prev > 0 ? prev - 1 : -1)
+        break
+      case 'Enter':
+        e.preventDefault()
+        if (highlightedIndex >= 0 && highlightedIndex < filteredClubs.length) {
+          selectOpposition(filteredClubs[highlightedIndex])
+        }
+        break
+      case 'Escape':
+        setShowOppositionDropdown(false)
+        setHighlightedIndex(-1)
+        break
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -112,6 +142,7 @@ export default function UploadSection({ teamId, teamName, onGameCreated }: Uploa
             type="text"
             value={oppositionClub}
             onChange={(e) => handleOppositionChange(e.target.value)}
+            onKeyDown={handleKeyDown}
             onFocus={() => oppositionClub && setShowOppositionDropdown(true)}
             onBlur={() => setTimeout(() => setShowOppositionDropdown(false), 200)}
             placeholder="Type club name..."
@@ -127,10 +158,16 @@ export default function UploadSection({ teamId, teamName, onGameCreated }: Uploa
                   key={`${club.Club}-${index}`}
                   type="button"
                   onClick={() => selectOpposition(club)}
-                  className="w-full px-4 py-2 text-left hover:bg-white/10 transition-colors text-white text-sm border-b border-white/5 last:border-0"
+                  className={`w-full px-4 py-2 text-left transition-colors text-white text-sm border-b border-white/5 last:border-0 ${
+                    index === highlightedIndex 
+                      ? 'bg-[#2D8B4D] text-white' 
+                      : 'hover:bg-white/10'
+                  }`}
                 >
                   <div className="font-medium">{club.Club}</div>
-                  <div className="text-xs text-gray-400">{club.County}</div>
+                  <div className={`text-xs ${index === highlightedIndex ? 'text-white/80' : 'text-gray-400'}`}>
+                    {club.County}
+                  </div>
                 </button>
               ))}
             </div>

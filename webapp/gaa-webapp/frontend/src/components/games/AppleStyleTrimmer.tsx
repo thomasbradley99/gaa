@@ -106,10 +106,10 @@ export default function AppleStyleTrimmer({
           key={i}
           className={`absolute bottom-0 ${
             isEventTick 
-              ? 'w-0.5 h-6 bg-gray-400' 
+              ? 'w-0.5 h-6 bg-white/20' 
               : isSecondMark 
-                ? 'w-px h-4 bg-gray-500' 
-                : 'w-px h-2 bg-gray-600'
+                ? 'w-px h-4 bg-white/10' 
+                : 'w-px h-2 bg-white/5'
           }`}
           style={{ left: `${position}px` }}
         />
@@ -122,12 +122,12 @@ export default function AppleStyleTrimmer({
     <div className={`bg-black rounded-lg p-3 ${className}`}>
       {/* Header with time info */}
       <div className="flex justify-between items-center mb-3 text-xs">
-        <span className="text-gray-400 font-medium">-{beforePadding}s</span>
-        <span className="text-gray-300 font-bold flex items-center gap-1">
+        <span className="text-white/40 font-medium">-{beforePadding}s</span>
+        <span className="text-white/60 font-bold flex items-center gap-1">
           <span>⚽</span>
           {formatTime(eventTimestamp)}
         </span>
-        <span className="text-gray-400 font-medium">+{afterPadding}s</span>
+        <span className="text-white/40 font-medium">+{afterPadding}s</span>
       </div>
 
       {/* Timeline Container */}
@@ -143,7 +143,7 @@ export default function AppleStyleTrimmer({
 
         {/* Selected region */}
         <div
-          className="absolute top-2 bottom-2 bg-gray-700/40 border border-gray-600 rounded"
+          className="absolute top-2 bottom-2 bg-white/10 border border-white/20 rounded"
           style={{
             left: `${startPosition}px`,
             width: `${selectedWidth}px`
@@ -152,14 +152,14 @@ export default function AppleStyleTrimmer({
 
         {/* Event marker (center line) */}
         <div
-          className="absolute top-1 bottom-1 w-0.5 bg-gray-400 z-10 pointer-events-none"
+          className="absolute top-1 bottom-1 w-0.5 bg-white/30 z-10 pointer-events-none"
           style={{ left: `${eventPosition}px` }}
         />
 
         {/* Playhead marker (current time) */}
         {showPlayhead && (
           <div
-            className="absolute top-0 bottom-0 w-1 bg-gray-300 z-20 pointer-events-none transition-all duration-100"
+            className="absolute top-0 bottom-0 w-1 bg-white/40 z-20 pointer-events-none transition-all duration-100"
             style={{ left: `${playheadPosition}px` }}
           />
         )}
@@ -167,7 +167,7 @@ export default function AppleStyleTrimmer({
         {/* Left handle */}
         <div
           className={`absolute top-0 bottom-0 w-3 rounded-l cursor-ew-resize flex items-center justify-center ${
-            isDragging === 'left' ? 'bg-gray-400' : 'bg-gray-500'
+            isDragging === 'left' ? 'bg-white/30' : 'bg-white/20'
           }`}
           style={{ left: `${startPosition - 6}px` }}
           onMouseDown={(e) => handleMouseDown(e, 'left')}
@@ -178,7 +178,7 @@ export default function AppleStyleTrimmer({
         {/* Right handle */}
         <div
           className={`absolute top-0 bottom-0 w-3 rounded-r cursor-ew-resize flex items-center justify-center ${
-            isDragging === 'right' ? 'bg-gray-400' : 'bg-gray-500'
+            isDragging === 'right' ? 'bg-white/30' : 'bg-white/20'
           }`}
           style={{ left: `${endPosition - 6}px` }}
           onMouseDown={(e) => handleMouseDown(e, 'right')}

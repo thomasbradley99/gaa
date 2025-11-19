@@ -763,10 +763,10 @@ export default function UnifiedSidebar({
                           onClick={() => !isEditMode && onEventClick(event)}
                           className={`w-full text-left p-3 rounded-lg transition-all duration-200 border cursor-pointer ${
                             isCurrentEvent
-                              ? 'bg-gray-800 text-white border-white ring-0.5 ring-white'
+                              ? 'bg-black text-white border-white/30 ring-0.5 ring-white/30'
                               : isEditMode
-                              ? 'bg-gray-800/50 border-gray-600 cursor-default'
-                              : 'bg-gray-800/60 text-gray-300 hover:bg-gray-700/60 border-gray-700 hover:border-gray-600'
+                              ? 'bg-black/80 border-white/10 cursor-default'
+                              : 'bg-black/80 text-gray-300 hover:bg-black border-white/10 hover:border-white/20'
                           }`}
                         >
                           <div className="flex items-start justify-between gap-2">

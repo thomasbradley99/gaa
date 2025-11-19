@@ -17,6 +17,10 @@ def get_video_files(source_dir):
         video_files.extend(source_dir.glob(f'*{ext}'))
         video_files.extend(source_dir.glob(f'*{ext.upper()}'))
     
+    # Exclude specific videos
+    excluded = ['gaa7_hybrid.mp4']
+    video_files = [vf for vf in video_files if vf.name not in excluded]
+    
     # Custom ordering: prioritize specific videos
     priority_order = ['gaa3_hybrid.mp4', 'gaa5_hybrid.mp4', 'gaa6_hybrid.mp4', 'gaa8_hybrid.mp4']
     
@@ -51,7 +55,6 @@ def transcode_to_common_format(input_file, output_file, fps=30):
         '-preset', 'medium',
         '-acodec', 'aac',
         '-b:a', '128k',
-        '-movflags', '+faststart',
         '-y',
         str(output_file)
     ]

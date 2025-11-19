@@ -30,15 +30,21 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
     const possessionHome = totalPossessions > 0 ? Math.round((homePossessions / totalPossessions) * 100) : 0
     const possessionAway = totalPossessions > 0 ? Math.round((awayPossessions / totalPossessions) * 100) : 0
 
-    // Shots
-    const homeShots = homeEvents.filter((e) => e.type === 'shot')
-    const awayShots = awayEvents.filter((e) => e.type === 'shot')
+    // Shots - include all shot types (point, wide, goal, saved, shot)
+    const homeShots = homeEvents.filter((e) => 
+      e.type === 'shot' || e.type === 'point' || e.type === 'wide' || e.type === 'goal' || e.type === 'saved' ||
+      e.metadata?.action === 'Shot'
+    )
+    const awayShots = awayEvents.filter((e) => 
+      e.type === 'shot' || e.type === 'point' || e.type === 'wide' || e.type === 'goal' || e.type === 'saved' ||
+      e.metadata?.action === 'Shot'
+    )
     
-    const homeGoals = homeShots.filter((e) => e.metadata?.scoreType === 'goal').length
-    const homePoints = homeShots.filter((e) => e.metadata?.scoreType === 'point').length
-    const homeWides = homeShots.filter((e) => e.metadata?.scoreType === 'wide').length
+    const homeGoals = homeShots.filter((e) => e.type === 'goal' || e.metadata?.scoreType === 'goal').length
+    const homePoints = homeShots.filter((e) => e.type === 'point' || e.metadata?.scoreType === 'point').length
+    const homeWides = homeShots.filter((e) => e.type === 'wide' || e.metadata?.scoreType === 'wide').length
     const homeShortKeeper = homeShots.filter((e) => e.metadata?.scoreType === 'short_keeper' || e.metadata?.scoreType === 'short').length
-    const homeSaved = homeShots.filter((e) => e.metadata?.scoreType === 'saved').length
+    const homeSaved = homeShots.filter((e) => e.type === 'saved' || e.metadata?.scoreType === 'saved').length
     const home45M = homeShots.filter((e) => e.metadata?.scoreType === '45m').length
     const homeReboundPost = homeShots.filter((e) => e.metadata?.scoreType === 'rebound_post').length
     const homeOther = homeShots.filter((e) => {
@@ -46,11 +52,11 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
       return !type || (type !== 'goal' && type !== 'point' && type !== 'wide' && type !== 'short_keeper' && type !== 'short' && type !== 'saved' && type !== '45m' && type !== 'rebound_post')
     }).length
     
-    const awayGoals = awayShots.filter((e) => e.metadata?.scoreType === 'goal').length
-    const awayPoints = awayShots.filter((e) => e.metadata?.scoreType === 'point').length
-    const awayWides = awayShots.filter((e) => e.metadata?.scoreType === 'wide').length
+    const awayGoals = awayShots.filter((e) => e.type === 'goal' || e.metadata?.scoreType === 'goal').length
+    const awayPoints = awayShots.filter((e) => e.type === 'point' || e.metadata?.scoreType === 'point').length
+    const awayWides = awayShots.filter((e) => e.type === 'wide' || e.metadata?.scoreType === 'wide').length
     const awayShortKeeper = awayShots.filter((e) => e.metadata?.scoreType === 'short_keeper' || e.metadata?.scoreType === 'short').length
-    const awaySaved = awayShots.filter((e) => e.metadata?.scoreType === 'saved').length
+    const awaySaved = awayShots.filter((e) => e.type === 'saved' || e.metadata?.scoreType === 'saved').length
     const away45M = awayShots.filter((e) => e.metadata?.scoreType === '45m').length
     const awayReboundPost = awayShots.filter((e) => e.metadata?.scoreType === 'rebound_post').length
     const awayOther = awayShots.filter((e) => {

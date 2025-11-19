@@ -17,8 +17,27 @@ def get_video_files(source_dir):
         video_files.extend(source_dir.glob(f'*{ext}'))
         video_files.extend(source_dir.glob(f'*{ext.upper()}'))
     
-    # Sort by name to ensure consistent ordering
-    return sorted(video_files)
+    # Custom ordering: prioritize specific videos
+    priority_order = ['gaa3_hybrid.mp4', 'gaa5_hybrid.mp4', 'gaa6_hybrid.mp4', 'gaa8_hybrid.mp4']
+    
+    # Separate priority videos from others
+    priority_videos = []
+    other_videos = []
+    
+    for vf in video_files:
+        if vf.name in priority_order:
+            priority_videos.append(vf)
+        else:
+            other_videos.append(vf)
+    
+    # Sort priority videos by the order specified
+    priority_videos.sort(key=lambda x: priority_order.index(x.name))
+    
+    # Sort other videos alphabetically
+    other_videos.sort()
+    
+    # Combine: priority first, then others
+    return priority_videos + other_videos
 
 
 def transcode_to_common_format(input_file, output_file, fps=30):

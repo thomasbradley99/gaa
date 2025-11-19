@@ -428,20 +428,21 @@ router.post('/:id/events', authenticateLambda, async (req, res) => {
       return res.status(400).json({ error: 'Events must be an array' });
     }
 
-    // Build events JSONB object
-    const eventsData = {
+    // Store events array directly (not nested)
+    // Move match_info and team_mapping to metadata for proper separation
+    const enrichedMetadata = {
+      ...metadata,
       match_info: match_info || {
         title: 'GAA Match Events',
         total_events: events.length,
         analysis_method: 'AI pipeline',
         created_at: new Date().toISOString()
       },
-      events: events,
-      team_mapping: team_mapping || null, // Store team mapping if provided
+      team_mapping: team_mapping || null, // Store team mapping in metadata
       updated_at: new Date().toISOString()
     };
 
-    // Update database: store events, metadata, and update status
+    // Update database: store events array directly, metadata separately
     const updateResult = await query(
       `UPDATE games 
        SET events = $1::jsonb,
@@ -450,7 +451,7 @@ router.post('/:id/events', authenticateLambda, async (req, res) => {
            updated_at = NOW()
        WHERE id = $3
        RETURNING id, status`,
-      [JSON.stringify(eventsData), JSON.stringify(metadata || {}), id]
+      [JSON.stringify(events), JSON.stringify(enrichedMetadata), id]
     );
 
     console.log(`✅ Events stored for game ${id}: ${events.length} events`);
@@ -595,27 +596,31 @@ router.put('/:id/events', authenticateToken, async (req, res) => {
       }
     }));
     
-    // Wrap in GAA Events Schema format
-    const eventsData = {
+    // Get existing metadata and update it
+    const gameResult = await query('SELECT metadata FROM games WHERE id = $1', [id]);
+    const existingMetadata = gameResult.rows[0]?.metadata || {};
+    
+    const updatedMetadata = {
+      ...existingMetadata,
       match_info: {
+        ...existingMetadata.match_info,
         source: 'user_edited',
         total_events: dbEvents.length,
         edited_at: new Date().toISOString(),
       },
-      events: dbEvents,
-      team_mapping: null,
       updated_at: new Date().toISOString()
     };
     
-    // Update database
+    // Update database: store events array directly, update metadata
     const updateResult = await query(
       `UPDATE games
        SET events = $1::jsonb,
+           metadata = $2::jsonb,
            status = 'analyzed',
            updated_at = NOW()
-       WHERE id = $2
+       WHERE id = $3
        RETURNING id, status`,
-      [JSON.stringify(eventsData), id]
+      [JSON.stringify(dbEvents), JSON.stringify(updatedMetadata), id]
     );
     
     console.log(`✅ Events updated for game ${id}: ${dbEvents.length} events`);

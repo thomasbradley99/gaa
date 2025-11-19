@@ -144,16 +144,22 @@ export default function GameDetailPage() {
           console.log('Transformed events sample:', transformed.slice(0, 5).map(e => ({id: e.id, team: e.team})))
           return transformed
         }
-        // If events is already an array (legacy format)
+        // If events is already an array (direct format from database)
         if (Array.isArray(game.events)) {
+          // Transform database format to frontend GameEvent format
           return game.events.map((e: any, index: number) => ({
             id: e.id || `event-${index}`,
-            type: e.type || 'shot',
-            timestamp: e.timestamp || e.time || 0,
+            type: (e.action || e.type || 'shot').toLowerCase(), // Map 'action' to 'type'
+            timestamp: e.time || e.timestamp || 0, // Map 'time' to 'timestamp'
             team: e.team === 'home' || e.team === 'red' ? 'home' : 'away',
             player: e.player,
-            description: e.description || e.action,
-            metadata: e.metadata,
+            description: e.description || `${e.action || e.type} - ${e.outcome || 'N/A'}`,
+            metadata: {
+              ...e.metadata,
+              action: e.action,
+              outcome: e.outcome,
+              scoreType: e.metadata?.scoreType || (e.outcome === 'Point' ? 'point' : e.outcome === 'Goal' ? 'goal' : undefined),
+            },
           }))
         }
         return []

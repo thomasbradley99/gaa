@@ -1,0 +1,333 @@
+{
+  "events": [
+    {
+      "id": "event_001",
+      "team": "home",
+      "time": 11,
+      "action": "Shot",
+      "outcome": "Point",
+      "metadata": {
+        "from": "play",
+        "scoreType": "point"
+      }
+    },
+    {
+      "id": "event_002",
+      "team": "away",
+      "time": 40,
+      "action": "Kickout",
+      "outcome": "Lost"
+    },
+    {
+      "id": "event_003",
+      "team": "home",
+      "time": 42,
+      "action": "Turnover",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_004",
+      "team": "home",
+      "time": 56,
+      "action": "Shot",
+      "outcome": "Point",
+      "metadata": {
+        "from": "play",
+        "scoreType": "point"
+      }
+    },
+    {
+      "id": "event_005",
+      "team": "away",
+      "time": 71,
+      "action": "Kickout",
+      "outcome": "Lost"
+    },
+    {
+      "id": "event_006",
+      "team": "home",
+      "time": 75,
+      "action": "Turnover",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_007",
+      "team": "home",
+      "time": 105,
+      "action": "Shot",
+      "outcome": "Point",
+      "metadata": {
+        "from": "play",
+        "scoreType": "point"
+      }
+    },
+    {
+      "id": "event_008",
+      "team": "away",
+      "time": 145,
+      "action": "Kickout",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_009",
+      "team": "home",
+      "time": 157,
+      "action": "Turnover",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_010",
+      "team": "away",
+      "time": 166,
+      "action": "Turnover",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_011",
+      "team": "home",
+      "time": 179,
+      "action": "Foul",
+      "outcome": "N/A"
+    },
+    {
+      "id": "event_012",
+      "team": "away",
+      "time": 180,
+      "action": "Free",
+      "outcome": "N/A"
+    },
+    {
+      "id": "event_013",
+      "team": "home",
+      "time": 192,
+      "action": "Turnover",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_014",
+      "team": "away",
+      "time": 216,
+      "action": "Turnover",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_015",
+      "team": "home",
+      "time": 244,
+      "action": "Shot",
+      "outcome": "Wide"
+    },
+    {
+      "id": "event_016",
+      "team": "away",
+      "time": 245,
+      "action": "Kickout",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_017",
+      "team": "home",
+      "time": 286,
+      "action": "Turnover",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_018",
+      "team": "home",
+      "time": 311,
+      "action": "Shot",
+      "outcome": "Wide"
+    },
+    {
+      "id": "event_019",
+      "team": "away",
+      "time": 312,
+      "action": "Kickout",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_020",
+      "team": "home",
+      "time": 331,
+      "action": "Turnover",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_021",
+      "team": "away",
+      "time": 360,
+      "action": "Turnover",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_022",
+      "team": "home",
+      "time": 366,
+      "action": "Turnover",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_023",
+      "team": "away",
+      "time": 392,
+      "action": "Turnover",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_024",
+      "team": "home",
+      "time": 397,
+      "action": "Foul",
+      "outcome": "N/A"
+    },
+    {
+      "id": "event_025",
+      "team": "away",
+      "time": 402,
+      "action": "Free",
+      "outcome": "N/A"
+    },
+    {
+      "id": "event_026",
+      "team": "home",
+      "time": 417,
+      "action": "Turnover",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_027",
+      "team": "home",
+      "time": 424,
+      "action": "Shot",
+      "outcome": "Wide"
+    },
+    {
+      "id": "event_028",
+      "team": "away",
+      "time": 425,
+      "action": "Kickout",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_029",
+      "team": "home",
+      "time": 455,
+      "action": "Turnover",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_030",
+      "team": "home",
+      "time": 479,
+      "action": "Shot",
+      "outcome": "Wide"
+    },
+    {
+      "id": "event_031",
+      "team": "away",
+      "time": 480,
+      "action": "Kickout",
+      "outcome": "Lost"
+    },
+    {
+      "id": "event_032",
+      "team": "home",
+      "time": 486,
+      "action": "Turnover",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_033",
+      "team": "home",
+      "time": 519,
+      "action": "Shot",
+      "outcome": "Point",
+      "metadata": {
+        "from": "play",
+        "scoreType": "point"
+      }
+    },
+    {
+      "id": "event_034",
+      "team": "away",
+      "time": 539,
+      "action": "Kickout",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_035",
+      "team": "home",
+      "time": 550,
+      "action": "Foul",
+      "outcome": "N/A"
+    },
+    {
+      "id": "event_036",
+      "team": "away",
+      "time": 551,
+      "action": "Free",
+      "outcome": "N/A"
+    },
+    {
+      "id": "event_037",
+      "team": "away",
+      "time": 560,
+      "action": "Turnover",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_038",
+      "team": "away",
+      "time": 563,
+      "action": "Shot",
+      "outcome": "Point",
+      "metadata": {
+        "from": "play",
+        "scoreType": "point"
+      }
+    },
+    {
+      "id": "event_039",
+      "team": "home",
+      "time": 588,
+      "action": "Kickout",
+      "outcome": "Lost"
+    },
+    {
+      "id": "event_040",
+      "team": "away",
+      "time": 593,
+      "action": "Turnover",
+      "outcome": "Won"
+    },
+    {
+      "id": "event_041",
+      "team": "away",
+      "time": 611,
+      "action": "Shot",
+      "outcome": "Point",
+      "metadata": {
+        "from": "play",
+        "scoreType": "point"
+      }
+    },
+    {
+      "id": "event_042",
+      "team": "home",
+      "time": 635,
+      "action": "Kickout",
+      "outcome": "Won"
+    }
+  ],
+  "match_info": {
+    "title": "GAA Match",
+    "created_at": null,
+    "total_events": 42,
+    "analysis_method": "Gemini AI - First 10 minutes"
+  },
+  "updated_at": "2025-11-19T14:17:58.486Z",
+  "team_mapping": {
+    "red": "home",
+    "blue": "away"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "teams": {
+    "away_team": {
+      "name": "Away",
+      "jersey_color": "White"
+    },
+    "home_team": {
+      "name": "Home",
+      "jersey_color": "Black"
+    }
+  }
+}

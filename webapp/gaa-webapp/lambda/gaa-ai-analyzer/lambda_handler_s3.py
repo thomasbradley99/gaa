@@ -150,7 +150,12 @@ def lambda_handler(event, context):
     {
         "game_id": "uuid",
         "s3_key": "videos/{game_id}/video.mp4",
-        "title": "Team A vs Team B"  (optional)
+        "title": "Team A vs Team B"  (optional),
+        "team_colors": {  (optional - for home/away detection)
+            "primary": "white",
+            "secondary": "black",
+            "team_name": "Faughanvale GAA"
+        }
     }
     """
     print("🎬 GAA AI Analyzer Lambda started (S3 Mode)")
@@ -160,6 +165,9 @@ def lambda_handler(event, context):
     game_id = event.get('game_id')
     s3_key = event.get('s3_key')
     title = event.get('title', 'Unknown Match')
+    team_colors = event.get('team_colors', {})  # {primary, secondary, team_name}
+    
+    print(f"🎨 User's team colors: {team_colors}")
     
     if not game_id or not s3_key:
         raise ValueError("Missing required fields: game_id, s3_key")
@@ -208,9 +216,45 @@ def lambda_handler(event, context):
         match_start = game_profile['match_times']['start']
         
         print(f"✅ Game calibrated:")
-        print(f"   Team A: {team_a_color}")
-        print(f"   Team B: {team_b_color}")
+        print(f"   Detected Team A: {team_a_color}")
+        print(f"   Detected Team B: {team_b_color}")
         print(f"   Match starts at: {match_start}s ({match_start//60}m{match_start%60:02d}s)")
+        
+        # Match detected colors to user's team colors
+        # If user's team color matches team_a → team_a is home
+        # If user's team color matches team_b → team_b is home
+        user_primary = team_colors.get('primary', '').lower()
+        user_secondary = team_colors.get('secondary', '').lower()
+        team_name = team_colors.get('team_name', 'Home Team')
+        
+        team_a_is_user = False
+        team_b_is_user = False
+        
+        if user_primary or user_secondary:
+            # Check if team_a matches user's colors
+            if user_primary and user_primary in team_a_color.lower():
+                team_a_is_user = True
+            elif user_secondary and user_secondary in team_a_color.lower():
+                team_a_is_user = True
+            
+            # Check if team_b matches user's colors
+            if user_primary and user_primary in team_b_color.lower():
+                team_b_is_user = True
+            elif user_secondary and user_secondary in team_b_color.lower():
+                team_b_is_user = True
+        
+        # Determine home/away assignment
+        if team_a_is_user:
+            print(f"✅ Team A ({team_a_color}) matches {team_name} → Team A = Home")
+            team_mapping = {'red': 'home', 'blue': 'away'}  # Assuming AI uses red/blue
+        elif team_b_is_user:
+            print(f"✅ Team B ({team_b_color}) matches {team_name} → Team B = Home")
+            team_mapping = {'red': 'away', 'blue': 'home'}
+        else:
+            print(f"⚠️  No color match found, defaulting to Team A = Home")
+            team_mapping = {'red': 'home', 'blue': 'away'}
+        
+        print(f"   Final mapping: {team_mapping}")
         
         # Stage 0.1: Extract first 10 minutes (from match start time)
         print("\n" + "="*60)
@@ -301,24 +345,21 @@ def lambda_handler(event, context):
         if upload_to_s3(str(xml_path), xml_s3_key, BUCKET_NAME, 'application/xml'):
             print(f"✅ XML uploaded to S3: {xml_s3_key}")
         
-        # Create team mapping for frontend
-        team_mapping = {
-            'red': 'home',  # Default mapping
-            'blue': 'away'
-        }
-        
-        # Package team colors for backend
-        team_colors = {
-            'home': team_a_color,
-            'away': team_b_color
+        # Package team colors for backend (using the team_mapping we determined earlier)
+        # team_mapping was set after calibration based on color matching
+        detected_team_colors = {
+            'home': team_a_color if team_mapping.get('red') == 'home' else team_b_color,
+            'away': team_b_color if team_mapping.get('red') == 'home' else team_a_color
         }
         
         # Post results back to backend
         print("\n" + "="*60)
         print("POSTING RESULTS TO BACKEND")
         print("="*60)
+        print(f"   Team mapping: {team_mapping}")
+        print(f"   Team colors: {detected_team_colors}")
         update_processing_progress(game_id, 'Saving results to database', 95)
-        post_results_to_backend(game_id, events_json, team_mapping, title, team_colors)
+        post_results_to_backend(game_id, events_json, team_mapping, title, detected_team_colors)
         
         print("\n" + "="*60)
         print("✅ PIPELINE COMPLETE!")

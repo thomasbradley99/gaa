@@ -107,6 +107,59 @@ async function triggerVeoDownload(gameId, videoUrl) {
   }
 }
 
+/**
+ * GAA AI Analyzer Lambda Trigger
+ * 
+ * Triggers the AI analyzer Lambda to process uploaded video.
+ * Includes team colors for home/away detection.
+ * 
+ * @param {string} gameId - Game ID from database
+ * @param {string} s3Key - S3 key to video file
+ * @param {string} title - Game title
+ * @param {object} teamColors - Team colors {primary, secondary, team_name}
+ * @returns {Promise<boolean>} - True if Lambda invoked successfully
+ */
+async function triggerAIAnalyzer(gameId, s3Key, title, teamColors) {
+  if (!lambdaClient) {
+    console.log('⚠️  Lambda client not configured - skipping AI analyzer trigger');
+    return false;
+  }
+
+  const lambdaFunctionName = process.env.AI_ANALYZER_FUNCTION_NAME || 'gaa-ai-analyzer-nov25';
+  
+  try {
+    console.log(`🤖 Triggering AI Analyzer: ${lambdaFunctionName}`);
+    console.log(`   Game ID: ${gameId}`);
+    console.log(`   S3 Key: ${s3Key}`);
+    console.log(`   Team Colors:`, teamColors);
+
+    const invokeCommand = new InvokeCommand({
+      FunctionName: lambdaFunctionName,
+      InvocationType: 'Event', // Async invocation
+      Payload: JSON.stringify({
+        game_id: gameId,
+        s3_key: s3Key,
+        title: title,
+        team_colors: {
+          primary: teamColors.primary,
+          secondary: teamColors.secondary,
+          team_name: teamColors.team_name
+        }
+      }),
+    });
+
+    const lambdaResponse = await lambdaClient.send(invokeCommand);
+    console.log(`✅ AI Analyzer invoked successfully!`);
+    console.log(`   Status Code: ${lambdaResponse.StatusCode}`);
+    console.log(`   Request ID: ${lambdaResponse.$metadata.requestId}`);
+    
+    return true;
+  } catch (error) {
+    console.error(`❌ Failed to invoke AI Analyzer:`, error);
+    return false;
+  }
+}
+
 // Get user's games
 router.get('/', authenticateToken, async (req, res) => {
   try {
@@ -198,15 +251,24 @@ router.post('/', authenticateToken, async (req, res) => {
       return res.status(400).json({ error: 'Title and team ID are required' });
     }
 
-    // Verify user is member of team
+    // Verify user is member of team and fetch team colors
     const memberResult = await query(
-      'SELECT * FROM team_members WHERE team_id = $1 AND user_id = $2',
+      `SELECT tm.*, t.name as team_name, t.primary_color, t.secondary_color 
+       FROM team_members tm
+       JOIN teams t ON t.id = tm.team_id
+       WHERE tm.team_id = $1 AND tm.user_id = $2`,
       [teamId, req.user.userId]
     );
 
     if (memberResult.rows.length === 0) {
       return res.status(403).json({ error: 'Not a member of this team' });
     }
+    
+    const teamData = memberResult.rows[0];
+    const teamColors = {
+      primary: teamData.primary_color,
+      secondary: teamData.secondary_color
+    };
 
     // Determine file type based on videoUrl or s3Key
     let fileType = 'upload'; // default for file uploads
@@ -254,6 +316,20 @@ router.post('/', authenticateToken, async (req, res) => {
       // Game is created with status='pending', Lambda will update to 'analyzed' when done
       triggerVeoDownload(game.id, finalVideoUrl).catch(err => {
         console.error('❌ Failed to trigger GAA VEO download Lambda:', err);
+        // Don't fail the request - game is created, Lambda can be triggered manually later
+      });
+    }
+    
+    // If file was uploaded (s3Key exists), trigger AI analyzer
+    if (s3Key) {
+      console.log(`📤 File uploaded - triggering AI analyzer...`);
+      
+      triggerAIAnalyzer(game.id, s3Key, title, {
+        primary: teamColors.primary,
+        secondary: teamColors.secondary,
+        team_name: teamData.team_name
+      }).catch(err => {
+        console.error('❌ Failed to trigger AI analyzer:', err);
         // Don't fail the request - game is created, Lambda can be triggered manually later
       });
     }

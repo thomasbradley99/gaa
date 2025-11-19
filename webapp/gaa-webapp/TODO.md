@@ -23,6 +23,7 @@
   - mark edited events (useredited flag in metadata)
 - user company / sales / admin accounts
 - user adds colour to team and ai picks it up
+- // make scraper for team colours and autofill 
 
 ## nice to have
 - keyboard shortcuts help ("?" overlay)

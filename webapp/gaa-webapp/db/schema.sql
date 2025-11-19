@@ -51,6 +51,7 @@ CREATE TABLE games (
   team_id UUID REFERENCES teams(id) ON DELETE CASCADE,
   video_url VARCHAR(500),
   events JSONB,
+  metadata JSONB,
   tactical_analysis JSONB,
   status VARCHAR(50) DEFAULT 'pending',
   created_by UUID REFERENCES users(id),

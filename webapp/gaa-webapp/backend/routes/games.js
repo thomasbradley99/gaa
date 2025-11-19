@@ -597,8 +597,8 @@ router.put('/:id/events', authenticateToken, async (req, res) => {
     }));
     
     // Get existing metadata and update it
-    const gameResult = await query('SELECT metadata FROM games WHERE id = $1', [id]);
-    const existingMetadata = gameResult.rows[0]?.metadata || {};
+    const metadataResult = await query('SELECT metadata FROM games WHERE id = $1', [id]);
+    const existingMetadata = metadataResult.rows[0]?.metadata || {};
     
     const updatedMetadata = {
       ...existingMetadata,

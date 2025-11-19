@@ -644,7 +644,7 @@ export default function VideoPlayer({
       {/* Video Element */}
       <video
         ref={videoRef}
-        className="w-full h-full object-contain transition-transform duration-200"
+        className="w-[105%] h-[105%] object-contain transition-transform duration-200"
         style={{ 
           transform: `scale(${zoomLevel})`,
           transformOrigin: 'center center'

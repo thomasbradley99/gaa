@@ -89,7 +89,7 @@ export function XMLUpload({ gameId, onEventsUploaded }: XMLUploadProps) {
       }
     })
 
-    return events.sort((a, b) => a.timestamp - b.timestamp)
+    return events.sort((a, b) => a.time - b.time)
   }
 
   const normalizeEventType = (type: string): string => {

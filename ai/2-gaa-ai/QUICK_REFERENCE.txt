@@ -1,0 +1,59 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    GAA AI EVENT DETECTION - QUICK REFERENCE                  ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+📊 CURRENT PERFORMANCE (First 10 Minutes)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Precision:  32.0%  │  8 correct out of 25 detected
+  Recall:     40.0%  │  8 correct out of 20 in ground truth
+  F1 Score:   35.6%  │  ⭐ BEST PERFORMANCE
+  Cost:       $0.26  │  Per 10-minute segment
+
+🎯 STRENGTHS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ✅ Turnovers:    100% F1  (Perfect when detected)
+  ✅ Kickouts:      67% F1  (Strong detection)
+  ✅ Shots:       40-44% F1  (Decent, catching 50% of shots)
+  ✅ Spatial Awareness: Understands pitch position & game flow
+
+⚠️  LIMITATIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ⚠️  Fouls:         0% F1  (Timing mismatches with pro annotations)
+  ⚠️  Kickout Own:  17% P   (Over-detects routine restarts)
+
+🚀 RUN THE PIPELINE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+cd /home/ubuntu/clann/gaa/ai/2-gaa-ai
+
+# First 10 minutes (clips 0-9):
+python3 pipelines/production1/1_clips_to_descriptions.py \
+  --game kilmeena-vs-cill-chomain --start-clip 0 --end-clip 9 && \
+python3 pipelines/production1/2_create_coherent_narrative.py \
+  --game kilmeena-vs-cill-chomain && \
+python3 pipelines/production1/3_event_classification.py \
+  --game kilmeena-vs-cill-chomain && \
+python3 pipelines/production1/7_evaluate.py \
+  --game kilmeena-vs-cill-chomain
+
+📈 IMPROVEMENT vs BASELINE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Precision:  +123%  (14.3% → 32.0%)
+  Recall:      +26%  (31.6% → 40.0%)
+  F1 Score:    +81%  (19.7% → 35.6%)
+  False Pos:   -53%  (36 → 17)
+
+📁 BEST RUN LOCATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  games/kilmeena-vs-cill-chomain/outputs/6-with-audio-20251119-2156/
+  (Marked with PRODUCTION_BEST.txt)
+
+📖 DOCUMENTATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  README_PRODUCTION.md     - Full production guide
+  PERFORMANCE_SUMMARY.md   - Detailed metrics & analysis
+  QUICK_REFERENCE.txt      - This file
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  Updated: November 19, 2024  │  System: 2-gaa-ai  │  Model: Gemini 2.5 Pro  ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+

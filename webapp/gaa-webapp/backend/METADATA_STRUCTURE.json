@@ -8,5 +8,16 @@
       "name": "Home",
       "jersey_color": "Black"
     }
+  },
+  "match_info": {
+    "title": "GAA Match",
+    "created_at": null,
+    "total_events": 42,
+    "analysis_method": "Gemini AI - First 10 minutes"
+  },
+  "updated_at": "2025-11-19T14:17:58.486Z",
+  "team_mapping": {
+    "red": "home",
+    "blue": "away"
   }
 }

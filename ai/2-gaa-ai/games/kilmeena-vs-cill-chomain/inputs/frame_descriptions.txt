@@ -1,0 +1,2868 @@
+00000s (00m00s): Based on the video frame:
+
+1. Teams: Black jerseys vs White jerseys
+2. Keepers: Not visible
+3. Game state: IN-PLAY - match is ongoing, but play is momentarily paused
+4. Ball location: Not visible (likely out of play)
+5. Activity level: Stopped
+00030s (00m30s): White vs Black jerseys. Keepers not visible.
+IN-PLAY - active match, players in motion.
+Ball located in midfield. Active play.
+00060s (01m00s): Based on the image provided:
+
+1. **Teams**: Black vs White
+2. **Keepers**: White keeper RIGHT goal (Left goal not visible)
+3. **Game state**: IN-PLAY - match is ongoing but currently paused for a set piece
+4. **Ball location**: On the ground at midfield (player bending to place it)
+5. **Activity level**: Stopped
+00090s (01m30s): Based on the image provided:
+
+1. **Teams:** Black vs White
+2. **Keepers:** White keeper RIGHT goal (outfield player or keeper in white jersey visible in right goal; left keeper not clearly visible)
+3. **Game state:** IN-PLAY - active match, players in motion
+4. **Ball location:** Midfield (players are running and contesting in the central area, moving towards the left)
+5. **Activity level:** Active play
+00120s (02m00s): Black jerseys vs White jerseys. Keepers not visible.
+IN-PLAY - active match, players jogging and tracking play downfield.
+Ball location: Not visible, play moving towards the right side. Active play.
+00150s (02m30s): Black vs White. Dark keeper LEFT, RIGHT goal not visible.
+IN-PLAY - match paused, waiting for kickout.
+Ball location: Left goal area (on ground).
+Stopped.
+00180s (03m00s): Black vs White. Keepers not visible.
+IN-PLAY - active match, players in motion.
+Ball is in the midfield, contested by a cluster of players. Active play.
+00210s (03m30s): White vs Black.
+Keepers not visible in goals.
+WARMUP - players standing around, no organized play.
+Ball location: Midfield, held by a player in a yellow jersey.
+Activity level: Stopped.
+00240s (04m00s): Based on the image provided:
+
+1.  **Teams**: Black jerseys vs White jerseys
+2.  **Keepers**: Not visible in frame
+3.  **Game state**: IN-PLAY - active match, players in motion
+4.  **Ball location**: Midfield
+5.  **Activity level**: Active play
+00270s (04m30s): Black vs White. Keepers not visible.
+IN-PLAY - active match, players in formation.
+Ball is at midfield, held by a player in a black jersey.
+Stopped (players standing still, likely waiting for a free kick).
+00300s (05m00s): 1. Teams: Black jerseys vs White jerseys
+2. Keepers: Not visible
+3. Game state: IN-PLAY - active match, players in motion
+4. Ball location: Not visible (likely out of play)
+5. Activity level: Slow / players walking and resetting positions
+00330s (05m30s): 1. Teams: Black jerseys vs White jerseys
+2. Keepers: Not visible
+3. Game state: IN-PLAY - match paused for injury, medic running onto field
+4. Ball location: Midfield
+5. Activity level: Stopped
+00360s (06m00s): Black jerseys vs White jerseys. Keepers not visible. IN-PLAY - active match, players in motion. Ball at midfield, being placed on the ground for a free kick. Stopped.
+00390s (06m30s): Teams: Black jerseys vs White jerseys
+Keepers: Not visible
+Game state: IN-PLAY - active match, players in motion
+Ball location: Midfield
+Activity level: Active play
+00420s (07m00s): Teams: Black vs White
+Game state: IN-PLAY - active match, players in motion
+Ball location: Midfield, in possession of player #12 in white
+Activity level: active play
+00450s (07m30s): White vs Black.
+Keepers not clearly visible.
+IN-PLAY - active match, players in motion (currently paused for free kick).
+Ball is at midfield (player placing it).
+Stopped.
+00480s (08m00s): Black vs White. Keepers not visible.
+IN-PLAY - active match.
+Ball held by White player #21 in midfield.
+Stopped.
+00510s (08m30s): White vs Black jerseys. White keeper LEFT goal, Right keeper not visible.
+IN-PLAY - active match, players in motion
+Ball is on the ground in midfield near the referee.
+Active play.
+00540s (09m00s): Teams: Black vs White
+Game state: IN-PLAY - active match, players in motion
+Ball location: Midfield
+Activity level: Active play
+00570s (09m30s): White jerseys vs Black jerseys. Keepers not visible.
+IN-PLAY - active match, players in motion.
+Ball location: Midfield. Active play.
+00600s (10m00s): Based on the visual evidence:
+
+1.  **Teams**: Dark Blue vs White
+2.  **Keepers**: White keeper RIGHT goal (standing near the right goalpost)
+3.  **Game state**: IN-PLAY - match appears to be in progress, though stopped for a set piece.
+4.  **Ball location**: Midfield / approx. 45m line (player standing over stationary ball on the ground).
+5.  **Activity level**: Stopped - player preparing to take a free kick or "45".
+00630s (10m30s): Based on the video frame:
+
+1.  **Teams:** White jerseys vs Navy jerseys
+2.  **Keepers:** Not visible
+3.  **Game state:** IN-PLAY - active match, players in motion
+4.  **Ball location:** Midfield (players are tracking play towards the left side of the field)
+5.  **Activity level:** Active play
+00660s (11m00s): White jerseys vs Black jerseys. Keepers not visible.
+IN-PLAY - active match, players in motion.
+Ball is located in the midfield area, currently in possession of a player in a white jersey on the left side. Active play.
+00690s (11m30s): 1. Teams: Black vs White
+2. Keepers: White keeper LEFT goal, Right goal not visible
+3. Game state: IN-PLAY - active match, players in motion
+4. Ball location: Midfield
+5. Activity: Active play
+00720s (12m00s): Teams: Black vs White
+Keepers: White keeper LEFT goal, Right keeper not visible
+Game state: IN-PLAY - active match, players in motion
+Ball location: Midfield
+Activity level: Active play
+00750s (12m30s): Black vs White jerseys. Blue keeper LEFT goal, None visible RIGHT goal.
+IN-PLAY - active match, players in motion
+Ball location: Midfield, carried by player in black jersey.
+Active play.
+00780s (13m00s): Black vs White. Keepers not visible.
+IN-PLAY - active match, players in motion.
+Ball is carried by a player in a black jersey running down the right side of the field. Active play.
+00810s (13m30s): Navy vs White.
+IN-PLAY - active match, players in motion.
+Ball is in midfield. Active play.
+00840s (14m00s): Based on the video frame:
+
+1. **Teams**: Navy jerseys vs White jerseys
+2. **Keepers (if visible)**: White keeper RIGHT goal (Left keeper not visible)
+3. **Game state**: IN-PLAY - active match, players in motion
+4. **Ball location**: Midfield
+5. **Activity level**: Active play
+00870s (14m30s): Based on the image provided:
+
+1.  **Teams**: White jerseys vs Black jerseys
+2.  **Keepers**: Not visible in the frame (Right goal appears empty or keeper obscured; Left goal is off-screen)
+3.  **Game state**: IN-PLAY - active match, players moving in formation across the field.
+4.  **Ball location**: Midfield (inferred from player gaze and movement, not explicitly visible).
+5.  **Activity level**: Active play
+00900s (15m00s): White jerseys vs Black jerseys. White keeper LEFT, RIGHT goal not visible.
+IN-PLAY - active match, players in motion.
+Ball is in midfield. Active play.
+00930s (15m30s): White jerseys vs Dark Blue jerseys. Keepers not visible. IN-PLAY - active match, players in motion. Ball located in midfield. Active play.
+00960s (16m00s): Teams: White jerseys vs Dark jerseys
+Keepers: Not visible
+IN-PLAY - active match, players in motion
+Ball location: Midfield
+Activity level: Active play
+00990s (16m30s): Dark Blue vs White. White keeper RIGHT goal.
+IN-PLAY - active match, players in motion.
+Ball location: Right side of the field.
+Activity level: Active play.
+01020s (17m00s): White jerseys vs Black jerseys. Keepers not clearly visible.
+IN-PLAY - active match, players in motion.
+Ball location: Midfield, carried by player #15 in a black jersey.
+Activity level: Active play.
+01050s (17m30s): 1. Teams: White jerseys vs Black jerseys
+2. Keepers: Black keeper LEFT goal, White keeper RIGHT goal
+3. Game state: IN-PLAY - active match, players in motion
+4. Ball location: Midfield
+5. Activity level: active play
+01080s (18m00s): White jerseys vs Navy jerseys. Keepers not clearly visible.
+IN-PLAY - active match, players in motion.
+Ball is in the midfield, in possession of player #15. Active play.
+01110s (18m30s): White jerseys vs Black jerseys. Keepers not visible.
+IN-PLAY - active match, players in motion.
+Ball location: Midfield area.
+Activity level: Active play.
+01140s (19m00s): White vs Black jerseys. Keepers not visible.
+IN-PLAY - active match, players in motion.
+Ball is in midfield, being carried by a player in white. Active play.
+01170s (19m30s): White jerseys vs Dark jerseys. Keepers not visible.
+IN-PLAY - active match, players in motion.
+Ball is high in the air above midfield. Active play.
+01200s (20m00s): Dark vs White jerseys. Keepers not clearly visible.
+IN-PLAY - active match, players in motion.
+Ball is in midfield, carried by a player in a white jersey.
+Active play.
+01230s (20m30s): Teams: Black jerseys vs White jerseys
+Keepers: Not visible
+Game state: IN-PLAY - match is active but paused due to a player down
+Ball location: Midfield, on the ground near the fallen player
+Activity level: Stopped
+01260s (21m00s): Black vs White. Keepers not visible.
+IN-PLAY - active match, players in motion.
+Ball not visible (likely near injury stoppage). Stopped.
+01290s (21m30s): Black vs White. White keeper RIGHT goal.
+IN-PLAY - match is ongoing but currently paused for a restart.
+Ball location: Sideline.
+Activity level: Stopped.
+01320s (22m00s): 1. Teams: Black jerseys vs White jerseys
+2. Keepers (if visible): Not clearly visible
+3. Game state: IN-PLAY - active match, players in motion
+4. Ball location: Midfield, being contested by a group of players
+5. Activity level: Active play
+01350s (22m30s): White vs Navy jerseys. Keepers not visible.
+IN-PLAY - active match, players in motion.
+Ball location: Midfield, carried by player in white jersey.
+Activity level: Active play.
+01380s (23m00s): White vs Black jerseys. Keepers not visible (goals out of frame).
+IN-PLAY - active match, players in motion.
+Ball is in midfield, being carried by a player in a gold jersey (likely the goalkeeper). Active play.
+01410s (23m30s): Based on the image provided, here is the report:
+
+1.  **Teams**: Black jerseys vs White jerseys
+2.  **Keepers**: White keeper RIGHT goal (Left goal not visible)
+3.  **Game state**: IN-PLAY
+4.  **Ball location**: Midfield (held by a player in a White jersey standing near the referee)
+5.  **Activity level**: Stopped / players resting (match paused, likely for a free kick or injury)
+01440s (24m00s): Black vs White. Keepers not visible.
+IN-PLAY - active match, players in motion.
+Ball location: Midfield. Active play.
+01470s (24m30s): 1. Teams: Black jerseys vs White jerseys
+2. Keepers: Not visible
+3. Game state: IN-PLAY - active match, players in motion
+4. Ball location: Midfield, in possession of player in black jersey
+5. Activity level: Active play
+01500s (25m00s): Black vs White. Keepers not clearly visible.
+IN-PLAY - active match, players watching ball flight
+Ball is high in the air, approaching the right-hand goal posts.
+Active play
+01530s (25m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 53.184839944s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 53
+}
+]
+01560s (26m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 53.119053119s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 53
+}
+]
+01590s (26m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 53.051045026s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 53
+}
+]
+01620s (27m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 52.973988764s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 52
+}
+]
+01650s (27m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 52.904939929s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 52
+}
+]
+01680s (28m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 52.830609766s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 52
+}
+]
+01710s (28m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 52.760494211s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 52
+}
+]
+01740s (29m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 52.687921365s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 52
+}
+]
+01770s (29m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 52.621883458s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 52
+}
+]
+01800s (30m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 52.549925654s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 52
+}
+]
+01830s (30m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 52.478588432s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 52
+}
+]
+01860s (31m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 52.403742153s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 52
+}
+]
+01890s (31m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 52.32774878s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 52
+}
+]
+01920s (32m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 52.251139926s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 52
+}
+]
+01950s (32m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 52.188345629s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 52
+}
+]
+01980s (33m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 52.128719169s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 52
+}
+]
+02010s (33m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 52.066935562s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 52
+}
+]
+02040s (34m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 52.000586834s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 52
+}
+]
+02070s (34m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 51.928231254s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 51
+}
+]
+02100s (35m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 51.861764287s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 51
+}
+]
+02130s (35m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 51.785117083s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 51
+}
+]
+02160s (36m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 51.705430073s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 51
+}
+]
+02190s (36m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 51.622465144s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 51
+}
+]
+02220s (37m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 51.558757188s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 51
+}
+]
+02250s (37m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 51.496777708s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 51
+}
+]
+02280s (38m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 51.419464314s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 51
+}
+]
+02310s (38m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 51.354004088s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 51
+}
+]
+02340s (39m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 51.277449415s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 51
+}
+]
+02370s (39m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 51.196250842s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 51
+}
+]
+02400s (40m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 51.119583519s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 51
+}
+]
+02430s (40m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 51.054224463s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 51
+}
+]
+02460s (41m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.980581143s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+02490s (41m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.910576345s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+02520s (42m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.841785716s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+02550s (42m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.807603489s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+02580s (43m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.748308453s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+02610s (43m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.729091466s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+02640s (44m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.701170797s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+02670s (44m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.654573424s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+02700s (45m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.645626787s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+02730s (45m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.594928509s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+02760s (46m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.54460331s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+02790s (46m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.545891855s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+02820s (47m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.503659985s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+02850s (47m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.476383834s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+02880s (48m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.451113819s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+02910s (48m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.405083359s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+02940s (49m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.393109086s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+02970s (49m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.375308369s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+03000s (50m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.327168245s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+03030s (50m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.304875164s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+03060s (51m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.24793125s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+03090s (51m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.244377362s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+03120s (52m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.235611181s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+03150s (52m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.164176056s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+03180s (53m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.1295794s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+03210s (53m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.087380223s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+03240s (54m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.088591777s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+03270s (54m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.057362667s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+03300s (55m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 50.001011085s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 50
+}
+]
+03330s (55m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.982796823s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03360s (56m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.95668885s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03390s (56m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.931384719s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03420s (57m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.907435668s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03450s (57m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.868926332s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03480s (58m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.855265626s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03510s (58m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.83931783s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03540s (59m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.795543372s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03570s (59m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.785635051s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03600s (60m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.76458622s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03630s (60m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.70772002s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03660s (61m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.714442474s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03690s (61m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.699345808s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03720s (62m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.641324609s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03750s (62m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.612642616s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03780s (63m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.618137448s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03810s (63m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.564807909s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03840s (64m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.538428974s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03870s (64m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.533398143s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03900s (65m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.491957906s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03930s (65m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.465302612s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03960s (66m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.450319657s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+03990s (66m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.418931016s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04020s (67m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.387662266s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04050s (67m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.380628349s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04080s (68m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.361664352s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04110s (68m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.318977354s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04140s (69m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.310893263s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04170s (69m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.298669044s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04200s (70m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.253013011s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04230s (70m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.247956794s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04260s (71m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.234354504s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04290s (71m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.191504066s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04320s (72m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.180206881s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04350s (72m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.168801471s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04380s (73m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.124626918s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04410s (73m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.116972228s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04440s (74m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.105550241s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04470s (74m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.064587609s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04500s (75m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.058713767s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04530s (75m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.044393855s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04560s (76m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 49.001138271s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 49
+}
+]
+04590s (76m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 48.991221979s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 48
+}
+]
+04620s (77m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 48.973720343s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 48
+}
+]
+04650s (77m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 48.934056525s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 48
+}
+]
+04680s (78m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 48.927530003s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 48
+}
+]
+04710s (78m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 48.897288235s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 48
+}
+]
+04740s (79m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 48.857118202s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 48
+}
+]
+04770s (79m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 48.857672253s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 48
+}
+]
+04800s (80m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 48.83383027s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 48
+}
+]
+04830s (80m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 48.792576288s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 48
+}
+]
+04860s (81m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 48.778944173s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 48
+}
+]
+04890s (81m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 48.757266648s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 48
+}
+]
+04920s (82m00s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 48.720793807s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 48
+}
+]
+04950s (82m30s): Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_requests_per_model, limit: 50, model: gemini-3-pro
+Please retry in 48.687088599s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_requests_per_model"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-3-pro"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, retry_delay {
+  seconds: 48
+}
+]

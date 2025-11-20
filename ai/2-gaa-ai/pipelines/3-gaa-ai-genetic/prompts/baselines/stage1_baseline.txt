@@ -1,0 +1,59 @@
+
+        team_context = f"""CONTEXT: {current_half}.
+
+TEAMS (refer to them ONLY by jersey color):
+- {home_color} ({home_keeper} keeper) - attacking {home_attacks}, defend {home_goal_side} side goal
+- {away_color} ({away_keeper} keeper) - attacking {away_attacks}, defend {away_goal_side} side goal"""
+
+        clip_start_time = f"{timestamp//60}:{timestamp%60:02d}"
+        clip_end_ts = timestamp + 60
+        clip_end_time = f"{clip_end_ts//60}:{clip_end_ts%60:02d}"
+        example_mid_time = f"{(timestamp + 30)//60}:{(timestamp + 30)%60:02d}"
+
+        prompt = f"""You are analyzing a GAA (Gaelic Athletic Association) match clip.
+
+{team_context}
+
+**CLIP TIMING:**
+This clip shows {clip_start_time} to {clip_end_time}.
+
+**YOUR TASK:**
+First understand WHERE and WHAT'S HAPPENING, then describe SPECIFIC EVENTS.
+
+**STEP 1: UNDERSTAND THE CONTEXT**
+- WHERE on pitch: Near goal / Attacking area / Midfield / Defensive area
+- WHAT'S HAPPENING: Are teams passing around? Attacking? Defending? Contesting ball?
+
+**STEP 2: DETECT THESE EVENTS (be selective - don't over-report):**
+
+1. **SHOTS** - Clear scoring attempts ONLY:
+   - ⚠️ Only report if you SEE the actual shot/kick toward goal
+   - Don't report "attempts" or "attacks" - must see the shot
+   - WHO shoots, WHERE from, OUTCOME (Point/Goal/Wide/Saved)
+   - Example: "{example_mid_time} - White shoots from 25m center - POINT scored"
+
+2. **KICKOUTS** - Goalkeeper restarts (be selective):
+   - ⚠️ Don't report EVERY kickout - only if significant or clearly visible
+   - After a score, many kickouts are routine - skip if nothing notable
+   - WHO kicks, DISTANCE (Long/Mid/Short), DIRECTION (Left/Centre/Right), OUTCOME (Won/Lost)
+   - Example: "{clip_start_time} - Black keeper kicks out LONG to CENTRE, White WINS in midfield"
+
+3. **FOULS** - Look for CLEAR SIGNS:
+   - 🚩 Referee arm raised / signaling
+   - 🚩 Play STOPS suddenly (ball dead, players waiting)
+   - 🚩 Players clustered around stoppage
+   - 🚩 Player on ground after contact
+   - 🔊 Whistle heard (if audible)
+   - DESCRIBE: Which team fouled (conceded), where it happened (near goal = scoreable)
+   - Example: "{clip_end_time} - Play stops, Black fouls White near goal - SCOREABLE free awarded"
+   - Example: "{example_mid_time} - White fouls Black in midfield - free awarded"
+
+4. **TURNOVERS** - VERY RARE, strict criteria:
+   - ONLY if: Ball clearly DROPPED / Pass INTERCEPTED mid-flight / Clean TACKLE causes loss
+   - Don't report normal ball contests or possession changes
+   - Example: "{example_mid_time} - White player DROPS ball, Black recovers"
+
+**Important:**
+- Use absolute timestamps like {clip_start_time} (NOT 0:05)
+- Include WHERE events happen (near goal, midfield, attacking area, etc.)
+- Only describe KEY events you're CONFIDENT about

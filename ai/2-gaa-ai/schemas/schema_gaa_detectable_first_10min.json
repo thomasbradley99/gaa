@@ -1,0 +1,109 @@
+{
+  "version": "2.0",
+  "sport": "GAA",
+  "description": "ACTUAL detectable GAA events from first 10 minutes ground truth - NO invented outcomes",
+  "target_time_range": "0-600s",
+  "data_source": "ground_truth_detectable_first_10min.xml",
+  "actions": {
+    "Shot Own": {
+      "description": "Home team shot at goal",
+      "detectable": true,
+      "priority": "high",
+      "labels": [
+        "From Play",
+        "From Free",
+        "Point",
+        "Wide"
+      ]
+    },
+    "Shot Opp": {
+      "description": "Away team shot at goal",
+      "detectable": true,
+      "priority": "high",
+      "labels": [
+        "From Play",
+        "From Free",
+        "Point",
+        "Wide",
+        "Pass / Other"
+      ]
+    },
+    "Kickout Own": {
+      "description": "Home team kickout",
+      "detectable": true,
+      "priority": "high",
+      "labels": [
+        "Long",
+        "Mid",
+        "Left",
+        "Lost"
+      ],
+      "note": "NO 'Won' in first 10 mins data!"
+    },
+    "Kickout Opp": {
+      "description": "Away team kickout",
+      "detectable": true,
+      "priority": "high",
+      "labels": [
+        "Long",
+        "Mid",
+        "Centre",
+        "Right",
+        "Won",
+        "Lost"
+      ]
+    },
+    "Turnover Won": {
+      "description": "Home team won possession",
+      "detectable": true,
+      "priority": "medium",
+      "labels": [
+        "Unforced",
+        "M1",
+        "middle third"
+      ],
+      "note": "Only M1 zone in first 10 mins"
+    },
+    "Turnover lost": {
+      "description": "Home team lost possession",
+      "detectable": true,
+      "priority": "medium",
+      "labels": [
+        "Unforced",
+        "M3",
+        "middle third"
+      ],
+      "note": "Only M3 zone in first 10 mins"
+    },
+    "Foul Awarded": {
+      "description": "Free kick awarded to home team",
+      "detectable": true,
+      "priority": "medium",
+      "labels": []
+    },
+    "Foul Conceded": {
+      "description": "Free kick conceded by home team",
+      "detectable": true,
+      "priority": "medium",
+      "labels": []
+    },
+    "Scoreable Foul Awarded": {
+      "description": "Scorable free kick awarded to home team",
+      "detectable": true,
+      "priority": "medium",
+      "labels": []
+    },
+    "Scoreable Foul Conceded": {
+      "description": "Scorable free kick conceded by home team",
+      "detectable": true,
+      "priority": "medium",
+      "labels": []
+    }
+  },
+  "notes": [
+    "THIS SCHEMA CONTAINS ONLY LABELS THAT ACTUALLY EXIST IN THE FIRST 10 MINS DATA",
+    "NO made-up outcomes like 'Goal', 'Short', 'Forced', 'A1-A3', 'D1-D3'",
+    "Team is in event code suffix: 'Own' = home, 'Opp' = away",
+    "All timestamps are absolute video time (0s = video start)"
+  ]
+}

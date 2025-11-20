@@ -1,0 +1,127 @@
+{
+  "version": "1.0",
+  "sport": "GAA",
+  "description": "Complete GAA event schema - based on ACTUAL full game ground truth",
+  "data_source": "ground_truth_template.xml (full game)",
+  "actions": {
+    "1st Half End": [],
+    "1st Half Start": [],
+    "2nd Half End": [],
+    "2nd Half Start": [],
+    "Ball in Play": [],
+    "Stoppage": [
+      "Point",
+      "Goal",
+      "Wide",
+      "45m"
+    ],
+    "Possession Own": [
+      "Won",
+      "Lost",
+      "Turnover",
+      "Attack",
+      "KIckout Opp"
+    ],
+    "Possession Opp": [
+      "Won",
+      "Lost",
+      "Turnover",
+      "Attack",
+      "KIckout Opp"
+    ],
+    "Pos Own Att": [
+      "Turnover",
+      "Kickout Own",
+      "KIckout Opp"
+    ],
+    "Pos Opp ATT": [
+      "Turnover",
+      "Kickout Own",
+      "KIckout Opp"
+    ],
+    "Attack Own": [],
+    "Attack OPP": [],
+    "Shot Own": [
+      "From Play",
+      "From Free",
+      "Point",
+      "Goal",
+      "Wide",
+      "Short Keeper"
+    ],
+    "Shot Opp": [
+      "From Play",
+      "From Free",
+      "Point",
+      "Goal",
+      "Wide",
+      "Short Keeper",
+      "Pass / Other"
+    ],
+    "Kickout Own": [
+      "Long",
+      "Mid",
+      "Left",
+      "Centre",
+      "Right",
+      "Won",
+      "Lost"
+    ],
+    "Kickout Opp": [
+      "Long",
+      "Mid",
+      "Short",
+      "Left",
+      "Centre",
+      "Right",
+      "Won",
+      "Lost"
+    ],
+    "Turnover Won": [
+      "Forced",
+      "Unforced",
+      "D1",
+      "D2",
+      "D3",
+      "M1",
+      "M2",
+      "M3",
+      "defensive",
+      "middle third"
+    ],
+    "Turnover lost": [
+      "Forced",
+      "Unforced",
+      "A1",
+      "A2",
+      "A3",
+      "M2",
+      "M3",
+      "attack third",
+      "middle third"
+    ],
+    "Foul Awarded": [],
+    "Foul Conceded": [],
+    "Scoreable Foul Awarded": [],
+    "Scoreable Foul Conceded": [],
+    "Throw Up": [
+      "Won"
+    ],
+    "Hot Ball": [
+      "Won",
+      "Lost"
+    ],
+    "Highlight": [
+      "Point",
+      "Goal"
+    ],
+    "Referee": []
+  },
+  "notes": [
+    "This schema is based on ACTUAL labels found in the full game ground truth",
+    "NO invented outcomes - only what exists in professional annotations",
+    "Removed: Rebound Post, Saved, 45m (for shots) - not in data",
+    "Short Keeper IS in data (keeper saves short)",
+    "Team encoded in suffix: Own = home, Opp = away"
+  ]
+}

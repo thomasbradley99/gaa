@@ -1,0 +1,22 @@
+{
+  "team_a": {
+    "jersey_color": "Black",
+    "keeper_color": "Dark",
+    "attack_direction_1st_half": "right-to-left",
+    "attack_direction_2nd_half": "left-to-right"
+  },
+  "team_b": {
+    "jersey_color": "White",
+    "keeper_color": "Dark",
+    "attack_direction_1st_half": "left-to-right",
+    "attack_direction_2nd_half": "right-to-left"
+  },
+  "match_times": {
+    "start": 25,
+    "half_time": 1950,
+    "second_half_start": 2820,
+    "end": 4920
+  },
+  "notes": "The video data shows significant fragmentation with frequent transitions between 'ACTIVE' and 'WARMUP/PRACTICE' states, and inconsistent team pairings and attack directions within what would typically be a single half. The inferred match times represent the longest plausible continuous periods of 'ACTIVE' play separated by a substantial 'WARMUP/PRACTICE' block (halftime). Attack directions for each half are based on the first instance of the main teams' play in that half, as the 'most common pattern' rule resulted in ties due to high inconsistency. Keeper colors are generalized to 'Dark' due to varied and inconsistent specific color mentions across frames.",
+  "home_team_assignment": "team_a"
+}

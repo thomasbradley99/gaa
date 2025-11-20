@@ -1,0 +1,111 @@
+api rates. 
+
+ok here are all models. Project
+ClannAI Production
+Time Range
+28 Days
+Rate limits by model
+info
+Peak usage per model compared to its limit over the last 28 days
+Model
+Category
+RPM
+TPM
+RPD
+Charts
+gemini-2.5-pro	Text-out models	
+5 / 150
+74.26K / 2M
+7 / 10K
+gemini-2.5-flash	Text-out models	
+28 / 1K
+82.9K / 1M
+75 / 10K
+gemini-2.5-flash-lite	Text-out models	
+19 / 4K
+15.02K / 4M
+19 / Unlimited
+computer-use-preview	Other models	
+0 / 150
+0 / 2M
+0 / 10K
+gemini-2.0-flash-exp	Text-out models	
+0 / 10
+0 / 250K
+0 / 500
+gemini-2.0-flash-lite	Text-out models	
+0 / 4K
+0 / 4M
+0 / Unlimited
+gemini-2.0-flash-preview-image-generation	Multi-modal generative models	
+0 / 1K
+0 / 1M
+0 / 10K
+gemini-2.0-flash	Text-out models	
+0 / 2K
+0 / 4M
+0 / Unlimited
+gemini-2.5-flash-preview-image	Multi-modal generative models	
+0 / 500
+0 / 500K
+0 / 2K
+gemini-2.5-flash-tts	Multi-modal generative models	
+0 / 10
+0 / 10K
+0 / 100
+gemini-2.5-pro-tts	Multi-modal generative models	
+0 / 10
+0 / 10K
+0 / 50
+gemini-robotics-er-1.5-preview	Other models	
+0 / 1K
+0 / 2M
+0 / 10K
+imagen-3.0-generate	Multi-modal generative models	
+0 / 20
+N/A	
+0 / Unlimited
+imagen-4.0-fast-generate	Multi-modal generative models	
+0 / 10
+N/A	
+0 / 70
+imagen-4.0-generate	Multi-modal generative models	
+0 / 10
+N/A	
+0 / 70
+imagen-4.0-ultra-generate	Multi-modal generative models	
+0 / 5
+N/A	
+0 / 30
+veo-2.0-generate-001	Multi-modal generative models	
+0 / 2
+N/A	
+0 / 50
+veo-3.0-fast-generate-preview	Multi-modal generative models	
+0 / 2
+N/A	
+0 / 10
+veo-3.0-fast-generate	Multi-modal generative models	
+0 / 2
+N/A	
+0 / 10
+veo-3.0-generate-preview	Multi-modal generative models	
+0 / 2
+N/A	
+0 / 10
+veo-3.0-generate	Multi-modal generative models	
+0 / 2
+N/A	
+0 / 10
+gemini-2.0-flash-live	Live API	
+0 / Unlimited
+0 / 4M
+0 / Unlimited
+gemini-2.5-flash-live	Live API	
+0 / Unlimited
+0 / 1M
+0 / Unlimited
+gemini-2.5-flash-native-audio-dialog	Live API	
+0 / Unlimited
+0 / 1M
+0 / Unlimited

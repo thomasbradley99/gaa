@@ -14,7 +14,7 @@ def run(classified_events, game_profile, work_dir, api_key):
     
     Args:
         classified_events: Classified events text from stage 3
-        game_profile: Calibrated game profile
+        game_profile: Calibrated game profile (includes match_times.start)
         work_dir: Working directory
         api_key: Gemini API key
         
@@ -25,12 +25,16 @@ def run(classified_events, game_profile, work_dir, api_key):
     
     team_a = game_profile['team_a']
     team_b = game_profile['team_b']
+    match_start = game_profile['match_times']['start']  # Get match start time from calibration
     
     prompt = f"""Convert these GAA match events into structured JSON.
 
 **TEAMS:**
 - {team_a['jersey_color']} ({team_a['keeper_color']} keeper)
 - {team_b['jersey_color']} ({team_b['keeper_color']} keeper)
+
+**MATCH START TIME:**
+The match starts at {match_start} seconds ({match_start//60}m{match_start%60:02d}s) into the video recording.
 
 **CLASSIFIED EVENTS:**
 
@@ -41,7 +45,7 @@ def run(classified_events, game_profile, work_dir, api_key):
   "events": [
     {{
       "id": "event_001",
-      "time": 65,
+      "time": {match_start + 65},
       "team": "home",
       "action": "Shot",
       "outcome": "Point",
@@ -52,7 +56,7 @@ def run(classified_events, game_profile, work_dir, api_key):
     }},
     {{
       "id": "event_002",
-      "time": 120,
+      "time": {match_start + 120},
       "team": "away",
       "action": "Kickout",
       "outcome": "Won"
@@ -72,7 +76,9 @@ Shot, Kickout, Turnover, Throw-up, Foul, Yellow Card, Black Card, Red Card, Kick
 Point, Goal, Wide, Saved, Won, Lost, N/A
 
 **RULES:**
-- Convert timestamps to seconds (e.g., "1:05" → 65)
+- "time" must be ABSOLUTE VIDEO TIME in seconds (from video start at 0:00, NOT from match start)
+- For events in classified list: ADD {match_start} seconds to convert from match time to video time
+- Example: Event at "1:05" in match → {match_start} + 65 = {match_start + 65} seconds in video
 - Map jersey colors to team: "{team_a['jersey_color']}" = home, "{team_b['jersey_color']}" = away
 - Generate unique IDs (e.g., "event_001", "event_002")
 - Include all events from the classified list

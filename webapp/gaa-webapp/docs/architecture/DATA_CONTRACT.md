@@ -31,9 +31,10 @@ This is what the frontend expects when fetching `/api/games/:id`
   
   // ===== EVENTS (JSONB ARRAY) ===== 
   // ✅ IMPORTANT: This is now a DIRECT ARRAY (not nested object)
+  // ✅ SCHEMA: See shared/EVENT_SCHEMA.ts for master definition
   events: Array<{
     id: string               // "event_001"
-    time: number             // 11 (seconds from MATCH START, not recording start)
+    time: number             // 311 (seconds from VIDEO START at 0:00, NOT match start)
     team: string             // "home" | "away"
     action: string           // "Shot" | "Kickout" | "Turnover" | "Throw-up" | "Foul"
     outcome: string          // "Point" | "Goal" | "Wide" | "Won" | "Lost" | "N/A"

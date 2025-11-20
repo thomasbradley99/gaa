@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { X } from 'lucide-react'
 import { EventList } from './EventList'
 import { GameStats } from './GameStats'
@@ -74,6 +74,12 @@ export default function UnifiedSidebar({
   const [chatInput, setChatInput] = useState('')
   const [isAIChatLoading, setIsAIChatLoading] = useState(false)
   
+  // Auto-scroll state
+  const eventListRef = useRef<HTMLDivElement>(null)
+  const lastUserScrollRef = useRef<number>(0)
+  const scrollTimeoutRef = useRef<NodeJS.Timeout>()
+  const [autoScrollEnabled, setAutoScrollEnabled] = useState(true)
+  
   // Event type filters for GAA
   const [eventTypeFilters, setEventTypeFilters] = useState({
     // Shot outcomes (what we actually detect)
@@ -136,6 +142,49 @@ export default function UnifiedSidebar({
     // For everything else, show the action
     return event.action || 'Event'
   }
+
+  // Handle user scroll - disable auto-scroll temporarily
+  const handleUserScroll = () => {
+    lastUserScrollRef.current = Date.now()
+    setAutoScrollEnabled(false)
+    
+    // Clear existing timeout
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current)
+    }
+    
+    // Re-enable auto-scroll after 10 seconds of no scrolling
+    scrollTimeoutRef.current = setTimeout(() => {
+      setAutoScrollEnabled(true)
+    }, 10000)
+  }
+  
+  // Auto-scroll to current event
+  useEffect(() => {
+    if (!autoScrollEnabled || !eventListRef.current || activeTab !== 'events') return
+    
+    // Find current event element
+    const currentEventElements = eventListRef.current.querySelectorAll('[data-event-index]')
+    const currentEventElement = Array.from(currentEventElements).find(
+      el => el.getAttribute('data-event-index') === String(currentEventIndex)
+    )
+    
+    if (currentEventElement) {
+      currentEventElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      })
+    }
+  }, [currentEventIndex, autoScrollEnabled, activeTab])
+  
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current)
+      }
+    }
+  }, [])
 
   const handleToggleEditMode = () => {
     if (isEditMode) {
@@ -844,7 +893,11 @@ export default function UnifiedSidebar({
               </div>
 
               {/* Events List */}
-              <div className="flex-1 min-h-0 overflow-y-auto p-2">
+              <div 
+                ref={eventListRef}
+                onScroll={handleUserScroll}
+                className="flex-1 min-h-0 overflow-y-auto p-2"
+              >
                 {filteredByType.length === 0 ? (
                 <div className="text-center py-8 text-gray-400 text-sm">
                   No events available
@@ -867,6 +920,7 @@ export default function UnifiedSidebar({
                       return (
                         <div
                           key={`${event.id}-${originalIndex}`}
+                          data-event-index={originalIndex}
                           onClick={() => onEventClick(event)}
                           className={`w-full text-left p-3 rounded-lg transition-all duration-200 border cursor-pointer ${
                             isCurrentEvent
@@ -988,20 +1042,14 @@ export default function UnifiedSidebar({
                               ) : (
                                 <div className="w-full">
                                   <div className="flex items-center gap-2 flex-wrap">
-                                    {/* Time Badge with Icon */}
-                                    <div className="flex items-center gap-1">
-                                      <svg className="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                      </svg>
-                                      <span className="text-xs text-gray-400 font-mono">
-                                        {formatTime(event.time)}
-                                      </span>
-                                    </div>
+                                    {/* Time Badge */}
+                                    <span className="text-xs text-gray-400 font-mono">
+                                      {formatTime(event.time)}
+                                    </span>
                                     
                                     {/* Event Type Badge */}
-                                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium border bg-gray-500/20 text-gray-300 border-gray-500/30">
-                                      <span>{getEventEmoji(getEventDisplayType(event))}</span>
-                                      <span>{getEventDisplayType(event)}</span>
+                                    <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium border bg-gray-500/20 text-gray-300 border-gray-500/30">
+                                      {getEventDisplayType(event)}
                                     </span>
                                     
                                     {/* Team Badge */}

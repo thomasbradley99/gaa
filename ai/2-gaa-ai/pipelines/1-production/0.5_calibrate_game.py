@@ -246,6 +246,19 @@ Provide ONLY the JSON object:"""
         
         game_profile = json.loads(result_text)
         
+        # Add video URL from video_source.json if available
+        video_source_path = GAME_ROOT / "inputs" / "video_source.json"
+        if video_source_path.exists():
+            try:
+                with open(video_source_path, 'r') as f:
+                    video_source = json.load(f)
+                    if video_source.get('downloads') and len(video_source['downloads']) > 0:
+                        video_url = video_source['downloads'][0]['url']
+                        game_profile['video_url'] = video_url
+                        print(f"✅ Added video URL from video_source.json")
+            except Exception as e:
+                print(f"⚠️  Could not read video_source.json: {e}")
+        
         # Get token usage
         usage = response.usage_metadata
         input_tokens = usage.prompt_token_count
@@ -300,12 +313,18 @@ Provide ONLY the JSON object:"""
         print(f"   TOTAL: ${total_cost:.4f}")
         
         print(f"\n💾 Saved to: {OUTPUT_FILE}")
+        
+        if 'video_url' in game_profile:
+            print(f"\n🎥 VIDEO URL (for home team verification):")
+            print(f"   {game_profile['video_url']}")
+        
         print(f"\n⚠️  ACTION REQUIRED - Set Home Team:")
-        print(f"   1. Watch S3 website or check ground truth for 'Home Goal Kick'")
+        print(f"   1. Watch video or check ground truth for 'Home Goal Kick'")
         print(f"   2. See which keeper takes it:")
         print(f"      - {game_profile['team_a']['keeper_color']} keeper → set 'home_team_assignment': 'team_a'")
         print(f"      - {game_profile['team_b']['keeper_color']} keeper → set 'home_team_assignment': 'team_b'")
         print(f"   3. Edit {OUTPUT_FILE.name} and change 'EDIT_ME' to the correct team")
+        print(f"\n   💡 TIP: Video URL is included in {OUTPUT_FILE.name} for easy access")
         print(f"\nNext step: python3 1_clips_to_descriptions.py --game {ARGS.game} --start-clip X --end-clip Y")
         
         return True

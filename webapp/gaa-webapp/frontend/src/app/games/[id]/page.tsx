@@ -249,40 +249,16 @@ export default function GameDetailPage() {
 
   // Handle XML upload
   const handleEventsUploaded = (events: GameEvent[]) => {
-    console.log(`📤 Uploaded ${events.length} events from XML`)
-    // Update game state with uploaded events
-    setGame({
-      ...game,
-      events: {
-        events: events.map(event => ({
-          id: event.id,
-          team: event.team,
-          time: event.timestamp,
-          action: event.type,
-          outcome: event.metadata?.outcome || 'N/A',
-          metadata: event.metadata || {},
-        })),
-      },
-    })
+    console.log(`📤 Uploaded ${events.length} events`)
+    // Events are already in master schema format - just refresh from DB
+    fetchGame()
   }
 
   // Handle event updates from edit mode
   const handleEventsUpdate = (updatedEvents: GameEvent[]) => {
     console.log(`📝 Updated ${updatedEvents.length} events`)
-    // Update game state with edited events
-    setGame({
-      ...game,
-      events: {
-        events: updatedEvents.map(event => ({
-          id: event.id,
-          team: event.team,
-          time: event.timestamp,
-          action: event.type,
-          outcome: event.metadata?.outcome || 'N/A',
-          metadata: event.metadata || {},
-        })),
-      },
-    })
+    // Events are already in master schema format - just refresh from DB
+    fetchGame()
   }
 
   // Filter events based on team filter

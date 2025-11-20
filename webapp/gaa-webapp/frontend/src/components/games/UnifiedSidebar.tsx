@@ -298,8 +298,7 @@ export default function UnifiedSidebar({
         total: finalEvents.length
       })
       
-      // Reset edit mode
-      setIsEditMode(false)
+      // Clear edit buffers but stay in edit mode
       setEditModeEvents(new Map())
       setBinnedEvents(new Set())
       
@@ -632,7 +631,7 @@ export default function UnifiedSidebar({
                       
                       <button
                         onClick={handleToggleEditMode}
-                        className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-purple-500/10 hover:bg-purple-500/20 border-purple-400/30 text-purple-300 transition-all"
+                        className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-white/5 hover:bg-white/10 border-white/20 text-white transition-all"
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -750,9 +749,9 @@ export default function UnifiedSidebar({
 
                 {/* Create Event Form */}
                 {isCreatingEvent && (
-                  <div className="p-3 bg-gray-800/50 rounded-lg border border-purple-400/30 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <h4 className="text-sm font-medium text-purple-300">New Event</h4>
+                  <div className="p-2 bg-gray-800/50 rounded-lg border border-white/20 space-y-1.5">
+                    <div className="flex items-center justify-between mb-1">
+                      <h4 className="text-xs font-medium text-white">New Event</h4>
                       <button
                         onClick={handleCancelCreateEvent}
                         className="p-1 text-gray-400 hover:text-white transition-colors"
@@ -768,14 +767,14 @@ export default function UnifiedSidebar({
                       value={Math.round(newEvent.timestamp)}
                       onFocus={() => setNewEvent({...newEvent, timestamp: Math.floor(currentTime)})}
                       onChange={(e) => setNewEvent({...newEvent, timestamp: parseFloat(e.target.value) || 0})}
-                      placeholder="Time (seconds)"
-                      className="w-full bg-gray-800 text-gray-300 text-xs px-3 py-2 rounded border border-gray-600 focus:border-purple-400 focus:outline-none font-mono"
+                      placeholder="Time (s)"
+                      className="w-full bg-black text-white text-xs px-2 py-1 rounded border border-white/20 focus:border-white/50 focus:outline-none font-mono"
                     />
                     
                     <select
                       value={newEvent.type}
                       onChange={(e) => setNewEvent({...newEvent, type: e.target.value})}
-                      className="w-full bg-gray-800 text-gray-300 text-xs px-3 py-2 rounded border border-gray-600 focus:border-purple-400 focus:outline-none"
+                      className="w-full bg-black text-white text-xs px-2 py-1 rounded border border-white/20 focus:border-white/50 focus:outline-none"
                     >
                       {Object.keys(eventTypeFilters).map((type) => (
                         <option key={type} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>
@@ -785,7 +784,7 @@ export default function UnifiedSidebar({
                     <select
                       value={newEvent.team}
                       onChange={(e) => setNewEvent({...newEvent, team: e.target.value})}
-                      className="w-full bg-gray-800 text-gray-300 text-xs px-3 py-2 rounded border border-gray-600 focus:border-purple-400 focus:outline-none"
+                      className="w-full bg-black text-white text-xs px-2 py-1 rounded border border-white/20 focus:border-white/50 focus:outline-none"
                     >
                       <option value="home">Home</option>
                       <option value="away">Away</option>
@@ -795,21 +794,21 @@ export default function UnifiedSidebar({
                       type="text"
                       value={newEvent.description}
                       onChange={(e) => setNewEvent({...newEvent, description: e.target.value})}
-                      placeholder="Event description..."
-                      className="w-full bg-gray-800 text-gray-300 text-xs px-3 py-2 rounded border border-gray-600 focus:border-purple-400 focus:outline-none"
+                      placeholder="Description..."
+                      className="w-full bg-black text-white text-xs px-2 py-1 rounded border border-white/20 focus:border-white/50 focus:outline-none"
                     />
                     
                     <input
                       type="text"
                       value={newEvent.player}
                       onChange={(e) => setNewEvent({...newEvent, player: e.target.value})}
-                      placeholder="Player name/number (optional)..."
-                      className="w-full bg-gray-800 text-gray-300 text-xs px-3 py-2 rounded border border-gray-600 focus:border-purple-400 focus:outline-none"
+                      placeholder="Player (optional)..."
+                      className="w-full bg-black text-white text-xs px-2 py-1 rounded border border-white/20 focus:border-white/50 focus:outline-none"
                     />
                     
                     <button
                       onClick={handleCreateEvent}
-                      className="w-full py-2 text-sm font-medium bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 rounded transition-colors"
+                      className="w-full py-1.5 text-xs font-medium bg-white/5 hover:bg-white/10 text-white rounded transition-colors"
                     >
                       Create Event
                     </button>
@@ -818,7 +817,7 @@ export default function UnifiedSidebar({
               </div>
 
               {/* Events List */}
-              <div className="flex-1 min-h-0 overflow-y-auto p-4">
+              <div className="flex-1 min-h-0 overflow-y-auto p-2">
                 {filteredByType.length === 0 ? (
                 <div className="text-center py-8 text-gray-400 text-sm">
                   No events available
@@ -879,7 +878,7 @@ export default function UnifiedSidebar({
                                       }}
                                       onClick={(e) => e.stopPropagation()}
                                       placeholder="Time (s)"
-                                      className="w-20 bg-gray-700 text-white text-xs px-2 py-1 rounded border border-gray-600 focus:border-purple-400 focus:outline-none font-mono"
+                                      className="w-20 bg-black text-white text-xs px-2 py-1 rounded border border-white/20 focus:border-white/50 focus:outline-none font-mono"
                                     />
                                     <select
                                       value={getEventDisplayType(displayEvent).toLowerCase()}
@@ -900,7 +899,7 @@ export default function UnifiedSidebar({
                                         }
                                       }}
                                       onClick={(e) => e.stopPropagation()}
-                                      className="flex-1 bg-gray-700 text-white text-xs px-2 py-1 rounded border border-gray-600 focus:border-purple-400 focus:outline-none"
+                                      className="flex-1 bg-black text-white text-xs px-2 py-1 rounded border border-white/20 focus:border-white/50 focus:outline-none"
                                     >
                                       {Object.keys(eventTypeFilters).map((type) => (
                                         <option key={type} value={type}>
@@ -921,7 +920,7 @@ export default function UnifiedSidebar({
                                       })
                                     }}
                                     onClick={(e) => e.stopPropagation()}
-                                    className="w-full bg-gray-700 text-white text-xs px-2 py-1 rounded border border-gray-600 focus:border-purple-400 focus:outline-none"
+                                    className="w-full bg-black text-white text-xs px-2 py-1 rounded border border-white/20 focus:border-white/50 focus:outline-none"
                                   >
                                     <option value="home">Home</option>
                                     <option value="away">Away</option>
@@ -940,7 +939,7 @@ export default function UnifiedSidebar({
                                     }}
                                     onClick={(e) => e.stopPropagation()}
                                     placeholder="Description..."
-                                    className="w-full bg-gray-700 text-white text-xs px-2 py-1 rounded border border-gray-600 focus:border-purple-400 focus:outline-none"
+                                    className="w-full bg-black text-white text-xs px-2 py-1 rounded border border-white/20 focus:border-white/50 focus:outline-none"
                                   />
                                   
                                   {/* Player */}
@@ -956,7 +955,7 @@ export default function UnifiedSidebar({
                                     }}
                                     onClick={(e) => e.stopPropagation()}
                                     placeholder="Player (optional)..."
-                                    className="w-full bg-gray-700 text-white text-xs px-2 py-1 rounded border border-gray-600 focus:border-purple-400 focus:outline-none"
+                                    className="w-full bg-black text-white text-xs px-2 py-1 rounded border border-white/20 focus:border-white/50 focus:outline-none"
                                   />
                                 </div>
                               ) : (

@@ -663,7 +663,7 @@ export default function UnifiedSidebar({
                                 }))
                                 
                                 // Save to DB
-                                await apiClient.games.updateGameEvents(gameId || game.id, parsedEvents)
+                                await apiClient.games.updateEvents(gameId || game.id, parsedEvents)
                                 
                                 // Refresh
                                 if (onEventsUploaded) onEventsUploaded(parsedEvents)

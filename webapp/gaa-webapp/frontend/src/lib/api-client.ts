@@ -121,6 +121,11 @@ export const games = {
       method: 'POST',
       body: JSON.stringify(data),
     }),
+  updateEvents: (gameId: string, events: any[]) =>
+    apiRequest(`/api/games/${gameId}/events`, {
+      method: 'PUT',
+      body: JSON.stringify({ events }),
+    }),
   getDemo: () => apiRequest('/api/games/demo'),
 };
 

@@ -180,7 +180,7 @@ export default function UnifiedSidebar({
     setIsCreatingEvent(false)
   }
 
-  const handleCreateEvent = () => {
+  const handleCreateEvent = async () => {
     // Determine action/outcome based on event type
     const eventType = newEvent.type
     const isShot = ['point', 'wide', 'goal', 'saved'].includes(eventType.toLowerCase())
@@ -200,12 +200,36 @@ export default function UnifiedSidebar({
       }
     }
 
-    // Add to allEvents
+    // Add to allEvents and sort by time
     const newAllEvents = [...allEvents, event].sort((a, b) => a.time - b.time)
-    onEventsUpdate?.(newAllEvents)
+    
+    try {
+      // Save to database immediately
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/games/${game.id}/events`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ events: newAllEvents })
+      })
+      
+      if (!response.ok) {
+        throw new Error('Failed to save event to server')
+      }
+      
+      console.log('✅ Created and saved new event:', event)
+      
+      // Update parent to refresh from DB
+      if (onRefresh) {
+        onRefresh()
+      }
+    } catch (error) {
+      console.error('❌ Failed to create event:', error)
+      alert(`Failed to create event: ${error instanceof Error ? error.message : 'Unknown error'}`)
+    }
     
     setIsCreatingEvent(false)
-    console.log('✅ Created new event:', event)
   }
 
   const handleSaveChanges = async () => {

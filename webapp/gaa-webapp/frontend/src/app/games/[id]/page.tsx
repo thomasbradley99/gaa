@@ -226,12 +226,19 @@ export default function GameDetailPage() {
   const handleEventClick = (event: GameEvent) => {
     const video = (window as any).videoElement as HTMLVideoElement
     if (video) {
-      video.currentTime = event.time
+      // Find the event index to get its padding
+      const eventIndex = gameEvents.findIndex(e => e.id === event.id)
+      const padding = eventPaddings.get(eventIndex) || { beforePadding: 5, afterPadding: 3 }
+      
+      // Jump to trimmer start (5s before event by default)
+      const startTime = Math.max(0, event.time - padding.beforePadding)
+      video.currentTime = startTime
+      
       const playPromise = video.play()
       if (playPromise !== undefined) {
         playPromise.catch(error => console.log('Play interrupted:', error))
       }
-      setCurrentTime(event.time)
+      setCurrentTime(startTime)
     }
   }
 

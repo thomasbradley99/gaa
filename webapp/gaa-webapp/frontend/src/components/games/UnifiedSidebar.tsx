@@ -702,14 +702,25 @@ export default function UnifiedSidebar({
                           <span>Upload</span>
                         </button>
                         <button
-                          onClick={handleToggleEditMode}
-                          disabled={isSavingEvents}
-                          className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-white/5 hover:bg-white/10 border-white/20 text-white disabled:opacity-50 transition-all"
+                          onClick={() => {
+                            // Export current events as JSON
+                            const json = JSON.stringify(allEvents, null, 2)
+                            const blob = new Blob([json], { type: 'application/json' })
+                            const url = URL.createObjectURL(blob)
+                            const a = document.createElement('a')
+                            a.href = url
+                            a.download = 'edited-web-events.json'
+                            document.body.appendChild(a)
+                            a.click()
+                            document.body.removeChild(a)
+                            URL.revokeObjectURL(url)
+                          }}
+                          className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-white/5 hover:bg-white/10 border-white/20 text-white transition-all"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                           </svg>
-                          <span>Exit</span>
+                          <span>Export JSON</span>
                         </button>
                       </div>
                       <div className="space-y-2">
@@ -745,25 +756,14 @@ export default function UnifiedSidebar({
                           </button>
                         </div>
                         <button
-                          onClick={() => {
-                            // Export current events as JSON
-                            const json = JSON.stringify(allEvents, null, 2)
-                            const blob = new Blob([json], { type: 'application/json' })
-                            const url = URL.createObjectURL(blob)
-                            const a = document.createElement('a')
-                            a.href = url
-                            a.download = 'edited-web-events.json'
-                            document.body.appendChild(a)
-                            a.click()
-                            document.body.removeChild(a)
-                            URL.revokeObjectURL(url)
-                          }}
-                          className="w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-white/5 hover:bg-white/10 border-white/20 text-white transition-all"
+                          onClick={handleToggleEditMode}
+                          disabled={isSavingEvents}
+                          className="w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-white/5 hover:bg-white/10 border-white/20 text-white disabled:opacity-50 transition-all"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                           </svg>
-                          <span>Export JSON</span>
+                          <span>Exit</span>
                         </button>
                       </div>
                     </div>

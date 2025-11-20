@@ -671,7 +671,9 @@ export default function UnifiedSidebar({
                                 
                                 alert(`✅ Uploaded ${parsedEvents.length} events to database`)
                               } catch (err: any) {
-                                alert(`❌ Upload failed: ${err.message}`)
+                                console.error('Upload error:', err)
+                                const errorMsg = err.details || err.message || 'Unknown error'
+                                alert(`❌ Upload failed: ${errorMsg}`)
                               }
                             }
                             fileInput.click()

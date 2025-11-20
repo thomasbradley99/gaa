@@ -566,8 +566,8 @@ router.put('/:id/events', authenticateToken, async (req, res) => {
     
     // Validate game exists and belongs to user
     const gameResult = await query(
-      'SELECT g.* FROM games g WHERE g.id = $1 AND g.user_id = $2',
-      [id, req.user.id]
+      'SELECT g.* FROM games g WHERE g.id = $1 AND g.created_by = $2',
+      [id, req.user.userId]
     );
     
     if (gameResult.rows.length === 0) {
@@ -632,7 +632,10 @@ router.put('/:id/events', authenticateToken, async (req, res) => {
     });
   } catch (error) {
     console.error('Update events error:', error);
-    res.status(500).json({ error: 'Failed to update events' });
+    res.status(500).json({ 
+      error: 'Failed to update events',
+      details: error.message 
+    });
   }
 });
 

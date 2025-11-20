@@ -122,22 +122,7 @@ export default function UnifiedSidebar({
   }
 
   const getEventEmoji = (type: string) => {
-    switch (type?.toLowerCase()) {
-      // Shot outcomes
-      case 'point': return '🎯'
-      case 'wide': return '📏'
-      case 'goal': return '⚽'
-      case 'saved': return '🧤'
-      // Actions
-      case 'kickout': return '🦶'
-      case 'turnover': return '🔄'
-      case 'foul': return '🚫'
-      case 'throw-up': return '🏐'
-      case 'penalty': return '⚠️'
-      // Legacy/fallback
-      case 'shot': return '🏃'
-      default: return '⚡'
-    }
+    return ''
   }
 
   // Helper: Get display type from new schema (action + outcome)

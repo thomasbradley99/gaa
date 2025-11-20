@@ -1,9 +1,17 @@
 #!/usr/bin/env python3
 """
-Convert Anadi Pro XML to EVENT_SCHEMA.ts JSON format
+Convert Anadi Pro XML to Web EVENT_SCHEMA JSON format
+
+Transforms FULL Anadi Pro XML (with all possession, attack, stoppage data) 
+into the webapp EVENT_SCHEMA.ts JSON format, filtering to only detectable events:
+  - Shot
+  - Kickout
+  - Turnover
+  - Foul
 
 Usage:
-  python3 convert_anadi_to_schema.py --input ground_truth.xml --output events.json
+  python3 anadi_to_web_schema.py --game kilmeena-vs-cill-chomain --input ground_truth_full_anadi.xml
+  python3 anadi_to_web_schema.py --input ground_truth.xml --output web_schema.json
 """
 
 import argparse
@@ -11,6 +19,9 @@ import json
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Dict, List, Optional
+
+# Detectable events - only these will be converted to web schema
+DETECTABLE_EVENTS = {"Shot", "Kickout", "Turnover", "Foul"}
 
 def parse_anadi_code(code: str) -> tuple[str, str]:
     """
@@ -154,13 +165,29 @@ def extract_metadata(action: str, labels: Dict[str, str]) -> Dict:
     
     return metadata
 
+def is_detectable_event(code: str) -> bool:
+    """Check if the Anadi code represents a detectable event"""
+    # Detectable event codes in Anadi format
+    detectable_codes = [
+        "Shot Own", "Shot Opp",
+        "Kickout Own", "Kickout Opp",
+        "Turnover Won", "Turnover lost",  # Note: Anadi uses lowercase 'lost'
+        "Foul Awarded", "Foul Conceded",
+        "Scoreable Foul Awarded", "Scoreable Foul Conceded"
+    ]
+    return code in detectable_codes
+
 def convert_anadi_xml_to_schema(xml_path: Path) -> List[Dict]:
-    """Convert Anadi Pro XML to EVENT_SCHEMA format"""
+    """
+    Convert FULL Anadi Pro XML to EVENT_SCHEMA format
+    Filters to only detectable events (Shot, Kickout, Turnover, Foul)
+    """
     
     tree = ET.parse(xml_path)
     root = tree.getroot()
     
     events = []
+    skipped = 0
     
     # Find all instances
     all_instances = root.find('ALL_INSTANCES')
@@ -177,9 +204,15 @@ def convert_anadi_xml_to_schema(xml_path: Path) -> List[Dict]:
         if id_elem is None or start_elem is None or code_elem is None:
             continue
         
+        code = code_elem.text.strip()
+        
+        # FILTER: Only process detectable events
+        if not is_detectable_event(code):
+            skipped += 1
+            continue
+        
         event_id = f"event_{int(id_elem.text):03d}"
         time = float(start_elem.text)
-        code = code_elem.text.strip()
         
         # Parse action and team
         action, team = parse_anadi_code(code)
@@ -205,20 +238,34 @@ def convert_anadi_xml_to_schema(xml_path: Path) -> List[Dict]:
         
         events.append(event)
     
+    if skipped > 0:
+        print(f"   Filtered out {skipped} non-detectable events (Possession, Attack, Stoppage, etc.)")
+    
     return events
 
 def main():
-    parser = argparse.ArgumentParser(description='Convert Anadi Pro XML to EVENT_SCHEMA JSON')
-    parser.add_argument('--input', required=True, help='Input XML file (Anadi format)')
-    parser.add_argument('--output', required=True, help='Output JSON file (EVENT_SCHEMA format)')
-    parser.add_argument('--game', help='Game name (for finding input file)')
+    parser = argparse.ArgumentParser(description='Convert Anadi Pro XML to Web EVENT_SCHEMA JSON')
+    parser.add_argument('--input', required=True, help='Input XML file (full Anadi Pro format)')
+    parser.add_argument('--output', help='Output JSON file (Web EVENT_SCHEMA format). Default: inputs/web_schema.json')
+    parser.add_argument('--game', help='Game name (for finding input file in games/{game}/inputs/)')
     args = parser.parse_args()
     
     # Resolve input path
     if args.game:
-        input_path = Path(__file__).parent.parent.parent / "games" / args.game / "inputs" / args.input
+        game_dir = Path(__file__).parent.parent.parent / "games" / args.game
+        input_path = game_dir / "inputs" / args.input
+        # Default output to game inputs directory
+        if not args.output:
+            output_path = game_dir / "inputs" / "web_schema.json"
+        else:
+            output_path = Path(args.output)
     else:
         input_path = Path(args.input)
+        if not args.output:
+            # Default output next to input file
+            output_path = input_path.parent / "web_schema.json"
+        else:
+            output_path = Path(args.output)
     
     if not input_path.exists():
         print(f"❌ Input file not found: {input_path}")
@@ -230,9 +277,9 @@ def main():
     events = convert_anadi_xml_to_schema(input_path)
     
     print(f"✅ Converted {len(events)} events")
+    print(f"   Time range: {events[0]['time']:.1f}s - {events[-1]['time']:.1f}s ({events[-1]['time']/60:.1f} min)")
     
     # Write output
-    output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     
     with open(output_path, 'w') as f:
@@ -242,8 +289,11 @@ def main():
     
     # Show sample
     if events:
-        print(f"\n📋 Sample event:")
-        print(json.dumps(events[0], indent=2))
+        print(f"\n📋 Sample events:")
+        for event in events[:3]:
+            print(f"  {event['time']:.1f}s: {event['team']} {event['action']} - {event['outcome']}")
+    
+    print(f"\n✅ Ready for webapp EVENT_SCHEMA.ts format")
 
 if __name__ == '__main__':
     main()

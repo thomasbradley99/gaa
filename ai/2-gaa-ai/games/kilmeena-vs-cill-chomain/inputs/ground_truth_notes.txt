@@ -1,3 +1,64 @@
-Ground truth XML placeholder for Kilmeena v Cill Chomain.
-Paste the exported XML content below this line.
+GROUND TRUTH WORKFLOW
+=====================
 
+This directory contains professional ground truth annotations from Anadi Pro.
+
+SOURCE FILES:
+-------------
+• ground_truth_full_anadi.xml
+  - Full Anadi Pro XML export with ALL event types:
+    * Shot Own/Opp
+    * Kickout Own/Opp
+    * Turnover Won/Lost
+    * Foul Awarded/Conceded
+    * Possession Own/Opp (not detectable by AI)
+    * Attack Own/OPP (not detectable by AI)
+    * Ball in Play / Stoppage (not detectable by AI)
+    * Hot Ball, Highlight, Referee, etc. (metadata)
+  
+  - This is the SOURCE OF TRUTH - never delete or modify
+
+CONVERSION WORKFLOW:
+-------------------
+1. Export full match annotations from Anadi Pro → ground_truth_full_anadi.xml
+
+2. Convert to web schema (detectable events only):
+   $ cd pipelines/1-production
+   $ python3 anadi_to_web_schema.py \
+       --game kilmeena-vs-cill-chomain \
+       --input ground_truth_full_anadi.xml
+
+3. Output: web_schema.json
+   - Contains only detectable events: Shot, Kickout, Turnover, Foul
+   - Format: EVENT_SCHEMA.ts compatible JSON
+   - Used by: evaluation pipeline (7_evaluate.py), web viewer
+
+DETECTABLE EVENTS:
+-----------------
+Only these event types can be detected by AI from video:
+  ✓ Shot (Own/Opp) → Point/Wide/Goal/Saved
+  ✓ Kickout (Own/Opp) → Won/Lost (Long/Mid/Short, Left/Centre/Right)
+  ✓ Turnover (Won/Lost) → Forced/Unforced, with zone
+  ✓ Foul (Awarded/Conceded) → Scoreable flag
+
+Non-detectable (filtered out):
+  ✗ Possession phases
+  ✗ Attack phases
+  ✗ Ball in play / Stoppage states
+  ✗ Positional tracking
+
+WHY THIS APPROACH?
+-----------------
+• Anadi Pro XML is the professional standard with rich metadata
+• Keep full XML as source for future analysis/queries
+• Conversion script filters to AI-detectable subset
+• Web schema JSON is optimized for evaluation & web viewer
+• Single source of truth, multiple derived outputs
+
+STATISTICS (Kilmeena vs Cill Chomain):
+--------------------------------------
+Full Anadi XML: 486 total events
+  → 134 detectable events (Shot, Kickout, Turnover, Foul)
+  → 352 non-detectable filtered out (Possession, Attack, etc.)
+
+Match duration: ~82 minutes

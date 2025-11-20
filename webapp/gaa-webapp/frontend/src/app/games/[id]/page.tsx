@@ -214,7 +214,7 @@ export default function GameDetailPage() {
     if (gameEvents.length > 0) {
       const eventIndex = gameEvents.findIndex((event, index) => {
         const nextEvent = gameEvents[index + 1]
-        return time >= event.timestamp && (!nextEvent || time < nextEvent.timestamp)
+        return time >= event.time && (!nextEvent || time < nextEvent.time)
       })
       if (eventIndex !== -1) {
         setCurrentEventIndex(eventIndex)
@@ -225,12 +225,12 @@ export default function GameDetailPage() {
   const handleEventClick = (event: GameEvent) => {
     const video = (window as any).videoElement as HTMLVideoElement
     if (video) {
-      video.currentTime = event.timestamp
+      video.currentTime = event.time
       const playPromise = video.play()
       if (playPromise !== undefined) {
         playPromise.catch(error => console.log('Play interrupted:', error))
       }
-      setCurrentTime(event.timestamp)
+      setCurrentTime(event.time)
     }
   }
 

@@ -159,25 +159,6 @@ export default function UnifiedSidebar({
     }, 10000)
   }
   
-  // Auto-scroll to current event
-  useEffect(() => {
-    if (!autoScrollEnabled || !eventListRef.current || activeTab !== 'events' || currentEventIndex === -1) return
-    
-    // Find current event element
-    const currentEventElements = eventListRef.current.querySelectorAll('[data-event-index]')
-    const currentEventElement = Array.from(currentEventElements).find(
-      el => el.getAttribute('data-event-index') === String(currentEventIndex)
-    )
-    
-    if (currentEventElement) {
-      console.log('🔄 Auto-scrolling to event index:', currentEventIndex)
-      currentEventElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-      })
-    }
-  }, [currentEventIndex, autoScrollEnabled, activeTab, currentTime])
-  
   // Cleanup timeout on unmount
   useEffect(() => {
     return () => {
@@ -436,6 +417,25 @@ export default function UnifiedSidebar({
     // Current if we're between this event and the next
     return currentTime >= event.time && currentTime < nextEvent.time
   })
+
+  // Auto-scroll to current event (must be after currentEventIndex calculation)
+  useEffect(() => {
+    if (!autoScrollEnabled || !eventListRef.current || activeTab !== 'events' || currentEventIndex === -1) return
+    
+    // Find current event element
+    const currentEventElements = eventListRef.current.querySelectorAll('[data-event-index]')
+    const currentEventElement = Array.from(currentEventElements).find(
+      el => el.getAttribute('data-event-index') === String(currentEventIndex)
+    )
+    
+    if (currentEventElement) {
+      console.log('🔄 Auto-scrolling to event index:', currentEventIndex)
+      currentEventElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      })
+    }
+  }, [currentEventIndex, autoScrollEnabled, activeTab, currentTime])
 
   return (
     <>

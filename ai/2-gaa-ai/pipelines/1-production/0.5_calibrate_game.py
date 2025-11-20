@@ -282,6 +282,11 @@ Provide ONLY the JSON object:"""
         
         game_profile = json.loads(result_text)
         
+        # Ensure home_team_assignment is set to EDIT_ME (AI sometimes forgets to include it)
+        if 'home_team_assignment' not in game_profile:
+            game_profile['home_team_assignment'] = 'EDIT_ME'
+            print(f"⚠️  Added missing 'home_team_assignment': 'EDIT_ME' field")
+        
         # Post-process match times: if start is within first 60s, set to 0
         # (sampling interval may have missed the actual start)
         if 'match_times' in game_profile:

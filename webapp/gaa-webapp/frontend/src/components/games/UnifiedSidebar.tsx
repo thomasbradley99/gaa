@@ -172,6 +172,7 @@ export default function UnifiedSidebar({
       team: 'home',
       description: '',
       player: '',
+      timestamp: Math.floor(currentTime),
     })
   }
 
@@ -741,6 +742,7 @@ export default function UnifiedSidebar({
                     <input
                       type="number"
                       value={Math.round(newEvent.timestamp)}
+                      onFocus={() => setNewEvent({...newEvent, timestamp: Math.floor(currentTime)})}
                       onChange={(e) => setNewEvent({...newEvent, timestamp: parseFloat(e.target.value) || 0})}
                       placeholder="Time (seconds)"
                       className="w-full bg-gray-800 text-gray-300 text-xs px-3 py-2 rounded border border-gray-600 focus:border-purple-400 focus:outline-none font-mono"
@@ -833,6 +835,14 @@ export default function UnifiedSidebar({
                                     <input
                                       type="number"
                                       value={Math.round(displayEvent.time)}
+                                      onFocus={(e) => {
+                                        e.stopPropagation()
+                                        // Set time to current video time when user clicks in
+                                        handleUpdateEditModeEvent(originalIndex, {
+                                          ...displayEvent,
+                                          time: Math.floor(currentTime)
+                                        })
+                                      }}
                                       onChange={(e) => {
                                         e.stopPropagation()
                                         const newTime = parseFloat(e.target.value)

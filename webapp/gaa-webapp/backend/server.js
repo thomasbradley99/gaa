@@ -55,12 +55,16 @@ const authRoutes = require('./routes/auth');
 const teamsRoutes = require('./routes/teams');
 const videoProxyRoutes = require('./routes/video-proxy');
 const gamesRoutes = require('./routes/games');
+const adminRoutes = require('./routes/admin');
+const clubsRoutes = require('./routes/clubs');
 
 // Register routes
 app.use('/api/auth', authRoutes);
 app.use('/api/teams', teamsRoutes);
 app.use('/api/video-proxy', videoProxyRoutes);
 app.use('/api/games', gamesRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/clubs', clubsRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

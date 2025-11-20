@@ -4,12 +4,13 @@ import { useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import Image from 'next/image'
 import { removeToken } from '@/lib/api-client'
-import { Gamepad2, Users, LogOut, User, Menu, X } from 'lucide-react'
+import { Gamepad2, Users, LogOut, User, Menu, X, Shield } from 'lucide-react'
 
 interface SidebarProps {
   user: {
     name?: string
     email: string
+    role?: string
   }
 }
 
@@ -36,6 +37,13 @@ export default function Sidebar({ user }: SidebarProps) {
       path: '/team',
       active: pathname === '/team',
     },
+    // Show admin link only if user is admin
+    ...(user?.role === 'admin' ? [{
+      label: 'Admin',
+      icon: Shield,
+      path: '/admin',
+      active: pathname === '/admin',
+    }] : []),
   ]
 
   return (

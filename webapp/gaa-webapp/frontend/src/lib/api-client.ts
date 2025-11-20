@@ -124,3 +124,30 @@ export const games = {
   getDemo: () => apiRequest('/api/games/demo'),
 };
 
+// Admin API
+export const admin = {
+  getGames: () => apiRequest('/api/admin/games'),
+  getTeams: () => apiRequest('/api/admin/teams'),
+  getUsers: (teamId?: string) => {
+    const url = teamId ? `/api/admin/users?teamId=${teamId}` : '/api/admin/users';
+    return apiRequest(url);
+  },
+  getStats: () => apiRequest('/api/admin/stats'),
+};
+
+// Clubs API
+export const clubs = {
+  list: (filters?: { usesVeo?: string; county?: string; province?: string; search?: string }) => {
+    const params = new URLSearchParams();
+    if (filters?.usesVeo) params.append('usesVeo', filters.usesVeo);
+    if (filters?.county) params.append('county', filters.county);
+    if (filters?.province) params.append('province', filters.province);
+    if (filters?.search) params.append('search', filters.search);
+    const url = params.toString() ? `/api/clubs?${params.toString()}` : '/api/clubs';
+    return apiRequest(url);
+  },
+  getStats: () => apiRequest('/api/clubs/stats'),
+  getCounties: () => apiRequest('/api/clubs/counties'),
+  getProvinces: () => apiRequest('/api/clubs/provinces'),
+};
+

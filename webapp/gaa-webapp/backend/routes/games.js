@@ -579,18 +579,17 @@ router.put('/:id/events', authenticateToken, async (req, res) => {
       return res.status(400).json({ error: 'Events must be an array' });
     }
     
-    // Convert frontend GameEvent format to database format
+    // Events should already be in master schema format (time, action, outcome)
+    // Just add metadata flags for user edits
     const dbEvents = events.map(event => ({
       id: event.id,
+      time: event.time,                    // Already in master schema
       team: event.team,
-      time: event.timestamp,
-      action: event.type,
-      outcome: event.metadata?.outcome || 'N/A',
+      action: event.action,                // Already in master schema
+      outcome: event.outcome,              // Already in master schema
       metadata: {
         ...event.metadata,
-        player: event.player,
-        description: event.description,
-        validated: true, // Mark as validated by user
+        validated: true,                   // Mark as validated by user
         userEdited: true,
         editedAt: new Date().toISOString(),
       }

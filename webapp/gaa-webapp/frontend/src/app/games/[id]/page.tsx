@@ -301,7 +301,7 @@ export default function GameDetailPage() {
         {/* Left Navigation - Toggleable */}
         <div
           className={`transition-all duration-300 ${
-            showLeftSidebar ? 'w-64' : 'w-0'
+            showLeftSidebar ? 'w-56' : 'w-0'
           } overflow-hidden`}
         >
           <Sidebar user={user} />
@@ -326,7 +326,7 @@ export default function GameDetailPage() {
           </div>
 
           <div
-            className={`flex-1 relative transition-all duration-300 ${showRightSidebar ? 'md:mr-[400px]' : ''}`}
+            className={`flex-1 relative transition-all duration-300 ${showRightSidebar ? 'md:mr-[360px]' : ''}`}
           >
             {game.video_url ? (
               <VideoPlayer

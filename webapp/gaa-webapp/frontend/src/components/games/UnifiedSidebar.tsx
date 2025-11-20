@@ -400,7 +400,7 @@ export default function UnifiedSidebar({
         className={`${
           isMobile
             ? 'relative w-full min-h-screen bg-black/90 backdrop-blur-sm'
-            : 'fixed top-0 right-0 h-full bg-black/90 backdrop-blur-lg border-l border-white/10 z-50 transition-transform duration-300 w-full md:w-[400px]'
+            : 'fixed top-0 right-0 h-full bg-black/90 backdrop-blur-lg border-l border-white/10 z-50 transition-transform duration-300 w-full md:w-[360px]'
         } ${!isMobile && (isOpen ? 'translate-x-0' : 'translate-x-full')}`}
       >
         {/* Mobile Video Header - sticky so it stays at top */}

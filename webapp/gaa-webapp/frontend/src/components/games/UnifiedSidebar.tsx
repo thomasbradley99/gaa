@@ -315,7 +315,7 @@ export default function UnifiedSidebar({
   }
 
   const handleCancelChanges = () => {
-    setIsEditMode(false)
+    // Clear changes but stay in edit mode
     setEditModeEvents(new Map())
     setBinnedEvents(new Set())
     setIsCreatingEvent(false)
@@ -752,7 +752,7 @@ export default function UnifiedSidebar({
                             const url = URL.createObjectURL(blob)
                             const a = document.createElement('a')
                             a.href = url
-                            a.download = `${game.title.replace(/[^a-z0-9]/gi, '_')}_events.json`
+                            a.download = 'edited-web-events.json'
                             document.body.appendChild(a)
                             a.click()
                             document.body.removeChild(a)

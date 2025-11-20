@@ -74,20 +74,17 @@ export default function UnifiedSidebar({
   
   // Event type filters for GAA
   const [eventTypeFilters, setEventTypeFilters] = useState({
-    shot: true,
+    // Shot outcomes (what we actually detect)
     point: true,
-    goal: true,
     wide: true,
-    '45': true,
-    '65': true,
-    free: true,
-    sideline: true,
-    penalty: true,
+    goal: true,
+    saved: true,
+    // Actions (what we actually detect)
     kickout: true,
     turnover: true,
     foul: true,
-    card: true,
-    substitution: true,
+    'throw-up': true,
+    penalty: true,
   })
   const [showFilters, setShowFilters] = useState(false)
   
@@ -126,21 +123,19 @@ export default function UnifiedSidebar({
 
   const getEventEmoji = (type: string) => {
     switch (type?.toLowerCase()) {
-      case 'goal': return '⚽'
+      // Shot outcomes
       case 'point': return '🎯'
-      case 'shot': return '🏃'
       case 'wide': return '📏'
-      case '45': return '4️⃣5️⃣'
-      case '65': return '6️⃣5️⃣'
-      case 'free': return '🆓'
-      case 'sideline': return '↔️'
-      case 'penalty': return '⚠️'
+      case 'goal': return '⚽'
+      case 'saved': return '🧤'
+      // Actions
       case 'kickout': return '🦶'
       case 'turnover': return '🔄'
       case 'foul': return '🚫'
-      case 'card': return '🟨'
-      case 'substitution': return '🔄'
       case 'throw-up': return '🏐'
+      case 'penalty': return '⚠️'
+      // Legacy/fallback
+      case 'shot': return '🏃'
       default: return '⚡'
     }
   }
@@ -559,13 +554,14 @@ export default function UnifiedSidebar({
                                 }
                               })
                             }}
-                            className={`py-1.5 text-xs font-medium rounded border transition-colors ${
+                            className={`py-1.5 px-2 text-xs font-medium rounded border transition-colors flex items-center justify-center gap-1 ${
                               (eventTypeFilters as any)[type]
                                 ? 'bg-white/90 text-black border-white/50'
                                 : 'bg-gray-500/10 text-gray-500 border-gray-500/30'
                             }`}
                           >
-                            {type.charAt(0).toUpperCase() + type.slice(1)}
+                            <span>{getEventEmoji(type)}</span>
+                            <span className="hidden sm:inline">{type.charAt(0).toUpperCase() + type.slice(1)}</span>
                           </button>
                         ))}
                       </div>

@@ -695,6 +695,18 @@ export default function UnifiedSidebar({
                     </div>
                   ) : (
                     <div className="space-y-2">
+                      {/* Exit Edit Mode - Top */}
+                      <button
+                        onClick={handleToggleEditMode}
+                        disabled={isSavingEvents}
+                        className="w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-white/5 hover:bg-white/10 border-white/20 text-white disabled:opacity-50 transition-all"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        <span>Exit Edit Mode</span>
+                      </button>
+                      
                       <div className="grid grid-cols-3 gap-2">
                         <button
                           onClick={handleStartCreatingEvent}
@@ -809,16 +821,6 @@ export default function UnifiedSidebar({
                             <span>Cancel</span>
                           </button>
                         </div>
-                        <button
-                          onClick={handleToggleEditMode}
-                          disabled={isSavingEvents}
-                          className="w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-white/5 hover:bg-white/10 border-white/20 text-white disabled:opacity-50 transition-all"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                          </svg>
-                          <span>Exit</span>
-                        </button>
                       </div>
                     </div>
                   )}

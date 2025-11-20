@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { X } from 'lucide-react'
 import { EventList } from './EventList'
 import { GameStats } from './GameStats'
-import { JsonUpload } from './JsonUpload'
 import AppleStyleTrimmer from './AppleStyleTrimmer'
 import { GAA_COACHES, getDefaultCoach, type Coach } from './gaa-coaches'
 import type { GameEvent } from './video-player/types'
@@ -627,7 +626,7 @@ export default function UnifiedSidebar({
                     </div>
                   ) : (
                     <div className="space-y-2">
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="grid grid-cols-3 gap-2">
                         <button
                           onClick={handleStartCreatingEvent}
                           disabled={isSavingEvents}
@@ -637,6 +636,53 @@ export default function UnifiedSidebar({
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                           </svg>
                           <span>Add</span>
+                        </button>
+                        <button
+                          onClick={() => {
+                            // Show JSON upload modal/section
+                            const fileInput = document.createElement('input')
+                            fileInput.type = 'file'
+                            fileInput.accept = '.json,application/json'
+                            fileInput.onchange = async (e: any) => {
+                              const file = e.target?.files?.[0]
+                              if (!file) return
+                              
+                              try {
+                                const text = await file.text()
+                                const jsonData = JSON.parse(text)
+                                let eventsArray = Array.isArray(jsonData) ? jsonData : (jsonData.events || jsonData.data || [])
+                                
+                                // Parse to master schema
+                                const parsedEvents = eventsArray.map((event: any, index: number) => ({
+                                  id: event.id || `event_${index + 1}`,
+                                  time: event.time ?? event.timestamp ?? 0,
+                                  team: event.team || 'home',
+                                  action: event.action || event.type || 'Shot',
+                                  outcome: event.outcome || 'N/A',
+                                  metadata: event.metadata || {}
+                                }))
+                                
+                                // Save to DB
+                                await apiClient.games.updateGameEvents(gameId || game.id, parsedEvents)
+                                
+                                // Refresh
+                                if (onEventsUploaded) onEventsUploaded(parsedEvents)
+                                if (onRefresh) onRefresh()
+                                
+                                alert(`✅ Uploaded ${parsedEvents.length} events to database`)
+                              } catch (err: any) {
+                                alert(`❌ Upload failed: ${err.message}`)
+                              }
+                            }
+                            fileInput.click()
+                          }}
+                          disabled={isSavingEvents}
+                          className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-blue-500/10 hover:bg-blue-500/20 border-blue-400/30 text-blue-300 disabled:opacity-50 transition-all"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                          </svg>
+                          <span>Upload</span>
                         </button>
                         <button
                           onClick={handleToggleEditMode}
@@ -999,11 +1045,10 @@ export default function UnifiedSidebar({
                   duration={duration}
                 />
               ) : (
-                  <JsonUpload 
-                    gameId={game.id}
-                    onEventsUploaded={onEventsUploaded || (() => {})}
-                    apiClient={apiClient}
-                  />
+                <div className="text-center text-gray-400 py-12">
+                  <p className="text-lg mb-2">No events yet</p>
+                  <p className="text-sm">Events will appear here after analysis or upload</p>
+                </div>
                   )}
                 </div>
             </div>

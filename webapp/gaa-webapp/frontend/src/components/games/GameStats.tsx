@@ -330,43 +330,17 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
 
   return (
     <div className="bg-black/50 backdrop-blur-lg border border-white/10 rounded-2xl p-3 sm:p-6 shadow-xl">
-      {/* Header with Export Buttons */}
+      {/* Header with Export Button */}
       <div className="flex items-center justify-between mb-4 sm:mb-6">
         <h2 className="text-lg sm:text-2xl font-bold text-white">Match Statistics</h2>
-        <div className="flex gap-2">
-          <button
-            onClick={() => {
-              // Export events as JSON
-              const jsonData = {
-                title: game?.title || 'GAA Match',
-                events: events,
-                exported_at: new Date().toISOString()
-              }
-              const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' })
-              const url = URL.createObjectURL(blob)
-              const a = document.createElement('a')
-              a.href = url
-              a.download = `${game?.title?.replace(/[^a-z0-9]/gi, '_') || 'game'}_events.json`
-              document.body.appendChild(a)
-              a.click()
-              document.body.removeChild(a)
-              URL.revokeObjectURL(url)
-            }}
-            className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-xl transition-colors text-xs sm:text-sm font-medium shadow-lg"
-          >
-            <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-            <span className="hidden sm:inline">Export JSON</span>
-            <span className="sm:hidden">JSON</span>
-          </button>
-          <button
-            onClick={exportToPDF}
-            className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white rounded-xl transition-colors text-xs sm:text-sm font-medium shadow-lg"
-          >
-            <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-            <span className="hidden sm:inline">Export PDF</span>
-            <span className="sm:hidden">PDF</span>
-          </button>
-        </div>
+        <button
+          onClick={exportToPDF}
+          className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white rounded-xl transition-colors text-xs sm:text-sm font-medium shadow-lg"
+        >
+          <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+          <span className="hidden sm:inline">Export to PDF</span>
+          <span className="sm:hidden">PDF</span>
+        </button>
       </div>
 
       {/* Score Display - Anadi Style */}

@@ -140,8 +140,19 @@ export default function UnifiedSidebar({
       case 'foul': return '🚫'
       case 'card': return '🟨'
       case 'substitution': return '🔄'
+      case 'throw-up': return '🏐'
       default: return '⚡'
     }
+  }
+
+  // Helper: Get display type from new schema (action + outcome)
+  const getEventDisplayType = (event: GameEvent): string => {
+    // For shots, show the outcome (Point, Wide, Goal)
+    if (event.action === 'Shot') {
+      return event.outcome || 'Shot'
+    }
+    // For everything else, show the action
+    return event.action || 'Event'
   }
 
   const handleToggleEditMode = () => {
@@ -347,10 +358,10 @@ export default function UnifiedSidebar({
     }
   }
 
-  // Filter events by type
+  // Filter events by type (using new schema: action/outcome)
   const filteredByType = (allEvents || []).filter(event => {
-    const type = event.type?.toLowerCase() || ''
-    return (eventTypeFilters as any)[type] !== false
+    const displayType = getEventDisplayType(event).toLowerCase()
+    return (eventTypeFilters as any)[displayType] !== false
   })
 
   // Find current event index based on video time
@@ -779,13 +790,22 @@ export default function UnifiedSidebar({
                                       {formatTime(displayEvent.time)}
                                     </span>
                                     <select
-                                      value={displayEvent.type}
+                                      value={getEventDisplayType(displayEvent).toLowerCase()}
                                       onChange={(e) => {
                                         e.stopPropagation()
-                                        handleUpdateEditModeEvent(originalIndex, {
-                                          ...displayEvent,
-                                          type: e.target.value
-                                        })
+                                        // For shots, update outcome; for others, update action
+                                        const newValue = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)
+                                        if (displayEvent.action === 'Shot') {
+                                          handleUpdateEditModeEvent(originalIndex, {
+                                            ...displayEvent,
+                                            outcome: newValue
+                                          })
+                                        } else {
+                                          handleUpdateEditModeEvent(originalIndex, {
+                                            ...displayEvent,
+                                            action: newValue
+                                          })
+                                        }
                                       }}
                                       onClick={(e) => e.stopPropagation()}
                                       className="flex-1 bg-gray-700 text-white text-xs px-2 py-1 rounded border border-gray-600 focus:border-purple-400 focus:outline-none"
@@ -862,8 +882,8 @@ export default function UnifiedSidebar({
                                     
                                     {/* Event Type Badge */}
                                     <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium border bg-gray-500/20 text-gray-300 border-gray-500/30">
-                                      <span>{getEventEmoji(event.type)}</span>
-                                      <span>{event.type.charAt(0).toUpperCase() + event.type.slice(1)}</span>
+                                      <span>{getEventEmoji(getEventDisplayType(event))}</span>
+                                      <span>{getEventDisplayType(event)}</span>
                                     </span>
                                     
                                     {/* Team Badge */}
@@ -943,7 +963,7 @@ export default function UnifiedSidebar({
                                     {formatTime(event.time)}
                                   </span>
                                   <span className="text-sm font-medium text-gray-400">
-                                    {getEventEmoji(event.type)} {event.type}
+                                    {getEventEmoji(getEventDisplayType(event))} {getEventDisplayType(event)}
                                   </span>
                                   <span className="text-xs text-gray-500">
                                     {event.team}

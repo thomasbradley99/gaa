@@ -7,7 +7,6 @@ import { auth, setToken } from '@/lib/api-client'
 import { PitchFinder } from '@/components/pitch-finder/PitchFinder'
 import VideoPlayer from '@/components/games/VideoPlayer'
 import UnifiedSidebar from '@/components/games/UnifiedSidebar'
-import { transformDatabaseEventsToGameEvents } from '@/lib/event-transformer'
 import type { GameEvent } from '@/components/games/video-player/types'
 import { useOrientation } from '@/hooks/useOrientation'
 
@@ -67,7 +66,7 @@ function DemoMobileVideoPlayer({ demoEvents, filteredDemoEvents, setDemoCurrentT
           onEventClick={(event: GameEvent) => {
             const video = (window as any).videoElement as HTMLVideoElement
             if (video) {
-              video.currentTime = event.timestamp
+              video.currentTime = event.time
               const playPromise = video.play()
               if (playPromise !== undefined) {
                 playPromise.catch(error => console.log('Play interrupted:', error))
@@ -118,8 +117,8 @@ function HomePage() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // Transform demo events
-  const demoEvents = transformDatabaseEventsToGameEvents(DEMO_GAME_DATA.events as any)
+  // Extract demo events directly (already in master schema format)
+  const demoEvents: GameEvent[] = DEMO_GAME_DATA.events.events || []
   const filteredDemoEvents = demoTeamFilter === 'all' 
     ? demoEvents 
     : demoEvents.filter(e => e.team === demoTeamFilter)
@@ -323,12 +322,12 @@ function HomePage() {
                       onEventClick={(event: GameEvent) => {
                         const video = (window as any).videoElement as HTMLVideoElement
                         if (video) {
-                          video.currentTime = event.timestamp
+                          video.currentTime = event.time
                           const playPromise = video.play()
                           if (playPromise !== undefined) {
                             playPromise.catch(error => console.log('Play interrupted:', error))
                           }
-                          setDemoCurrentTime(event.timestamp)
+                          setDemoCurrentTime(event.time)
                         }
                       }}
                       onTimeUpdate={(time: number, dur: number) => {
@@ -381,12 +380,12 @@ function HomePage() {
                     onEventClick={(event: GameEvent) => {
                       const video = (window as any).videoElement as HTMLVideoElement
                       if (video) {
-                        video.currentTime = event.timestamp
+                        video.currentTime = event.time
                         const playPromise = video.play()
                         if (playPromise !== undefined) {
                           playPromise.catch(error => console.log('Play interrupted:', error))
                         }
-                        setDemoCurrentTime(event.timestamp)
+                        setDemoCurrentTime(event.time)
                       }
                     }}
                     teamFilter={demoTeamFilter}
@@ -441,12 +440,12 @@ function HomePage() {
                         onEventClick={(event: GameEvent) => {
                           const video = (window as any).videoElement as HTMLVideoElement
                           if (video) {
-                            video.currentTime = event.timestamp
+                            video.currentTime = event.time
                             const playPromise = video.play()
                             if (playPromise !== undefined) {
                               playPromise.catch(error => console.log('Play interrupted:', error))
                             }
-                            setDemoCurrentTime(event.timestamp)
+                            setDemoCurrentTime(event.time)
                           }
                         }}
                         teamFilter={demoTeamFilter}

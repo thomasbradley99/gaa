@@ -307,6 +307,12 @@ Provide ONLY the JSON object:"""
         
         total_cost = step1_cost + step2_cost
         
+        # Add verification reminder as comment in notes
+        if 'notes' in game_profile:
+            game_profile['notes'] = game_profile['notes'] + "\n\n⚠️ VERIFY: Attack directions are AI-inferred and may be incorrect. Watch first kickoff to confirm which team attacks which direction."
+        else:
+            game_profile['notes'] = "⚠️ VERIFY: Attack directions are AI-inferred and may be incorrect. Watch first kickoff to confirm which team attacks which direction."
+        
         # Save profile
         OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
         with open(OUTPUT_FILE, 'w') as f:
@@ -334,14 +340,20 @@ Provide ONLY the JSON object:"""
         print(f"   2nd Half: {mt['second_half_start']}s ({mt['second_half_start']//60}m{mt['second_half_start']%60:02d}s)")
         print(f"   End: {mt['end']}s ({mt['end']//60}m{mt['end']%60:02d}s)")
         
-        print(f"\n🎯 ATTACKING DIRECTIONS:")
-        print(f"   1st Half - Team A: {game_profile['team_a']['attack_direction_1st_half']}, " +
-              f"Team B: {game_profile['team_b']['attack_direction_1st_half']}")
+        print(f"\n🎯 ATTACKING DIRECTIONS (AI INFERENCE - VERIFY MANUALLY):")
+        print(f"   1st Half - Team A ({game_profile['team_a']['jersey_color']}): {game_profile['team_a']['attack_direction_1st_half']}")
+        print(f"             Team B ({game_profile['team_b']['jersey_color']}): {game_profile['team_b']['attack_direction_1st_half']}")
         print(f"   2nd Half - Team A: {game_profile['team_a']['attack_direction_2nd_half']}, " +
               f"Team B: {game_profile['team_b']['attack_direction_2nd_half']}")
         
         if 'notes' in game_profile and game_profile['notes']:
-            print(f"\n📝 Notes: {game_profile['notes']}")
+            print(f"\n📝 AI Notes:")
+            # Truncate long notes
+            notes = game_profile['notes']
+            if len(notes) > 300:
+                print(f"   {notes[:300]}...")
+            else:
+                print(f"   {notes}")
         
         print(f"\n💰 TOTAL COST:")
         print(f"   Step 1 (Frame descriptions): ${step1_cost:.4f}")
@@ -351,17 +363,28 @@ Provide ONLY the JSON object:"""
         print(f"\n💾 Saved to: {OUTPUT_FILE}")
         
         if 'video_url' in game_profile:
-            print(f"\n🎥 VIDEO URL (for home team verification):")
+            print(f"\n🎥 VIDEO URL:")
             print(f"   {game_profile['video_url']}")
         
-        print(f"\n⚠️  ACTION REQUIRED - Set Home Team:")
-        print(f"   1. Watch video or check ground truth for 'Home Goal Kick'")
-        print(f"   2. See which keeper takes it:")
-        print(f"      - {game_profile['team_a']['keeper_color']} keeper → set 'home_team_assignment': 'team_a'")
-        print(f"      - {game_profile['team_b']['keeper_color']} keeper → set 'home_team_assignment': 'team_b'")
-        print(f"   3. Edit {OUTPUT_FILE.name} and change 'EDIT_ME' to the correct team")
-        print(f"\n   💡 TIP: Video URL is included in {OUTPUT_FILE.name} for easy access")
-        print(f"\nNext step: python3 1_clips_to_descriptions.py --game {ARGS.game} --start-clip X --end-clip Y")
+        print(f"\n" + "=" * 70)
+        print("⚠️  MANUAL VERIFICATION REQUIRED")
+        print("=" * 70)
+        
+        print(f"\n1️⃣  VERIFY ATTACK DIRECTIONS:")
+        print(f"   Watch first kickoff or check ground truth to see:")
+        print(f"   - Which team shoots toward LEFT side of screen? → 'right-to-left'")
+        print(f"   - Which team shoots toward RIGHT side of screen? → 'left-to-right'")
+        print(f"   - Teams should SWITCH directions at halftime")
+        print(f"\n   If AI got it wrong, edit {OUTPUT_FILE.name}:")
+        print(f"   - Change 'attack_direction_1st_half' and 'attack_direction_2nd_half'")
+        
+        print(f"\n2️⃣  SET HOME TEAM:")
+        print(f"   Watch first 'Home Goal Kick' to see which keeper takes it:")
+        print(f"   - {game_profile['team_a']['keeper_color']} keeper → 'home_team_assignment': 'team_a'")
+        print(f"   - {game_profile['team_b']['keeper_color']} keeper → 'home_team_assignment': 'team_b'")
+        print(f"   Edit {OUTPUT_FILE.name} and change 'EDIT_ME' to correct team")
+        
+        print(f"\n✅ Once verified, run: python3 1_clips_to_descriptions.py --game {ARGS.game} --start-clip 0 --end-clip 20")
         
         return True
         

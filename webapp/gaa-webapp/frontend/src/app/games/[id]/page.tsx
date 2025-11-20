@@ -8,7 +8,6 @@ import VideoPlayer from '@/components/games/VideoPlayer'
 import GameHeader from '@/components/games/GameHeader'
 import UnifiedSidebar from '@/components/games/UnifiedSidebar'
 import type { GameEvent } from '@/components/games/video-player/types'
-import { transformDatabaseEventsToGameEvents } from '@/lib/event-transformer'
 import { useOrientation } from '@/hooks/useOrientation'
 import { calculateScore } from '@/lib/score-calculator'
 
@@ -140,51 +139,9 @@ export default function GameDetailPage() {
   const [teamFilter, setTeamFilter] = useState<'all' | 'home' | 'away'>('all')
   const [eventPaddings, setEventPaddings] = useState<Map<number, { beforePadding: number, afterPadding: number }>>(new Map())
 
-  // Parse events from game data
-  // Check if events are in GAA Events Schema format (from AI pipeline)
-  const gameEvents: GameEvent[] = game?.events
-    ? (() => {
-        // If events is an object with 'events' array (GAA Events Schema format)
-        if (game.events && typeof game.events === 'object' && 'events' in game.events) {
-          const transformed = transformDatabaseEventsToGameEvents(game.events as any)
-          console.log('Transformed events sample:', transformed.slice(0, 5).map(e => ({id: e.id, team: e.team})))
-          return transformed
-        }
-        // If events is already an array (direct format from database)
-        if (Array.isArray(game.events)) {
-          // Transform database format to frontend GameEvent format
-          return game.events.map((e: any, index: number) => {
-            // Determine type based on action and outcome
-            let eventType = (e.action || e.type || 'shot').toLowerCase()
-            
-            // For shots, use the outcome as the type (point, wide, goal, etc.)
-            if (e.action === 'Shot' && e.outcome) {
-              const outcome = e.outcome.toLowerCase()
-              if (outcome === 'point' || outcome === 'wide' || outcome === 'goal' || outcome === 'saved') {
-                eventType = outcome
-              } else {
-                eventType = 'shot' // Generic shot for other outcomes
-              }
-            }
-            
-            return {
-              id: e.id || `event-${index}`,
-              type: eventType,
-              timestamp: e.time || e.timestamp || 0, // Map 'time' to 'timestamp'
-              team: e.team === 'home' || e.team === 'red' ? 'home' : 'away',
-              player: e.player,
-              description: e.description || `${e.action || e.type} - ${e.outcome || 'N/A'}`,
-              metadata: {
-                ...e.metadata,
-                action: e.action,
-                outcome: e.outcome,
-                scoreType: e.metadata?.scoreType || (e.outcome === 'Point' ? 'point' : e.outcome === 'Goal' ? 'goal' : undefined),
-              },
-            }
-          })
-        }
-        return []
-      })()
+  // Events from database - now using master schema directly (no transformation needed)
+  const gameEvents: GameEvent[] = game?.events && Array.isArray(game.events) 
+    ? game.events 
     : []
 
   const fetchUserData = async () => {

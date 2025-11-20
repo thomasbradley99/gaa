@@ -58,7 +58,7 @@ export function EventList({
 
   // Check if event is near current time
   const isEventActive = (event: GameEvent) => {
-    return Math.abs(event.timestamp - currentTime) < 2
+    return Math.abs(event.time - currentTime) < 2
   }
 
   return (
@@ -144,7 +144,7 @@ export function EventList({
 
                   <div className="flex items-center gap-1">
                     <Clock className="w-3 h-3 text-gray-400" />
-                    <span className="text-xs text-gray-400">{formatTime(event.timestamp)}</span>
+                    <span className="text-xs text-gray-400">{formatTime(event.time)}</span>
                   </div>
                 </div>
               </div>

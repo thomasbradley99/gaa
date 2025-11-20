@@ -103,8 +103,8 @@ export default function VideoPlayer({
           const padding = eventPaddings?.get(index) || { beforePadding: 5, afterPadding: 3 }
           return {
             id: index,
-            start: Math.max(0, event.timestamp - padding.beforePadding),
-            end: event.timestamp + padding.afterPadding,
+            start: Math.max(0, event.time - padding.beforePadding),
+            end: event.time + padding.afterPadding,
             event
           }
         })
@@ -360,10 +360,10 @@ export default function VideoPlayer({
     let lastEnd = 0
     
     // Sort events by timestamp
-    const sortedEvents = [...allEvents].sort((a, b) => a.timestamp - b.timestamp)
+    const sortedEvents = [...allEvents].sort((a, b) => a.time - b.time)
     
     sortedEvents.forEach((event) => {
-      const eventPercent = (event.timestamp / duration) * 100
+      const eventPercent = (event.time / duration) * 100
       const eventColor = getEventColor(event)
       
       // Add grey background before this event

@@ -121,18 +121,18 @@ export function VideoPlayerContainer({
   // Event navigation
   const handleNextEvent = useCallback(() => {
     if (events.length === 0) return
-    const currentEventIndex = events.findIndex(e => e.timestamp > currentTime)
+    const currentEventIndex = events.findIndex(e => e.time > currentTime)
     if (currentEventIndex !== -1 && events[currentEventIndex]) {
-      handleSeek(events[currentEventIndex].timestamp)
+      handleSeek(events[currentEventIndex].time)
     }
   }, [events, currentTime, handleSeek])
 
   const handlePrevEvent = useCallback(() => {
     if (events.length === 0) return
-    const prevEvents = events.filter(e => e.timestamp < currentTime - 2)
+    const prevEvents = events.filter(e => e.time < currentTime - 2)
     if (prevEvents.length > 0) {
       const lastPrevEvent = prevEvents[prevEvents.length - 1]
-      handleSeek(lastPrevEvent.timestamp)
+      handleSeek(lastPrevEvent.time)
     }
   }, [events, currentTime, handleSeek])
 

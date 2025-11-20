@@ -203,7 +203,7 @@ export default function UnifiedSidebar({
     }
 
     // Add to allEvents
-    const newAllEvents = [...allEvents, event].sort((a, b) => a.timestamp - b.timestamp)
+    const newAllEvents = [...allEvents, event].sort((a, b) => a.time - b.time)
     onEventsUpdate?.(newAllEvents)
     
     setIsCreatingEvent(false)
@@ -358,10 +358,10 @@ export default function UnifiedSidebar({
     const nextEvent = allEvents[index + 1]
     if (!nextEvent) {
       // Last event - it's current if we're past its timestamp
-      return currentTime >= event.timestamp
+      return currentTime >= event.time
     }
     // Current if we're between this event and the next
-    return currentTime >= event.timestamp && currentTime < nextEvent.timestamp
+    return currentTime >= event.time && currentTime < nextEvent.timestamp
   })
 
   return (
@@ -776,7 +776,7 @@ export default function UnifiedSidebar({
                                   {/* Time + Type */}
                                   <div className="flex items-center gap-2">
                                     <span className="text-xs text-gray-400 font-mono">
-                                      {formatTime(displayEvent.timestamp)}
+                                      {formatTime(displayEvent.time)}
                                     </span>
                                     <select
                                       value={displayEvent.type}
@@ -856,7 +856,7 @@ export default function UnifiedSidebar({
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                       </svg>
                                       <span className="text-xs text-gray-400 font-mono">
-                                        {formatTime(event.timestamp)}
+                                        {formatTime(event.time)}
                                       </span>
                                     </div>
                                     
@@ -890,7 +890,7 @@ export default function UnifiedSidebar({
                                   {showTrimmers && (
                                     <div className="mt-3">
                                       <AppleStyleTrimmer
-                                        eventTimestamp={event.timestamp}
+                                        eventTimestamp={event.time}
                                         beforePadding={getEventPadding(originalIndex).beforePadding}
                                         afterPadding={getEventPadding(originalIndex).afterPadding}
                                         maxPadding={15}
@@ -940,7 +940,7 @@ export default function UnifiedSidebar({
                               >
                                 <div className="flex items-center gap-2">
                                   <span className="text-xs text-gray-400 font-mono">
-                                    {formatTime(event.timestamp)}
+                                    {formatTime(event.time)}
                                   </span>
                                   <span className="text-sm font-medium text-gray-400">
                                     {getEventEmoji(event.type)} {event.type}

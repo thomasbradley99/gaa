@@ -30,21 +30,15 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
     const possessionHome = totalPossessions > 0 ? Math.round((homePossessions / totalPossessions) * 100) : 0
     const possessionAway = totalPossessions > 0 ? Math.round((awayPossessions / totalPossessions) * 100) : 0
 
-    // Shots - include all shot types (point, wide, goal, saved, shot)
-    const homeShots = homeEvents.filter((e) => 
-      e.type === 'shot' || e.type === 'point' || e.type === 'wide' || e.type === 'goal' || e.type === 'saved' ||
-      e.metadata?.action === 'Shot'
-    )
-    const awayShots = awayEvents.filter((e) => 
-      e.type === 'shot' || e.type === 'point' || e.type === 'wide' || e.type === 'goal' || e.type === 'saved' ||
-      e.metadata?.action === 'Shot'
-    )
+    // Shots - filter by action="Shot"
+    const homeShots = homeEvents.filter((e) => e.action === 'Shot')
+    const awayShots = awayEvents.filter((e) => e.action === 'Shot')
     
-    const homeGoals = homeShots.filter((e) => e.type === 'goal' || e.metadata?.scoreType === 'goal').length
-    const homePoints = homeShots.filter((e) => e.type === 'point' || e.metadata?.scoreType === 'point').length
-    const homeWides = homeShots.filter((e) => e.type === 'wide' || e.metadata?.scoreType === 'wide').length
+    const homeGoals = homeShots.filter((e) => e.outcome === 'Goal').length
+    const homePoints = homeShots.filter((e) => e.outcome === 'Point').length
+    const homeWides = homeShots.filter((e) => e.outcome === 'Wide').length
     const homeShortKeeper = homeShots.filter((e) => e.metadata?.scoreType === 'short_keeper' || e.metadata?.scoreType === 'short').length
-    const homeSaved = homeShots.filter((e) => e.type === 'saved' || e.metadata?.scoreType === 'saved').length
+    const homeSaved = homeShots.filter((e) => e.outcome === 'Saved').length
     const home45M = homeShots.filter((e) => e.metadata?.scoreType === '45m').length
     const homeReboundPost = homeShots.filter((e) => e.metadata?.scoreType === 'rebound_post').length
     const homeOther = homeShots.filter((e) => {
@@ -52,11 +46,11 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
       return !type || (type !== 'goal' && type !== 'point' && type !== 'wide' && type !== 'short_keeper' && type !== 'short' && type !== 'saved' && type !== '45m' && type !== 'rebound_post')
     }).length
     
-    const awayGoals = awayShots.filter((e) => e.type === 'goal' || e.metadata?.scoreType === 'goal').length
-    const awayPoints = awayShots.filter((e) => e.type === 'point' || e.metadata?.scoreType === 'point').length
-    const awayWides = awayShots.filter((e) => e.type === 'wide' || e.metadata?.scoreType === 'wide').length
+    const awayGoals = awayShots.filter((e) => e.outcome === 'Goal').length
+    const awayPoints = awayShots.filter((e) => e.outcome === 'Point').length
+    const awayWides = awayShots.filter((e) => e.outcome === 'Wide').length
     const awayShortKeeper = awayShots.filter((e) => e.metadata?.scoreType === 'short_keeper' || e.metadata?.scoreType === 'short').length
-    const awaySaved = awayShots.filter((e) => e.type === 'saved' || e.metadata?.scoreType === 'saved').length
+    const awaySaved = awayShots.filter((e) => e.outcome === 'Saved').length
     const away45M = awayShots.filter((e) => e.metadata?.scoreType === '45m').length
     const awayReboundPost = awayShots.filter((e) => e.metadata?.scoreType === 'rebound_post').length
     const awayOther = awayShots.filter((e) => {
@@ -73,8 +67,8 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
     const conversionRateAway = awayTotalShots > 0 ? Math.round((awayScores / awayTotalShots) * 100) : 0
 
     // Kickouts
-    const homeKickouts = homeEvents.filter((e) => e.type === 'kickout')
-    const awayKickouts = awayEvents.filter((e) => e.type === 'kickout')
+    const homeKickouts = homeEvents.filter((e) => e.action === 'Kickout')
+    const awayKickouts = awayEvents.filter((e) => e.action === 'Kickout')
     
     // Home kickouts won (when home team wins their own kickout)
     const homeKickoutsWon = homeKickouts.filter((e) => e.metadata?.possessionOutcome === 'won').length
@@ -95,8 +89,8 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
     const awayOpponentKickoutsWon = homeKickouts.filter((e) => e.metadata?.possessionOutcome === 'lost').length
 
     // Turnovers
-    const homeTurnovers = homeEvents.filter((e) => e.type === 'turnover')
-    const awayTurnovers = awayEvents.filter((e) => e.type === 'turnover')
+    const homeTurnovers = homeEvents.filter((e) => e.action === 'Turnover')
+    const awayTurnovers = awayEvents.filter((e) => e.action === 'Turnover')
     
     const homeTurnoversForced = homeTurnovers.filter((e) => e.metadata?.turnoverType === 'forced').length
     const homeTurnoversUnforced = homeTurnovers.filter((e) => e.metadata?.turnoverType === 'unforced').length
@@ -107,8 +101,8 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
     const awayTurnoversTotal = awayTurnovers.length
 
     // Fouls
-    const homeFouls = homeEvents.filter((e) => e.type === 'foul')
-    const awayFouls = awayEvents.filter((e) => e.type === 'foul')
+    const homeFouls = homeEvents.filter((e) => e.action === 'Foul')
+    const awayFouls = awayEvents.filter((e) => e.action === 'Foul')
     const homeScorableFreesConceded = homeFouls.filter((e) => e.metadata?.foulType === 'scorable' || e.metadata?.scorable).length
     const awayScorableFreesConceded = awayFouls.filter((e) => e.metadata?.foulType === 'scorable' || e.metadata?.scorable).length
 

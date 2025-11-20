@@ -60,8 +60,8 @@ export function VideoOverlayTimeline({
   const currentEvent = useMemo(() => {
     return (
       filteredEvents
-        .filter((e) => e.timestamp <= currentTime)
-        .sort((a, b) => b.timestamp - a.timestamp)[0] || null
+        .filter((e) => e.time <= currentTime)
+        .sort((a, b) => b.time - a.time)[0] || null
     )
   }, [filteredEvents, currentTime])
 
@@ -69,16 +69,16 @@ export function VideoOverlayTimeline({
   const prevEvent = useMemo(() => {
     return (
       filteredEvents
-        .filter((e) => e.timestamp < (currentEvent?.timestamp ?? currentTime))
-        .sort((a, b) => b.timestamp - a.timestamp)[0] || null
+        .filter((e) => e.time < (currentEvent?.time ?? currentTime))
+        .sort((a, b) => b.time - a.time)[0] || null
     )
   }, [filteredEvents, currentEvent, currentTime])
 
   const nextEvent = useMemo(() => {
     return (
       filteredEvents
-        .filter((e) => e.timestamp > (currentEvent?.timestamp ?? currentTime))
-        .sort((a, b) => a.timestamp - b.timestamp)[0] || null
+        .filter((e) => e.time > (currentEvent?.time ?? currentTime))
+        .sort((a, b) => a.time - b.time)[0] || null
     )
   }, [filteredEvents, currentEvent, currentTime])
 
@@ -95,7 +95,7 @@ export function VideoOverlayTimeline({
   // Handle marker click
   const handleMarkerClick = (event: GameEvent, e: React.MouseEvent) => {
     e.stopPropagation()
-    onSeek(event.timestamp)
+    onSeek(event.time)
   }
 
   if (duration === 0) return null
@@ -109,7 +109,7 @@ export function VideoOverlayTimeline({
             {/* Prev event */}
             <button
               className="p-1 rounded-full hover:bg-white/10 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-              onClick={() => prevEvent && onSeek(prevEvent.timestamp)}
+              onClick={() => prevEvent && onSeek(prevEvent.time)}
               disabled={!prevEvent}
               title="Previous event"
             >
@@ -137,14 +137,14 @@ export function VideoOverlayTimeline({
                 </>
               )}
               <span className="text-xs text-gray-200 ml-2 whitespace-nowrap">
-                ({formatTime(currentEvent.timestamp)})
+                ({formatTime(currentEvent.time)})
               </span>
             </div>
 
             {/* Next event */}
             <button
               className="p-1 rounded-full hover:bg-white/10 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-              onClick={() => nextEvent && onSeek(nextEvent.timestamp)}
+              onClick={() => nextEvent && onSeek(nextEvent.time)}
               disabled={!nextEvent}
               title="Next event"
             >
@@ -176,11 +176,11 @@ export function VideoOverlayTimeline({
               className={`absolute top-0 w-3 h-3 rounded-full border-2 cursor-pointer transition-transform duration-75 ${getTeamColor(
                 event.team
               )} ${hoveredEvent?.id === event.id ? 'scale-125 z-30' : 'z-20'} -translate-x-1/2 -translate-y-1/2`}
-              style={{ left: `${(event.timestamp / duration) * 100}%`, top: '50%' }}
+              style={{ left: `${(event.time / duration) * 100}%`, top: '50%' }}
               onMouseEnter={() => setHoveredEvent(event)}
               onMouseLeave={() => setHoveredEvent(null)}
               onClick={(e) => handleMarkerClick(event, e)}
-              title={`${event.type} - ${formatTime(event.timestamp)}`}
+              title={`${event.type} - ${formatTime(event.time)}`}
             >
               <div className="absolute inset-0 flex items-center justify-center text-white">
                 {getEventIcon(event.type)}
@@ -193,12 +193,12 @@ export function VideoOverlayTimeline({
         {hoveredEvent && (
           <div
             className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-black/90 text-white text-xs px-3 py-2 rounded shadow-lg pointer-events-none whitespace-nowrap"
-            style={{ left: `${(hoveredEvent.timestamp / duration) * 100}%` }}
+            style={{ left: `${(hoveredEvent.time / duration) * 100}%` }}
           >
             <div className="font-bold">{hoveredEvent.type}</div>
             <div>{hoveredEvent.team === 'home' ? 'Home' : 'Away'}</div>
             {hoveredEvent.player && <div>{hoveredEvent.player}</div>}
-            <div>{formatTime(hoveredEvent.timestamp)}</div>
+            <div>{formatTime(hoveredEvent.time)}</div>
           </div>
         )}
       </div>

@@ -34,19 +34,23 @@ def describe_single_frame(frame_path: Path, timestamp_seconds: int) -> dict:
         prompt = f"""Frame at {timestamp_seconds}s. Report:
 
 1. Teams: [color] jerseys vs [color] jerseys
-2. Keepers (if visible): [color] keeper LEFT goal, [color] keeper RIGHT goal
+2. Keepers (if visible): [color] keeper at LEFT goal, [color] keeper at RIGHT goal
 3. Game state - choose ONE:
    - "THROW-UP" - referee throws up ball, players contesting
    - "IN-PLAY" - active match, players in motion
    - "HALFTIME" - players walking off field, leaving pitch
    - "WARMUP" - players standing around, no organized play
    - "END" - players shaking hands, celebrating, leaving field
-4. Ball location: where is it? (center, penalty area, midfield, sideline, etc.)
-5. Activity level: active play / slow / stopped / players resting
+4. Possession & Direction (CRITICAL for attack direction detection):
+   - If ball is visible: Which color team has it?
+   - Which direction are they playing/attacking? (toward LEFT goal or toward RIGHT goal)
+   - Which goal is this team defending? (LEFT side or RIGHT side)
+5. Ball location: where is it? (center, penalty area, midfield, sideline, etc.)
+6. Activity level: active play / slow / stopped / players resting
 
-Format example: "Blue vs White. Pink LEFT, Green RIGHT. THROW-UP - referee throws up ball, teams contesting. Active."
+Format example: "Blue vs White. Pink keeper LEFT, Green keeper RIGHT. IN-PLAY. Blue has possession, attacking toward RIGHT goal, defending LEFT. Ball at midfield. Active."
 
-Be concise (2-3 lines)."""
+ALWAYS specify possession and direction when game is IN-PLAY. Be concise (2-4 lines)."""
 
         with open(frame_path, 'rb') as f:
             frame_data = f.read()
@@ -193,13 +197,18 @@ Extract the following information:
 3. **ATTACKING DIRECTIONS:**
    - In 1st half: Which team attacks left-to-right? Which attacks right-to-left?
    - In 2nd half: Do they switch directions?
+   - Use possession and direction info from the frame descriptions
+   - Look for patterns: "Team X attacking toward RIGHT goal" = "left-to-right"
+   - Look for patterns: "Team X attacking toward LEFT goal" = "right-to-left"
+   - Teams typically SWITCH directions at halftime
 
 **RULES:**
-- Use the timestamps from the descriptions
+- Use the timestamps AND possession/direction info from the descriptions
 - Be specific about colors (exact shades like "Light blue", "Dark blue", "White")
 - Times should be in SECONDS (integer)
 - Be conservative with start times - if game is active early, assume it started at 0
 - DO NOT try to determine home/away - that will be set manually
+- Attack direction should be consistent within each half (most common pattern wins)
 
 **OUTPUT FORMAT (JSON only, no markdown, no code blocks):**
 {{

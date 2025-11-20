@@ -49,7 +49,13 @@ echo ""
 
 # Step 2: Build Docker image for x86_64 (Lambda architecture)
 echo "🔨 Step 2: Building Docker image for x86_64..."
-docker build --platform linux/amd64 -t ${ECR_REPOSITORY}:latest .
+# Build ONLY for linux/amd64, disable provenance/attestation (single image, no manifest list)
+docker buildx build \
+  --platform linux/amd64 \
+  --provenance=false \
+  --sbom=false \
+  --load \
+  -t ${ECR_REPOSITORY}:latest .
 echo "✅ Docker image built"
 echo ""
 

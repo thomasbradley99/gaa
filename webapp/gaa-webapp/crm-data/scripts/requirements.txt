@@ -1,0 +1,25 @@
+# Python Dependencies for VEO-GAA Matching Pipeline
+# Install: pip install -r requirements.txt
+
+# Google Gemini API
+google-generativeai>=0.3.0
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# CSV handling
+csv23>=0.3.3
+
+# Environment variables
+python-dotenv>=1.0.0
+
+# Progress bars
+tqdm>=4.65.0
+
+# JSON handling (built-in, but for reference)
+# json - built-in
+
+# Retry logic
+tenacity>=8.2.0
+

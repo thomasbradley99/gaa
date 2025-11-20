@@ -248,6 +248,7 @@ def main():
     parser.add_argument('--input', required=True, help='Input XML file (full Anadi Pro format)')
     parser.add_argument('--output', help='Output JSON file (Web EVENT_SCHEMA format). Default: inputs/web_schema.json')
     parser.add_argument('--game', help='Game name (for finding input file in games/{game}/inputs/)')
+    parser.add_argument('--time-limit', type=float, help='Only include events up to this time in seconds (e.g., 600 for 10 min)')
     args = parser.parse_args()
     
     # Resolve input path
@@ -275,6 +276,19 @@ def main():
     
     # Convert
     events = convert_anadi_xml_to_schema(input_path)
+    
+    # Apply time filter if specified
+    if args.time_limit:
+        original_count = len(events)
+        events = [e for e in events if e['time'] <= args.time_limit]
+        filtered_count = original_count - len(events)
+        print(f"⏱️  Time limit: {args.time_limit}s ({args.time_limit/60:.1f} min)")
+        if filtered_count > 0:
+            print(f"   Filtered out {filtered_count} events after time limit")
+    
+    if not events:
+        print("❌ No events found after filtering")
+        return
     
     print(f"✅ Converted {len(events)} events")
     print(f"   Time range: {events[0]['time']:.1f}s - {events[-1]['time']:.1f}s ({events[-1]['time']/60:.1f} min)")

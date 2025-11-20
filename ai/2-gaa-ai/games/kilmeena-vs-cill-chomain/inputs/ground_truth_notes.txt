@@ -23,15 +23,26 @@ CONVERSION WORKFLOW:
 1. Export full match annotations from Anadi Pro → ground_truth_full_anadi.xml
 
 2. Convert to web schema (detectable events only):
+   
+   # Full match (all detectable events)
    $ cd pipelines/1-production
    $ python3 anadi_to_web_schema.py \
        --game kilmeena-vs-cill-chomain \
        --input ground_truth_full_anadi.xml
+   
+   # First 10 minutes only (for evaluation)
+   $ python3 anadi_to_web_schema.py \
+       --game kilmeena-vs-cill-chomain \
+       --input ground_truth_full_anadi.xml \
+       --output ../../games/kilmeena-vs-cill-chomain/inputs/web_schema_first_10min.json \
+       --time-limit 600
 
-3. Output: web_schema.json
-   - Contains only detectable events: Shot, Kickout, Turnover, Foul
-   - Format: EVENT_SCHEMA.ts compatible JSON
-   - Used by: evaluation pipeline (7_evaluate.py), web viewer
+3. Outputs:
+   • web_schema.json - Full match (134 events)
+   • web_schema_first_10min.json - First 10 min (20 events)
+   
+   Format: EVENT_SCHEMA.ts compatible JSON
+   Used by: evaluation pipeline (7_evaluate.py), web viewer
 
 DETECTABLE EVENTS:
 -----------------
@@ -62,3 +73,8 @@ Full Anadi XML: 486 total events
   → 352 non-detectable filtered out (Possession, Attack, etc.)
 
 Match duration: ~82 minutes
+
+First 10 minutes (0-600s):
+  → 20 detectable events
+  → Breakdown: 6 Shots, 5 Kickouts, 5 Fouls, 2 Turnovers, 2 Throw-ups
+  → Time range: 26.8s - 566.2s (9.4 min)

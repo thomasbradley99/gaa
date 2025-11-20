@@ -238,7 +238,7 @@ export default function GameDetailPage() {
       if (playPromise !== undefined) {
         playPromise.catch(error => console.log('Play interrupted:', error))
       }
-      setCurrentTime(startTime)
+      // Don't manually set currentTime - let video's timeupdate event handle it
     }
   }
 

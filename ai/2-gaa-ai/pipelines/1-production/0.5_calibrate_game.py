@@ -246,6 +246,26 @@ Provide ONLY the JSON object:"""
         
         game_profile = json.loads(result_text)
         
+        # Add human-readable time formats
+        def seconds_to_readable(seconds: int) -> str:
+            """Convert seconds to mm:ss or hh:mm:ss format"""
+            hours = seconds // 3600
+            minutes = (seconds % 3600) // 60
+            secs = seconds % 60
+            if hours > 0:
+                return f"{hours}h{minutes:02d}m{secs:02d}s"
+            else:
+                return f"{minutes}m{secs:02d}s"
+        
+        if 'match_times' in game_profile:
+            mt = game_profile['match_times']
+            game_profile['match_times_readable'] = {
+                'start': seconds_to_readable(mt['start']),
+                'half_time': seconds_to_readable(mt['half_time']),
+                'second_half_start': seconds_to_readable(mt['second_half_start']),
+                'end': seconds_to_readable(mt['end'])
+            }
+        
         # Add video URL from video_source.json if available
         video_source_path = GAME_ROOT / "inputs" / "video_source.json"
         if video_source_path.exists():

@@ -1,23 +1,29 @@
 {
   "team_a": {
-    "jersey_color": "Black",
-    "keeper_color": "Dark",
+    "jersey_color": "White jerseys",
+    "keeper_color": "White keeper",
     "attack_direction_1st_half": "right-to-left",
     "attack_direction_2nd_half": "left-to-right"
   },
   "team_b": {
-    "jersey_color": "White",
-    "keeper_color": "Dark",
+    "jersey_color": "Dark jerseys",
+    "keeper_color": "Yellow keeper",
     "attack_direction_1st_half": "left-to-right",
     "attack_direction_2nd_half": "right-to-left"
   },
   "match_times": {
-    "start": 25,
-    "half_time": 1950,
-    "second_half_start": 2820,
+    "start": 30,
+    "half_time": 2040,
+    "second_half_start": 2910,
     "end": 4920
   },
-  "video_url": "https://c.veocdn.com/010c72f5-2c21-422c-bcf2-c198a4fe3a96/standard/human/41c052f9/video.mp4?v=JMjGSpBo",
-  "notes": "The video data shows significant fragmentation with frequent transitions between 'ACTIVE' and 'WARMUP/PRACTICE' states, and inconsistent team pairings and attack directions within what would typically be a single half. The inferred match times represent the longest plausible continuous periods of 'ACTIVE' play separated by a substantial 'WARMUP/PRACTICE' block (halftime). Attack directions for each half are based on the first instance of the main teams' play in that half, as the 'most common pattern' rule resulted in ties due to high inconsistency. Keeper colors are generalized to 'Dark' due to varied and inconsistent specific color mentions across frames.",
-  "home_team_assignment": "team_a"
+  "match_times_readable": {
+    "start": "0m30s",
+    "half_time": "34m00s",
+    "second_half_start": "48m30s",
+    "end": "1h22m00s"
+  },
+  "notes": "Team B's jersey color is generalized as 'Dark jerseys' to encompass variations like Black, Dark Blue, and Dark Blue/Black seen throughout the match. Team A's keeper color is listed as 'White keeper' based on explicit mentions, although this is not a distinct color from their field jerseys. Team B's keeper color is identified as 'Yellow keeper' as it is the most frequently mentioned distinct keeper color for the opposing team. There is a significant 'WARMUP' period after halftime (2130s-2730s) featuring 'Lime Green' jerseys, but subsequent 'IN-PLAY' frames revert to 'White vs Dark/Black' matchups, so the primary team colors are maintained.",
+  "home_team_assignment": "EDIT_ME",
+  "video_url": "https://c.veocdn.com/010c72f5-2c21-422c-bcf2-c198a4fe3a96/standard/human/41c052f9/video.mp4?v=JMjGSpBo"
 }

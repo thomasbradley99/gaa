@@ -1,28 +1,27 @@
 {
   "team_a": {
-    "jersey_color": "White jerseys",
+    "jersey_color": "White",
     "keeper_color": "White",
     "attack_direction_1st_half": "right-to-left",
     "attack_direction_2nd_half": "left-to-right"
   },
   "team_b": {
-    "jersey_color": "Black jerseys",
-    "keeper_color": "Light Blue",
+    "jersey_color": "Dark Blue",
+    "keeper_color": "Black",
     "attack_direction_1st_half": "left-to-right",
     "attack_direction_2nd_half": "right-to-left"
   },
   "match_times": {
     "start": 0,
     "half_time": 2040,
-    "second_half_start": 2820,
+    "second_half_start": 2760,
     "end": 4920
   },
-  "notes": "Team A (White jerseys) keeper color identified as 'White' based on direct mentions. Team B (Black jerseys) keeper color identified as 'Light Blue' as it is the most frequently mentioned distinct keeper color for the opposing team (including 'Dark Blue' and 'Dark' variants). \n\nAttacking Direction Analysis:\n1st Half (0s - 2039s):\n- Team B (opponent of White) keeper positions: LEFT (6 times - 390s Yellow/Lime Green, 420s Blue, 900s Light Blue, 1440s Blue, 1500s Bright Blue, 1680s Blue); RIGHT (0 times).\n- Conclusion: Team B defends LEFT goal, therefore attacks 'right-to-left'. Team A (White) defends RIGHT goal, therefore attacks 'left-to-right'.\n\n2nd Half (2820s - 4920s):\n- Team B (opponent of White) keeper positions: LEFT (2 times - 3930s Light Blue, 4110s Light Gold); RIGHT (6 times - 3000s Light Blue, 3090s Light Blue, 4080s Light Blue, 4500s Yellow, 4530s Light Blue, 4830s Lime Green).\n- Conclusion: Team B defends RIGHT goal, therefore attacks 'left-to-right'. Team A (White) defends LEFT goal, therefore attacks 'right-to-left'.\n\nNote: Frames with 'White keeper LEFT, White keeper RIGHT' in the same timestamp (e.g., 90s, 1770s) were excluded from defending goal frequency counts due to ambiguity regarding a single team's defending goal. Warmup frames were also excluded from keeper position analysis.",
-  "home_team_assignment": "EDIT_ME",
+  "notes": "Team Identification:\n- Team A (White) is identified by its consistent 'White' jersey and 'White' keeper mentions.\n- Team B is identified as the primary opponent, with jersey descriptions varying between 'Dark', 'Black', 'Dark Blue', and 'Dark Brown/Black'. 'Dark Blue' is chosen as the representative jersey color due to its frequency in attacking actions. The opponent keeper is consistently described as 'Black'.\n\nMatch Times:\n- Start: 0s (first IN-PLAY is at 0s, within the 60s threshold).\n- Half Time: 2040s (first HALFTIME state).\n- Second Half Start: 2760s (first IN-PLAY for the main teams 'Dark vs White' after the HALFTIME and WARMUP periods).\n- End: 4920s (last IN-PLAY state).\n\nAttacking Directions - Critical Analysis:\n\n**First Half (0s - 2040s):**\n- **Field Orientation (Tier 2 - Keeper Frames):**\n  - 60s: Black keeper LEFT, White keeper RIGHT. (Implies Team B defends LEFT, Team A defends RIGHT)\n  - 270s: Dark Blue keeper LEFT, White keeper RIGHT. (Implies Team B defends LEFT, Team A defends RIGHT)\n  - (90s: White keeper LEFT, Black keeper RIGHT. This frame is inconsistent with the majority, suggesting a camera perspective change or temporary field orientation shift.)\n  - **Conclusion for 1st Half Orientation:** Based on the majority of Tier 2 keeper frames (2 out of 3), Team A (White) attacks LEFT (right-to-left), and Team B (Dark Blue) attacks RIGHT (left-to-right).\n\n- **Team A (White) attacking R-L (toward LEFT goal):**\n  - Consistent frames: 480s (White attacking toward LEFT goal), 1860s (White attacking toward LEFT goal). (2 instances)\n  - Inconsistent frames (attacking RIGHT goal, interpreted as camera perspective changes): 1170s, 1200s, 1530s, 1560s. (4 instances)\n\n- **Team B (Dark Blue) attacking L-R (toward RIGHT goal):**\n  - Consistent frames: 120s, 150s, 600s, 840s, 1050s, 1080s, 1380s, 1470s, 1500s, 1680s, 1740s, 1770s, 1890s (all attacking toward RIGHT goal/area). (13 instances)\n  - Inconsistent frames (attacking LEFT goal, interpreted as camera perspective changes): 510s, 630s, 900s, 1020s, 1140s, 1950s. (6 instances)\n\n**Second Half (2760s - 4920s):**\n- **Field Orientation (Tier 2 - Keeper Frames):**\n  - 2940s: White keeper LEFT, Black keeper RIGHT. (Implies Team A defends LEFT, Team B defends RIGHT)\n  - 3180s: White keeper LEFT, Black keeper RIGHT. (Implies Team A defends LEFT, Team B defends RIGHT)\n  - 3900s: Dark Blue keeper RIGHT, White keeper LEFT. (Implies Team B defends RIGHT, Team A defends LEFT, consistent with above)\n  - 4560s: White keeper LEFT, Dark Blue keeper RIGHT. (Implies Team A defends LEFT, Team B defends RIGHT)\n  - **Conclusion for 2nd Half Orientation:** All 4 Tier 2 keeper frames consistently indicate Team A (White) attacks RIGHT (left-to-right), and Team B (Dark Blue) attacks LEFT (right-to-left).\n\n- **Team A (White) attacking L-R (toward RIGHT goal):**\n  - Consistent frames: 3030s, 3330s, 3660s (all attacking toward RIGHT goal). (3 instances)\n  - Inconsistent frames: None.\n\n- **Team B (Dark Blue) attacking R-L (toward LEFT goal):**\n  - Consistent frames: 2970s, 3120s, 3150s, 3300s (all attacking toward LEFT goal/area). (4 instances)\n  - Inconsistent frames (attacking RIGHT goal, interpreted as camera perspective changes): 3060s, 3210s, 3240s, 3420s, 3570s, 3600s, 3690s, 3720s, 3810s, 3870s, 3930s, 4230s, 4290s, 4470s. (14 instances)\n\n**Validation:**\n- The chosen attacking directions (Team A R-L, Team B L-R in 1st half; Team A L-R, Team B R-L in 2nd half) satisfy the rules that teams must attack opposite directions in the same half and switch directions at halftime. This interpretation prioritizes the consistent field orientation provided by Tier 2 keeper frames to resolve ambiguities and apparent contradictions in Tier 1 attacking action descriptions, which are likely influenced by changing camera perspectives.\n\n\u26a0\ufe0f VERIFY: Attack directions are AI-inferred and may be incorrect. Watch first kickoff to confirm which team attacks which direction.",
   "match_times_readable": {
     "start": "0m00s",
     "half_time": "34m00s",
-    "second_half_start": "47m00s",
+    "second_half_start": "46m00s",
     "end": "1h22m00s"
   },
   "video_url": "https://c.veocdn.com/010c72f5-2c21-422c-bcf2-c198a4fe3a96/standard/human/41c052f9/video.mp4?v=JMjGSpBo"

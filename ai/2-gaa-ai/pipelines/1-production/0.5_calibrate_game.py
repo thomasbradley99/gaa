@@ -34,19 +34,31 @@ def describe_single_frame(frame_path: Path, timestamp_seconds: int) -> dict:
         prompt = f"""Frame at {timestamp_seconds}s. Report:
 
 1. Teams: [color] jerseys vs [color] jerseys (be specific: "White", "Black", "Dark Blue", etc.)
-2. Keepers (if visible): [color] keeper LEFT, [color] keeper RIGHT
-3. Game state - choose ONE:
-   - "THROW-UP" - referee throws up ball, players contesting
-   - "IN-PLAY" - active match, players in motion
-   - "HALFTIME" - players walking off field, leaving pitch
-   - "WARMUP" - players standing around, no organized play
-   - "END" - players shaking hands, celebrating, leaving field
-4. Ball location: where is it? (left area, center, right area, penalty box, etc.)
-5. Activity level: active play / slow / stopped / players resting
 
-Format example: "Blue jerseys vs White jerseys. Pink keeper LEFT, Green keeper RIGHT. IN-PLAY. Ball at midfield. Active."
+2. ATTACKING ACTION (MOST VALUABLE - if visible):
+   - Is a team shooting/attacking toward a goal? Which color team? Toward LEFT or RIGHT goal?
+   - Example: "Black player shooting toward RIGHT goal"
+   - Example: "White player taking free kick toward LEFT goal"
+   - Example: "Dark Blue attacking toward RIGHT penalty area"
+   - This is the BEST indicator of attack direction - report if you see it
 
-Be concise (2 lines max). Focus on accurate color identification."""
+3. Keepers (if visible and no clear attacking action): 
+   - LEFT goal: [color] keeper
+   - RIGHT goal: [color] keeper
+   - If BOTH keepers visible, report both (rare but valuable)
+   - NEVER report same color for both keepers
+
+4. Game state: THROW-UP / IN-PLAY / HALFTIME / WARMUP / END
+
+5. Frame usefulness:
+   - "USEFUL" if attacking action visible or both keepers visible
+   - "NOT USEFUL" if unclear/ambiguous/warmup
+
+Format example: "Black vs White. Black shooting toward RIGHT goal. IN-PLAY. USEFUL."
+Or: "White vs Black. Dark keeper LEFT, White keeper RIGHT. IN-PLAY. USEFUL."
+Or: "White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL."
+
+Be concise (2-3 lines). Prioritize reporting attacking action over keepers."""
 
         with open(frame_path, 'rb') as f:
             frame_data = f.read()
@@ -177,27 +189,43 @@ Extract the following information:
    - Match END: Find the last timestamp with "IN-PLAY" or first "END" state
    
 3. **ATTACKING DIRECTIONS - CRITICAL ANALYSIS:**
-   You MUST analyze goalkeeper positions systematically:
    
-   STEP-BY-STEP METHOD:
-   a) List ALL 1st half frames (before halftime) that mention keeper colors at goals
-   b) Count frequency: How many times is Team A keeper at LEFT vs RIGHT goal?
-   c) Count frequency: How many times is Team B keeper at LEFT vs RIGHT goal?
-   d) The MOST FREQUENT position for each team is their defending goal
-   e) If Team X defends LEFT goal → attacks "right-to-left"
-   f) If Team X defends RIGHT goal → attacks "left-to-right"
-   g) Repeat for 2nd half (teams should switch directions at halftime)
+   Use a PRIORITIZED, LAYERED APPROACH:
    
-   EXAMPLE LOGIC:
-   - If "Dark keeper LEFT" appears 15 times and "Dark keeper RIGHT" appears 3 times in 1st half
-     → Dark team defends LEFT → Dark attacks "right-to-left" in 1st half
-   - If "White keeper RIGHT" appears 12 times in 1st half
-     → White defends RIGHT → White attacks "left-to-right" in 1st half
+   **TIER 1 (MOST RELIABLE) - Attacking Action:**
+   - Look for frames marked "USEFUL" with attacking action descriptions
+   - PARSE CAREFULLY: "[Team Color] attacking toward [Direction] goal"
+   - Example: "Black attacking toward RIGHT goal" → Black (NOT White) attacks left-to-right
+   - Example: "White player shooting toward LEFT goal" → White (NOT opponent) attacks right-to-left
+   - Extract the SUBJECT of the attacking action, not just color mentions
+   - Count separately for each team's attacking frames
+   - If Team X attacks toward RIGHT goal → "left-to-right"
+   - If Team X attacks toward LEFT goal → "right-to-left"
+   - List evidence frames explicitly with format: "Team X attacking [direction]: [timestamps]"
    
-   IGNORE:
-   - Frames where keepers aren't visible
+   **TIER 2 (RELIABLE) - Both Keepers Visible:**
+   - Look for frames showing BOTH keepers simultaneously (rare but definitive)
+   - Example: "Dark Blue keeper LEFT, White keeper RIGHT"
+   - If found, this confirms which team defends which goal
+   - List these frames in your notes
+   
+   **TIER 3 (LEAST RELIABLE) - Single Keeper Counts:**
+   - Only use if Tier 1 and Tier 2 have insufficient data
+   - Count frequency of single keeper mentions
+   - Use most common pattern
+   
+   **IGNORE COMPLETELY:**
+   - Frames marked "NOT USEFUL"
+   - Frames with "White keeper LEFT, White keeper RIGHT" (impossible)
+   - Frames with "No keeper visible"
    - Warmup periods
-   - Contradictory individual frames (use MAJORITY pattern)
+   
+   **VALIDATION (CRITICAL):**
+   - Teams MUST attack OPPOSITE directions in same half (one left-to-right, one right-to-left)
+   - If both teams show same direction, YOU MADE A PARSING ERROR - recount carefully
+   - Teams MUST switch directions at halftime
+   - Show your work: List counts like "Team A: 15 toward RIGHT, 3 toward LEFT = attacks left-to-right"
+   - Include specific evidence timestamps in notes
 
 **RULES:**
 - Count ALL keeper mentions systematically before deciding

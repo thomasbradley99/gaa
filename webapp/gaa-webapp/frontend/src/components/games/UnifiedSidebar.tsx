@@ -694,7 +694,7 @@ export default function UnifiedSidebar({
                             fileInput.click()
                           }}
                           disabled={isSavingEvents}
-                          className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-blue-500/10 hover:bg-blue-500/20 border-blue-400/30 text-blue-300 disabled:opacity-50 transition-all"
+                          className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-white/5 hover:bg-white/10 border-white/20 text-white disabled:opacity-50 transition-all"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
@@ -704,7 +704,7 @@ export default function UnifiedSidebar({
                         <button
                           onClick={handleToggleEditMode}
                           disabled={isSavingEvents}
-                          className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-gray-500/10 hover:bg-gray-500/20 border-gray-400/30 text-gray-300 disabled:opacity-50 transition-all"
+                          className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-white/5 hover:bg-white/10 border-white/20 text-white disabled:opacity-50 transition-all"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -712,35 +712,58 @@ export default function UnifiedSidebar({
                           <span>Exit</span>
                         </button>
                       </div>
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="space-y-2">
+                        <div className="grid grid-cols-2 gap-2">
+                          <button
+                            onClick={handleSaveChanges}
+                            disabled={isSavingEvents || (editModeEvents.size === 0 && binnedEvents.size === 0)}
+                            className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-black/80 hover:bg-black border-white/30 text-white disabled:opacity-50 transition-all"
+                          >
+                            {isSavingEvents ? (
+                              <>
+                                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                                <span>Saving...</span>
+                              </>
+                            ) : (
+                              <>
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Save ({editModeEvents.size + binnedEvents.size})</span>
+                              </>
+                            )}
+                          </button>
+                          <button
+                            onClick={handleCancelChanges}
+                            disabled={isSavingEvents}
+                            className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-red-500/10 hover:bg-red-500/20 border-red-400/30 text-red-300 disabled:opacity-50 transition-all"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                            <span>Cancel</span>
+                          </button>
+                        </div>
                         <button
-                          onClick={handleSaveChanges}
-                          disabled={isSavingEvents || (editModeEvents.size === 0 && binnedEvents.size === 0)}
-                          className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-black/80 hover:bg-black border-white/30 text-white disabled:opacity-50 transition-all"
-                        >
-                          {isSavingEvents ? (
-                            <>
-                              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                              <span>Saving...</span>
-                            </>
-                          ) : (
-                            <>
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                              </svg>
-                              <span>Save ({editModeEvents.size + binnedEvents.size})</span>
-                            </>
-                          )}
-                        </button>
-                        <button
-                          onClick={handleCancelChanges}
-                          disabled={isSavingEvents}
-                          className="flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-red-500/10 hover:bg-red-500/20 border-red-400/30 text-red-300 disabled:opacity-50 transition-all"
+                          onClick={() => {
+                            // Export current events as JSON
+                            const json = JSON.stringify(allEvents, null, 2)
+                            const blob = new Blob([json], { type: 'application/json' })
+                            const url = URL.createObjectURL(blob)
+                            const a = document.createElement('a')
+                            a.href = url
+                            a.download = `${game.title.replace(/[^a-z0-9]/gi, '_')}_events.json`
+                            document.body.appendChild(a)
+                            a.click()
+                            document.body.removeChild(a)
+                            URL.revokeObjectURL(url)
+                          }}
+                          className="w-full flex items-center justify-center gap-2 py-2.5 text-sm font-medium rounded-lg border-2 bg-white/5 hover:bg-white/10 border-white/20 text-white transition-all"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                           </svg>
-                          <span>Cancel</span>
+                          <span>Export JSON</span>
                         </button>
                       </div>
                     </div>

@@ -4,10 +4,11 @@ import { useState } from 'react'
 import { X } from 'lucide-react'
 import { EventList } from './EventList'
 import { GameStats } from './GameStats'
-import { XMLUpload } from './XmlUpload'
+import { JsonUpload } from './JsonUpload'
 import AppleStyleTrimmer from './AppleStyleTrimmer'
 import { GAA_COACHES, getDefaultCoach, type Coach } from './gaa-coaches'
 import type { GameEvent } from './video-player/types'
+import * as apiClient from '@/lib/api-client'
 
 interface UnifiedSidebarProps {
   isOpen: boolean
@@ -998,9 +999,10 @@ export default function UnifiedSidebar({
                   duration={duration}
                 />
               ) : (
-                  <XMLUpload 
+                  <JsonUpload 
                     gameId={game.id}
                     onEventsUploaded={onEventsUploaded || (() => {})}
+                    apiClient={apiClient}
                   />
                   )}
                 </div>

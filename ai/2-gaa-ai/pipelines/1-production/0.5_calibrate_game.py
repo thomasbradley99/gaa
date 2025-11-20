@@ -185,6 +185,7 @@ Extract the following information:
    
 2. **MATCH TIMES:**
    - Match START: Find the FIRST timestamp with "THROW-UP" or "IN-PLAY" state
+     IMPORTANT: If this is within the first 60 seconds, set start to 0 (sampling may have missed earlier action)
    - Half Time: Find first timestamp with "HALFTIME" state (players walking off)
    - 2nd Half START: Find the SECOND "THROW-UP" or "IN-PLAY" state (after halftime)
    - Match END: Find the last timestamp with "IN-PLAY" or first "END" state
@@ -197,7 +198,7 @@ Extract the following information:
 - Use the timestamps from the descriptions
 - Be specific about colors (exact shades like "Light blue", "Dark blue", "White")
 - Times should be in SECONDS (integer)
-- Include buffer time - better to start early than miss events
+- Be conservative with start times - if game is active early, assume it started at 0
 - DO NOT try to determine home/away - that will be set manually
 
 **OUTPUT FORMAT (JSON only, no markdown, no code blocks):**
@@ -245,6 +246,14 @@ Provide ONLY the JSON object:"""
             result_text = '\n'.join(json_lines).strip()
         
         game_profile = json.loads(result_text)
+        
+        # Post-process match times: if start is within first 60s, set to 0
+        # (sampling interval may have missed the actual start)
+        if 'match_times' in game_profile:
+            mt = game_profile['match_times']
+            if mt.get('start', 0) > 0 and mt.get('start', 0) <= 60:
+                print(f"⚠️  Start time {mt['start']}s detected - adjusting to 0s to account for sampling interval")
+                mt['start'] = 0
         
         # Add human-readable time formats
         def seconds_to_readable(seconds: int) -> str:

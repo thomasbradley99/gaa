@@ -12,13 +12,13 @@
     "attack_direction_2nd_half": "right-to-left"
   },
   "match_times": {
-    "start": 30,
+    "start": 0,
     "half_time": 2040,
     "second_half_start": 2910,
     "end": 4920
   },
   "match_times_readable": {
-    "start": "0m30s",
+    "start": "0m00s",
     "half_time": "34m00s",
     "second_half_start": "48m30s",
     "end": "1h22m00s"

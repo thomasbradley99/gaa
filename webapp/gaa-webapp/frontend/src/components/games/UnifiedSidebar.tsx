@@ -27,6 +27,7 @@ interface UnifiedSidebarProps {
   allEvents: GameEvent[]
   onEventsUpdate?: (events: GameEvent[]) => void
   onEventPaddingsChange?: (paddings: Map<number, { beforePadding: number, afterPadding: number }>) => void
+  onAutoplayChange?: (enabled: boolean) => void
 }
 
 type TabType = 'events' | 'stats' | 'ai'
@@ -49,6 +50,7 @@ export default function UnifiedSidebar({
   allEvents,
   onEventsUpdate,
   onEventPaddingsChange,
+  onAutoplayChange,
 }: UnifiedSidebarProps) {
   const [activeTab, setActiveTab] = useState<TabType>('stats')
   
@@ -608,6 +610,8 @@ export default function UnifiedSidebar({
                           setAutoplayMode(newAutoplay)
                           // Auto-show trimmers when autoplay is enabled, hide when disabled
                           setShowTrimmers(newAutoplay)
+                          // Notify parent
+                          if (onAutoplayChange) onAutoplayChange(newAutoplay)
                         }}
                         className={`flex flex-col items-center justify-center gap-1.5 py-2.5 text-sm font-medium rounded-lg border-2 transition-all ${
                           autoplayMode

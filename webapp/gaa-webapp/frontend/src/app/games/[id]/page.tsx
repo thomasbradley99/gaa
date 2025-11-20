@@ -138,6 +138,7 @@ export default function GameDetailPage() {
   const [showLeftSidebar, setShowLeftSidebar] = useState(true)
   const [teamFilter, setTeamFilter] = useState<'all' | 'home' | 'away'>('all')
   const [eventPaddings, setEventPaddings] = useState<Map<number, { beforePadding: number, afterPadding: number }>>(new Map())
+  const [autoplayEnabled, setAutoplayEnabled] = useState(false)
 
   // Events from database - now using master schema directly (no transformation needed)
   const gameEvents: GameEvent[] = game?.events && Array.isArray(game.events) 
@@ -342,6 +343,7 @@ export default function GameDetailPage() {
                 onEventClick={handleEventClick}
                 onSeekToTimestamp={seekToTimestamp}
                 eventPaddings={eventPaddings}
+                autoplayEvents={autoplayEnabled}
               />
             ) : (
               <div className="h-full flex items-center justify-center">
@@ -375,6 +377,7 @@ export default function GameDetailPage() {
           onEventsUploaded={handleEventsUploaded}
           onEventsUpdate={handleEventsUpdate}
           onEventPaddingsChange={setEventPaddings}
+          onAutoplayChange={setAutoplayEnabled}
         />
       </div>
     )
@@ -427,6 +430,7 @@ export default function GameDetailPage() {
         onEventsUploaded={handleEventsUploaded}
         onEventsUpdate={handleEventsUpdate}
         onEventPaddingsChange={setEventPaddings}
+        onAutoplayChange={setAutoplayEnabled}
       />
     </div>
   )

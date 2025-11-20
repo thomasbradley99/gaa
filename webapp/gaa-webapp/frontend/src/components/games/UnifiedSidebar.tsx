@@ -840,12 +840,12 @@ export default function UnifiedSidebar({
                       return (
                         <div
                           key={`${event.id}-${originalIndex}`}
-                          onClick={() => !isEditMode && onEventClick(event)}
+                          onClick={() => onEventClick(event)}
                           className={`w-full text-left p-3 rounded-lg transition-all duration-200 border cursor-pointer ${
                             isCurrentEvent
                               ? 'bg-black text-white border-white/30 ring-0.5 ring-white/30'
                               : isEditMode
-                              ? 'bg-black/80 border-white/10 cursor-default'
+                              ? 'bg-black/80 border-white/10 hover:bg-black/90'
                               : 'bg-black/80 text-gray-300 hover:bg-black border-white/10 hover:border-white/20'
                           }`}
                         >

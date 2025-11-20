@@ -1,29 +1,29 @@
 {
   "team_a": {
     "jersey_color": "White jerseys",
-    "keeper_color": "White keeper",
+    "keeper_color": "White",
     "attack_direction_1st_half": "right-to-left",
     "attack_direction_2nd_half": "left-to-right"
   },
   "team_b": {
-    "jersey_color": "Dark jerseys",
-    "keeper_color": "Yellow keeper",
+    "jersey_color": "Black jerseys",
+    "keeper_color": "Light Blue",
     "attack_direction_1st_half": "left-to-right",
     "attack_direction_2nd_half": "right-to-left"
   },
   "match_times": {
     "start": 0,
     "half_time": 2040,
-    "second_half_start": 2910,
+    "second_half_start": 2820,
     "end": 4920
   },
+  "notes": "Team A (White jerseys) keeper color identified as 'White' based on direct mentions. Team B (Black jerseys) keeper color identified as 'Light Blue' as it is the most frequently mentioned distinct keeper color for the opposing team (including 'Dark Blue' and 'Dark' variants). \n\nAttacking Direction Analysis:\n1st Half (0s - 2039s):\n- Team B (opponent of White) keeper positions: LEFT (6 times - 390s Yellow/Lime Green, 420s Blue, 900s Light Blue, 1440s Blue, 1500s Bright Blue, 1680s Blue); RIGHT (0 times).\n- Conclusion: Team B defends LEFT goal, therefore attacks 'right-to-left'. Team A (White) defends RIGHT goal, therefore attacks 'left-to-right'.\n\n2nd Half (2820s - 4920s):\n- Team B (opponent of White) keeper positions: LEFT (2 times - 3930s Light Blue, 4110s Light Gold); RIGHT (6 times - 3000s Light Blue, 3090s Light Blue, 4080s Light Blue, 4500s Yellow, 4530s Light Blue, 4830s Lime Green).\n- Conclusion: Team B defends RIGHT goal, therefore attacks 'left-to-right'. Team A (White) defends LEFT goal, therefore attacks 'right-to-left'.\n\nNote: Frames with 'White keeper LEFT, White keeper RIGHT' in the same timestamp (e.g., 90s, 1770s) were excluded from defending goal frequency counts due to ambiguity regarding a single team's defending goal. Warmup frames were also excluded from keeper position analysis.",
+  "home_team_assignment": "EDIT_ME",
   "match_times_readable": {
     "start": "0m00s",
     "half_time": "34m00s",
-    "second_half_start": "48m30s",
+    "second_half_start": "47m00s",
     "end": "1h22m00s"
   },
-  "notes": "Team B's jersey color is generalized as 'Dark jerseys' to encompass variations like Black, Dark Blue, and Dark Blue/Black seen throughout the match. Team A's keeper color is listed as 'White keeper' based on explicit mentions, although this is not a distinct color from their field jerseys. Team B's keeper color is identified as 'Yellow keeper' as it is the most frequently mentioned distinct keeper color for the opposing team. There is a significant 'WARMUP' period after halftime (2130s-2730s) featuring 'Lime Green' jerseys, but subsequent 'IN-PLAY' frames revert to 'White vs Dark/Black' matchups, so the primary team colors are maintained.",
-  "home_team_assignment": "EDIT_ME",
   "video_url": "https://c.veocdn.com/010c72f5-2c21-422c-bcf2-c198a4fe3a96/standard/human/41c052f9/video.mp4?v=JMjGSpBo"
 }

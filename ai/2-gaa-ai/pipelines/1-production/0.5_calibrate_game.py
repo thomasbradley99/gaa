@@ -33,24 +33,20 @@ def describe_single_frame(frame_path: Path, timestamp_seconds: int) -> dict:
     try:
         prompt = f"""Frame at {timestamp_seconds}s. Report:
 
-1. Teams: [color] jerseys vs [color] jerseys
-2. Keepers (if visible): [color] keeper at LEFT goal, [color] keeper at RIGHT goal
+1. Teams: [color] jerseys vs [color] jerseys (be specific: "White", "Black", "Dark Blue", etc.)
+2. Keepers (if visible): [color] keeper LEFT, [color] keeper RIGHT
 3. Game state - choose ONE:
    - "THROW-UP" - referee throws up ball, players contesting
    - "IN-PLAY" - active match, players in motion
    - "HALFTIME" - players walking off field, leaving pitch
    - "WARMUP" - players standing around, no organized play
    - "END" - players shaking hands, celebrating, leaving field
-4. Possession & Direction (CRITICAL for attack direction detection):
-   - If ball is visible: Which color team has it?
-   - Which direction are they playing/attacking? (toward LEFT goal or toward RIGHT goal)
-   - Which goal is this team defending? (LEFT side or RIGHT side)
-5. Ball location: where is it? (center, penalty area, midfield, sideline, etc.)
-6. Activity level: active play / slow / stopped / players resting
+4. Ball location: where is it? (left area, center, right area, penalty box, etc.)
+5. Activity level: active play / slow / stopped / players resting
 
-Format example: "Blue vs White. Pink keeper LEFT, Green keeper RIGHT. IN-PLAY. Blue has possession, attacking toward RIGHT goal, defending LEFT. Ball at midfield. Active."
+Format example: "Blue jerseys vs White jerseys. Pink keeper LEFT, Green keeper RIGHT. IN-PLAY. Ball at midfield. Active."
 
-ALWAYS specify possession and direction when game is IN-PLAY. Be concise (2-4 lines)."""
+Be concise (2 lines max). Focus on accurate color identification."""
 
         with open(frame_path, 'rb') as f:
             frame_data = f.read()
@@ -85,23 +81,9 @@ def calibrate_game():
     print(f"Game: {ARGS.game}")
     print("=" * 70)
     
-    # Check if profile already exists - WARNING if it does
+    # Check if profile already exists
     if OUTPUT_FILE.exists():
-        print("")
-        print("⚠️  WARNING: game_profile.json already exists!")
-        print(f"   Location: {OUTPUT_FILE}")
-        print("")
-        print("   This script should only be run ONCE per game.")
-        print("   Running it again will OVERWRITE your existing configuration,")
-        print("   which could cause team assignment inconsistencies across AI runs!")
-        print("")
-        response = input("   Type 'OVERWRITE' to continue, or anything else to abort: ")
-        print("")
-        if response.strip() != 'OVERWRITE':
-            print("✅ Aborted - existing profile preserved")
-            return False
-        print("⚠️  Proceeding with OVERWRITE...")
-        print("=" * 70)
+        print(f"⚠️  Overwriting existing game_profile.json")
         print()
     
     # Check frames exist
@@ -194,21 +176,37 @@ Extract the following information:
    - 2nd Half START: Find the SECOND "THROW-UP" or "IN-PLAY" state (after halftime)
    - Match END: Find the last timestamp with "IN-PLAY" or first "END" state
    
-3. **ATTACKING DIRECTIONS:**
-   - In 1st half: Which team attacks left-to-right? Which attacks right-to-left?
-   - In 2nd half: Do they switch directions?
-   - Use possession and direction info from the frame descriptions
-   - Look for patterns: "Team X attacking toward RIGHT goal" = "left-to-right"
-   - Look for patterns: "Team X attacking toward LEFT goal" = "right-to-left"
-   - Teams typically SWITCH directions at halftime
+3. **ATTACKING DIRECTIONS - CRITICAL ANALYSIS:**
+   You MUST analyze goalkeeper positions systematically:
+   
+   STEP-BY-STEP METHOD:
+   a) List ALL 1st half frames (before halftime) that mention keeper colors at goals
+   b) Count frequency: How many times is Team A keeper at LEFT vs RIGHT goal?
+   c) Count frequency: How many times is Team B keeper at LEFT vs RIGHT goal?
+   d) The MOST FREQUENT position for each team is their defending goal
+   e) If Team X defends LEFT goal → attacks "right-to-left"
+   f) If Team X defends RIGHT goal → attacks "left-to-right"
+   g) Repeat for 2nd half (teams should switch directions at halftime)
+   
+   EXAMPLE LOGIC:
+   - If "Dark keeper LEFT" appears 15 times and "Dark keeper RIGHT" appears 3 times in 1st half
+     → Dark team defends LEFT → Dark attacks "right-to-left" in 1st half
+   - If "White keeper RIGHT" appears 12 times in 1st half
+     → White defends RIGHT → White attacks "left-to-right" in 1st half
+   
+   IGNORE:
+   - Frames where keepers aren't visible
+   - Warmup periods
+   - Contradictory individual frames (use MAJORITY pattern)
 
 **RULES:**
-- Use the timestamps AND possession/direction info from the descriptions
-- Be specific about colors (exact shades like "Light blue", "Dark blue", "White")
+- Count ALL keeper mentions systematically before deciding
+- Use FREQUENCY ANALYSIS - most common pattern wins
 - Times should be in SECONDS (integer)
 - Be conservative with start times - if game is active early, assume it started at 0
 - DO NOT try to determine home/away - that will be set manually
-- Attack direction should be consistent within each half (most common pattern wins)
+- Attack directions MUST be opposite for both teams in same half (one left-to-right, one right-to-left)
+- Include your frequency counts in the "notes" field for verification
 
 **OUTPUT FORMAT (JSON only, no markdown, no code blocks):**
 {{

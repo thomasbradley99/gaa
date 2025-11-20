@@ -13,9 +13,11 @@ dotenv.config();
 
 // Paths to data files
 const PITCH_FINDER_DATA = path.join(__dirname, '../frontend/src/components/pitch-finder/gaapitchfinder_data.json');
-// Try multiple possible paths for CSV files
+
+// Try multiple possible paths for CSV files (local GAA directory first, then CLANNAI)
 const possiblePaths = [
-  path.join(__dirname, '../../../CLANNAI/crm/veo/crm-clean/data/2-by-country/clubs_ireland.csv'),
+  path.join(__dirname, '../crm-data/veo/clubs_ireland.csv'),                                      // 1. Local GAA directory (preferred)
+  path.join(__dirname, '../../../CLANNAI/crm/veo/crm-clean/data/2-by-country/clubs_ireland.csv'), // 2. CLANNAI path (fallback)
   path.join(__dirname, '../../CLANNAI/crm/veo/crm-clean/data/2-by-country/clubs_ireland.csv'),
   path.join(process.cwd(), 'CLANNAI/crm/veo/crm-clean/data/2-by-country/clubs_ireland.csv'),
   path.join(__dirname, '../../../../CLANNAI/crm/veo/crm-clean/data/2-by-country/clubs_ireland.csv'),

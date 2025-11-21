@@ -28,7 +28,7 @@ export interface GameEvent {
    */
   time: number
   
-  /** Team that performed the action - supports color-based teams (e.g., "Black", "White") or traditional labels ("home", "away") */
+  /** Team that performed the action (can be color name like "Black"/"White" or "home"/"away") */
   team: string
   
   /** Type of action performed */
@@ -167,7 +167,7 @@ export const validateEvent = (event: any): event is GameEvent => {
   return (
     typeof event.id === 'string' &&
     typeof event.time === 'number' &&
-    typeof event.team === 'string' &&
+    (typeof event.team === 'string' && event.team.length > 0) &&
     typeof event.action === 'string' &&
     typeof event.outcome === 'string'
   )

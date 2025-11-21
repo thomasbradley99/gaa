@@ -18,8 +18,8 @@ interface UnifiedSidebarProps {
   currentTime: number
   duration: number
   onEventClick: (event: GameEvent) => void
-  teamFilter: string
-  onTeamFilterChange: (filter: string) => void
+  teamFilter: 'all' | 'home' | 'away'
+  onTeamFilterChange: (filter: 'all' | 'home' | 'away') => void
   isMobile?: boolean
   mobileVideoComponent?: React.ReactNode
   onRefresh?: () => void
@@ -53,6 +53,20 @@ export default function UnifiedSidebar({
   onAutoplayChange,
 }: UnifiedSidebarProps) {
   const [activeTab, setActiveTab] = useState<TabType>('stats')
+  
+  // Get unique team names from events (Black, White, etc.)
+  const teamNames = useMemo(() => {
+    const teams = new Set<string>()
+    allEvents.forEach(event => {
+      if (event.team) teams.add(event.team)
+    })
+    const teamArray = Array.from(teams)
+    // If no events yet, default to common team names
+    if (teamArray.length === 0) {
+      return ['Black', 'White']
+    }
+    return teamArray.length >= 2 ? [teamArray[0], teamArray[1]] : teamArray
+  }, [allEvents])
   
   // Edit mode state
   const [isEditMode, setIsEditMode] = useState(false)
@@ -96,42 +110,17 @@ export default function UnifiedSidebar({
   })
   const [showFilters, setShowFilters] = useState(false)
   
-  // Helper functions
-  
-  // Extract unique teams from events
-  const getUniqueTeams = (): string[] => {
-    const teams = new Set<string>()
-    allEvents.forEach(event => {
-      if (event.team) teams.add(event.team)
-    })
-    return Array.from(teams).sort()
-  }
-  
-  // Get unique teams (memoized)
-  const uniqueTeams = useMemo(() => getUniqueTeams(), [allEvents])
-  
   // Add event state
   const [isCreatingEvent, setIsCreatingEvent] = useState(false)
   const [newEvent, setNewEvent] = useState({
     type: 'shot',
-    team: '',
+    team: 'home',
     description: '',
     player: '',
     time: 0,
   })
-  
-  // Initialize team when uniqueTeams is available
-  useEffect(() => {
-    if (!newEvent.team && uniqueTeams.length > 0) {
-      setNewEvent(prev => ({ ...prev, team: uniqueTeams[0] }))
-    }
-  }, [uniqueTeams, newEvent.team])
-  
-  // Get team display name (capitalize first letter)
-  const getTeamDisplayName = (team: string): string => {
-    if (!team) return 'Unknown'
-    return team.charAt(0).toUpperCase() + team.slice(1)
-  }
+
+  // Helper functions
   
   // Get padding for an event (with defaults)
   const getEventPadding = (eventIndex: number) => {
@@ -249,7 +238,7 @@ export default function UnifiedSidebar({
       time: Math.floor(newEvent.time),
       action: isShot ? 'Shot' : eventType.charAt(0).toUpperCase() + eventType.slice(1),
       outcome: isShot ? eventType.charAt(0).toUpperCase() + eventType.slice(1) : 'N/A',
-      team: newEvent.team,
+      team: newEvent.team as 'home' | 'away',
       player: newEvent.player || undefined,
       description: newEvent.description || undefined,
       metadata: {
@@ -562,19 +551,30 @@ export default function UnifiedSidebar({
                 <div>
                   <label className="text-gray-300 block mb-2 text-sm font-medium">Team:</label>
                   <div className="grid grid-cols-3 gap-2">
-                    {getUniqueTeams().map((team) => (
+                    {teamNames.length >= 1 && (
                       <button
-                        key={team}
-                        onClick={() => onTeamFilterChange(team)}
+                        onClick={() => onTeamFilterChange(teamNames[0] as 'home' | 'away')}
                         className={`py-2 text-xs font-semibold rounded-lg border-2 transition-colors ${
-                          teamFilter === team
-                            ? 'bg-green-600/80 text-white border-green-500/50'
+                          teamFilter === teamNames[0]
+                            ? 'bg-black/80 text-white border-white/30'
                             : 'bg-gray-500/10 text-gray-400 border-gray-500/30 hover:bg-gray-500/20'
                         }`}
                       >
-                        {getTeamDisplayName(team)}
+                        {teamNames[0]}
                       </button>
-                    ))}
+                    )}
+                    {teamNames.length >= 2 && (
+                      <button
+                        onClick={() => onTeamFilterChange(teamNames[1] as 'home' | 'away')}
+                        className={`py-2 text-xs font-semibold rounded-lg border-2 transition-colors ${
+                          teamFilter === teamNames[1]
+                            ? 'bg-white/90 text-black border-white/50'
+                            : 'bg-gray-500/10 text-gray-400 border-gray-500/30 hover:bg-gray-500/20'
+                        }`}
+                      >
+                        {teamNames[1]}
+                      </button>
+                    )}
                     <button
                       onClick={() => onTeamFilterChange('all')}
                       className={`py-2 text-xs font-semibold rounded-lg border-2 transition-colors ${
@@ -583,7 +583,7 @@ export default function UnifiedSidebar({
                           : 'bg-gray-500/10 text-gray-400 border-gray-500/30 hover:bg-gray-500/20'
                       }`}
                     >
-                      All
+                      Both
                     </button>
                   </div>
                 </div>
@@ -755,11 +755,11 @@ export default function UnifiedSidebar({
                                 const jsonData = JSON.parse(text)
                                 let eventsArray = Array.isArray(jsonData) ? jsonData : (jsonData.events || jsonData.data || [])
                                 
-                                // Parse to master schema
+                                // Parse to master schema - preserve team names as-is (Black/White, not home/away)
                                 const parsedEvents = eventsArray.map((event: any, index: number) => ({
                                   id: event.id || `event_${index + 1}`,
                                   time: event.time ?? event.timestamp ?? 0,
-                                  team: event.team || 'home',
+                                  team: event.team || 'Black', // Preserve color names
                                   action: event.action || event.type || 'Shot',
                                   outcome: event.outcome || 'N/A',
                                   metadata: event.metadata || {}
@@ -887,16 +887,9 @@ export default function UnifiedSidebar({
                       onChange={(e) => setNewEvent({...newEvent, team: e.target.value})}
                       className="w-full bg-black text-white text-xs px-2 py-1 rounded border border-white/20 focus:border-white/50 focus:outline-none"
                     >
-                      {uniqueTeams.length > 0 ? (
-                        uniqueTeams.map((team) => (
-                          <option key={team} value={team}>{team}</option>
-                        ))
-                      ) : (
-                        <>
-                          <option value="Black">Black</option>
-                          <option value="White">White</option>
-                        </>
-                      )}
+                      {teamNames.map(team => (
+                        <option key={team} value={team}>{team}</option>
+                      ))}
                     </select>
                     
                     <input
@@ -1037,22 +1030,15 @@ export default function UnifiedSidebar({
                                       e.stopPropagation()
                                       handleUpdateEditModeEvent(originalIndex, {
                                         ...displayEvent,
-                                        team: e.target.value
+                                        team: e.target.value as 'home' | 'away'
                                       })
                                     }}
                                     onClick={(e) => e.stopPropagation()}
                                     className="w-full bg-black text-white text-xs px-2 py-1 rounded border border-white/20 focus:border-white/50 focus:outline-none"
                                   >
-                                    {uniqueTeams.length > 0 ? (
-                                      uniqueTeams.map((team) => (
-                                        <option key={team} value={team}>{team}</option>
-                                      ))
-                                    ) : (
-                                      <>
-                                        <option value="Black">Black</option>
-                                        <option value="White">White</option>
-                                      </>
-                                    )}
+                                    {teamNames.map(team => (
+                                      <option key={team} value={team}>{team}</option>
+                                    ))}
                                   </select>
                                   
                                   {/* Description */}
@@ -1102,13 +1088,11 @@ export default function UnifiedSidebar({
                                     
                                     {/* Team Badge */}
                                     <span className={`inline-flex items-center px-2 py-1 rounded-md text-xs font-medium border ${
-                                      event.team?.toLowerCase() === 'black' || event.team?.toLowerCase() === 'home'
+                                      event.team === 'home'
                                         ? 'bg-black/60 text-white border-white/30'
-                                        : event.team?.toLowerCase() === 'white' || event.team?.toLowerCase() === 'away'
-                                        ? 'bg-white/90 text-black border-white/50'
-                                        : 'bg-gray-600/60 text-white border-gray-500/30'
+                                        : 'bg-white/90 text-black border-white/50'
                                     }`}>
-                                      {getTeamDisplayName(event.team || 'Unknown')}
+                                      {event.team || 'Unknown'}
                                     </span>
                                   </div>
                                   

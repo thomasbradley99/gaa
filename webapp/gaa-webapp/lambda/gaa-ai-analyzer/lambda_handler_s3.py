@@ -31,7 +31,7 @@ from stages import (
 
 # Environment variables
 BACKEND_API_URL = os.environ.get('BACKEND_API_URL', 'http://localhost:4011')
-LAMBDA_API_KEY = os.environ.get('LAMBDA_API_KEY', 'gaa-lambda-secret-key')
+LAMBDA_API_KEY = os.environ.get('LAMBDA_API_KEY', 'gaa-lambda-secret-key-2024')
 GEMINI_API_KEY = os.environ['GEMINI_API_KEY']
 BUCKET_NAME = os.environ.get('AWS_BUCKET_NAME', 'clann-gaa-videos-nov25')
 AWS_REGION = os.environ.get('AWS_REGION', 'eu-west-1')

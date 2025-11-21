@@ -46,7 +46,7 @@ The match starts at {match_start} seconds ({match_start//60}m{match_start%60:02d
     {{
       "id": "event_001",
       "time": {match_start + 65},
-      "team": "home",
+      "team": "{team_a['jersey_color']}",
       "action": "Shot",
       "outcome": "Point",
       "metadata": {{
@@ -57,7 +57,7 @@ The match starts at {match_start} seconds ({match_start//60}m{match_start%60:02d
     {{
       "id": "event_002",
       "time": {match_start + 120},
-      "team": "away",
+      "team": "{team_b['jersey_color']}",
       "action": "Kickout",
       "outcome": "Won"
     }}
@@ -79,7 +79,7 @@ Point, Goal, Wide, Saved, Won, Lost, N/A
 - "time" must be ABSOLUTE VIDEO TIME in seconds (from video start at 0:00, NOT from match start)
 - For events in classified list: ADD {match_start} seconds to convert from match time to video time
 - Example: Event at "1:05" in match → {match_start} + 65 = {match_start + 65} seconds in video
-- Map jersey colors to team: "{team_a['jersey_color']}" = home, "{team_b['jersey_color']}" = away
+- Use jersey colors directly for team field: "{team_a['jersey_color']}" or "{team_b['jersey_color']}" (e.g., "Black", "White")
 - Generate unique IDs (e.g., "event_001", "event_002")
 - Include all events from the classified list
 

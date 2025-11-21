@@ -149,8 +149,9 @@ export default function AdminPage() {
       } else if (activeTab === 'teams') {
         fetchTeams()
       } else if (activeTab === 'users') {
-        // Fetch teams first when users tab is opened
+        // Fetch teams and all users when users tab is opened
         fetchTeams()
+        fetchUsers() // Fetch all users by default
       } else if (activeTab === 'clubs') {
         fetchClubs()
       }
@@ -163,7 +164,7 @@ export default function AdminPage() {
       if (selectedTeamId) {
         fetchUsers(selectedTeamId)
       } else {
-        setUsers([]) // Clear users if no team selected
+        fetchUsers() // Fetch all users if no team selected
       }
     }
   }, [selectedTeamId, activeTab, loading, user])
@@ -368,17 +369,17 @@ export default function AdminPage() {
             {/* Users Tab */}
             {activeTab === 'users' && (
               <div>
-                {/* Team Selector */}
+                {/* Team Filter */}
                 <div className="mb-6">
                   <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Select Team
+                    Filter by Team
                   </label>
                   <select
                     value={selectedTeamId}
                     onChange={(e) => setSelectedTeamId(e.target.value)}
                     className="w-full sm:w-auto px-4 py-2 bg-black/60 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#2D8B4D] focus:border-transparent"
                   >
-                    <option value="">-- Select a team --</option>
+                    <option value="">All Users</option>
                     {teams.map((team) => (
                       <option key={team.id} value={team.id}>
                         {team.name} ({team.member_count || 0} members)
@@ -387,12 +388,7 @@ export default function AdminPage() {
                   </select>
                 </div>
 
-                {!selectedTeamId ? (
-                  <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-12 text-center">
-                    <Users className="w-12 h-12 mx-auto text-gray-500 mb-4" />
-                    <p className="text-gray-400">Please select a team to view its members</p>
-                  </div>
-                ) : dataLoading ? (
+                {dataLoading ? (
                   <div className="text-center py-12">
                     <Loader2 className="w-8 h-8 mx-auto animate-spin text-[#2D8B4D]" />
                   </div>

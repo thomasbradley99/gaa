@@ -19,13 +19,9 @@
 - google auth on frontend
 - password reset
 - download functionality on videos
-- stats editing system
-  - allow users to edit event stats (scores, fouls, etc.)
-  - commit stat changes to database
-  - ai coach reads current stats from db (including user edits)
-  - mark edited events (useredited flag in metadata)
 - user company / sales / admin accounts
 - user adds colour to team and ai picks it up
+- user can select team colour and assign themselves to that team
 - // make scraper for team colours and autofill 
 
 ## nice to have

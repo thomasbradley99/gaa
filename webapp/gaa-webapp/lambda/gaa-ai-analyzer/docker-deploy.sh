@@ -16,8 +16,8 @@ ECR_REPOSITORY="${FUNCTION_NAME}"
 ECR_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/${ECR_REPOSITORY}"
 
 # Environment variables (from .env file or passed in)
-GEMINI_API_KEY="${GEMINI_API_KEY:-AIzaSyDjpe_vHrJmwc7P9-93Bg7ICFSw195CaP0}"
-BACKEND_API_URL="${BACKEND_API_URL:-http://localhost:4011}"
+GEMINI_API_KEY="${GEMINI_API_KEY:-AIzaSyD1Wxu58da6jYGPsKUR1JrVIR61Pu03Eno}"
+BACKEND_API_URL="${BACKEND_API_URL:-https://api-gaa.clannai.com}"
 LAMBDA_API_KEY="${LAMBDA_API_KEY:-gaa-lambda-secret-key-2024}"
 DATABASE_URL="${DATABASE_URL:-postgresql://gaaadmin:YourSecurePassword123!@clann-gaa-db-nov25.cfcgo2cma4or.eu-west-1.rds.amazonaws.com:5432/gaa_app}"
 AWS_BUCKET_NAME="${AWS_BUCKET_NAME:-clann-gaa-videos-nov25}"

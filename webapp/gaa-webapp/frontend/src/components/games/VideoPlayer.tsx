@@ -386,6 +386,13 @@ export default function VideoPlayer({
   const getEventColor = (event: GameEvent) => {
     const eventTeam = event.team?.toLowerCase() || ''
     
+    // First check if event team is a direct color match (e.g., "black", "white")
+    const eventTeamColor = getTeamCSSColor(eventTeam)
+    if (eventTeamColor !== eventTeam) {
+      // If getTeamCSSColor returned a hex color, it means it recognized the color
+      return eventTeamColor
+    }
+    
     // Check if event team matches home team
     if (eventTeam === homeTeam.name.toLowerCase() || 
         eventTeam.includes(homeTeam.name.toLowerCase()) ||
@@ -399,6 +406,16 @@ export default function VideoPlayer({
         eventTeam.includes(awayTeam.name.toLowerCase()) ||
         awayTeam.name.toLowerCase().includes(eventTeam) ||
         eventTeam === 'away') {
+      return getTeamCSSColor(awayTeam.jersey_color)
+    }
+    
+    // Try to match by jersey color name
+    const homeColorName = homeTeam.jersey_color.toLowerCase().trim()
+    const awayColorName = awayTeam.jersey_color.toLowerCase().trim()
+    if (eventTeam === homeColorName || eventTeam.includes(homeColorName) || homeColorName.includes(eventTeam)) {
+      return getTeamCSSColor(homeTeam.jersey_color)
+    }
+    if (eventTeam === awayColorName || eventTeam.includes(awayColorName) || awayColorName.includes(eventTeam)) {
       return getTeamCSSColor(awayTeam.jersey_color)
     }
     

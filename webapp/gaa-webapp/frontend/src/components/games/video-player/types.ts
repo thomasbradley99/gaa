@@ -36,7 +36,7 @@ export interface VideoOverlayTimelineProps {
   duration: number
   currentTime: number
   onSeek: (time: number) => void
-  teamFilter?: 'all' | 'home' | 'away'
+  teamFilter?: string
   selectedEventTypes?: string[]
 }
 
@@ -49,6 +49,6 @@ export interface VideoPlayerContainerProps {
   className?: string
   showTimeline?: boolean
   showControls?: boolean
-  teamFilter?: 'all' | 'home' | 'away'
+  teamFilter?: string
 }
 

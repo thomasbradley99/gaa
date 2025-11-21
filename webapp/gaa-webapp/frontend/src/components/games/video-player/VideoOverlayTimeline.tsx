@@ -20,10 +20,15 @@ export function VideoOverlayTimeline({
     return `${mins}:${secs.toString().padStart(2, '0')}`
   }
 
-  // Get color for team - white for home, black for away
+  // Get color for team - supports colors like "Black", "White" or "home"/"away"
   const getTeamColor = (team?: string) => {
-    if (team === 'home' || team === 'red') return 'bg-white border-white/70'
-    if (team === 'away' || team === 'blue') return 'bg-black border-black/70'
+    if (!team) return 'bg-gray-500 border-gray-700'
+    const teamLower = team.toLowerCase()
+    if (teamLower === 'home' || teamLower === 'red' || teamLower === 'white') return 'bg-white border-white/70'
+    if (teamLower === 'away' || teamLower === 'blue' || teamLower === 'black') return 'bg-black border-black/70'
+    // Try to match common colors
+    if (teamLower.includes('white')) return 'bg-white border-white/70'
+    if (teamLower.includes('black')) return 'bg-black border-black/70'
     return 'bg-gray-500 border-gray-700' // Default for unknown teams
   }
 
@@ -120,10 +125,10 @@ export function VideoOverlayTimeline({
             <div className="flex items-center gap-2 min-w-[180px]">
               <div
                 className={`px-2 py-1 rounded text-xs font-semibold ${
-                  currentEvent.team === 'home' ? 'bg-white text-black' : 'bg-black text-white'
+                  getTeamColor(currentEvent.team).includes('white') ? 'bg-white text-black' : 'bg-black text-white'
                 }`}
               >
-                {currentEvent.team === 'home' ? 'Home' : 'Away'}
+                {currentEvent.team ? currentEvent.team.charAt(0).toUpperCase() + currentEvent.team.slice(1) : 'Unknown'}
               </div>
               <span className="text-xs font-medium text-white whitespace-nowrap">
                 {currentEvent.type}
@@ -196,7 +201,7 @@ export function VideoOverlayTimeline({
             style={{ left: `${(hoveredEvent.time / duration) * 100}%` }}
           >
             <div className="font-bold">{hoveredEvent.type}</div>
-            <div>{hoveredEvent.team === 'home' ? 'Home' : 'Away'}</div>
+            <div>{hoveredEvent.team ? hoveredEvent.team.charAt(0).toUpperCase() + hoveredEvent.team.slice(1) : 'Unknown'}</div>
             {hoveredEvent.player && <div>{hoveredEvent.player}</div>}
             <div>{formatTime(hoveredEvent.time)}</div>
           </div>

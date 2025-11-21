@@ -20,8 +20,13 @@ interface GameStatsProps {
 
 export function GameStats({ game, events, duration }: GameStatsProps) {
   const stats = useMemo(() => {
-    const homeEvents = events.filter((e) => e.team === 'home')
-    const awayEvents = events.filter((e) => e.team === 'away')
+    // Extract unique teams from events
+    const uniqueTeams = Array.from(new Set(events.map(e => e.team).filter(Boolean)))
+    const team1 = uniqueTeams[0] || 'home'
+    const team2 = uniqueTeams[1] || 'away'
+    
+    const homeEvents = events.filter((e) => e.team === team1)
+    const awayEvents = events.filter((e) => e.team === team2)
 
     // Calculate possession (simplified - based on events)
     const totalPossessions = events.length
@@ -198,9 +203,12 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
 
     // Score
     doc.setFontSize(16)
-    doc.text('HOME', 20, yPos)
+    const uniqueTeams = Array.from(new Set(events.map(e => e.team).filter(Boolean)))
+    const team1Name = uniqueTeams[0]?.toUpperCase() || 'HOME'
+    const team2Name = uniqueTeams[1]?.toUpperCase() || 'AWAY'
+    doc.text(team1Name, 20, yPos)
     doc.text(`${stats.home.goals} - ${stats.home.points}`, 60, yPos)
-    doc.text('AWAY', 120, yPos)
+    doc.text(team2Name, 120, yPos)
     doc.text(`${stats.away.goals} - ${stats.away.points}`, 160, yPos)
     yPos += 15
 
@@ -346,11 +354,21 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
       {/* Score Display - Anadi Style */}
       <div className="flex items-center justify-center gap-4 sm:gap-16 mb-6 sm:mb-8 pb-4 sm:pb-6 border-b-2 border-gray-700">
         <div className="text-center">
-          <div className="text-xl sm:text-4xl font-bold text-white mb-1 sm:mb-2">HOME</div>
+          <div className="text-xl sm:text-4xl font-bold text-white mb-1 sm:mb-2">
+            {(() => {
+              const uniqueTeams = Array.from(new Set(events.map(e => e.team).filter(Boolean)))
+              return uniqueTeams[0]?.toUpperCase() || 'HOME'
+            })()}
+          </div>
           <div className="text-2xl sm:text-5xl font-bold text-white">{stats.home.goals} - {stats.home.points}</div>
         </div>
         <div className="text-center">
-          <div className="text-xl sm:text-4xl font-bold text-white mb-1 sm:mb-2">AWAY</div>
+          <div className="text-xl sm:text-4xl font-bold text-white mb-1 sm:mb-2">
+            {(() => {
+              const uniqueTeams = Array.from(new Set(events.map(e => e.team).filter(Boolean)))
+              return uniqueTeams[1]?.toUpperCase() || 'AWAY'
+            })()}
+          </div>
           <div className="text-2xl sm:text-5xl font-bold text-white">{stats.away.goals} - {stats.away.points}</div>
         </div>
       </div>

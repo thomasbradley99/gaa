@@ -8,8 +8,8 @@ interface EventListProps {
   events: GameEvent[]
   currentTime: number
   onEventClick: (event: GameEvent) => void
-  teamFilter?: 'all' | 'home' | 'away'
-  onTeamFilterChange?: (filter: 'all' | 'home' | 'away') => void
+  teamFilter?: string
+  onTeamFilterChange?: (filter: string) => void
 }
 
 export function EventList({
@@ -71,12 +71,13 @@ export function EventList({
             <Filter className="w-4 h-4 text-gray-400" />
             <select
               value={teamFilter}
-              onChange={(e) => onTeamFilterChange(e.target.value as 'all' | 'home' | 'away')}
+              onChange={(e) => onTeamFilterChange?.(e.target.value)}
               className="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
             >
               <option value="all">All Teams</option>
-              <option value="home">Home</option>
-              <option value="away">Away</option>
+              {Array.from(new Set(events.map(e => e.team).filter(Boolean))).map(team => (
+                <option key={team} value={team}>{team.charAt(0).toUpperCase() + team.slice(1)}</option>
+              ))}
             </select>
           </div>
         )}
@@ -121,10 +122,14 @@ export function EventList({
                   <div className="flex items-center gap-2 mb-1">
                     <span
                       className={`px-2 py-0.5 rounded text-xs font-semibold ${
-                        event.team === 'home' ? 'bg-white text-black' : 'bg-black text-white'
+                        event.team?.toLowerCase() === 'black' || event.team?.toLowerCase() === 'home'
+                          ? 'bg-black text-white'
+                          : event.team?.toLowerCase() === 'white' || event.team?.toLowerCase() === 'away'
+                          ? 'bg-white text-black'
+                          : 'bg-gray-600 text-white'
                       }`}
                     >
-                      {event.team === 'home' ? 'Home' : 'Away'}
+                      {event.team ? event.team.charAt(0).toUpperCase() + event.team.slice(1) : 'Unknown'}
                     </span>
                     <span className="text-sm font-semibold text-white">
                       {getEventTypeLabel(event)}

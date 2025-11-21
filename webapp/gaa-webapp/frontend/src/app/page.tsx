@@ -105,7 +105,7 @@ function HomePage() {
   const [demoCurrentTime, setDemoCurrentTime] = useState(0)
   const [demoDuration, setDemoDuration] = useState(0)
   const [showDemoSidebar, setShowDemoSidebar] = useState(true)
-  const [demoTeamFilter, setDemoTeamFilter] = useState<'all' | 'home' | 'away'>('all')
+  const [demoTeamFilter, setDemoTeamFilter] = useState<string>('all')
   
   // Check if mobile for default sidebar state
   useEffect(() => {

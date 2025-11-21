@@ -136,7 +136,7 @@ export default function GameDetailPage() {
   const [currentEventIndex, setCurrentEventIndex] = useState(-1)
   const [showRightSidebar, setShowRightSidebar] = useState(true)
   const [showLeftSidebar, setShowLeftSidebar] = useState(true)
-  const [teamFilter, setTeamFilter] = useState<'all' | 'home' | 'away'>('all')
+  const [teamFilter, setTeamFilter] = useState<string>('all')
   const [eventPaddings, setEventPaddings] = useState<Map<number, { beforePadding: number, afterPadding: number }>>(new Map())
   const [autoplayEnabled, setAutoplayEnabled] = useState(false)
 

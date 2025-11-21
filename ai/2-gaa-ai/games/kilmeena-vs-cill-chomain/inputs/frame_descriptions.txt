@@ -1,166 +1,170 @@
-00000s (00m00s): White vs Dark. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+00000s (00m00s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
 00030s (00m30s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-00060s (01m00s): Black vs White. Black keeper LEFT, White keeper RIGHT. IN-PLAY. USEFUL.
-00090s (01m30s): Black vs White. White keeper LEFT, Black keeper RIGHT. IN-PLAY. USEFUL.
-00120s (02m00s): Dark vs White. Dark attacking toward RIGHT goal area. IN-PLAY. USEFUL.
-00150s (02m30s): Black vs White. Black player kicking toward RIGHT goal. IN-PLAY. USEFUL.
-00180s (03m00s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-00210s (03m30s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-00240s (04m00s): Black vs White. White keeper RIGHT. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-00270s (04m30s): Dark Blue vs White. Dark Blue keeper LEFT, White keeper RIGHT. IN-PLAY. USEFUL.
-00300s (05m00s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-00330s (05m30s): Black vs White. Ball midfield, players gathered around fallen player, no clear action. IN-PLAY. NOT USEFUL.
-00360s (06m00s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-00390s (06m30s): Dark vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+00060s (01m00s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+00090s (01m30s): White vs Dark. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+00120s (02m00s): Black vs White. White team attacking toward RIGHT goal. IN-PLAY. USEFUL.
+00150s (02m30s): White vs Black. White player taking a kick toward RIGHT goal. IN-PLAY. USEFUL.
+00180s (03m00s): White vs Black. White attacking toward RIGHT penalty area. IN-PLAY. USEFUL.
+00210s (03m30s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+00240s (04m00s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+00270s (04m30s): Black vs White. Black keeper LEFT, White keeper RIGHT. IN-PLAY. USEFUL.
+00300s (05m00s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+00330s (05m30s): Dark vs White. Ball contested on ground mid-field, no clear action. IN-PLAY. NOT USEFUL.
+00360s (06m00s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+00390s (06m30s): White vs Dark Blue. Light Blue keeper LEFT. IN-PLAY. NOT USEFUL.
 00420s (07m00s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-00450s (07m30s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-00480s (08m00s): Black vs White. White player (21) attacking toward LEFT goal. IN-PLAY. USEFUL.
+00450s (07m30s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+00480s (08m00s): White vs Black. White attacking toward LEFT goal. IN-PLAY. USEFUL.
 00510s (08m30s): Dark Blue vs White. Dark Blue attacking toward LEFT goal. IN-PLAY. USEFUL.
-00540s (09m00s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-00570s (09m30s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-00600s (10m00s): Dark Blue vs White. Dark Blue player taking free kick toward RIGHT goal. IN-PLAY. USEFUL.
-00630s (10m30s): Dark Blue vs White. Dark Blue attacking toward LEFT penalty area. IN-PLAY. USEFUL.
-00660s (11m00s): White vs Dark. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-00690s (11m30s): Dark Blue vs White. LEFT goal: Yellow keeper. IN-PLAY. NOT USEFUL.
-00720s (12m00s): Dark vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+00540s (09m00s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+00570s (09m30s): White vs Light Brown. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+00600s (10m00s): Dark vs White. Dark player attacking toward LEFT goal. IN-PLAY. USEFUL.
+00630s (10m30s): Dark Blue vs White. Dark Blue attacking toward RIGHT goal. IN-PLAY. USEFUL.
+00660s (11m00s): Dark Blue vs White. Dark Blue attacking toward RIGHT side of the field. IN-PLAY. USEFUL.
+00690s (11m30s): Dark Blue vs White. White keeper LEFT. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+00720s (12m00s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
 00750s (12m30s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
 00780s (13m00s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-00810s (13m30s): Dark vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-00840s (14m00s): White vs Dark Blue. Dark Blue attacking toward RIGHT goal. IN-PLAY. USEFUL.
+00810s (13m30s): White vs Dark. Dark keeper LEFT, White keeper RIGHT. IN-PLAY. USEFUL.
+00840s (14m00s): Dark vs White. Dark attacking toward LEFT goal. IN-PLAY. USEFUL.
 00870s (14m30s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-00900s (15m00s): Dark Blue vs White. Dark Blue player celebrating toward LEFT goal. IN-PLAY. USEFUL.
+00900s (15m00s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
 00930s (15m30s): White vs Dark. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-00960s (16m00s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+00960s (16m00s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
 00990s (16m30s): Dark vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-01020s (17m00s): Dark Brown/Black vs White. Dark Brown/Black attacking toward LEFT goal. IN-PLAY. USEFUL.
-01050s (17m30s): Black vs White. Black attacking toward RIGHT penalty area. IN-PLAY. USEFUL.
-01080s (18m00s): Dark vs White. Dark player shooting toward RIGHT goal. IN-PLAY. USEFUL.
+01020s (17m00s): Dark vs White. Dark player #15 attacking toward RIGHT goal. IN-PLAY. USEFUL.
+01050s (17m30s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+01080s (18m00s): White vs Dark Blue. Dark Blue player kicking toward RIGHT goal. IN-PLAY. USEFUL.
 01110s (18m30s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-01140s (19m00s): Dark vs White. Dark attacking toward LEFT goal. IN-PLAY. USEFUL.
-01170s (19m30s): White vs Dark Blue. White attacking toward RIGHT penalty area. IN-PLAY. USEFUL.
-01200s (20m00s): Black vs White. White attacking toward RIGHT goal. IN-PLAY. USEFUL.
-01230s (20m30s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-01260s (21m00s): White vs Dark. Ball near right sideline, no clear attacking action. IN-PLAY. NOT USEFUL.
-01290s (21m30s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-01320s (22m00s): Black vs White. Ball contested midfield, no clear attacking action. IN-PLAY. NOT USEFUL.
+01140s (19m00s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+01170s (19m30s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+01200s (20m00s): Dark Blue vs White. White player attacking toward RIGHT goal area. IN-PLAY. USEFUL.
+01230s (20m30s): Black vs White. No clear attacking action. IN-PLAY. NOT USEFUL.
+01260s (21m00s): Black vs White. Ball midfield, players gathered around one on the ground. IN-PLAY. NOT USEFUL.
+01290s (21m30s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+01320s (22m00s): Teams: Black vs White.
+Attacking action: No clear attacking action visible. Ball is midfield.
+Keepers: White keeper visible at LEFT goal. No Black keeper is clearly visible at the RIGHT goal; only white jerseys are seen defending it, which conflicts with reporting both keepers as the same color.
+Game state: IN-PLAY.
+Frame usefulness: NOT USEFUL.
 01350s (22m30s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-01380s (23m00s): Dark Blue vs White. Dark Blue attacking toward RIGHT penalty area. IN-PLAY. USEFUL.
-01410s (23m30s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-01440s (24m00s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-01470s (24m30s): Dark Blue vs White. Dark Blue attacking toward RIGHT goal. IN-PLAY. USEFUL.
+01380s (23m00s): Dark vs White. Dark player attacking toward RIGHT goal. IN-PLAY. USEFUL.
+01410s (23m30s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+01440s (24m00s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+01470s (24m30s): Dark vs White. Dark player attacking toward RIGHT goal. IN-PLAY. USEFUL.
 01500s (25m00s): Dark Blue vs White. Dark Blue attacking toward RIGHT goal. IN-PLAY. USEFUL.
-01530s (25m30s): White vs Black. White attacking toward RIGHT goal. IN-PLAY. USEFUL.
+01530s (25m30s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
 01560s (26m00s): Dark vs White. White player taking free kick toward RIGHT goal. IN-PLAY. USEFUL.
-01590s (26m30s): Black vs White. White keeper RIGHT. IN-PLAY. NOT USEFUL.
+01590s (26m30s): Black vs White. Black player #15 attacking toward RIGHT goal. IN-PLAY. USEFUL.
 01620s (27m00s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-01650s (27m30s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-01680s (28m00s): Black vs White. Black attacking toward RIGHT goal. IN-PLAY. USEFUL.
+01650s (27m30s): Dark vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+01680s (28m00s): White vs Black. White attacking toward RIGHT goal. IN-PLAY. USEFUL.
 01710s (28m30s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-01740s (29m00s): Black vs White. Black player attacking toward RIGHT goal. IN-PLAY. USEFUL.
-01770s (29m30s): Black vs White. Black attacking toward RIGHT goal. IN-PLAY. USEFUL.
-01800s (30m00s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-01830s (30m30s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+01740s (29m00s): Dark Blue vs White. Dark Blue attacking toward RIGHT goal. IN-PLAY. USEFUL.
+01770s (29m30s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+01800s (30m00s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+01830s (30m30s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
 01860s (31m00s): White vs Black. White player attacking toward LEFT goal. IN-PLAY. USEFUL.
-01890s (31m30s): Black vs White. Black player with ball attacking toward RIGHT goal. IN-PLAY. USEFUL.
-01920s (32m00s): Dark vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-01950s (32m30s): Dark vs White. Dark attacking toward LEFT goal. IN-PLAY. USEFUL.
+01890s (31m30s): Black vs White. Black player attacking toward RIGHT goal. IN-PLAY. USEFUL.
+01920s (32m00s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+01950s (32m30s): White vs Dark. White attacking toward RIGHT goal. IN-PLAY. USEFUL.
 01980s (33m00s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-02010s (33m30s): Dark vs Light Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-02040s (34m00s): Dark Blue vs Orange. Ball midfield, no clear action. HALFTIME. NOT USEFUL.
-02070s (34m30s): Dark Blue vs White. No clear action visible. HALFTIME. NOT USEFUL.
-02100s (35m00s): Lime Green vs Unknown. No clear action. WARMUP. NOT USEFUL.
+02010s (33m30s): Light Blue vs Dark. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+02040s (34m00s): Dark Blue vs White. Ball midfield, no clear action. END. NOT USEFUL.
+02070s (34m30s): Cannot identify team colors. Ball far right, no clear action. IN-PLAY. NOT USEFUL.
+02100s (35m00s): Fluorescent Yellow vs Undefined. No clear attacking action. WARMUP. NOT USEFUL.
 02130s (35m30s): Lime Green vs Dark. Lime Green attacking toward RIGHT goal. IN-PLAY. USEFUL.
-02160s (36m00s): Lime Green vs Dark Green. Ball midfield, no clear action. WARMUP. NOT USEFUL.
-02190s (36m30s): Lime Green vs None (training). No clear attacking action. WARMUP. NOT USEFUL.
-02220s (37m00s): Light Green/Yellow vs Black. Ball midfield, no clear action. WARMUP. NOT USEFUL.
-02250s (37m30s): Lime Green vs Dark Blue/Black. Dark Blue/Black player kicking toward RIGHT goal. WARMUP. USEFUL.
-02280s (38m00s): Bright Green/Yellow players. Bright Green/Yellow player kicking toward RIGHT goal. WARMUP. NOT USEFUL.
-02310s (38m30s): Lime Green vs Dark Blue. Players gathered, no clear action. WARMUP. NOT USEFUL.
-02340s (39m00s): Lime Green vs Dark Blue. Dark Blue player kicking toward RIGHT goal. WARMUP. USEFUL.
-02370s (39m30s): Lime Green vs White. Lime Green attacking toward RIGHT goal. IN-PLAY. USEFUL.
-02400s (40m00s): Lime Green vs N/A. No clear attacking action. WARMUP. NOT USEFUL.
-02430s (40m30s): Green vs White. Ball midfield, no clear action. WARMUP. NOT USEFUL.
-02460s (41m00s): Bright yellow-green vs Bright yellow-green. Ball midfield, no clear action. WARMUP. NOT USEFUL.
-02490s (41m30s): Lime Green vs Dark. Ball midfield, no clear action. WARMUP. NOT USEFUL.
-02520s (42m00s): Lime Green vs N/A. Ball midfield, no clear action. WARMUP. NOT USEFUL.
-02550s (42m30s): Neon Green vs Unknown. Ball midfield, no clear action. WARMUP. NOT USEFUL.
-02580s (43m00s): Green vs Green. Ball midfield, no clear action. WARMUP. NOT USEFUL.
-02610s (43m30s): Green vs White. Ball midfield, no clear action. WARMUP. NOT USEFUL.
-02640s (44m00s): Lime Green/Black vs N/A. No attacking action. WARMUP. NOT USEFUL.
-02670s (44m30s): Lime Green vs White. Ball midfield, no clear action. WARMUP. NOT USEFUL.
-02700s (45m00s): Lime Green vs Dark Green. Ball midfield, no clear action. WARMUP. NOT USEFUL.
-02730s (45m30s): Lime Green vs Light Blue. Light Blue keeper LEFT. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+02160s (36m00s): Black vs Lime Green. Black player attacking toward RIGHT goal. IN-PLAY. USEFUL.
+02190s (36m30s): Lime Green vs Black. No clear attacking action. WARMUP. NOT USEFUL.
+02220s (37m00s): Green vs Black. Ball midfield, no clear action. WARMUP. NOT USEFUL.
+02250s (37m30s): Dark vs Bright Green. Dark player kicking toward RIGHT goal. IN-PLAY. USEFUL.
+02280s (38m00s): Lime Green vs Dark Green. Lime Green player shooting toward RIGHT goal. WARMUP. NOT USEFUL.
+02310s (38m30s): Lime Green vs Black. Ball midfield, no clear action. WARMUP. NOT USEFUL.
+02340s (39m00s): Dark Blue vs Green. Dark Blue player kicking toward RIGHT goal. IN-PLAY. USEFUL.
+02370s (39m30s): Lime Green vs Light Blue. Lime Green shooting toward RIGHT goal. IN-PLAY. USEFUL.
+02400s (40m00s): Lime Green jerseys vs Unknown jerseys. WARMUP. NOT USEFUL.
+02430s (40m30s): Bright Green vs White. Ball midfield, no clear action. WARMUP. NOT USEFUL.
+02460s (41m00s): Green/Yellow vs Dark Green. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+02490s (41m30s): Lime Green vs Dark Blue/Black. Dark Blue/Black player attacking toward RIGHT goal. WARMUP. USEFUL.
+02520s (42m00s): Lime Green vs Dark. Ball midfield, no clear action. WARMUP. NOT USEFUL.
+02550s (42m30s): Only Lime Green jerseys visible. Ball midfield, no clear action. WARMUP. NOT USEFUL.
+02580s (43m00s): Yellow-green vs Dark. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+02610s (43m30s): Lime Green/Yellow vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+02640s (44m00s): Lime Green vs Dark Grey. Ball midfield, no clear action. WARMUP. NOT USEFUL.
+02670s (44m30s): Green vs Green. Ball midfield, no clear action. WARMUP. NOT USEFUL.
+02700s (45m00s): Lime Green vs Dark Blue. Ball midfield, no clear action. WARMUP. NOT USEFUL.
+02730s (45m30s): Lime Green vs Dark Blue. Lime Green player attacking toward RIGHT goal. IN-PLAY. USEFUL.
 02760s (46m00s): Dark vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-02790s (46m30s): Black vs White. Ball midfield, no clear action. THROW-UP. NOT USEFUL.
-02820s (47m00s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+02790s (46m30s): Black vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+02820s (47m00s): White vs Dark Blue. Ball midfield, no clear action. THROW-UP. NOT USEFUL.
 02850s (47m30s): White vs Dark. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-02880s (48m00s): White vs Dark Blue. Ball midfield, players gathered. THROW-UP. NOT USEFUL.
-02910s (48m30s): White vs Dark. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-02940s (49m00s): Black vs White. White keeper LEFT, Black keeper RIGHT. IN-PLAY. USEFUL.
-02970s (49m30s): Black vs White. Black attacking toward LEFT goal. IN-PLAY. USEFUL.
+02880s (48m00s): White vs Dark Blue. Ball midfield, no clear action. THROW-UP. NOT USEFUL.
+02910s (48m30s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+02940s (49m00s): Dark Blue vs White. White keeper LEFT. IN-PLAY. NOT USEFUL.
+02970s (49m30s): White vs Dark. White keeper LEFT. IN-PLAY. NOT USEFUL.
 03000s (50m00s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-03030s (50m30s): Black vs White. White attacking toward RIGHT goal. IN-PLAY. USEFUL.
-03060s (51m00s): Black vs White. Black attacking toward RIGHT goal. IN-PLAY. USEFUL.
-03090s (51m30s): White vs Dark Blue. Light Blue keeper RIGHT. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-03120s (52m00s): Black vs White. Black attacking toward LEFT goal. IN-PLAY. USEFUL.
-03150s (52m30s): Dark Blue vs White. Dark Blue attacking toward LEFT goal area. IN-PLAY. USEFUL.
-03180s (53m00s): White vs Black. White keeper LEFT, Black keeper RIGHT. IN-PLAY. USEFUL.
-03210s (53m30s): White vs Dark Blue/Black. Dark Blue attacking toward RIGHT goal area. IN-PLAY. USEFUL.
-03240s (54m00s): Dark Blue vs White. Dark Blue attacking toward RIGHT. IN-PLAY. USEFUL.
+03030s (50m30s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+03060s (51m00s): Dark Blue/Black vs White. Dark Blue/Black attacking toward RIGHT goal. IN-PLAY. USEFUL.
+03090s (51m30s): White vs Dark Blue. White attacking toward RIGHT goal. IN-PLAY. USEFUL.
+03120s (52m00s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+03150s (52m30s): Dark Blue vs White. White keeper LEFT, Dark Blue keeper RIGHT. IN-PLAY. USEFUL.
+03180s (53m00s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+03210s (53m30s): Dark Blue vs White. Dark Blue attacking toward RIGHT goal. IN-PLAY. USEFUL.
+03240s (54m00s): White vs Dark Blue. White attacking toward RIGHT. IN-PLAY. USEFUL.
 03270s (54m30s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-03300s (55m00s): Black vs White. Black attacking toward LEFT goal. IN-PLAY. USEFUL.
-03330s (55m30s): White vs Black. White attacking toward RIGHT goal. IN-PLAY. USEFUL.
+03300s (55m00s): Black vs White. White player attacking toward LEFT goal. IN-PLAY. USEFUL.
+03330s (55m30s): White vs Dark. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
 03360s (56m00s): Dark Blue vs White. White keeper LEFT. IN-PLAY. NOT USEFUL.
-03390s (56m30s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-03420s (57m00s): Dark Blue vs White. Dark Blue attacking toward RIGHT goal. IN-PLAY. USEFUL.
-03450s (57m30s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-03480s (58m00s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-03510s (58m30s): White vs Dark. Ball midfield, no clear action. WARMUP. NOT USEFUL.
+03390s (56m30s): Dark Blue vs White. White player attacking toward RIGHT goal. IN-PLAY. USEFUL.
+03420s (57m00s): Dark Blue vs White. Dark Blue attacking toward RIGHT penalty area. IN-PLAY. USEFUL.
+03450s (57m30s): Dark Blue vs White. Dark Blue attacking toward RIGHT goal area. IN-PLAY. USEFUL.
+03480s (58m00s): White vs Black. Ball midfield, no clear action. WARMUP. NOT USEFUL.
+03510s (58m30s): White vs Dark Blue. Light Blue keeper RIGHT. IN-PLAY. NOT USEFUL.
 03540s (59m00s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-03570s (59m30s): White vs Dark. Dark attacking toward RIGHT goal. IN-PLAY. USEFUL.
-03600s (60m00s): Dark Blue vs White. Dark Blue attacking toward RIGHT penalty area. IN-PLAY. USEFUL.
-03630s (60m30s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-03660s (61m00s): Dark vs White. White attacking toward RIGHT goal. IN-PLAY. USEFUL.
-03690s (61m30s): Dark vs White. Dark attacking toward RIGHT. IN-PLAY. USEFUL.
-03720s (62m00s): Dark vs White. Dark attacking toward RIGHT goal. IN-PLAY. USEFUL.
+03570s (59m30s): White vs Dark Blue. White keeper RIGHT. IN-PLAY. NOT USEFUL.
+03600s (60m00s): Dark Blue vs White. Dark Blue attacking toward RIGHT goal. IN-PLAY. USEFUL.
+03630s (60m30s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+03660s (61m00s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+03690s (61m30s): Black vs White. Black attacking toward RIGHT goal. IN-PLAY. USEFUL.
+03720s (62m00s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
 03750s (62m30s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-03780s (63m00s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-03810s (63m30s): Black vs White. Black player attacking toward RIGHT goal. IN-PLAY. USEFUL.
-03840s (64m00s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-03870s (64m30s): Dark Blue vs White. Dark Blue attacking toward RIGHT goal. IN-PLAY. USEFUL.
-03900s (65m00s): White vs Dark Blue. Dark Blue keeper RIGHT, White keeper LEFT. IN-PLAY. USEFUL.
-03930s (65m30s): Black vs White. Black attacking toward RIGHT goal. IN-PLAY. USEFUL.
-03960s (66m00s): Dark Blue vs White. Orange keeper LEFT. IN-PLAY. NOT USEFUL.
-03990s (66m30s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-04020s (67m00s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-04050s (67m30s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-04080s (68m00s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+03780s (63m00s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+03810s (63m30s): Dark vs White. Dark player with ball attacking toward LEFT goal area. IN-PLAY. USEFUL.
+03840s (64m00s): Black vs White. Black attacking toward LEFT goal. IN-PLAY. USEFUL.
+03870s (64m30s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+03900s (65m00s): Dark vs White. Dark attacking toward RIGHT goal. IN-PLAY. USEFUL.
+03930s (65m30s): Black vs White. Black attacking toward RIGHT goal area. IN-PLAY. USEFUL.
+03960s (66m00s): White vs Dark Blue. Dark Blue keeper LEFT, White keeper RIGHT. IN-PLAY. USEFUL.
+03990s (66m30s): Black vs White. Black player attacking toward RIGHT goal. IN-PLAY. USEFUL.
+04020s (67m00s): White vs Black. White player attacking toward RIGHT goal. IN-PLAY. USEFUL.
+04050s (67m30s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+04080s (68m00s): Dark vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
 04110s (68m30s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
 04140s (69m00s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-04170s (69m30s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-04200s (70m00s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-04230s (70m30s): White vs Dark. Dark attacking toward RIGHT. IN-PLAY. USEFUL.
-04260s (71m00s): Dark vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+04170s (69m30s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+04200s (70m00s): Black vs White. Black player with ball attacking toward LEFT goal. IN-PLAY. USEFUL.
+04230s (70m30s): White vs Dark Green. White attacking toward RIGHT goal. IN-PLAY. USEFUL.
+04260s (71m00s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
 04290s (71m30s): Black vs White. Black attacking toward RIGHT goal. IN-PLAY. USEFUL.
-04320s (72m00s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-04350s (72m30s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-04380s (73m00s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-04410s (73m30s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-04440s (74m00s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-04470s (74m30s): Dark Blue vs White. Dark Blue player contesting ball mid-air, pushing toward RIGHT. IN-PLAY. USEFUL.
+04320s (72m00s): White vs Black. White player taking a free kick toward RIGHT goal. IN-PLAY. USEFUL.
+04350s (72m30s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+04380s (73m00s): Dark vs White. Dark player taking a free kick toward RIGHT goal. IN-PLAY. USEFUL.
+04410s (73m30s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+04440s (74m00s): Black vs White. White keeper LEFT, Black keeper RIGHT. IN-PLAY. USEFUL.
+04470s (74m30s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
 04500s (75m00s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-04530s (75m30s): White vs Dark Blue. Right goal: Yellow keeper. IN-PLAY. NOT USEFUL.
-04560s (76m00s): White vs Dark Blue. White keeper LEFT, Dark Blue keeper RIGHT. IN-PLAY. USEFUL.
-04590s (76m30s): White vs Black. Ball midfield, multiple balls visible. WARMUP. NOT USEFUL.
+04530s (75m30s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+04560s (76m00s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+04590s (76m30s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
 04620s (77m00s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
 04650s (77m30s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-04680s (78m00s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+04680s (78m00s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
 04710s (78m30s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-04740s (79m00s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-04770s (79m30s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-04800s (80m00s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-04830s (80m30s): White vs Dark. Yellow keeper RIGHT. IN-PLAY. NOT USEFUL.
+04740s (79m00s): Dark Blue vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+04770s (79m30s): White vs Dark. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+04800s (80m00s): White vs Dark Blue. White attacking toward RIGHT goal. IN-PLAY. USEFUL.
+04830s (80m30s): White vs Dark Blue. Ball midfield, no clear action. Yellow keeper RIGHT. IN-PLAY. NOT USEFUL.
 04860s (81m00s): White vs Dark Blue. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
 04890s (81m30s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
-04920s (82m00s): Black vs White. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
+04920s (82m00s): White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL.
 04950s (82m30s): Black vs White. Ball midfield, no clear action. WARMUP. NOT USEFUL.

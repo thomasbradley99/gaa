@@ -33,9 +33,9 @@ class FitnessEvaluator:
         self.game_name = game_name
         self.num_clips = num_clips
         
-        # Use relative paths (3-gaa-ai-genetic and 1-production are siblings)
+        # Use relative paths (3-gaa-ai-genetic and 1-production-goals-side are siblings)
         pipelines_dir = Path(__file__).parent.parent.parent  # Up to /pipelines/
-        self.pipeline_root = pipelines_dir / "1-production"
+        self.pipeline_root = pipelines_dir / "1-production-goals-side"
         self.game_root = pipelines_dir.parent / "games" / game_name
         self.ground_truth_path = self.game_root / "inputs" / "ground_truth_detectable_first_10min.xml"
         

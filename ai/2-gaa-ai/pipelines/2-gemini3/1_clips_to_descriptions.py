@@ -51,13 +51,13 @@ load_dotenv('/home/ubuntu/clann/CLANNAI/.env')
 
 api_key = os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
 genai.configure(api_key=api_key)
+MODEL_NAME = 'gemini-3-pro-preview'
 model = genai.GenerativeModel(
-    'gemini-3-pro-preview',
+    MODEL_NAME,
     generation_config={"temperature": 0, "top_p": 0.1}  # Deterministic output
 )
 
 # Load game profile (REQUIRED)
-GAME_PROFILE = None
 profile_path = GAME_ROOT / "inputs" / "game_profile.json"
 if not profile_path.exists():
     print("❌ ERROR: game_profile.json not found!")
@@ -295,7 +295,7 @@ def analyze_clips():
     print(f"📊 Found {len(all_clips)} clips (with audio)")
     print(f"🚀 Processing in parallel with 30 workers...")
     print(f"⏱️  Estimated time: 2-3 minutes")
-    print(f"💰 Estimated cost: ~${len(all_clips) * 0.026:.2f} (Gemini 2.5 Pro)")
+    print(f"💰 Estimated cost: ~${len(all_clips) * 0.026:.2f} ({MODEL_NAME})")
     print()
     
     results = []
@@ -341,7 +341,7 @@ def analyze_clips():
         for result in results:
             f.write(f"[{result['timestamp']}s] {result['clip_name']}: {result['description']}\n")
     
-    # Calculate costs with Gemini 2.5 Pro pricing (Paid Tier 1)
+    # Calculate costs with model pricing (Paid Tier 1)
     # 200k threshold is PER API CALL, not total
     # Each clip is separate call with ~18k tokens, so always use lower tier
     # Input: $1.25/1M, Output: $10.00/1M
@@ -352,7 +352,7 @@ def analyze_clips():
     # Save usage stats
     usage_stats = {
         'stage': 'stage_1_clip_descriptions',
-        'model': 'gemini-3-pro-preview',
+        'model': MODEL_NAME,
         'test_type': 'audio_and_visual',
         'clips_analyzed': len(results),
         'api_calls': total_usage['api_calls'],
@@ -386,7 +386,7 @@ def analyze_clips():
     print(f"   Total:  {total_usage['total_tokens']:,} tokens")
     print(f"   API Calls: {total_usage['api_calls']}")
     print()
-    print(f"💰 COST (Gemini 2.5 Pro):")
+    print(f"💰 COST ({MODEL_NAME}):")
     print(f"   Input:  ${input_cost:.4f}")
     print(f"   Output: ${output_cost:.4f}")
     print(f"   Total:  ${total_cost:.4f}")
@@ -402,7 +402,7 @@ def analyze_clips():
 if __name__ == "__main__":
     print(f"🎬 STAGE 1: AUDIO + VISUAL OBSERVATIONS (41 Event Types)")
     print(f"Game: {ARGS.game}")
-    print(f"Model: Gemini 2.5 Pro")
+    print(f"Model: {MODEL_NAME}")
     print(f"Input: clips/ (WITH AUDIO)")
     print(f"Time Range: All available clips (CALIBRATION MODE)")
     print("=" * 70)

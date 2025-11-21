@@ -35,12 +35,12 @@ class PromptManager:
             dir_path.mkdir(parents=True, exist_ok=True)
     
     def extract_baselines(self):
-        """Extract baseline prompts from 1-production pipeline scripts"""
+        """Extract baseline prompts from 1-production-goals-side pipeline scripts"""
         print("🔍 Extracting baseline prompts from pipeline...")
         
-        # Use relative path (3-gaa-ai-genetic and 1-production are siblings)
+        # Use relative path (3-gaa-ai-genetic and 1-production-goals-side are siblings)
         pipelines_dir = Path(__file__).parent.parent.parent  # Up to /pipelines/
-        pipeline_root = pipelines_dir / "1-production"
+        pipeline_root = pipelines_dir / "1-production-goals-side"
         
         # Extract Stage 1 prompt (lines 149-207 in 1_clips_to_descriptions.py)
         stage1_file = pipeline_root / "1_clips_to_descriptions.py"

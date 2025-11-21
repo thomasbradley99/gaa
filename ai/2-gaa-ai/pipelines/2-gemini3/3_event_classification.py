@@ -50,7 +50,7 @@ profile_path = GAME_ROOT / "inputs" / "game_profile.json"
 if not profile_path.exists():
     print("❌ ERROR: game_profile.json not found!")
     print(f"   Expected at: {profile_path}")
-    print(f"   Run once: python3 pipelines/1-production/0.5_calibrate_game.py --game {ARGS.game}")
+    print(f"   Run once: python3 pipelines/1-production-goals-side/0.5_calibrate_game.py --game {ARGS.game}")
     print(f"   Then manually set 'home_team_assignment' in game_profile.json")
     exit(1)
 
@@ -266,7 +266,7 @@ def classify_events():
         away_defends = "RIGHT side"
         away_attacks_toward = "LEFT side"
     
-    team_mapping = f"""Teams (convert colors to Home/Away):
+        team_mapping = f"""Teams (convert colors to Home/Away):
 - Home = {HOME_TEAM['jersey_color']} ({HOME_TEAM['keeper_color']} goalkeeper)
 - Away/Opp = {AWAY_TEAM['jersey_color']} ({AWAY_TEAM['keeper_color']} goalkeeper)
 

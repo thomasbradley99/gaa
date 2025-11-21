@@ -28,6 +28,8 @@ DATA_DIR = SCRIPT_DIR.parent / 'veo'
 load_dotenv(SCRIPT_DIR / '.env')
 
 INPUT_CSV = DATA_DIR / 'irish_veo_clubs_matched_with_locations.csv'
+# Optionally use a filtered CSV for clubs without contacts
+FILTERED_INPUT_CSV = SCRIPT_DIR / 'clubs_without_contacts.csv'
 OUTPUT_CSV = DATA_DIR / 'irish_veo_clubs_contacts.csv'
 
 # Apify API Configuration
@@ -509,7 +511,7 @@ def search_google_apify(query, num_results=5):
         return []
     
     try:
-        # Prepare Apify API request - token in URL as per your example
+        # Prepare Apify API request - try token in URL first (as per Apify docs for run-sync)
         url = f"{APIFY_API_URL}?token={APIFY_API_TOKEN}"
         
         # Payload format - queries must be a string, not array
@@ -527,6 +529,13 @@ def search_google_apify(query, num_results=5):
         # Make API request
         print(f"   🔍 Calling Apify API for: {query[:50]}...")
         response = requests.post(url, json=payload, headers=headers, timeout=60)
+        
+        # If 401, try with Authorization header instead
+        if response.status_code == 401:
+            url = APIFY_API_URL
+            headers["Authorization"] = f"Bearer {APIFY_API_TOKEN}"
+            response = requests.post(url, json=payload, headers=headers, timeout=60)
+        
         response.raise_for_status()
         
         # Parse response
@@ -775,12 +784,17 @@ def main():
         print("   Please set APIFY_API_TOKEN in .env file with your actual token.")
         print()
     
-    # Load clubs
+    # Load clubs - use filtered CSV if it exists (clubs without contacts)
+    input_file = FILTERED_INPUT_CSV if FILTERED_INPUT_CSV.exists() else INPUT_CSV
+    if FILTERED_INPUT_CSV.exists():
+        print(f"📋 Using filtered input: {FILTERED_INPUT_CSV.name} (clubs without contacts)")
+    
     clubs = []
-    with open(INPUT_CSV, 'r', encoding='utf-8') as f:
+    with open(input_file, 'r', encoding='utf-8-sig') as f:  # utf-8-sig handles BOM
         reader = csv.DictReader(f)
         for row in reader:
-            club_name = row.get('Club Name', '').strip()
+            # Try different possible column names
+            club_name = row.get('Club Name', '').strip() or row.get('club_name', '').strip() or row.get('Club', '').strip()
             if club_name:
                 clubs.append(club_name)
     
@@ -789,7 +803,7 @@ def main():
         clubs = clubs[:TEST_LIMIT]
         print(f"🧪 TEST MODE: Processing first {TEST_LIMIT} clubs")
     
-    print(f"✅ Loaded {len(clubs)} clubs from {INPUT_CSV}")
+    print(f"✅ Loaded {len(clubs)} clubs from {input_file.name}")
     print(f"📊 Processing clubs...\n")
     
     # Check if output file exists (for resuming)

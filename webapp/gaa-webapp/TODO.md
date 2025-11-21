@@ -18,6 +18,7 @@
 - show "only first 10 mins analyzed" banner
 - google auth on frontend
 - password reset
+- download functionality on videos
 - stats editing system
   - allow users to edit event stats (scores, fouls, etc.)
   - commit stat changes to database

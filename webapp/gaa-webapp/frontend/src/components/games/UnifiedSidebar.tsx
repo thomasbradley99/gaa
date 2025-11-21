@@ -449,15 +449,16 @@ export default function UnifiedSidebar({
       )}
 
       {/* Sidebar */}
-      <div
-        className={`${
-          isMobile
-            ? 'relative w-full min-h-screen bg-black/90 backdrop-blur-sm'
-            : `fixed top-0 right-0 h-full bg-black/90 backdrop-blur-lg border-l border-white/10 z-50 transition-all duration-300 ${
-                isOpen ? 'w-full md:w-[360px] translate-x-0' : 'w-0 translate-x-full pointer-events-none'
-              }`
-        }`}
-      >
+      {!isMobile && !isOpen ? null : (
+        <div
+          className={`${
+            isMobile
+              ? 'relative w-full min-h-screen bg-black/90 backdrop-blur-sm'
+              : `fixed top-0 right-0 h-full bg-black/90 backdrop-blur-lg border-l border-white/10 z-50 transition-all duration-300 ${
+                  isOpen ? 'w-full md:w-[360px] translate-x-0' : 'hidden'
+                }`
+          }`}
+        >
         {/* Mobile Video Header - sticky so it stays at top */}
         {isMobile && mobileVideoComponent && (
           <div className="sticky top-0 z-30 bg-black">
@@ -1327,6 +1328,7 @@ export default function UnifiedSidebar({
           )}
         </div>
       </div>
+      )}
     </>
   )
 }

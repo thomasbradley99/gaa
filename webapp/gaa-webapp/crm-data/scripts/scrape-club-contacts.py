@@ -770,8 +770,8 @@ def main():
     print()
     
     # Check API token
-    if not APIFY_API_TOKEN or APIFY_API_TOKEN == 'apify_api_FlnTefPUjZmcPc3rABfOpjH1TxypIQ3X':
-        print("⚠️  Warning: Using default/example Apify API token.")
+    if not APIFY_API_TOKEN:
+        print("⚠️  Warning: APIFY_API_TOKEN not set in environment.")
         print("   Please set APIFY_API_TOKEN in .env file with your actual token.")
         print()
     

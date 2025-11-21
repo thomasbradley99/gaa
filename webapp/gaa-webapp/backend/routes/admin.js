@@ -136,7 +136,7 @@ router.get('/users', authenticateAdmin, async (req, res) => {
       `;
       params = [teamId];
     } else {
-      // Get all users (for backwards compatibility, but shouldn't be used in UI)
+      // Get all users with their team information
       queryText = `
         SELECT 
           u.id,
@@ -146,9 +146,13 @@ router.get('/users', authenticateAdmin, async (req, res) => {
           u.role,
           u.created_at,
           COUNT(DISTINCT tm.team_id) as team_count,
-          COUNT(DISTINCT g.id) as game_count
+          COUNT(DISTINCT g.id) as game_count,
+          STRING_AGG(DISTINCT t.name, ', ' ORDER BY t.name) as team_names,
+          MAX(tm.role) as team_role,
+          MAX(tm.joined_at) as team_joined_at
         FROM users u
         LEFT JOIN team_members tm ON u.id = tm.user_id
+        LEFT JOIN teams t ON tm.team_id = t.id
         LEFT JOIN games g ON u.id = g.created_by
         GROUP BY u.id
         ORDER BY u.created_at DESC

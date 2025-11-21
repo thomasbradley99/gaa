@@ -400,10 +400,10 @@ export default function AdminPage() {
                           <tr>
                             <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Email</th>
                             <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Name</th>
+                            <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Team(s)</th>
                             <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Role</th>
                             <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Team Role</th>
                             <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Games</th>
-                            <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Joined Team</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-white/10">
@@ -411,6 +411,9 @@ export default function AdminPage() {
                             <tr key={u.id} className="hover:bg-white/5">
                               <td className="px-6 py-4 text-sm text-white">{u.email}</td>
                               <td className="px-6 py-4 text-sm text-gray-400">{u.name || 'N/A'}</td>
+                              <td className="px-6 py-4 text-sm text-gray-400">
+                                {u.team_names || (selectedTeamId && teams.find(t => t.id === selectedTeamId)?.name) || 'No team'}
+                              </td>
                               <td className="px-6 py-4 text-sm">
                                 <span className={`px-2 py-1 rounded text-xs font-medium ${
                                   u.role === 'admin' ? 'bg-[#2D8B4D]/50 text-green-300' :
@@ -428,9 +431,6 @@ export default function AdminPage() {
                                 </span>
                               </td>
                               <td className="px-6 py-4 text-sm text-gray-400">{u.game_count || 0}</td>
-                              <td className="px-6 py-4 text-sm text-gray-400">
-                                {u.team_joined_at ? new Date(u.team_joined_at).toLocaleDateString() : 'N/A'}
-                              </td>
                             </tr>
                           ))}
                         </tbody>

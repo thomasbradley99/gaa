@@ -16,6 +16,8 @@
 - add hls streaming (large videos are slow)
 - fix presigned url expiry (videos break after 1 hour)
 - show "only first 10 mins analyzed" banner
+- google auth on frontend
+- password reset
 - stats editing system
   - allow users to edit event stats (scores, fouls, etc.)
   - commit stat changes to database

@@ -90,3 +90,4 @@ if (require.main === module) {
 // Export for Vercel
 module.exports = app;
 
+// Redeploy trigger Fri Nov 21 12:29:35 GMT 2025

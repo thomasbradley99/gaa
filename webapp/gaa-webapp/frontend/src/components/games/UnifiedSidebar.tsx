@@ -103,6 +103,7 @@ export default function UnifiedSidebar({
     team: 'home',
     description: '',
     player: '',
+    time: 0,
   })
 
   // Helper functions
@@ -205,7 +206,7 @@ export default function UnifiedSidebar({
       team: 'home',
       description: '',
       player: '',
-      timestamp: Math.floor(currentTime),
+      time: Math.floor(currentTime),
     })
   }
 
@@ -220,7 +221,7 @@ export default function UnifiedSidebar({
     
     const event: GameEvent = {
       id: `event-${Date.now()}`,
-      time: Math.floor(newEvent.timestamp),
+      time: Math.floor(newEvent.time),
       action: isShot ? 'Shot' : eventType.charAt(0).toUpperCase() + eventType.slice(1),
       outcome: isShot ? eventType.charAt(0).toUpperCase() + eventType.slice(1) : 'N/A',
       team: newEvent.team as 'home' | 'away',
@@ -843,9 +844,9 @@ export default function UnifiedSidebar({
                     
                     <input
                       type="number"
-                      value={Math.round(newEvent.timestamp)}
-                      onFocus={() => setNewEvent({...newEvent, timestamp: Math.floor(currentTime)})}
-                      onChange={(e) => setNewEvent({...newEvent, timestamp: parseFloat(e.target.value) || 0})}
+                      value={Math.round(newEvent.time)}
+                      onFocus={() => setNewEvent({...newEvent, time: Math.floor(currentTime)})}
+                      onChange={(e) => setNewEvent({...newEvent, time: parseFloat(e.target.value) || 0})}
                       placeholder="Time (s)"
                       className="w-full bg-black text-white text-xs px-2 py-1 rounded border border-white/20 focus:border-white/50 focus:outline-none font-mono"
                     />

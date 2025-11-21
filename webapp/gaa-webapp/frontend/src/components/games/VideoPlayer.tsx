@@ -2,16 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Hls from 'hls.js'
-
-interface GameEvent {
-  id: string
-  type: string
-  timestamp: number
-  team?: string
-  player?: string
-  description?: string
-  metadata?: any
-}
+import type { GameEvent } from './video-player/types'
 
 interface VideoPlayerProps {
   game: {

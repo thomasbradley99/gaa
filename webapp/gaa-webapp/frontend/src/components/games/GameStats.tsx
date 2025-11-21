@@ -19,170 +19,184 @@ interface GameStatsProps {
 }
 
 export function GameStats({ game, events, duration }: GameStatsProps) {
+  // Get unique team names from events
+  const teamNames = useMemo(() => {
+    const teams = new Set<string>()
+    events.forEach(event => {
+      if (event.team) teams.add(event.team)
+    })
+    const teamArray = Array.from(teams)
+    return teamArray.length >= 2 ? [teamArray[0], teamArray[1]] : (teamArray.length === 1 ? [teamArray[0], 'Away'] : ['Home', 'Away'])
+  }, [events])
+  
   const stats = useMemo(() => {
-    const homeEvents = events.filter((e) => e.team === 'home')
-    const awayEvents = events.filter((e) => e.team === 'away')
+    const team1Name = teamNames[0] || 'Home'
+    const team2Name = teamNames[1] || 'Away'
+    const team1Events = events.filter((e) => e.team === team1Name)
+    const team2Events = events.filter((e) => e.team === team2Name)
 
     // Calculate possession (simplified - based on events)
     const totalPossessions = events.length
-    const homePossessions = homeEvents.length
-    const awayPossessions = awayEvents.length
-    const possessionHome = totalPossessions > 0 ? Math.round((homePossessions / totalPossessions) * 100) : 0
-    const possessionAway = totalPossessions > 0 ? Math.round((awayPossessions / totalPossessions) * 100) : 0
+    const team1Possessions = team1Events.length
+    const team2Possessions = team2Events.length
+    const possessionTeam1 = totalPossessions > 0 ? Math.round((team1Possessions / totalPossessions) * 100) : 0
+    const possessionTeam2 = totalPossessions > 0 ? Math.round((team2Possessions / totalPossessions) * 100) : 0
 
     // Shots - filter by action="Shot"
-    const homeShots = homeEvents.filter((e) => e.action === 'Shot')
-    const awayShots = awayEvents.filter((e) => e.action === 'Shot')
+    const team1Shots = team1Events.filter((e) => e.action === 'Shot')
+    const team2Shots = team2Events.filter((e) => e.action === 'Shot')
     
-    const homeGoals = homeShots.filter((e) => e.outcome === 'Goal').length
-    const homePoints = homeShots.filter((e) => e.outcome === 'Point').length
-    const homeWides = homeShots.filter((e) => e.outcome === 'Wide').length
-    const homeShortKeeper = homeShots.filter((e) => e.metadata?.scoreType === 'short_keeper' || e.metadata?.scoreType === 'short').length
-    const homeSaved = homeShots.filter((e) => e.outcome === 'Saved').length
-    const home45M = homeShots.filter((e) => e.metadata?.scoreType === '45m').length
-    const homeReboundPost = homeShots.filter((e) => e.metadata?.scoreType === 'rebound_post').length
-    const homeOther = homeShots.filter((e) => {
+    const team1Goals = team1Shots.filter((e) => e.outcome === 'Goal').length
+    const team1Points = team1Shots.filter((e) => e.outcome === 'Point').length
+    const team1Wides = team1Shots.filter((e) => e.outcome === 'Wide').length
+    const team1ShortKeeper = team1Shots.filter((e) => e.metadata?.scoreType === 'short_keeper' || e.metadata?.scoreType === 'short').length
+    const team1Saved = team1Shots.filter((e) => e.outcome === 'Saved').length
+    const team145M = team1Shots.filter((e) => e.metadata?.scoreType === '45m').length
+    const team1ReboundPost = team1Shots.filter((e) => e.metadata?.scoreType === 'rebound_post').length
+    const team1Other = team1Shots.filter((e) => {
       const type = e.metadata?.scoreType
       return !type || (type !== 'goal' && type !== 'point' && type !== 'wide' && type !== 'short_keeper' && type !== 'short' && type !== 'saved' && type !== '45m' && type !== 'rebound_post')
     }).length
     
-    const awayGoals = awayShots.filter((e) => e.outcome === 'Goal').length
-    const awayPoints = awayShots.filter((e) => e.outcome === 'Point').length
-    const awayWides = awayShots.filter((e) => e.outcome === 'Wide').length
-    const awayShortKeeper = awayShots.filter((e) => e.metadata?.scoreType === 'short_keeper' || e.metadata?.scoreType === 'short').length
-    const awaySaved = awayShots.filter((e) => e.outcome === 'Saved').length
-    const away45M = awayShots.filter((e) => e.metadata?.scoreType === '45m').length
-    const awayReboundPost = awayShots.filter((e) => e.metadata?.scoreType === 'rebound_post').length
-    const awayOther = awayShots.filter((e) => {
+    const team2Goals = team2Shots.filter((e) => e.outcome === 'Goal').length
+    const team2Points = team2Shots.filter((e) => e.outcome === 'Point').length
+    const team2Wides = team2Shots.filter((e) => e.outcome === 'Wide').length
+    const team2ShortKeeper = team2Shots.filter((e) => e.metadata?.scoreType === 'short_keeper' || e.metadata?.scoreType === 'short').length
+    const team2Saved = team2Shots.filter((e) => e.outcome === 'Saved').length
+    const team245M = team2Shots.filter((e) => e.metadata?.scoreType === '45m').length
+    const team2ReboundPost = team2Shots.filter((e) => e.metadata?.scoreType === 'rebound_post').length
+    const team2Other = team2Shots.filter((e) => {
       const type = e.metadata?.scoreType
       return !type || (type !== 'goal' && type !== 'point' && type !== 'wide' && type !== 'short_keeper' && type !== 'short' && type !== 'saved' && type !== '45m' && type !== 'rebound_post')
     }).length
 
-    const homeScores = homeGoals + homePoints
-    const awayScores = awayGoals + awayPoints
-    const homeTotalShots = homeShots.length
-    const awayTotalShots = awayShots.length
+    const team1Scores = team1Goals + team1Points
+    const team2Scores = team2Goals + team2Points
+    const team1TotalShots = team1Shots.length
+    const team2TotalShots = team2Shots.length
     
-    const conversionRateHome = homeTotalShots > 0 ? Math.round((homeScores / homeTotalShots) * 100) : 0
-    const conversionRateAway = awayTotalShots > 0 ? Math.round((awayScores / awayTotalShots) * 100) : 0
+    const conversionRateTeam1 = team1TotalShots > 0 ? Math.round((team1Scores / team1TotalShots) * 100) : 0
+    const conversionRateTeam2 = team2TotalShots > 0 ? Math.round((team2Scores / team2TotalShots) * 100) : 0
 
     // Kickouts
-    const homeKickouts = homeEvents.filter((e) => e.action === 'Kickout')
-    const awayKickouts = awayEvents.filter((e) => e.action === 'Kickout')
+    const team1Kickouts = team1Events.filter((e) => e.action === 'Kickout')
+    const team2Kickouts = team2Events.filter((e) => e.action === 'Kickout')
     
-    // Home kickouts won (when home team wins their own kickout)
-    const homeKickoutsWon = homeKickouts.filter((e) => e.metadata?.possessionOutcome === 'won').length
-    const homeKickoutsLong = homeKickouts.filter((e) => e.metadata?.kickoutType === 'long' && e.metadata?.possessionOutcome === 'won').length
-    const homeKickoutsShort = homeKickouts.filter((e) => e.metadata?.kickoutType === 'short' && e.metadata?.possessionOutcome === 'won').length
-    const homeKickoutsMid = homeKickouts.filter((e) => e.metadata?.kickoutType === 'mid' && e.metadata?.possessionOutcome === 'won').length
-    const homeKickoutsVoid = homeKickouts.filter((e) => e.metadata?.kickoutType === 'void' && e.metadata?.possessionOutcome === 'won').length
+    // Team1 kickouts won
+    const team1KickoutsWon = team1Kickouts.filter((e) => e.metadata?.possessionOutcome === 'won').length
+    const team1KickoutsLong = team1Kickouts.filter((e) => e.metadata?.kickoutType === 'long' && e.metadata?.possessionOutcome === 'won').length
+    const team1KickoutsShort = team1Kickouts.filter((e) => e.metadata?.kickoutType === 'short' && e.metadata?.possessionOutcome === 'won').length
+    const team1KickoutsMid = team1Kickouts.filter((e) => e.metadata?.kickoutType === 'mid' && e.metadata?.possessionOutcome === 'won').length
+    const team1KickoutsVoid = team1Kickouts.filter((e) => e.metadata?.kickoutType === 'void' && e.metadata?.possessionOutcome === 'won').length
     
-    // Away kickouts won (when away team wins their own kickout)
-    const awayKickoutsWon = awayKickouts.filter((e) => e.metadata?.possessionOutcome === 'won').length
-    const awayKickoutsLong = awayKickouts.filter((e) => e.metadata?.kickoutType === 'long' && e.metadata?.possessionOutcome === 'won').length
-    const awayKickoutsShort = awayKickouts.filter((e) => e.metadata?.kickoutType === 'short' && e.metadata?.possessionOutcome === 'won').length
-    const awayKickoutsMid = awayKickouts.filter((e) => e.metadata?.kickoutType === 'mid' && e.metadata?.possessionOutcome === 'won').length
-    const awayKickoutsVoid = awayKickouts.filter((e) => e.metadata?.kickoutType === 'void' && e.metadata?.possessionOutcome === 'won').length
+    // Team2 kickouts won
+    const team2KickoutsWon = team2Kickouts.filter((e) => e.metadata?.possessionOutcome === 'won').length
+    const team2KickoutsLong = team2Kickouts.filter((e) => e.metadata?.kickoutType === 'long' && e.metadata?.possessionOutcome === 'won').length
+    const team2KickoutsShort = team2Kickouts.filter((e) => e.metadata?.kickoutType === 'short' && e.metadata?.possessionOutcome === 'won').length
+    const team2KickoutsMid = team2Kickouts.filter((e) => e.metadata?.kickoutType === 'mid' && e.metadata?.possessionOutcome === 'won').length
+    const team2KickoutsVoid = team2Kickouts.filter((e) => e.metadata?.kickoutType === 'void' && e.metadata?.possessionOutcome === 'won').length
 
-    // Opponent kickouts won (when team wins opponent's kickout)
-    const homeOpponentKickoutsWon = awayKickouts.filter((e) => e.metadata?.possessionOutcome === 'lost').length
-    const awayOpponentKickoutsWon = homeKickouts.filter((e) => e.metadata?.possessionOutcome === 'lost').length
+    // Opponent kickouts won
+    const team1OpponentKickoutsWon = team2Kickouts.filter((e) => e.metadata?.possessionOutcome === 'lost').length
+    const team2OpponentKickoutsWon = team1Kickouts.filter((e) => e.metadata?.possessionOutcome === 'lost').length
 
     // Turnovers
-    const homeTurnovers = homeEvents.filter((e) => e.action === 'Turnover')
-    const awayTurnovers = awayEvents.filter((e) => e.action === 'Turnover')
+    const team1Turnovers = team1Events.filter((e) => e.action === 'Turnover')
+    const team2Turnovers = team2Events.filter((e) => e.action === 'Turnover')
     
-    const homeTurnoversForced = homeTurnovers.filter((e) => e.metadata?.turnoverType === 'forced').length
-    const homeTurnoversUnforced = homeTurnovers.filter((e) => e.metadata?.turnoverType === 'unforced').length
-    const homeTurnoversTotal = homeTurnovers.length
+    const team1TurnoversForced = team1Turnovers.filter((e) => e.metadata?.turnoverType === 'forced').length
+    const team1TurnoversUnforced = team1Turnovers.filter((e) => e.metadata?.turnoverType === 'unforced').length
+    const team1TurnoversTotal = team1Turnovers.length
     
-    const awayTurnoversForced = awayTurnovers.filter((e) => e.metadata?.turnoverType === 'forced').length
-    const awayTurnoversUnforced = awayTurnovers.filter((e) => e.metadata?.turnoverType === 'unforced').length
-    const awayTurnoversTotal = awayTurnovers.length
+    const team2TurnoversForced = team2Turnovers.filter((e) => e.metadata?.turnoverType === 'forced').length
+    const team2TurnoversUnforced = team2Turnovers.filter((e) => e.metadata?.turnoverType === 'unforced').length
+    const team2TurnoversTotal = team2Turnovers.length
 
     // Fouls
-    const homeFouls = homeEvents.filter((e) => e.action === 'Foul')
-    const awayFouls = awayEvents.filter((e) => e.action === 'Foul')
-    const homeScorableFreesConceded = homeFouls.filter((e) => e.metadata?.foulType === 'scorable' || e.metadata?.scorable).length
-    const awayScorableFreesConceded = awayFouls.filter((e) => e.metadata?.foulType === 'scorable' || e.metadata?.scorable).length
+    const team1Fouls = team1Events.filter((e) => e.action === 'Foul')
+    const team2Fouls = team2Events.filter((e) => e.action === 'Foul')
+    const team1ScorableFreesConceded = team1Fouls.filter((e) => e.metadata?.foulType === 'scorable' || e.metadata?.scorable).length
+    const team2ScorableFreesConceded = team2Fouls.filter((e) => e.metadata?.foulType === 'scorable' || e.metadata?.scorable).length
 
-    // 45M Entries (entries into scoring zone)
-    const home45MEntries = homeEvents.filter((e) => e.metadata?.zone === '45m' || e.metadata?.zone === 'attack').length
-    const away45MEntries = awayEvents.filter((e) => e.metadata?.zone === '45m' || e.metadata?.zone === 'attack').length
-    const home45MEntryRate = homePossessions > 0 ? Math.round((home45MEntries / homePossessions) * 100) : 0
-    const away45MEntryRate = awayPossessions > 0 ? Math.round((away45MEntries / awayPossessions) * 100) : 0
+    // 45M Entries
+    const team145MEntries = team1Events.filter((e) => e.metadata?.zone === '45m' || e.metadata?.zone === 'attack').length
+    const team245MEntries = team2Events.filter((e) => e.metadata?.zone === '45m' || e.metadata?.zone === 'attack').length
+    const team145MEntryRate = team1Possessions > 0 ? Math.round((team145MEntries / team1Possessions) * 100) : 0
+    const team245MEntryRate = team2Possessions > 0 ? Math.round((team245MEntries / team2Possessions) * 100) : 0
 
     // Shot rate
-    const homeShotRate = homePossessions > 0 ? Math.round((homeTotalShots / homePossessions) * 100) : 0
-    const awayShotRate = awayPossessions > 0 ? Math.round((awayTotalShots / awayPossessions) * 100) : 0
+    const team1ShotRate = team1Possessions > 0 ? Math.round((team1TotalShots / team1Possessions) * 100) : 0
+    const team2ShotRate = team2Possessions > 0 ? Math.round((team2TotalShots / team2Possessions) * 100) : 0
 
     // Scores
-    const homeScore = homeGoals * 3 + homePoints
-    const awayScore = awayGoals * 3 + awayPoints
+    const team1Score = team1Goals * 3 + team1Points
+    const team2Score = team2Goals * 3 + team2Points
 
     return {
-      home: {
-        score: homeScore,
-        goals: homeGoals,
-        points: homePoints,
-        totalScore: `${homeGoals} - ${homePoints}`,
-        conversionRate: conversionRateHome,
-        possession: possessionHome,
-        possessions: homePossessions,
-        shots: homeTotalShots,
-        shotRate: homeShotRate,
-        scores: homeScores,
-        wides: homeWides,
-        shortKeeper: homeShortKeeper,
-        saved: homeSaved,
-        m45: home45M,
-        reboundPost: homeReboundPost,
-        other: homeOther,
-        kickoutsWon: homeKickoutsWon,
-        opponentKickoutsWon: homeOpponentKickoutsWon,
-        kickoutsLong: homeKickoutsLong,
-        kickoutsShort: homeKickoutsShort,
-        kickoutsMid: homeKickoutsMid,
-        kickoutsVoid: homeKickoutsVoid,
-        turnoversForced: homeTurnoversForced,
-        turnoversUnforced: homeTurnoversUnforced,
-        turnoversTotal: homeTurnoversTotal,
-        scorableFreesConceded: homeScorableFreesConceded,
-        m45Entries: home45MEntries,
-        m45EntryRate: home45MEntryRate,
+      team1: {
+        name: team1Name,
+        score: team1Score,
+        goals: team1Goals,
+        points: team1Points,
+        totalScore: `${team1Goals} - ${team1Points}`,
+        conversionRate: conversionRateTeam1,
+        possession: possessionTeam1,
+        possessions: team1Possessions,
+        shots: team1TotalShots,
+        shotRate: team1ShotRate,
+        scores: team1Scores,
+        wides: team1Wides,
+        shortKeeper: team1ShortKeeper,
+        saved: team1Saved,
+        m45: team145M,
+        reboundPost: team1ReboundPost,
+        other: team1Other,
+        kickoutsWon: team1KickoutsWon,
+        opponentKickoutsWon: team1OpponentKickoutsWon,
+        kickoutsLong: team1KickoutsLong,
+        kickoutsShort: team1KickoutsShort,
+        kickoutsMid: team1KickoutsMid,
+        kickoutsVoid: team1KickoutsVoid,
+        turnoversForced: team1TurnoversForced,
+        turnoversUnforced: team1TurnoversUnforced,
+        turnoversTotal: team1TurnoversTotal,
+        scorableFreesConceded: team1ScorableFreesConceded,
+        m45Entries: team145MEntries,
+        m45EntryRate: team145MEntryRate,
       },
-      away: {
-        score: awayScore,
-        goals: awayGoals,
-        points: awayPoints,
-        totalScore: `${awayGoals} - ${awayPoints}`,
-        conversionRate: conversionRateAway,
-        possession: possessionAway,
-        possessions: awayPossessions,
-        shots: awayTotalShots,
-        shotRate: awayShotRate,
-        scores: awayScores,
-        wides: awayWides,
-        shortKeeper: awayShortKeeper,
-        saved: awaySaved,
-        m45: away45M,
-        reboundPost: awayReboundPost,
-        other: awayOther,
-        kickoutsWon: awayKickoutsWon,
-        opponentKickoutsWon: awayOpponentKickoutsWon,
-        kickoutsLong: awayKickoutsLong,
-        kickoutsShort: awayKickoutsShort,
-        kickoutsMid: awayKickoutsMid,
-        kickoutsVoid: awayKickoutsVoid,
-        turnoversForced: awayTurnoversForced,
-        turnoversUnforced: awayTurnoversUnforced,
-        turnoversTotal: awayTurnoversTotal,
-        scorableFreesConceded: awayScorableFreesConceded,
-        m45Entries: away45MEntries,
-        m45EntryRate: away45MEntryRate,
+      team2: {
+        name: team2Name,
+        score: team2Score,
+        goals: team2Goals,
+        points: team2Points,
+        totalScore: `${team2Goals} - ${team2Points}`,
+        conversionRate: conversionRateTeam2,
+        possession: possessionTeam2,
+        possessions: team2Possessions,
+        shots: team2TotalShots,
+        shotRate: team2ShotRate,
+        scores: team2Scores,
+        wides: team2Wides,
+        shortKeeper: team2ShortKeeper,
+        saved: team2Saved,
+        m45: team245M,
+        reboundPost: team2ReboundPost,
+        other: team2Other,
+        kickoutsWon: team2KickoutsWon,
+        opponentKickoutsWon: team2OpponentKickoutsWon,
+        kickoutsLong: team2KickoutsLong,
+        kickoutsShort: team2KickoutsShort,
+        kickoutsMid: team2KickoutsMid,
+        kickoutsVoid: team2KickoutsVoid,
+        turnoversForced: team2TurnoversForced,
+        turnoversUnforced: team2TurnoversUnforced,
+        turnoversTotal: team2TurnoversTotal,
+        scorableFreesConceded: team2ScorableFreesConceded,
+        m45Entries: team245MEntries,
+        m45EntryRate: team245MEntryRate,
       },
     }
-  }, [events])
+  }, [events, duration, teamNames])
 
   const exportToPDF = () => {
     const doc = new jsPDF()
@@ -198,10 +212,10 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
 
     // Score
     doc.setFontSize(16)
-    doc.text('HOME', 20, yPos)
-    doc.text(`${stats.home.goals} - ${stats.home.points}`, 60, yPos)
-    doc.text('AWAY', 120, yPos)
-    doc.text(`${stats.away.goals} - ${stats.away.points}`, 160, yPos)
+    doc.text(stats.team1.name, 20, yPos)
+    doc.text(`${stats.team1.goals} - ${stats.team1.points}`, 60, yPos)
+    doc.text(stats.team2.name, 120, yPos)
+    doc.text(`${stats.team2.goals} - ${stats.team2.points}`, 160, yPos)
     yPos += 15
 
     // Main stats table
@@ -214,17 +228,17 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
     doc.setFont('helvetica', 'normal')
     
     const statRows = [
-      ['Conversion Rate %', `${stats.home.conversionRate}%`, `${stats.away.conversionRate}%`],
-      ['Possession', `${stats.home.possession}%`, `${stats.away.possession}%`],
-      ['Number of Team Possessions', stats.home.possessions.toString(), stats.away.possessions.toString()],
-      ['45M Entries', `${stats.home.m45Entries} (${stats.home.m45EntryRate}%)`, `${stats.away.m45Entries} (${stats.away.m45EntryRate}%)`],
-      ['Shots', `${stats.home.shots} (${stats.home.shotRate}%)`, `${stats.away.shots} (${stats.away.shotRate}%)`],
-      ['Home Kickouts Won', stats.home.kickoutsWon.toString(), stats.away.opponentKickoutsWon.toString()],
-      ['Away Kickouts Won', stats.home.opponentKickoutsWon.toString(), stats.away.kickoutsWon.toString()],
-      ['Turnovers Won Forced', stats.home.turnoversForced.toString(), stats.away.turnoversForced.toString()],
-      ['Turnovers Won Unforced', stats.home.turnoversUnforced.toString(), stats.away.turnoversUnforced.toString()],
-      ['Turnovers Won Total', stats.home.turnoversTotal.toString(), stats.away.turnoversTotal.toString()],
-      ['Scorable Frees Conceded', stats.home.scorableFreesConceded.toString(), stats.away.scorableFreesConceded.toString()],
+      ['Conversion Rate %', `${stats.team1.conversionRate}%`, `${stats.team2.conversionRate}%`],
+      ['Possession', `${stats.team1.possession}%`, `${stats.team2.possession}%`],
+      ['Number of Team Possessions', stats.team1.possessions.toString(), stats.team2.possessions.toString()],
+      ['45M Entries', `${stats.team1.m45Entries} (${stats.team1.m45EntryRate}%)`, `${stats.team2.m45Entries} (${stats.team2.m45EntryRate}%)`],
+      ['Shots', `${stats.team1.shots} (${stats.team1.shotRate}%)`, `${stats.team2.shots} (${stats.team2.shotRate}%)`],
+      [`${stats.team1.name} Kickouts Won`, stats.team1.kickoutsWon.toString(), stats.team2.opponentKickoutsWon.toString()],
+      [`${stats.team2.name} Kickouts Won`, stats.team1.opponentKickoutsWon.toString(), stats.team2.kickoutsWon.toString()],
+      ['Turnovers Won Forced', stats.team1.turnoversForced.toString(), stats.team2.turnoversForced.toString()],
+      ['Turnovers Won Unforced', stats.team1.turnoversUnforced.toString(), stats.team2.turnoversUnforced.toString()],
+      ['Turnovers Won Total', stats.team1.turnoversTotal.toString(), stats.team2.turnoversTotal.toString()],
+      ['Scorable Frees Conceded', stats.team1.scorableFreesConceded.toString(), stats.team2.scorableFreesConceded.toString()],
     ]
 
     statRows.forEach(([label, home, away]) => {
@@ -246,24 +260,24 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
     }
 
     doc.setFont('helvetica', 'bold')
-    doc.text('HOME KICKOUTS WON', 20, yPos)
+    doc.text(`${stats.team1.name} KICKOUTS WON`, 20, yPos)
     yPos += 8
     doc.setFont('helvetica', 'normal')
     doc.text('Long', 25, yPos)
-    doc.text(`${stats.home.kickoutsLong}`, 100, yPos)
-    doc.text(`${stats.away.kickoutsLong}`, 150, yPos)
+    doc.text(`${stats.team1.kickoutsLong}`, 100, yPos)
+    doc.text(`${stats.team2.kickoutsLong}`, 150, yPos)
     yPos += 6
     doc.text('Short', 25, yPos)
-    doc.text(`${stats.home.kickoutsShort}`, 100, yPos)
-    doc.text(`${stats.away.kickoutsShort}`, 150, yPos)
+    doc.text(`${stats.team1.kickoutsShort}`, 100, yPos)
+    doc.text(`${stats.team2.kickoutsShort}`, 150, yPos)
     yPos += 6
     doc.text('Mid', 25, yPos)
-    doc.text(`${stats.home.kickoutsMid}`, 100, yPos)
-    doc.text(`${stats.away.kickoutsMid}`, 150, yPos)
+    doc.text(`${stats.team1.kickoutsMid}`, 100, yPos)
+    doc.text(`${stats.team2.kickoutsMid}`, 150, yPos)
     yPos += 6
     doc.text('Void', 25, yPos)
-    doc.text(`${stats.home.kickoutsVoid}`, 100, yPos)
-    doc.text(`${stats.away.kickoutsVoid}`, 150, yPos)
+    doc.text(`${stats.team1.kickoutsVoid}`, 100, yPos)
+    doc.text(`${stats.team2.kickoutsVoid}`, 150, yPos)
 
     yPos += 10
     if (yPos > pageHeight - 30) {
@@ -276,20 +290,20 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
     yPos += 8
     doc.setFont('helvetica', 'normal')
     doc.text('Long', 25, yPos)
-    doc.text(`${stats.away.kickoutsLong}`, 100, yPos)
-    doc.text(`${stats.home.kickoutsLong}`, 150, yPos)
+    doc.text(`${stats.team2.kickoutsLong}`, 100, yPos)
+    doc.text(`${stats.team1.kickoutsLong}`, 150, yPos)
     yPos += 6
     doc.text('Short', 25, yPos)
-    doc.text(`${stats.away.kickoutsShort}`, 100, yPos)
-    doc.text(`${stats.home.kickoutsShort}`, 150, yPos)
+    doc.text(`${stats.team2.kickoutsShort}`, 100, yPos)
+    doc.text(`${stats.team1.kickoutsShort}`, 150, yPos)
     yPos += 6
     doc.text('Mid', 25, yPos)
-    doc.text(`${stats.away.kickoutsMid}`, 100, yPos)
-    doc.text(`${stats.home.kickoutsMid}`, 150, yPos)
+    doc.text(`${stats.team2.kickoutsMid}`, 100, yPos)
+    doc.text(`${stats.team1.kickoutsMid}`, 150, yPos)
     yPos += 6
     doc.text('Void', 25, yPos)
-    doc.text(`${stats.away.kickoutsVoid}`, 100, yPos)
-    doc.text(`${stats.home.kickoutsVoid}`, 150, yPos)
+    doc.text(`${stats.team2.kickoutsVoid}`, 100, yPos)
+    doc.text(`${stats.team1.kickoutsVoid}`, 150, yPos)
 
     // Shot outcome breakdown
     yPos += 10
@@ -304,13 +318,13 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
     doc.setFont('helvetica', 'normal')
     
     const shotOutcomes = [
-      ['Scores', stats.home.scores.toString(), stats.away.scores.toString()],
-      ['Wide', stats.home.wides.toString(), stats.away.wides.toString()],
-      ['Short Keeper', stats.home.shortKeeper.toString(), stats.away.shortKeeper.toString()],
-      ['Saved', stats.home.saved.toString(), stats.away.saved.toString()],
-      ['45M', stats.home.m45.toString(), stats.away.m45.toString()],
-      ['Rebound Post', stats.home.reboundPost.toString(), stats.away.reboundPost.toString()],
-      ['Other', stats.home.other.toString(), stats.away.other.toString()],
+      ['Scores', stats.team1.scores.toString(), stats.team2.scores.toString()],
+      ['Wide', stats.team1.wides.toString(), stats.team2.wides.toString()],
+      ['Short Keeper', stats.team1.shortKeeper.toString(), stats.team2.shortKeeper.toString()],
+      ['Saved', stats.team1.saved.toString(), stats.team2.saved.toString()],
+      ['45M', stats.team1.m45.toString(), stats.team2.m45.toString()],
+      ['Rebound Post', stats.team1.reboundPost.toString(), stats.team2.reboundPost.toString()],
+      ['Other', stats.team1.other.toString(), stats.team2.other.toString()],
     ]
 
     shotOutcomes.forEach(([outcome, home, away]) => {
@@ -346,62 +360,62 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
       {/* Score Display - Anadi Style */}
       <div className="flex items-center justify-center gap-4 sm:gap-16 mb-6 sm:mb-8 pb-4 sm:pb-6 border-b-2 border-gray-700">
         <div className="text-center">
-          <div className="text-xl sm:text-4xl font-bold text-white mb-1 sm:mb-2">HOME</div>
-          <div className="text-2xl sm:text-5xl font-bold text-white">{stats.home.goals} - {stats.home.points}</div>
+          <div className="text-xl sm:text-4xl font-bold text-white mb-1 sm:mb-2">{stats.team1.name}</div>
+          <div className="text-2xl sm:text-5xl font-bold text-white">{stats.team1.goals} - {stats.team1.points}</div>
         </div>
         <div className="text-center">
-          <div className="text-xl sm:text-4xl font-bold text-white mb-1 sm:mb-2">AWAY</div>
-          <div className="text-2xl sm:text-5xl font-bold text-white">{stats.away.goals} - {stats.away.points}</div>
+          <div className="text-xl sm:text-4xl font-bold text-white mb-1 sm:mb-2">{stats.team2.name}</div>
+          <div className="text-2xl sm:text-5xl font-bold text-white">{stats.team2.goals} - {stats.team2.points}</div>
         </div>
       </div>
 
       {/* Main Statistics Table */}
       <div className="space-y-1.5 sm:space-y-2 mb-6 sm:mb-8">
-        <StatRow label="Conversion Rate %" home={`${stats.home.conversionRate}%`} away={`${stats.away.conversionRate}%`} />
-        <StatRow label="Possession" home={`${stats.home.possession}%`} away={`${stats.away.possession}%`} />
-        <StatRow label="Number of Team Possessions" home={stats.home.possessions.toString()} away={stats.away.possessions.toString()} />
+        <StatRow label="Conversion Rate %" home={`${stats.team1.conversionRate}%`} away={`${stats.team2.conversionRate}%`} />
+        <StatRow label="Possession" home={`${stats.team1.possession}%`} away={`${stats.team2.possession}%`} />
+        <StatRow label="Number of Team Possessions" home={stats.team1.possessions.toString()} away={stats.team2.possessions.toString()} />
         <StatRow 
           label="45M Entries" 
-          home={`${stats.home.m45Entries} (${stats.home.m45EntryRate}%)`} 
-          away={`${stats.away.m45Entries} (${stats.away.m45EntryRate}%)`} 
+          home={`${stats.team1.m45Entries} (${stats.team1.m45EntryRate}%)`} 
+          away={`${stats.team2.m45Entries} (${stats.team2.m45EntryRate}%)`} 
         />
         <StatRow 
           label="Shots" 
-          home={`${stats.home.shots} (${stats.home.shotRate}%)`} 
-          away={`${stats.away.shots} (${stats.away.shotRate}%)`} 
+          home={`${stats.team1.shots} (${stats.team1.shotRate}%)`} 
+          away={`${stats.team2.shots} (${stats.team2.shotRate}%)`} 
         />
-        <StatRow label="Home Kickouts Won" home={stats.home.kickoutsWon.toString()} away={stats.away.opponentKickoutsWon.toString()} />
-        <StatRow label="Away Kickouts Won" home={stats.home.opponentKickoutsWon.toString()} away={stats.away.kickoutsWon.toString()} />
-        <StatRow label="Turnovers Won Forced" home={stats.home.turnoversForced.toString()} away={stats.away.turnoversForced.toString()} />
-        <StatRow label="Turnovers Won Unforced" home={stats.home.turnoversUnforced.toString()} away={stats.away.turnoversUnforced.toString()} />
-        <StatRow label="Turnovers Won Total" home={stats.home.turnoversTotal.toString()} away={stats.away.turnoversTotal.toString()} />
-        <StatRow label="Scorable Frees Conceded" home={stats.home.scorableFreesConceded.toString()} away={stats.away.scorableFreesConceded.toString()} />
+        <StatRow label={`${stats.team1.name} Kickouts Won`} home={stats.team1.kickoutsWon.toString()} away={stats.team2.opponentKickoutsWon.toString()} />
+        <StatRow label={`${stats.team2.name} Kickouts Won`} home={stats.team1.opponentKickoutsWon.toString()} away={stats.team2.kickoutsWon.toString()} />
+        <StatRow label="Turnovers Won Forced" home={stats.team1.turnoversForced.toString()} away={stats.team2.turnoversForced.toString()} />
+        <StatRow label="Turnovers Won Unforced" home={stats.team1.turnoversUnforced.toString()} away={stats.team2.turnoversUnforced.toString()} />
+        <StatRow label="Turnovers Won Total" home={stats.team1.turnoversTotal.toString()} away={stats.team2.turnoversTotal.toString()} />
+        <StatRow label="Scorable Frees Conceded" home={stats.team1.scorableFreesConceded.toString()} away={stats.team2.scorableFreesConceded.toString()} />
       </div>
 
       {/* Kickout Breakdowns */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
         <KickoutBreakdown 
-          title="HOME KICKOUTS WON" 
-          long={stats.home.kickoutsLong}
-          short={stats.home.kickoutsShort}
-          mid={stats.home.kickoutsMid}
-          void={stats.home.kickoutsVoid}
-          opponentLong={stats.away.kickoutsLong}
-          opponentShort={stats.away.kickoutsShort}
-          opponentMid={stats.away.kickoutsMid}
-          opponentVoid={stats.away.kickoutsVoid}
+          title={`${stats.team1.name} KICKOUTS WON`} 
+          long={stats.team1.kickoutsLong}
+          short={stats.team1.kickoutsShort}
+          mid={stats.team1.kickoutsMid}
+          void={stats.team1.kickoutsVoid}
+          opponentLong={stats.team2.kickoutsLong}
+          opponentShort={stats.team2.kickoutsShort}
+          opponentMid={stats.team2.kickoutsMid}
+          opponentVoid={stats.team2.kickoutsVoid}
           metricFirst={true}
         />
         <KickoutBreakdown 
-          title="AWAY KICKOUTS WON" 
-          long={stats.away.kickoutsLong}
-          short={stats.away.kickoutsShort}
-          mid={stats.away.kickoutsMid}
-          void={stats.away.kickoutsVoid}
-          opponentLong={stats.home.kickoutsLong}
-          opponentShort={stats.home.kickoutsShort}
-          opponentMid={stats.home.kickoutsMid}
-          opponentVoid={stats.home.kickoutsVoid}
+          title={`${stats.team2.name} KICKOUTS WON`} 
+          long={stats.team2.kickoutsLong}
+          short={stats.team2.kickoutsShort}
+          mid={stats.team2.kickoutsMid}
+          void={stats.team2.kickoutsVoid}
+          opponentLong={stats.team1.kickoutsLong}
+          opponentShort={stats.team1.kickoutsShort}
+          opponentMid={stats.team1.kickoutsMid}
+          opponentVoid={stats.team1.kickoutsVoid}
         />
       </div>
 
@@ -410,39 +424,39 @@ export function GameStats({ game, events, duration }: GameStatsProps) {
         <h3 className="text-[10px] sm:text-sm font-bold text-green-400 mb-2 sm:mb-3 uppercase tracking-wide text-center">SHOT OUTCOME</h3>
         <div className="space-y-1">
           <div className="flex items-center justify-between gap-1.5 sm:gap-2">
-            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.home.scores}</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.team1.scores}</div>
             <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Scores</div>
-            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.away.scores}</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.team2.scores}</div>
           </div>
           <div className="flex items-center justify-between gap-1.5 sm:gap-2">
-            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.home.wides}</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.team1.wides}</div>
             <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Wide</div>
-            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.away.wides}</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.team2.wides}</div>
           </div>
           <div className="flex items-center justify-between gap-1.5 sm:gap-2">
-            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.home.shortKeeper}</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.team1.shortKeeper}</div>
             <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Short Keeper</div>
-            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.away.shortKeeper}</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.team2.shortKeeper}</div>
           </div>
           <div className="flex items-center justify-between gap-1.5 sm:gap-2">
-            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.home.saved}</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.team1.saved}</div>
             <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Saved</div>
-            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.away.saved}</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.team2.saved}</div>
           </div>
           <div className="flex items-center justify-between gap-1.5 sm:gap-2">
-            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.home.m45}</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.team1.m45}</div>
             <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">45M</div>
-            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.away.m45}</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.team2.m45}</div>
           </div>
           <div className="flex items-center justify-between gap-1.5 sm:gap-2">
-            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.home.reboundPost}</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.team1.reboundPost}</div>
             <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Rebound Post</div>
-            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.away.reboundPost}</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.team2.reboundPost}</div>
           </div>
           <div className="flex items-center justify-between gap-1.5 sm:gap-2">
-            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.home.other}</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.team1.other}</div>
             <div className="flex-1 bg-gray-800 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs text-center uppercase">Other</div>
-            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.away.other}</div>
+            <div className="bg-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white text-[10px] sm:text-xs font-medium min-w-[28px] sm:min-w-[40px] text-center">{stats.team2.other}</div>
           </div>
         </div>
       </div>

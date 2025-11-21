@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { auth, admin, clubs, getToken } from '@/lib/api-client'
 import Sidebar from '@/components/shared/Sidebar'
-import { Shield, Users, Gamepad2, TrendingUp, Loader2, Building2, Video } from 'lucide-react'
+import { Shield, Users, Gamepad2, TrendingUp, Loader2, Building2, Video, ExternalLink } from 'lucide-react'
 
 export default function AdminPage() {
   const router = useRouter()
@@ -238,7 +238,22 @@ export default function AdminPage() {
 
             {/* Overview Tab */}
             {activeTab === 'overview' && stats && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              <div>
+                {/* Attio CRM Link */}
+                <div className="mb-6">
+                  <a
+                    href="https://app.attio.com/clannai"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white font-semibold px-6 py-4 rounded-xl transition-all shadow-lg hover:shadow-xl"
+                  >
+                    <Building2 className="w-5 h-5" />
+                    <span>Open Attio CRM</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-6">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-gray-400 text-sm font-medium">Total Users</h3>
@@ -268,6 +283,7 @@ export default function AdminPage() {
                   <p className="text-3xl font-bold text-white">
                     {clubsStats ? clubsStats.usingVeo : 0}
                   </p>
+                </div>
                 </div>
               </div>
             )}

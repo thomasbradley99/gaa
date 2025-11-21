@@ -1,0 +1,8 @@
+.vercel
+
+# Environment variables - NEVER commit API keys!
+.env
+backend/.env
+*.env
+.env.local
+.env.*.local

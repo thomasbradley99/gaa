@@ -904,9 +904,16 @@ export default function UnifiedSidebar({
               >
                 {filteredByType.length === 0 ? (
                 <div className="text-center py-8 text-gray-400 text-sm">
-                  No events available
-                  {game.status === 'pending' && (
-                    <p className="mt-2 text-xs">Events will appear after analysis</p>
+                  {game.status === 'pending' || game.status === 'processing' || game.status === 'analyzing' ? (
+                    <>
+                      <p className="text-base mb-1">AI generating stats</p>
+                      <p className="text-xs mt-2">This may take a few minutes...</p>
+                    </>
+                  ) : (
+                    <>
+                      <p>No events available</p>
+                      <p className="mt-2 text-xs">Events will appear after analysis</p>
+                    </>
                   )}
                 </div>
                 ) : (
@@ -1173,8 +1180,17 @@ export default function UnifiedSidebar({
                 />
               ) : (
                 <div className="text-center text-gray-400 py-12">
-                  <p className="text-lg mb-2">No events yet</p>
-                  <p className="text-sm">Events will appear here after analysis or upload</p>
+                  {game?.status === 'pending' || game?.status === 'processing' || game?.status === 'analyzing' ? (
+                    <>
+                      <p className="text-lg mb-2">AI generating stats</p>
+                      <p className="text-sm">This may take a few minutes...</p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-lg mb-2">No events yet</p>
+                      <p className="text-sm">Events will appear here after analysis or upload</p>
+                    </>
+                  )}
                 </div>
                   )}
                 </div>

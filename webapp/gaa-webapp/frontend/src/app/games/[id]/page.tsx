@@ -334,8 +334,8 @@ export default function GameDetailPage() {
           </div>
 
           <div
-            className="flex-1 relative transition-all duration-300"
-            style={showRightSidebar ? { marginRight: '360px' } : undefined}
+            className="flex-1 relative"
+            style={showRightSidebar ? { marginRight: '360px', transition: 'margin-right 0.3s' } : { marginRight: '0', transition: 'margin-right 0.3s' }}
           >
             {game.video_url ? (
               <VideoPlayer

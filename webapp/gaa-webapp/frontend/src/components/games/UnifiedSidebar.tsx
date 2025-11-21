@@ -454,8 +454,8 @@ export default function UnifiedSidebar({
           className={`${
             isMobile
               ? 'relative w-full min-h-screen bg-black/90 backdrop-blur-sm'
-              : `fixed top-0 right-0 h-full bg-black/90 backdrop-blur-lg border-l border-white/10 z-50 transition-all duration-300 ${
-                  isOpen ? 'w-full md:w-[360px] translate-x-0' : 'hidden'
+              : `fixed top-0 right-0 h-full bg-black/90 backdrop-blur-lg border-l border-white/10 z-50 ${
+                  isOpen ? 'w-full md:w-[360px] translate-x-0 transition-transform duration-300' : 'hidden'
                 }`
           }`}
         >

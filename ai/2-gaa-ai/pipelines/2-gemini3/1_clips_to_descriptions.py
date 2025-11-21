@@ -29,10 +29,10 @@ INPUT_DIR = GAME_ROOT / "inputs" / "clips"  # CLIPS WITH AUDIO!
 
 # Create timestamped output folder to prevent overwrites
 if ARGS.output_suffix:
-    output_folder = f"6-with-audio-{ARGS.output_suffix}"
+    output_folder = f"2-gemini3-{ARGS.output_suffix}"
 else:
-    timestamp = datetime.now().strftime("%Y%m%d-%H%M")
-    output_folder = f"6-with-audio-{timestamp}"
+    timestamp = datetime.now().strftime("%b%d-%H%M").upper()
+    output_folder = f"2-gemini3-{timestamp}"
 
 OUTPUT_DIR = GAME_ROOT / "outputs" / output_folder
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -56,47 +56,62 @@ model = genai.GenerativeModel(
     generation_config={"temperature": 0, "top_p": 0.1}  # Deterministic output
 )
 
-# Load game profile (if exists)
+# Load game profile (REQUIRED)
 GAME_PROFILE = None
 profile_path = GAME_ROOT / "inputs" / "game_profile.json"
-if profile_path.exists():
-    with open(profile_path, 'r') as f:
-        GAME_PROFILE = json.load(f)
-    print(f"✅ Loaded game profile from {profile_path.name}")
+if not profile_path.exists():
+    print("❌ ERROR: game_profile.json not found!")
+    print(f"   Expected at: {profile_path}")
+    print(f"   Run once: python3 pipelines/production1/0.5_calibrate_game.py --game {ARGS.game}")
+    print(f"   Then manually set 'home_team_assignment' in game_profile.json")
+    exit(1)
 
-    def resolve_assignment(profile: dict) -> str:
-        assignment = profile.get('home_team_assignment', 'EDIT_ME')
-        if assignment not in {'team_a', 'team_b'}:
-            print("⚠️  WARNING: home_team_assignment not set in game_profile.json!")
-            print("   Teams will be referenced by color, but assignment is unknown")
-            return 'team_a'
-        return assignment
+with open(profile_path, 'r') as f:
+    GAME_PROFILE = json.load(f)
 
-    def defending_goal(attack_direction: str) -> str:
-        if attack_direction == 'left-to-right':
-            return 'left'
-        if attack_direction == 'right-to-left':
-            return 'right'
-        return 'unknown'
+print(f"✅ Loaded game profile from {profile_path.name}")
 
-    assignment = resolve_assignment(GAME_PROFILE)
-    team_a = GAME_PROFILE['team_a']
-    team_b = GAME_PROFILE['team_b']
+def defending_goal(attack_direction: str) -> str:
+    if attack_direction == 'left-to-right':
+        return 'left'
+    if attack_direction == 'right-to-left':
+        return 'right'
+    return 'unknown'
 
-    if assignment == 'team_a':
-        HOME_TEAM = team_a
-        AWAY_TEAM = team_b
-    else:
-        HOME_TEAM = team_b
-        AWAY_TEAM = team_a
+# Validate and assign teams
+assignment = GAME_PROFILE.get('home_team_assignment', 'EDIT_ME')
+if assignment not in {'team_a', 'team_b'}:
+    print("")
+    print("=" * 70)
+    print("❌ FATAL ERROR: home_team_assignment not configured!")
+    print("=" * 70)
+    print(f"   Current value: '{assignment}'")
+    print(f"   Expected: 'team_a' or 'team_b'")
+    print("")
+    print("   HOW TO FIX:")
+    print(f"   1. Edit: {profile_path}")
+    print("   2. Determine which team is HOME (check ground truth or first kickout)")
+    print(f"      - If {GAME_PROFILE['team_a']['jersey_color']} is home → set 'home_team_assignment': 'team_a'")
+    print(f"      - If {GAME_PROFILE['team_b']['jersey_color']} is home → set 'home_team_assignment': 'team_b'")
+    print("")
+    print("⚠️  DO NOT run calibration again - just edit the existing file!")
+    print("=" * 70)
+    exit(1)
 
-    print(f"   Home: {HOME_TEAM['jersey_color']} ({HOME_TEAM['keeper_color']} keeper)")
-    print(f"   Away: {AWAY_TEAM['jersey_color']} ({AWAY_TEAM['keeper_color']} keeper)")
-    print()
+team_a = GAME_PROFILE['team_a']
+team_b = GAME_PROFILE['team_b']
+
+if assignment == 'team_a':
+    HOME_TEAM = team_a
+    AWAY_TEAM = team_b
 else:
-    print(f"⚠️  No game profile found - using generic team descriptions")
-    print(f"   Run: python3 0.5_calibrate_game.py --game {ARGS.game}")
-    print()
+    HOME_TEAM = team_b
+    AWAY_TEAM = team_a
+
+print(f"   Home: {HOME_TEAM['jersey_color']} ({HOME_TEAM['keeper_color']} keeper)")
+print(f"   Away: {AWAY_TEAM['jersey_color']} ({AWAY_TEAM['keeper_color']} keeper)")
+print(f"   📌 Locked configuration - DO NOT re-run calibration!")
+print()
 
 def analyze_single_clip(clip_path: Path) -> dict:
     """Analyze a single clip (with audio) and return timestamp + description + usage stats"""
@@ -114,33 +129,29 @@ def analyze_single_clip(clip_path: Path) -> dict:
         print(f"🎬 Analyzing {timestamp}s: {clip_path.name} (WITH AUDIO)")
         
         # Build team context from profile
-        if GAME_PROFILE:
-            home_color = HOME_TEAM['jersey_color']
-            home_keeper = HOME_TEAM['keeper_color']
-            away_color = AWAY_TEAM['jersey_color']
-            away_keeper = AWAY_TEAM['keeper_color']
+        home_color = HOME_TEAM['jersey_color']
+        home_keeper = HOME_TEAM['keeper_color']
+        away_color = AWAY_TEAM['jersey_color']
+        away_keeper = AWAY_TEAM['keeper_color']
 
-            match_times = GAME_PROFILE['match_times']
-            half_time = match_times.get('half_time')
-            if half_time is None or timestamp < half_time:
-                current_half = "1st half"
-                home_attacks = HOME_TEAM['attack_direction_1st_half']
-                away_attacks = AWAY_TEAM['attack_direction_1st_half']
-            else:
-                current_half = "2nd half"
-                home_attacks = HOME_TEAM['attack_direction_2nd_half']
-                away_attacks = AWAY_TEAM['attack_direction_2nd_half']
+        match_times = GAME_PROFILE['match_times']
+        if timestamp < match_times['half_time']:
+            current_half = "1st half"
+            home_attacks = HOME_TEAM['attack_direction_1st_half']
+            away_attacks = AWAY_TEAM['attack_direction_1st_half']
+        else:
+            current_half = "2nd half"
+            home_attacks = HOME_TEAM['attack_direction_2nd_half']
+            away_attacks = AWAY_TEAM['attack_direction_2nd_half']
 
-            home_goal_side = defending_goal(home_attacks)
-            away_goal_side = defending_goal(away_attacks)
+        home_goal_side = defending_goal(home_attacks)
+        away_goal_side = defending_goal(away_attacks)
 
-            team_context = f"""CONTEXT: {current_half}.
+        team_context = f"""CONTEXT: {current_half}.
 
 TEAMS (refer to them ONLY by jersey color):
 - {home_color} ({home_keeper} keeper) - attacking {home_attacks}, defend {home_goal_side} side goal
 - {away_color} ({away_keeper} keeper) - attacking {away_attacks}, defend {away_goal_side} side goal"""
-        else:
-            team_context = "TEAMS: Identify teams by jersey colors"
 
         clip_start_time = f"{timestamp//60}:{timestamp%60:02d}"
         clip_end_ts = timestamp + 60
@@ -155,31 +166,64 @@ TEAMS (refer to them ONLY by jersey color):
 This clip shows {clip_start_time} to {clip_end_time}.
 
 **YOUR TASK:**
-Describe what happens using absolute game time (e.g., {clip_start_time}, {example_mid_time}).
+First understand WHERE and WHAT'S HAPPENING, then describe SPECIFIC EVENTS.
 
-What to describe:
-- Possession changes (tackles, interceptions, who wins the ball)
-- Shots at goal (points, goals, wides)
-- Attacks and build-up play
-- Kickouts (restarts after scores)
-- Throw-ups (restarts from referee)
-- Fouls and referee decisions
-- Turnovers (possession changes)
-- Scores: Points (over the bar) and Goals (into net) - BE VERY CAREFUL - only if you see ball clearly score AND celebrations/restart
+**STEP 1: UNDERSTAND THE CONTEXT**
+- WHERE on pitch: Near LEFT goal / Near RIGHT goal / Midfield / Attacking area
+- WHAT'S HAPPENING: Are teams passing around? Attacking? Defending? Contesting ball?
+
+**CRITICAL: ALWAYS specify which goal (LEFT or RIGHT) when events happen near a goal**
+
+**STEP 2: DETECT THESE EVENTS (be selective - don't over-report):**
+
+1. **SHOTS** - Clear scoring attempts ONLY:
+   - ⚠️ Only report if you SEE the actual shot/kick toward goal
+   - Don't report "attempts" or "attacks" - must see the shot
+   - WHO shoots, WHICH GOAL they're shooting toward, WHERE from, OUTCOME (Point/Goal/Wide/Saved)
+   - Example: "{example_mid_time} - White shoots toward LEFT goal from 25m center - POINT scored"
+   - Example: "{clip_start_time} - Black shoots toward RIGHT goal from 20m right - WIDE"
+
+2. **KICKOUTS** - Goalkeeper restarts (be selective):
+   - ⚠️ Don't report EVERY kickout - only if significant or clearly visible
+   - After a score, many kickouts are routine - skip if nothing notable
+   - WHO kicks, FROM WHICH GOAL, DISTANCE (Long/Mid/Short), DIRECTION (Left/Centre/Right), OUTCOME (Won/Lost)
+   - Example: "{clip_start_time} - Black keeper kicks out from LEFT goal, LONG to CENTRE, White WINS in midfield"
+   - Example: "{example_mid_time} - White keeper kicks out from RIGHT goal, SHORT to RIGHT, Black WINS"
+
+3. **FOULS** - Look for CLEAR SIGNS:
+   - 🚩 Referee arm raised / signaling
+   - 🚩 Play STOPS suddenly (ball dead, players waiting)
+   - 🚩 Players clustered around stoppage
+   - 🚩 Player on ground after contact
+   - 🔊 Whistle heard (if audible)
+   - DESCRIBE: Which team fouled (conceded), where it happened (specify goal side if near a goal)
+   - Example: "{clip_end_time} - Play stops near LEFT goal, Black fouls White - SCOREABLE free awarded"
+   - Example: "{example_mid_time} - White fouls Black in midfield - free awarded"
+
+4. **TURNOVERS** - VERY RARE, strict criteria:
+   - ONLY if: Ball clearly DROPPED / Pass INTERCEPTED mid-flight / Clean TACKLE causes loss
+   - Don't report normal ball contests or possession changes
+   - Example: "{example_mid_time} - White player DROPS ball in midfield, Black recovers"
 
 **Important:**
 - Use absolute timestamps like {clip_start_time} (NOT 0:05)
-- Only describe what you're confident about
+- ALWAYS specify which goal (LEFT or RIGHT) for events near goals
+- Include WHERE events happen: "near LEFT goal", "toward RIGHT goal", "midfield", etc.
+- Only describe KEY events you're CONFIDENT about
 - Refer to teams ONLY by jersey color
-- GAA scoring: Points (over crossbar) and Goals (into net)
+- FOULS: Look for play stoppages, referee signals, player contact
+- ⚠️ BE SELECTIVE: Don't report every single action - only clear, significant events
+- Skip routine play, vague "possession", and normal game flow
 
-**Example:**
-{clip_start_time} - Blue goalkeeper takes kickout from goal area
-{clip_start_time} - White player wins possession in midfield
-{example_mid_time} - Blue intercepts pass and attacks
-{clip_end_time} - Blue player scores a point over the bar
+**Example output format (be selective, not everything):**
+{clip_start_time} - Black shoots toward RIGHT goal from 20m center - POINT scored
+{example_mid_time} - White fouls Black in midfield - free awarded
+{clip_end_time} - Play stops near LEFT goal, Black fouls White - SCOREABLE free awarded
+{clip_start_time} - White keeper kicks out from RIGHT goal, SHORT to LEFT, Black WINS
 
-Just describe what happens:"""
+(Note: If a clip has routine play with no clear events, that's OK - only report what's significant)
+
+Describe the detectable events:"""
 
         # Read video data
         with open(clip_path, 'rb') as f:

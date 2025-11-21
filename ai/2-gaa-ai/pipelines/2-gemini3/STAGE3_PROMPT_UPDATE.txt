@@ -1,0 +1,36 @@
+UPDATED STAGE 3 EVENT CLASSIFICATION PROMPT
+===========================================
+
+Focus on extracting ONLY these 10 detectable GAA events:
+
+HIGH PRIORITY EVENTS:
+---------------------
+**SHOTS:**
+- Shot Own (home team shoots)
+- Shot Opp (away team shoots)
+  Tags: [From Play/From Free] + [Point/Goal/Wide]
+  
+**KICKOUTS:**
+- Kickout Own (home keeper restart)
+- Kickout Opp (away keeper restart)
+  Tags: [Long/Mid/Short] + [Left/Centre/Right] + [Won/Lost]
+
+MEDIUM PRIORITY EVENTS:
+-----------------------
+**TURNOVERS:**
+- Turnover Won (home wins possession)
+- Turnover lost (home loses possession)
+  Tags: [Forced/Unforced] [middle third] (optional)
+
+**FOULS:**
+- Foul Awarded (TO home team)
+- Foul Conceded (BY home team)
+- Scoreable Foul Awarded
+- Scoreable Foul Conceded
+  No tags needed
+
+KEY CHANGES FROM OLD PROMPT:
+- Remove: Possession Own/Opp, Attack Own/OPP, Ball in Play, Stoppage, Highlight, Hot Ball
+- Keep ONLY: Shot, Kickout, Turnover, Foul events
+- Every Shot MUST have outcome (Point/Goal/Wide)
+- Every Kickout MUST have Won/Lost outcome

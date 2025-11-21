@@ -1,19 +1,24 @@
 const professionalEvents = [
   {
-    "time": 26,
-    "timeLabel": "0:26",
+    "time": 25,
+    "timeLabel": "0:25",
+    "code": "Throw Up"
+  },
+  {
+    "time": 39,
+    "timeLabel": "0:39",
     "code": "Shot Own",
     "label": "From Play"
   },
   {
-    "time": 62,
-    "timeLabel": "1:02",
+    "time": 67,
+    "timeLabel": "1:07",
     "code": "Kickout Opp",
     "label": "Long"
   },
   {
-    "time": 70,
-    "timeLabel": "1:10",
+    "time": 85,
+    "timeLabel": "1:25",
     "code": "Shot Own",
     "label": "From Play"
   },
@@ -24,8 +29,8 @@ const professionalEvents = [
     "label": "Mid"
   },
   {
-    "time": 112,
-    "timeLabel": "1:52",
+    "time": 123,
+    "timeLabel": "2:03",
     "code": "Shot Opp",
     "label": "From Play"
   },
@@ -34,83 +39,59 @@ const professionalEvents = [
     "timeLabel": "2:54",
     "code": "Kickout Own",
     "label": "Mid"
-  },
-  {
-    "time": 174,
-    "timeLabel": "2:54",
-    "code": "Shot Opp",
-    "label": "From Play"
-  },
-  {
-    "time": 238,
-    "timeLabel": "3:58",
-    "code": "Scoreable Foul Awarded"
   },
   {
     "time": 240,
     "timeLabel": "4:00",
-    "code": "Foul Awarded"
+    "code": "Foul Conceded"
   },
   {
-    "time": 262,
-    "timeLabel": "4:22",
+    "time": 274,
+    "timeLabel": "4:34",
     "code": "Shot Own",
     "label": "From Free"
   },
   {
-    "time": 286,
-    "timeLabel": "4:46",
+    "time": 291,
+    "timeLabel": "4:51",
     "code": "Kickout Opp",
     "label": "Mid"
   },
   {
-    "time": 288,
-    "timeLabel": "4:48",
+    "time": 295,
+    "timeLabel": "4:55",
     "code": "Foul Conceded"
   },
   {
-    "time": 314,
-    "timeLabel": "5:14",
+    "time": 320,
+    "timeLabel": "5:20",
     "code": "Foul Conceded"
   },
   {
-    "time": 386,
-    "timeLabel": "6:26",
+    "time": 423,
+    "timeLabel": "7:03",
+    "code": "Foul Conceded"
+  },
+  {
+    "time": 424,
+    "timeLabel": "7:04",
+    "code": "Turnover lost"
+  },
+  {
+    "time": 485,
+    "timeLabel": "8:05",
     "code": "Shot Opp",
     "label": "From Free"
   },
   {
-    "time": 415,
-    "timeLabel": "6:55",
-    "code": "Foul Conceded"
-  },
-  {
-    "time": 416,
-    "timeLabel": "6:56",
-    "code": "Turnover lost",
-    "label": "Unforced"
-  },
-  {
-    "time": 473,
-    "timeLabel": "7:53",
-    "code": "Shot Opp",
-    "label": "From Free"
-  },
-  {
-    "time": 512,
-    "timeLabel": "8:32",
+    "time": 513,
+    "timeLabel": "8:33",
     "code": "Kickout Own",
     "label": "Long"
   },
   {
-    "time": 521,
-    "timeLabel": "8:41",
-    "code": "Turnover Won",
-    "label": "Unforced"
-  },
-  {
-    "time": 566,
-    "timeLabel": "9:26",
+    "time": 577,
+    "timeLabel": "9:37",
     "code": "Shot Own",
     "label": "From Play"
   }

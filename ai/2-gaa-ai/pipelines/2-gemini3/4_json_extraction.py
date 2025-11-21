@@ -1,16 +1,31 @@
 #!/usr/bin/env python3
 """
-Stage 3: Extract JSON events from narrative
-Usage: python3 3_json_extraction.py --game {game-name}
+Stage 4: Convert Text Events to EVENT_SCHEMA JSON
+
+Parses text-format events from Stage 3 and converts to EVENT_SCHEMA JSON format
+for use in evaluation, web viewer, and XML export.
+
+Text Format (Stage 3 output):
+  MM:SS - Event Code [Tag1] [Tag2]: Description
+
+JSON Format (EVENT_SCHEMA output):
+  {
+    "id": "event_001",
+    "time": 685.0,
+    "team": "home" | "away",
+    "action": "Shot" | "Kickout" | "Turnover" | "Foul" | "Throw-up",
+    "outcome": "Point" | "Wide" | "Goal" | "Saved" | "Won" | "Lost" | "Awarded" | "Conceded",
+    "metadata": { ... }
+  }
+
+Usage: python3 4_json_extraction.py --game {game-name}
 """
 
-import os
 import json
 import re
 import argparse
 from pathlib import Path
-from dotenv import load_dotenv
-import google.generativeai as genai
+from typing import Dict, List, Optional
 
 # Parse arguments
 parser = argparse.ArgumentParser()
@@ -18,9 +33,8 @@ parser.add_argument('--game', required=True)
 ARGS = parser.parse_args()
 
 # Paths
-PROD_ROOT = Path(__file__).parent.parent.parent  # production1/
+PROD_ROOT = Path(__file__).parent.parent.parent
 GAME_ROOT = PROD_ROOT / "games" / ARGS.game
-SCHEMA_DIR = PROD_ROOT / "schemas"
 
 # Auto-detect output folder from Stage 1
 run_config = GAME_ROOT / "outputs" / ".current_run.txt"
@@ -28,222 +42,243 @@ if run_config.exists():
     output_folder = run_config.read_text().strip()
     print(f"📁 Using output folder: {output_folder}")
 else:
-    output_folder = "6-with-audio"
+    output_folder = "2-gemini3"
     print(f"📁 Using default folder: {output_folder}")
 
 OUTPUT_DIR = GAME_ROOT / "outputs" / output_folder
 
-# Setup
-load_dotenv('/home/ubuntu/clann/CLANNAI/.env')
-api_key = os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
-genai.configure(api_key=api_key)
-
-def _load_constraints(constraints_path: Path):
-    try:
-        with constraints_path.open('r', encoding='utf-8') as f:
-            return json.load(f).get('actions', {})
-    except Exception:
-        return {}
-
-
-def _normalize_tag(tag: str) -> str:
-    t = tag.strip()
-    mapping = {
-        "on target": "On Target",
-        "off target": "Off Target",
-        "save": "Save",
-        "blocked": "Blocked",
-        "successful": "Successful",
-        "unsuccessful": "Unsuccessful",
-        "center": "centre",
-        "Center": "centre",
-        "CENTER": "centre",
+def parse_event_line(line: str, event_id: int) -> Optional[Dict]:
+    """
+    Parse a single event line from Stage 3 into EVENT_SCHEMA format
+    
+    Input format: MM:SS - Event Code [Tag1] [Tag2]: Description
+    Example: "17:15 - Shot Away [From Play] [Point]: Blue scores"
+    
+    Returns EVENT_SCHEMA dict or None if parsing fails
+    """
+    # Pattern: MM:SS - Event Code [optional tags]: Description
+    match = re.match(r'(\d+):(\d+)\s*-\s*(.+)$', line)
+    if not match:
+        return None
+    
+    minutes, seconds, rest = match.groups()
+    time = int(minutes) * 60 + int(seconds)
+    
+    # Extract event code (everything before first [ or :)
+    code_match = re.match(r'([^\[\:]+)', rest)
+    if not code_match:
+        return None
+    
+    code = code_match.group(1).strip()
+    
+    # Extract all tags [tag1] [tag2] [tag3]
+    tags = re.findall(r'\[([^\]]+)\]', rest)
+    
+    # Extract description (everything after last ] and :)
+    desc_match = re.search(r'(?:\]\s*)?:\s*(.+)$', rest)
+    description = desc_match.group(1).strip() if desc_match else code
+    
+    # Parse code into action, outcome, and team
+    code_parts = code.split()
+    
+    # Determine action and extract team
+    action = None
+    team = None
+    outcome = None
+    
+    if "Shot" in code:
+        action = "Shot"
+        team = "away" if "Away" in code else "home"
+        # Outcome from tags
+        for tag in tags:
+            tag_lower = tag.lower()
+            if tag_lower in ["point", "wide", "goal", "saved"]:
+                outcome = tag.capitalize()
+                break
+        if not outcome:
+            outcome = "Wide"  # Default
+    
+    elif "Kickout" in code:
+        action = "Kickout"
+        team = "away" if "Away" in code else "home"
+        # Outcome from tags
+        for tag in tags:
+            if tag in ["Won", "Lost"]:
+                outcome = tag
+                break
+        if not outcome:
+            outcome = "Lost"  # Default
+    
+    elif "Turnover" in code:
+        action = "Turnover"
+        if "Won" in code:
+            outcome = "Won"
+            # Team that WON the turnover
+            team = "away" if "Away" in code else "home"
+        else:  # "Lost" in code
+            outcome = "Lost"
+            # Team that LOST the turnover
+            team = "away" if "Away" in code else "home"
+    
+    elif "Foul" in code:
+        action = "Foul"
+        team = "away" if "Away" in code else "home"
+        if "Awarded" in code:
+            outcome = "Awarded"
+        elif "Conceded" in code:
+            outcome = "Conceded"
+        else:
+            outcome = "Conceded"  # Default
+    
+    elif "Throw" in code or "throw" in code.lower():
+        action = "Throw-up"
+        # Determine team from "Won Home" or "Won Away" tag
+        for tag in tags:
+            if "Won Home" in tag:
+                team = "home"
+                outcome = "Won"
+            elif "Won Away" in tag:
+                team = "away"
+                outcome = "Won"
+        if not team:
+            team = "home"  # Default
+        if not outcome:
+            outcome = "Won"  # Default
+    
+    else:
+        # Unknown event type, skip
+        return None
+    
+    # Build metadata based on action type
+    metadata = {"autoGenerated": True}
+    
+    if action == "Shot":
+        # Extract "from" and "scoreType"
+        for tag in tags:
+            tag_lower = tag.lower()
+            if "from play" in tag_lower:
+                metadata["from"] = "play"
+            elif "from free" in tag_lower:
+                metadata["from"] = "free"
+            elif "from 45m" in tag_lower:
+                metadata["from"] = "45m"
+            elif "from penalty" in tag_lower:
+                metadata["from"] = "penalty"
+            
+            if "point" in tag_lower:
+                metadata["scoreType"] = "point"
+            elif "goal" in tag_lower:
+                metadata["scoreType"] = "goal"
+            elif "wide" in tag_lower:
+                metadata["scoreType"] = "wide"
+            elif "saved" in tag_lower or "save" in tag_lower:
+                metadata["scoreType"] = "saved"
+        
+        # Ensure required fields
+        if "from" not in metadata:
+            metadata["from"] = "play"  # Default
+        if "scoreType" not in metadata:
+            metadata["scoreType"] = outcome.lower() if outcome else "wide"
+    
+    elif action == "Kickout":
+        # Extract length, direction
+        for tag in tags:
+            tag_lower = tag.lower()
+            if tag_lower in ["long", "mid", "short"]:
+                metadata["kickoutType"] = tag_lower
+            if tag_lower in ["left", "right", "centre", "center"]:
+                metadata["direction"] = "centre" if tag_lower == "center" else tag_lower
+    
+    elif action == "Turnover":
+        # Extract forced/unforced and zone
+        for tag in tags:
+            tag_lower = tag.lower()
+            if tag_lower in ["forced", "unforced"]:
+                metadata["turnoverType"] = tag_lower
+            # Zone: D1, D2, D3, M1, M2, M3, A1, A2, A3
+            if re.match(r'[DMA][1-3]', tag.upper()):
+                metadata["zone"] = tag.upper()
+    
+    elif action == "Foul":
+        # Extract scoreable flag
+        for tag in tags:
+            if tag.lower() == "scoreable":
+                metadata["scoreable"] = True
+    
+    # Build event dict
+    event = {
+        "id": f"event_{event_id:03d}",
+        "time": float(time),
+        "team": team,
+        "action": action,
+        "outcome": outcome,
+        "metadata": metadata
     }
-    low = t.lower()
-    return mapping.get(low, t)
+    
+    return event
+
 
 def extract_json():
-    """Extract structured JSON events from narrative using REGEX (no AI)"""
+    """Extract structured JSON events from text narrative using regex parsing"""
     
     input_file = OUTPUT_DIR / "3_events_classified.txt"
     output_file = OUTPUT_DIR / "4_events.json"
-    constraints_file = SCHEMA_DIR / "constraints.json"
     
     if not input_file.exists():
         raise FileNotFoundError(f"❌ Input file not found: {input_file}")
     
     # Read classified events
     with open(input_file, 'r') as f:
-        narrative_text = f.read()
+        text_content = f.read()
     
-    print(f"📖 Loaded narrative: {len(narrative_text)} characters")
-    
-    # REGEX PARSING (no AI needed!)
-    # Pattern: MM:SS - Event Code [Optional Tag] [Optional: Description]
-    # Matches both:
-    #   04:28 - Opp Throw In
-    #   04:33 - Home Shot at Goal [Save]: Description here
-    pattern = r'(\d+):(\d+)\s*-\s*([^\[\:]+?)(?:\s*\[([^\]]+)\])?(?:\s*:\s*(.+))?$'
+    print(f"📖 Loaded text events: {len(text_content)} characters")
     
     events = []
-    for line in narrative_text.split('\n'):
-        line = line.strip()
-        if not line or line.startswith('Here are') or line.startswith('**'):
-            continue
-            
-        match = re.match(pattern, line)
-        if match:
-            minutes, seconds, code, tag, label = match.groups()
-            start_seconds = int(minutes) * 60 + int(seconds)
-            
-            event = {
-                'ID': f'ai-{len(events)+1:04d}',
-                'start_seconds': float(start_seconds),
-                'end_seconds': float(start_seconds),
-                'start_raw': str(start_seconds),
-                'end_raw': str(start_seconds),
-                'code': code.strip(),
-                'label': label.strip() if label else code.strip()  # Use code as label if no description
-            }
-            
-            if tag:
-                event['tag'] = _normalize_tag(tag)
-            
-            events.append(event)
+    skipped_lines = []
     
-    # Save JSON
+    for line in text_content.split('\n'):
+        line = line.strip()
+        if not line or line.startswith('Here are') or line.startswith('**') or line.startswith('#'):
+            continue
+        
+        # Try to parse the line
+        event = parse_event_line(line, len(events) + 1)
+        if event:
+            events.append(event)
+        else:
+            # Only log if line looks like it should be an event (has timestamp)
+            if re.match(r'\d+:\d+', line):
+                skipped_lines.append(line[:80])  # Log first 80 chars
+    
+    if skipped_lines:
+        print(f"\n⚠️  Skipped {len(skipped_lines)} lines (couldn't parse or non-detectable):")
+        for skipped in skipped_lines[:5]:  # Show first 5
+            print(f"   {skipped}")
+        if len(skipped_lines) > 5:
+            print(f"   ... and {len(skipped_lines) - 5} more")
+    
+    # Save JSON in EVENT_SCHEMA format
     with open(output_file, 'w') as f:
         json.dump(events, f, indent=2)
     
-    print(f"✅ Extracted {len(events)} events (regex parsing)")
+    print(f"\n✅ Converted {len(events)} events to EVENT_SCHEMA format")
     print(f"💾 Saved to: {output_file}")
-    return
-
-    # OLD AI-BASED APPROACH (kept as fallback)
-    prompt = f"""Convert this event narrative into structured JSON format.
-
-**YOUR TASK:** Extract ALL events from the narrative below and convert them to JSON format.
-
-**IMPORTANT RULES:**
-1. Extract EVERY event mentioned in the narrative
-2. Use the EXACT event codes from the narrative (before the colon)
-3. Convert MM:SS timestamps to seconds (e.g., "05:19" → 319.0 seconds)
-4. Extract tags from [brackets] when present (e.g., "[M3 centre]" → tag: "M3 centre")
-5. The label should be the description text AFTER the colon (without the tag)
-6. DO NOT filter or skip any events - extract them all
-
-**NARRATIVE FORMAT:**
-Each line follows: MM:SS - Event Code [Tag]: Description
-Example: "05:25 - Home Regain Won [M3 centre]: Home team player heads the ball..."
-         → start_seconds: 325.0, code: "Home Regain Won", tag: "M3 centre", label: "Home team player heads the ball..."
-
-NARRATIVE:
-{narrative_text}
-
-OUTPUT FORMAT (JSON array only, no markdown, no code blocks):
-[
-  {{
-    "start_seconds": 319.0,
-    "end_seconds": 319.0,
-    "code": "Home Goal Kick",
-    "label": "Goalkeeper launches the ball high and long towards the center of the pitch."
-  }},
-  {{
-    "start_seconds": 325.0,
-    "end_seconds": 325.0,
-    "code": "Home Regain Won",
-    "label": "Home team player heads the ball and secures possession after an aerial duel.",
-    "tag": "M3 centre"
-  }},
-  {{
-    "start_seconds": 422.0,
-    "end_seconds": 422.0,
-    "code": "Opp Shot at Goal",
-    "label": "Away team shot is saved by the home team's goalkeeper.",
-    "tag": "Save"
-  }}
-]
-
-**CRITICAL:** 
-- If there is a [Tag] in brackets, you MUST extract it to the "tag" field
-- Only include the "tag" field when a tag is present in the narrative
-- Extract ALL events, maintaining the exact order from the narrative
-
-Convert ALL events from the narrative to JSON:"""
-
-    # Configure model for parsing (lower temperature for precision)
-    model = genai.GenerativeModel(
-        'gemini-3-pro-preview',  # Using Gemini 3 for advanced reasoning
-        generation_config={"temperature": 0, "top_p": 0.1}
-    )
     
-    try:
-        response = model.generate_content(prompt)
-        result_text = response.text.strip()
-        
-        # Try to extract JSON from response
-        json_match = re.search(r'\[.*\]', result_text, re.DOTALL)
-        if json_match:
-            json_text = json_match.group(0)
-            events = json.loads(json_text)
-            
-            # Add IDs to events and normalize/validate tag
-            constraints = _load_constraints(constraints_file)
-            formatted_events = []
-            for i, event in enumerate(events, 1):
-                event['ID'] = f"ai-{i:04d}"
-                if 'end_seconds' not in event or event['end_seconds'] is None:
-                    event['end_seconds'] = event['start_seconds']
-                
-                # Add start_raw and end_raw to match professional format
-                event['start_raw'] = str(int(event['start_seconds']))
-                event['end_raw'] = str(int(event['end_seconds']))
-                
-                # Validate and normalize tags
-                tag = event.get('tag')
-                code = event.get('code')
-                if tag:
-                    norm = _normalize_tag(str(tag))
-                    allowed = constraints.get(code)
-                    if allowed and norm not in allowed:
-                        event.pop('tag', None)
-                    else:
-                        event['tag'] = norm
-                
-                # Reorder fields to match professional format exactly
-                ordered_event = {
-                    'ID': event['ID'],
-                    'start_seconds': event['start_seconds'],
-                    'end_seconds': event['end_seconds'],
-                    'start_raw': event['start_raw'],
-                    'end_raw': event['end_raw'],
-                    'code': event['code']
-                }
-                if 'label' in event:
-                    ordered_event['label'] = event['label']
-                if 'tag' in event:
-                    ordered_event['tag'] = event['tag']
-                
-                formatted_events.append(ordered_event)
-            
-            events = formatted_events
-            
-            # Save events
-            with open(output_file, 'w') as f:
-                json.dump(events, f, indent=2)
-            
-            print(f"✅ Extracted {len(events)} events")
-            print(f"💾 Saved to: {output_file}")
-            
-        else:
-            print("⚠️  No JSON found in response")
-            print(f"Response: {result_text[:200]}")
-            
-    except Exception as e:
-        print(f"❌ Error: {e}")
+    # Show breakdown
+    action_counts = {}
+    for event in events:
+        action = event['action']
+        action_counts[action] = action_counts.get(action, 0) + 1
+    
+    print(f"\n📊 Event Breakdown:")
+    for action, count in sorted(action_counts.items()):
+        print(f"   {action}: {count}")
+    
+    return events
+
 
 if __name__ == "__main__":
-    print(f"🔧 STAGE 3: JSON EXTRACTION")
+    print(f"🏷️  STAGE 4: TEXT → EVENT_SCHEMA JSON CONVERSION")
     print(f"Game: {ARGS.game}")
     print("=" * 50)
     extract_json()

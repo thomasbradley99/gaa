@@ -165,11 +165,11 @@ You have a coherent narrative describing a GAA match. Your job is to extract DET
 MM:SS - Event Code [Tag1] [Tag2]: Brief description
 
 **EXTRACTION EXAMPLES:**
-- Narrative: "11:41 - Blue intercepts in midfield" → YOU: "11:41 - Turnover Won Away [Forced] [M2]: Blue intercepts"
-- Narrative: "17:15 - Blue shoots, scores a point" → YOU: "17:15 - Shot Away [From Play] [Point]: Blue scores"
-- Narrative: "14:20 - Blue keeper takes long kickout toward center, lost" → YOU: "14:20 - Kickout Away [Long] [Centre] [Lost]: Blue restarts"
-- Narrative: "18:45 - White commits foul in scoreable area" → YOU: "18:45 - Foul Conceded Home [Scoreable]: White fouls"
-- Narrative: "16:30 - Referee throws up ball, White wins" → YOU: "16:30 - Throw-up [Won Home]: Referee restart"
+- Narrative: "11:41 - Blue intercepts in midfield" = YOU: "11:41 - Turnover Won Away [Forced] [M2]: Blue intercepts"
+- Narrative: "17:15 - Blue shoots, scores a point" = YOU: "17:15 - Shot Away [From Play] [Point]: Blue scores"
+- Narrative: "14:20 - Blue keeper takes long kickout toward center, lost" = YOU: "14:20 - Kickout Away [Long] [Centre] [Lost]: Blue restarts"
+- Narrative: "18:45 - White commits foul in scoreable area" = YOU: "18:45 - Foul Conceded Home [Scoreable]: White fouls"
+- Narrative: "16:30 - Referee throws up ball, White wins" = YOU: "16:30 - Throw-up [Won Home]: Referee restart"
 
 **KEY RULES:**
 1. **Timestamps:** Use MM:SS format from narrative
@@ -187,7 +187,8 @@ MM:SS - Event Code [Tag1] [Tag2]: Brief description
 {narrative_block}
 
 **Now extract all detectable events:**
-Output one event per line in format: MM:SS - Event Code [Tags]: Description
+Output one event per line in format: MM:SS - Event Code [Tags]: Description"""
+
 def _parse_segment_narrative(narrative_text: str) -> str:
     """Extract actual narrative content, skipping segment headers."""
     lines = []
@@ -270,15 +271,15 @@ def classify_events():
 - Away/Opp = {AWAY_TEAM['jersey_color']} ({AWAY_TEAM['keeper_color']} goalkeeper)
 
 SPATIAL CONTEXT ({current_half}):
-- {HOME_TEAM['jersey_color']} (Home): Attacks {home_attacks} → Shoots toward {home_attacks_toward} goal, Defends {home_defends} goal
-- {AWAY_TEAM['jersey_color']} (Away): Attacks {away_attacks} → Shoots toward {away_attacks_toward} goal, Defends {away_defends} goal
+- {HOME_TEAM['jersey_color']} (Home): Attacks {home_attacks}, Shoots toward {home_attacks_toward} goal, Defends {home_defends} goal
+- {AWAY_TEAM['jersey_color']} (Away): Attacks {away_attacks}, Shoots toward {away_attacks_toward} goal, Defends {away_defends} goal
 
 USE THIS TO UNDERSTAND:
 - "Turnover Won" = Home team GAINS possession (good for Home)
 - "Turnover lost" = Home team LOSES possession (bad for Home)
-- If Home wins ball in their defensive area ({home_defends} side) → likely a defensive turnover
-- If Away shoots toward {away_attacks_toward} goal → "Shot Opp"
-- If Home shoots toward {home_attacks_toward} goal → "Shot Own" """
+- If Home wins ball in their defensive area ({home_defends} side) = likely a defensive turnover
+- If Away shoots toward {away_attacks_toward} goal = "Shot Away"
+- If Home shoots toward {home_attacks_toward} goal = "Shot Home" """
     
     model = genai.GenerativeModel('gemini-2.5-pro', generation_config={"temperature": 0, "top_p": 0.1})
     
@@ -422,145 +423,8 @@ USE THIS TO UNDERSTAND:
         print(f"   Output format: Text (MM:SS - Event Code [Tags]: Description)")
         
     else:
-        # Fallback: process full narrative (backward compatibility)
-        if narrative_file.exists():
-            input_file = narrative_file
-            print(f"📖 Using full validated narrative from Stage 2")
-        elif observations_file.exists():
-            input_file = observations_file
-            print(f"⚠️  No 2_narrative.txt found - using raw observations (Stage 2 was skipped)")
-        else:
-            raise FileNotFoundError(f"❌ No input files found")
-        
-        with open(input_file, 'r') as f:
-            narrative = f.read()
-        
-        print(f"📖 Loaded: {len(narrative)} characters")
-        
-        # Use the old prompt format for backward compatibility
-        prompt_text = f"""Hello! You're the final step in our GAA (Gaelic Athletic Association) event detection pipeline.
-
-**WHAT YOU'RE WORKING WITH:**
-You have a coherent narrative that's already been sanity-checked. Now extract the real events and convert team colors to Own/Opp labels for our database.
-
-{team_mapping}
-
-**YOUR TASK:**
-Read the narrative and extract events. The timestamps are already in absolute game time (e.g., 11:25, 14:33), so just use them as-is.
-
-**IMPORTANT - ONLY EXTRACT EVENTS THAT ARE EXPLICITLY MENTIONED:**
-Don't invent events, but when the narrative clearly says the ball goes over the bar (point) or into the net (goal), extract it as a score even if there are multiple in the segment.
-
-Handle structured restarts carefully:
-- **Scores (Points/Goals):** Any explicit "ball goes over the bar", "ball goes into the net", "scores", or obvious celebration cue → extract as "Shot Own/Opp" with appropriate tag ([Point], [Goal], [Wide]).
-- **Kickouts:** Only if it says "takes the kickout" or equivalent restart action (not just "prepares").
-- **Throw-ups:** Only if it says "throw-up" or referee restarts play.
-- **Half starts/ends:** Only if explicitly stated ("whistle blows to start", "half ends").
-
-**ALL EVENTS TO EXTRACT:**
-
-**GAA EVENTS WE'RE TRACKING:**
-
-**Restarts:**
-- "Kickout Own/Opp" - Goalkeeper restarts after a score (add tags: [Long/Mid/Short], [Left/Centre/Right], [Won/Lost])
-- "Throw Up" - Referee restarts play from contested ball (add tag: [Won] if team wins possession)
-
-**Possession & Attacks:**
-- "Possession Own/Opp" - Team has possession (add tags: [Won/Lost/Turnover/Attack])
-- "Pos Own Att/Pos Opp ATT" - Team in possession attacking (add tags: [Turnover/Kickout Own/KIckout Opp])
-- "Attack Own/Attack OPP" - Team actively attacking toward goal
-- "Turnover Won/Turnover lost" - Possession changes (add tags: [Forced/Unforced], [A1/A2/A3/M1/M2/M3/D1/D2/D3], [attack third/middle third/defensive])
-
-**Shots:**
-- "Shot Own/Opp" - ANY strike toward goal (add tags: [From Play/From Free], [Point/Goal/Wide/45m/Short Keeper/Pass / Other/Rebound Post/Save])
-
-**Fouls:**
-- "Foul Awarded/Foul Conceded" - Foul committed (team perspective)
-- "Scoreable Foul Awarded/Scoreable Foul Conceded" - Foul that results in a scoreable opportunity
-
-**Other:**
-- "Ball in Play" - Active play ongoing
-- "Stoppage" - Play stopped (add tags: [Point/Goal/Wide])
-- "Highlight" - Notable moment (add tags: [Point/Goal])
-- "Hot Ball" - Contested ball situation (add tag: [Won])
-- "Referee" - Referee decision/whistle
-
-**Match Structure:**
-- "1st Half Start", "1st Half End", "2nd Half Start", "2nd Half End"
-
-**HOW TO EXTRACT:**
-Only extract events that are **explicitly mentioned** in the narrative. Don't infer or add events.
-
-**EXTRACTION EXAMPLES:**
-- Narrative: "11:41 - Blue player intercepts in midfield" → YOU: "11:41 - Turnover Won: Blue intercepts"
-- Narrative: "13:20 - White player attacks down the right" → YOU: "13:20 - Attack Own: White attacks"
-- Narrative: "17:15 - Blue player takes a shot, scores a point" → YOU: "17:15 - Shot Opp [From Play] [Point]: Blue scores point"
-- Narrative: "15:45 - White player takes a shot, goalkeeper saves" → YOU: "15:45 - Shot Own [From Play] [Save]: White shoots, keeper saves"
-- Narrative: "14:20 - Blue goalkeeper takes kickout after point" → YOU: "14:20 - Kickout Opp [Long] [Centre] [Lost]: Blue restarts"
-- Narrative: "16:30 - Referee throws up ball" → YOU: "16:30 - Throw Up [Won]: Referee restart"
-- Narrative: "18:45 - White player scores a goal" → YOU: "18:45 - Shot Own [From Play] [Goal]: White scores goal"
-- Narrative: "20:10 - Blue player shoots wide" → YOU: "20:10 - Shot Opp [From Play] [Wide]: Blue shoots wide"
-- Narrative: "18:45 - White commits foul, referee awards free" → YOU: "18:45 - Foul Conceded: White fouls"
-- Narrative: "20:23 - Blue wins possession in defensive third" → YOU: "20:23 - Turnover Won [Unforced] [D3] [defensive]: Blue wins ball"
-
-**OUTPUT FORMAT:**
-MM:SS - Event Code [Tag if needed]: Brief description
-
-**KEY RULES:**
-1. **Timestamps:** Already in absolute game time (11:25, 14:33) - use them as-is
-2. **Team colors → Own/Opp:** Convert using the mapping and spatial context above
-3. **TURNOVER PERSPECTIVE** (CRITICAL - use spatial context!):
-   - "Turnover Won" = HOME team GAINS possession from opponent
-   - "Turnover lost" = HOME team LOSES possession to opponent
-   - If narrative says "White forces turnover" and White=Away → "Turnover lost" for Home
-4. **FOUL PERSPECTIVE** (use context!):
-   - "Foul Awarded" = Free TO home (opponent fouled us)
-   - "Foul Conceded" = Free BY home (we fouled opponent)
-5. **Only what's mentioned:** Don't add events not in the narrative
-6. **Merge shot outcomes:** If narrative says "shot" + "point/goal/wide" → ONE event with both tags
-7. **Keep fouls separate:** "Foul" and resulting "Shot" are separate events
-8. **Avoid duplicates:** If same event described twice, report clearest instance once
-9. **Required tags:** Shots need [From Play/From Free] + outcome, Kickouts need distance + direction + Won/Lost
-
-**QUALITY BAR:**
-- Extract every event that is clearly described, including multiple scores when the language supports it.
-- Kickouts should follow scores - verify the sequence makes sense.
-- Don't invent events to fill gaps.
-
-**Here is the validated narrative from Stage 2:**
-
-{narrative}
-
-**Now extract all events you can confidently identify:**
-Remember - timestamps are already in absolute time (11:25 format), just use them directly. Convert team colors to Own/Opp. Only extract what's explicitly mentioned. Good luck!"""
-        
-        try:
-            response = model.generate_content(prompt_text)
-            events_text = response.text.strip()
-            
-            with open(output_file, 'w') as f:
-                f.write(events_text)
-            
-            # Track usage
-            usage = response.usage_metadata
-            prompt_tokens = usage.prompt_token_count
-            output_tokens = usage.candidates_token_count
-            total_tokens = usage.total_token_count
-            input_cost, output_cost, total_cost = _calc_segment_cost(prompt_tokens, output_tokens)
-            
-            totals['prompt_tokens'] = prompt_tokens
-            totals['output_tokens'] = output_tokens
-            totals['total_tokens'] = total_tokens
-            totals['input_cost'] = input_cost
-            totals['output_cost'] = output_cost
-            totals['total_cost'] = total_cost
-            totals['api_calls'] = 1
-            
-            print(f"✅ Events extracted")
-            
-        except Exception as e:
-            print(f"❌ Error: {e}")
-            raise
+        # No segmented narratives found
+        raise FileNotFoundError(f"❌ No narrative segments found. Please run Stage 2 first.")
     
     total_elapsed = time.time() - stage_start_time
     

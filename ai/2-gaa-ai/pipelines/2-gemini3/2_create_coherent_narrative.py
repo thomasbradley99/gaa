@@ -34,7 +34,7 @@ if run_config.exists():
     output_folder = run_config.read_text().strip()
     print(f"📁 Using output folder from Stage 1: {output_folder}")
 else:
-    output_folder = "6-with-audio"
+    output_folder = "2-gemini3"
     print(f"⚠️  No .current_run.txt found, using default: {output_folder}")
 
 INPUT_DIR = GAME_ROOT / "outputs" / output_folder
@@ -89,9 +89,37 @@ def _build_stage2_prompt(observations_block: str, start_seconds: int, end_second
     if GAME_PROFILE:
         team_a = GAME_PROFILE['team_a']
         team_b = GAME_PROFILE['team_b']
+        
+        # Determine which half we're in to get correct attack directions
+        match_times = GAME_PROFILE.get('match_times', {})
+        half_time = match_times.get('half_time', 1800)
+        
+        if start_seconds < half_time:
+            current_half = "1st half"
+            team_a_attacks = team_a['attack_direction_1st_half']
+            team_b_attacks = team_b['attack_direction_1st_half']
+        else:
+            current_half = "2nd half"
+            team_a_attacks = team_a['attack_direction_2nd_half']
+            team_b_attacks = team_b['attack_direction_2nd_half']
+        
+        # Determine defending sides and attacking directions
+        def get_goal_sides(attack_dir):
+            if attack_dir == "right-to-left":
+                return "RIGHT side", "LEFT goal"
+            else:  # left-to-right
+                return "LEFT side", "RIGHT goal"
+        
+        team_a_defends, team_a_shoots_toward = get_goal_sides(team_a_attacks)
+        team_b_defends, team_b_shoots_toward = get_goal_sides(team_b_attacks)
+        
         team_info = f"""TEAMS (refer to them ONLY by jersey color):
-- {team_a['jersey_color']} ({team_a['keeper_color']} keeper)
-- {team_b['jersey_color']} ({team_b['keeper_color']} keeper)
+- {team_a['jersey_color']} ({team_a['keeper_color']} keeper) - attacking {team_a_attacks}, defend {team_a_defends} goal
+- {team_b['jersey_color']} ({team_b['keeper_color']} keeper) - attacking {team_b_attacks}, defend {team_b_defends} goal
+
+SPATIAL CONTEXT ({current_half}):
+- {team_a['jersey_color']} shoots toward {team_a_shoots_toward}, keeper at {team_a_defends} goal
+- {team_b['jersey_color']} shoots toward {team_b_shoots_toward}, keeper at {team_b_defends} goal
 
 {time_context}"""
     else:
@@ -159,6 +187,15 @@ Common false patterns to watch for:
 
 Use these GAA logic patterns to validate what you read:
 
+**Spatial validation (does the location make sense?):**
+- **Shots:** Check which goal the team is shooting toward - does it match their attack direction?
+  - Example: If observations say "Black shoots toward RIGHT goal" and Black attacks left-to-right → VALID ✓
+  - If "Black shoots toward LEFT goal" and Black attacks left-to-right → INVALID (hallucination or wrong team)
+- **Kickouts:** Check which goal the keeper is at - does it match their defending side?
+  - Example: "Black keeper kicks out from LEFT goal" and Black defends LEFT → VALID ✓
+  - If keeper location contradicts, it's likely a misidentification
+- **Use spatial info to verify team identity:** If you're unsure which team did something, check the goal side
+
 **Forward validation (cause must lead to effect):**
 - **Score (Point/Goal) → Kickout or celebration:** Real scores are usually followed by a kickout restart or clear celebratory language. If the score description is strong but the restart is missing, keep the score and simply note the restart is implied.
 - **Foul → Free kick/Scoreable foul:** Usually (but not always) follows within 5-30s. Keep both if you see them.
@@ -183,9 +220,12 @@ Keep the same format as the input observations - organized by clip with timestam
 11:25 - [Team color] player [ACTION DESCRIPTION]
 11:33 - [Next event]
 
-Keep it detailed for important events:
+Keep it detailed for important events AND preserve spatial info:
 ✅ GOOD: "11:25 - White player intercepts the pass in midfield"
+✅ GOOD: "00:53 - Black shoots toward RIGHT goal from 20m - POINT scored"
+✅ GOOD: "01:42 - Black keeper kicks out from LEFT goal, SHORT to LEFT, won by Black"
 ❌ BAD: "11:25 - Play continues in midfield" (too vague - we lose the interception!)
+❌ BAD: "00:53 - Black shoots - POINT" (loses spatial context for validation!)
 
 **FINAL CHECKLIST BEFORE YOU FINISH:**
 1. Did you keep every score (point/goal) that had clear "ball over bar" or "ball into net" language?

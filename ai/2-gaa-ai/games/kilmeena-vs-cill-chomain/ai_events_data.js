@@ -1,82 +1,129 @@
 const aiEventsData = [
   {
-    "time": 72,
-    "timeLabel": "1:12",
-    "code": "Turnover Won"
+    "time": 7,
+    "timeLabel": "0:07",
+    "code": "Throw Up"
+  },
+  {
+    "time": 8,
+    "timeLabel": "0:08",
+    "code": "Throw Up",
+    "label": "Won"
+  },
+  {
+    "time": 18,
+    "timeLabel": "0:18",
+    "code": "Attack Own"
+  },
+  {
+    "time": 24,
+    "timeLabel": "0:24",
+    "code": "Possession Own",
+    "label": "Won"
   },
   {
     "time": 84,
     "timeLabel": "1:24",
-    "code": "Shot Own"
+    "code": "Attack Opp"
   },
   {
-    "time": 101,
-    "timeLabel": "1:41",
-    "code": "Kickout Opp"
+    "time": 96,
+    "timeLabel": "1:36",
+    "code": "Attack Own"
   },
   {
-    "time": 177,
-    "timeLabel": "2:57",
-    "code": "Shot Own"
+    "time": 118,
+    "timeLabel": "1:58",
+    "code": "Kickout Opp",
+    "label": "Long"
   },
   {
-    "time": 185,
-    "timeLabel": "3:05",
-    "code": "Shot Opp"
+    "time": 205,
+    "timeLabel": "3:25",
+    "code": "Referee"
   },
   {
-    "time": 195,
-    "timeLabel": "3:15",
-    "code": "Kickout Own"
+    "time": 280,
+    "timeLabel": "4:40",
+    "code": "Foul Conceded"
   },
   {
-    "time": 235,
-    "timeLabel": "3:55",
-    "code": "Throw Up"
+    "time": 304,
+    "timeLabel": "5:04",
+    "code": "Possession Opp",
+    "label": "Won"
   },
   {
-    "time": 285,
-    "timeLabel": "4:45",
-    "code": "Shot Opp"
+    "time": 313,
+    "timeLabel": "5:13",
+    "code": "Foul Conceded"
   },
   {
-    "time": 325,
-    "timeLabel": "5:25",
-    "code": "Scoreable Foul Conceded"
+    "time": 383,
+    "timeLabel": "6:23",
+    "code": "Attack Own"
   },
   {
-    "time": 348,
-    "timeLabel": "5:48",
-    "code": "Shot Opp"
+    "time": 467,
+    "timeLabel": "7:47",
+    "code": "Attack Opp"
   },
   {
-    "time": 414,
-    "timeLabel": "6:54",
-    "code": "Turnover Won"
+    "time": 494,
+    "timeLabel": "8:14",
+    "code": "Foul Awarded"
   },
   {
-    "time": 490,
-    "timeLabel": "8:10",
-    "code": "Shot Opp"
+    "time": 513,
+    "timeLabel": "8:33",
+    "code": "Attack Own"
   },
   {
-    "time": 500,
-    "timeLabel": "8:20",
-    "code": "Kickout Own"
+    "time": 546,
+    "timeLabel": "9:06",
+    "code": "Attack Own"
   },
   {
-    "time": 534,
-    "timeLabel": "8:54",
-    "code": "Turnover lost"
+    "time": 561,
+    "timeLabel": "9:21",
+    "code": "Foul Conceded"
   },
   {
-    "time": 583,
-    "timeLabel": "9:43",
-    "code": "Shot Own"
+    "time": 589,
+    "timeLabel": "9:49",
+    "code": "Turnover Lost",
+    "label": "Unforced"
   },
   {
-    "time": 592,
-    "timeLabel": "9:52",
-    "code": "Kickout Opp"
+    "time": 600,
+    "timeLabel": "10:00",
+    "code": "Stoppage"
+  },
+  {
+    "time": 628,
+    "timeLabel": "10:28",
+    "code": "Throw Up",
+    "label": "Won"
+  },
+  {
+    "time": 630,
+    "timeLabel": "10:30",
+    "code": "Attack Own"
+  },
+  {
+    "time": 634,
+    "timeLabel": "10:34",
+    "code": "Hot Ball",
+    "label": "Won"
+  },
+  {
+    "time": 636,
+    "timeLabel": "10:36",
+    "code": "Attack Own"
+  },
+  {
+    "time": 649,
+    "timeLabel": "10:49",
+    "code": "Attack Opp"
   }
 ];

@@ -169,22 +169,26 @@ This clip shows {clip_start_time} to {clip_end_time}.
 First understand WHERE and WHAT'S HAPPENING, then describe SPECIFIC EVENTS.
 
 **STEP 1: UNDERSTAND THE CONTEXT**
-- WHERE on pitch: Near goal / Attacking area / Midfield / Defensive area
+- WHERE on pitch: Near LEFT goal / Near RIGHT goal / Midfield / Attacking area
 - WHAT'S HAPPENING: Are teams passing around? Attacking? Defending? Contesting ball?
+
+**CRITICAL: ALWAYS specify which goal (LEFT or RIGHT) when events happen near a goal**
 
 **STEP 2: DETECT THESE EVENTS (be selective - don't over-report):**
 
 1. **SHOTS** - Clear scoring attempts ONLY:
    - ⚠️ Only report if you SEE the actual shot/kick toward goal
    - Don't report "attempts" or "attacks" - must see the shot
-   - WHO shoots, WHERE from, OUTCOME (Point/Goal/Wide/Saved)
-   - Example: "{example_mid_time} - White shoots from 25m center - POINT scored"
+   - WHO shoots, WHICH GOAL they're shooting toward, WHERE from, OUTCOME (Point/Goal/Wide/Saved)
+   - Example: "{example_mid_time} - White shoots toward LEFT goal from 25m center - POINT scored"
+   - Example: "{clip_start_time} - Black shoots toward RIGHT goal from 20m right - WIDE"
 
 2. **KICKOUTS** - Goalkeeper restarts (be selective):
    - ⚠️ Don't report EVERY kickout - only if significant or clearly visible
    - After a score, many kickouts are routine - skip if nothing notable
-   - WHO kicks, DISTANCE (Long/Mid/Short), DIRECTION (Left/Centre/Right), OUTCOME (Won/Lost)
-   - Example: "{clip_start_time} - Black keeper kicks out LONG to CENTRE, White WINS in midfield"
+   - WHO kicks, FROM WHICH GOAL, DISTANCE (Long/Mid/Short), DIRECTION (Left/Centre/Right), OUTCOME (Won/Lost)
+   - Example: "{clip_start_time} - Black keeper kicks out from LEFT goal, LONG to CENTRE, White WINS in midfield"
+   - Example: "{example_mid_time} - White keeper kicks out from RIGHT goal, SHORT to RIGHT, Black WINS"
 
 3. **FOULS** - Look for CLEAR SIGNS:
    - 🚩 Referee arm raised / signaling
@@ -192,18 +196,19 @@ First understand WHERE and WHAT'S HAPPENING, then describe SPECIFIC EVENTS.
    - 🚩 Players clustered around stoppage
    - 🚩 Player on ground after contact
    - 🔊 Whistle heard (if audible)
-   - DESCRIBE: Which team fouled (conceded), where it happened (near goal = scoreable)
-   - Example: "{clip_end_time} - Play stops, Black fouls White near goal - SCOREABLE free awarded"
+   - DESCRIBE: Which team fouled (conceded), where it happened (specify goal side if near a goal)
+   - Example: "{clip_end_time} - Play stops near LEFT goal, Black fouls White - SCOREABLE free awarded"
    - Example: "{example_mid_time} - White fouls Black in midfield - free awarded"
 
 4. **TURNOVERS** - VERY RARE, strict criteria:
    - ONLY if: Ball clearly DROPPED / Pass INTERCEPTED mid-flight / Clean TACKLE causes loss
    - Don't report normal ball contests or possession changes
-   - Example: "{example_mid_time} - White player DROPS ball, Black recovers"
+   - Example: "{example_mid_time} - White player DROPS ball in midfield, Black recovers"
 
 **Important:**
 - Use absolute timestamps like {clip_start_time} (NOT 0:05)
-- Include WHERE events happen (near goal, midfield, attacking area, etc.)
+- ALWAYS specify which goal (LEFT or RIGHT) for events near goals
+- Include WHERE events happen: "near LEFT goal", "toward RIGHT goal", "midfield", etc.
 - Only describe KEY events you're CONFIDENT about
 - Refer to teams ONLY by jersey color
 - FOULS: Look for play stoppages, referee signals, player contact
@@ -211,9 +216,10 @@ First understand WHERE and WHAT'S HAPPENING, then describe SPECIFIC EVENTS.
 - Skip routine play, vague "possession", and normal game flow
 
 **Example output format (be selective, not everything):**
-{clip_start_time} - Black shoots from 20m center - POINT scored
+{clip_start_time} - Black shoots toward RIGHT goal from 20m center - POINT scored
 {example_mid_time} - White fouls Black in midfield - free awarded
-{clip_end_time} - Play stops, Black fouls White near goal - SCOREABLE free awarded
+{clip_end_time} - Play stops near LEFT goal, Black fouls White - SCOREABLE free awarded
+{clip_start_time} - White keeper kicks out from RIGHT goal, SHORT to LEFT, Black WINS
 
 (Note: If a clip has routine play with no clear events, that's OK - only report what's significant)
 

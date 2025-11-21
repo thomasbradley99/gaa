@@ -137,7 +137,7 @@ def main():
     if run_config.exists():
         output_folder = run_config.read_text().strip()
     else:
-        output_folder = "6-with-audio"
+        output_folder = "2-gemini3"
     
     OUTPUT_DIR = BASE_DIR / "outputs" / output_folder
     
@@ -146,13 +146,14 @@ def main():
     print(f"📁 Output folder: {output_folder}")
     print("=" * 60)
     
-    # 1. Export Professional Events (prefer full game XML for web viewer)
+    # 1. Export Professional Events (prefer detectable first 10 min for evaluation)
+    pro_xml_first_10 = INPUT_DIR / "ground_truth_detectable_first_10min.xml"
     pro_xml_full = INPUT_DIR / "ground_truth_full.xml"
     pro_xml_filtered = INPUT_DIR / "ground_truth_detectable_events.xml"
     pro_xml_template = INPUT_DIR / "ground_truth_template.xml"
     
-    # Use full game XML if available (for complete timeline), otherwise fall back to filtered or template
-    pro_xml = pro_xml_full if pro_xml_full.exists() else (pro_xml_filtered if pro_xml_filtered.exists() else pro_xml_template)
+    # Use first 10 min if available (for focused evaluation), otherwise fall back to full game
+    pro_xml = pro_xml_first_10 if pro_xml_first_10.exists() else (pro_xml_full if pro_xml_full.exists() else (pro_xml_filtered if pro_xml_filtered.exists() else pro_xml_template))
     
     if pro_xml.exists():
         print(f"📖 Parsing professional XML: {pro_xml.name}")

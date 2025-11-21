@@ -1,0 +1,213 @@
+<?xml version="1.0" ?>
+<file>
+  <instance>
+    <ID>1</ID>
+    <start>25</start>
+    <end>28</end>
+    <code>Throw Up</code>
+  </instance>
+  <instance>
+    <ID>2</ID>
+    <start>39</start>
+    <end>42</end>
+    <code>Shot Own</code>
+    <label>
+      <group>None</group>
+      <text>From Play</text>
+    </label>
+    <label>
+      <group>None</group>
+      <text>Point</text>
+    </label>
+  </instance>
+  <instance>
+    <ID>3</ID>
+    <start>67</start>
+    <end>70</end>
+    <code>Kickout Opp</code>
+    <label>
+      <group>None</group>
+      <text>Long</text>
+    </label>
+    <label>
+      <group>None</group>
+      <text>Centre</text>
+    </label>
+    <label>
+      <group>None</group>
+      <text>Won</text>
+    </label>
+  </instance>
+  <instance>
+    <ID>4</ID>
+    <start>85</start>
+    <end>88</end>
+    <code>Shot Own</code>
+    <label>
+      <group>None</group>
+      <text>From Play</text>
+    </label>
+    <label>
+      <group>None</group>
+      <text>Point</text>
+    </label>
+  </instance>
+  <instance>
+    <ID>5</ID>
+    <start>107.84</start>
+    <end>110.84</end>
+    <code>Kickout Opp</code>
+    <label>
+      <group>None</group>
+      <text>Mid</text>
+    </label>
+    <label>
+      <group>None</group>
+      <text>Centre</text>
+    </label>
+    <label>
+      <group>None</group>
+      <text>Lost</text>
+    </label>
+  </instance>
+  <instance>
+    <ID>6</ID>
+    <start>123</start>
+    <end>126</end>
+    <code>Shot Opp</code>
+    <label>
+      <group>None</group>
+      <text>From Play</text>
+    </label>
+    <label>
+      <group>None</group>
+      <text>Wide</text>
+    </label>
+  </instance>
+  <instance>
+    <ID>7</ID>
+    <start>174.26</start>
+    <end>177.26</end>
+    <code>Kickout Own</code>
+    <label>
+      <group>None</group>
+      <text>Mid</text>
+    </label>
+    <label>
+      <group>None</group>
+      <text>Left</text>
+    </label>
+    <label>
+      <group>None</group>
+      <text>Lost</text>
+    </label>
+  </instance>
+  <instance>
+    <ID>8</ID>
+    <start>240.94</start>
+    <end>243.94</end>
+    <code>Foul Conceded</code>
+  </instance>
+  <instance>
+    <ID>9</ID>
+    <start>274</start>
+    <end>277</end>
+    <code>Shot Own</code>
+    <label>
+      <group>None</group>
+      <text>From Free</text>
+    </label>
+    <label>
+      <group>None</group>
+      <text>Point</text>
+    </label>
+  </instance>
+  <instance>
+    <ID>10</ID>
+    <start>291</start>
+    <end>294</end>
+    <code>Kickout Opp</code>
+    <label>
+      <group>None</group>
+      <text>Mid</text>
+    </label>
+    <label>
+      <group>None</group>
+      <text>Right</text>
+    </label>
+    <label>
+      <group>None</group>
+      <text>Lost</text>
+    </label>
+  </instance>
+  <instance>
+    <ID>11</ID>
+    <start>295</start>
+    <end>298</end>
+    <code>Foul Conceded</code>
+  </instance>
+  <instance>
+    <ID>12</ID>
+    <start>320</start>
+    <end>323</end>
+    <code>Foul Conceded</code>
+  </instance>
+  <instance>
+    <ID>13</ID>
+    <start>423</start>
+    <end>426</end>
+    <code>Foul Conceded</code>
+  </instance>
+  <instance>
+    <ID>14</ID>
+    <start>424</start>
+    <end>427</end>
+    <code>Turnover lost</code>
+  </instance>
+  <instance>
+    <ID>15</ID>
+    <start>485</start>
+    <end>488</end>
+    <code>Shot Opp</code>
+    <label>
+      <group>None</group>
+      <text>From Free</text>
+    </label>
+    <label>
+      <group>None</group>
+      <text>Point</text>
+    </label>
+  </instance>
+  <instance>
+    <ID>16</ID>
+    <start>513</start>
+    <end>516</end>
+    <code>Kickout Own</code>
+    <label>
+      <group>None</group>
+      <text>Long</text>
+    </label>
+    <label>
+      <group>None</group>
+      <text>Left</text>
+    </label>
+    <label>
+      <group>None</group>
+      <text>Lost</text>
+    </label>
+  </instance>
+  <instance>
+    <ID>17</ID>
+    <start>577</start>
+    <end>580</end>
+    <code>Shot Own</code>
+    <label>
+      <group>None</group>
+      <text>From Play</text>
+    </label>
+    <label>
+      <group>None</group>
+      <text>Wide</text>
+    </label>
+  </instance>
+</file>

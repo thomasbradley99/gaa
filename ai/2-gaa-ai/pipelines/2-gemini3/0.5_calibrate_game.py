@@ -33,25 +33,37 @@ def describe_single_frame(frame_path: Path, timestamp_seconds: int) -> dict:
     try:
         prompt = f"""Frame at {timestamp_seconds}s. Report:
 
-1. Teams: [color] jerseys vs [color] jerseys
-2. Keepers (if visible): [color] keeper LEFT goal, [color] keeper RIGHT goal
-3. Game state - choose ONE:
-   - "THROW-UP" - referee throws up ball, players contesting
-   - "IN-PLAY" - active match, players in motion
-   - "HALFTIME" - players walking off field, leaving pitch
-   - "WARMUP" - players standing around, no organized play
-   - "END" - players shaking hands, celebrating, leaving field
-4. Ball location: where is it? (center, penalty area, midfield, sideline, etc.)
-5. Activity level: active play / slow / stopped / players resting
+1. Teams: [color] jerseys vs [color] jerseys (be specific: "White", "Black", "Dark Blue", etc.)
 
-Format example: "Blue vs White. Pink LEFT, Green RIGHT. THROW-UP - referee throws up ball, teams contesting. Active."
+2. ATTACKING ACTION (MOST VALUABLE - if visible):
+   - Is a team shooting/attacking toward a goal? Which color team? Toward LEFT or RIGHT goal?
+   - Example: "Black player shooting toward RIGHT goal"
+   - Example: "White player taking free kick toward LEFT goal"
+   - Example: "Dark Blue attacking toward RIGHT penalty area"
+   - This is the BEST indicator of attack direction - report if you see it
 
-Be concise (2-3 lines)."""
+3. Keepers (if visible and no clear attacking action): 
+   - LEFT goal: [color] keeper
+   - RIGHT goal: [color] keeper
+   - If BOTH keepers visible, report both (rare but valuable)
+   - NEVER report same color for both keepers
+
+4. Game state: THROW-UP / IN-PLAY / HALFTIME / WARMUP / END
+
+5. Frame usefulness:
+   - "USEFUL" if attacking action visible or both keepers visible
+   - "NOT USEFUL" if unclear/ambiguous/warmup
+
+Format example: "Black vs White. Black shooting toward RIGHT goal. IN-PLAY. USEFUL."
+Or: "White vs Black. Dark keeper LEFT, White keeper RIGHT. IN-PLAY. USEFUL."
+Or: "White vs Black. Ball midfield, no clear action. IN-PLAY. NOT USEFUL."
+
+Be concise (2-3 lines). Prioritize reporting attacking action over keepers."""
 
         with open(frame_path, 'rb') as f:
             frame_data = f.read()
         
-        model = genai.GenerativeModel('gemini-3-pro-preview')
+        model = genai.GenerativeModel('gemini-2.5-flash')
         response = model.generate_content([
             {"mime_type": "image/jpeg", "data": frame_data},
             prompt
@@ -80,6 +92,11 @@ def calibrate_game():
     print(f"🎯 STAGE 0.5: GAME CALIBRATION (PARALLEL)")
     print(f"Game: {ARGS.game}")
     print("=" * 70)
+    
+    # Check if profile already exists
+    if OUTPUT_FILE.exists():
+        print(f"⚠️  Overwriting existing game_profile.json")
+        print()
     
     # Check frames exist
     frames = sorted(FRAMES_DIR.glob('frame_*.jpg'))
@@ -166,20 +183,58 @@ Extract the following information:
    
 2. **MATCH TIMES:**
    - Match START: Find the FIRST timestamp with "THROW-UP" or "IN-PLAY" state
+     IMPORTANT: If this is within the first 60 seconds, set start to 0 (sampling may have missed earlier action)
    - Half Time: Find first timestamp with "HALFTIME" state (players walking off)
    - 2nd Half START: Find the SECOND "THROW-UP" or "IN-PLAY" state (after halftime)
    - Match END: Find the last timestamp with "IN-PLAY" or first "END" state
    
-3. **ATTACKING DIRECTIONS:**
-   - In 1st half: Which team attacks left-to-right? Which attacks right-to-left?
-   - In 2nd half: Do they switch directions?
+3. **ATTACKING DIRECTIONS - CRITICAL ANALYSIS:**
+   
+   Use a PRIORITIZED, LAYERED APPROACH:
+   
+   **TIER 1 (MOST RELIABLE) - Attacking Action:**
+   - Look for frames marked "USEFUL" with attacking action descriptions
+   - PARSE CAREFULLY: "[Team Color] attacking toward [Direction] goal"
+   - Example: "Black attacking toward RIGHT goal" → Black (NOT White) attacks left-to-right
+   - Example: "White player shooting toward LEFT goal" → White (NOT opponent) attacks right-to-left
+   - Extract the SUBJECT of the attacking action, not just color mentions
+   - Count separately for each team's attacking frames
+   - If Team X attacks toward RIGHT goal → "left-to-right"
+   - If Team X attacks toward LEFT goal → "right-to-left"
+   - List evidence frames explicitly with format: "Team X attacking [direction]: [timestamps]"
+   
+   **TIER 2 (RELIABLE) - Both Keepers Visible:**
+   - Look for frames showing BOTH keepers simultaneously (rare but definitive)
+   - Example: "Dark Blue keeper LEFT, White keeper RIGHT"
+   - If found, this confirms which team defends which goal
+   - List these frames in your notes
+   
+   **TIER 3 (LEAST RELIABLE) - Single Keeper Counts:**
+   - Only use if Tier 1 and Tier 2 have insufficient data
+   - Count frequency of single keeper mentions
+   - Use most common pattern
+   
+   **IGNORE COMPLETELY:**
+   - Frames marked "NOT USEFUL"
+   - Frames with "White keeper LEFT, White keeper RIGHT" (impossible)
+   - Frames with "No keeper visible"
+   - Warmup periods
+   
+   **VALIDATION (CRITICAL):**
+   - Teams MUST attack OPPOSITE directions in same half (one left-to-right, one right-to-left)
+   - If both teams show same direction, YOU MADE A PARSING ERROR - recount carefully
+   - Teams MUST switch directions at halftime
+   - Show your work: List counts like "Team A: 15 toward RIGHT, 3 toward LEFT = attacks left-to-right"
+   - Include specific evidence timestamps in notes
 
 **RULES:**
-- Use the timestamps from the descriptions
-- Be specific about colors (exact shades like "Light blue", "Dark blue", "White")
+- Count ALL keeper mentions systematically before deciding
+- Use FREQUENCY ANALYSIS - most common pattern wins
 - Times should be in SECONDS (integer)
-- Include buffer time - better to start early than miss events
+- Be conservative with start times - if game is active early, assume it started at 0
 - DO NOT try to determine home/away - that will be set manually
+- Attack directions MUST be opposite for both teams in same half (one left-to-right, one right-to-left)
+- Include your frequency counts in the "notes" field for verification
 
 **OUTPUT FORMAT (JSON only, no markdown, no code blocks):**
 {{
@@ -208,7 +263,7 @@ Extract the following information:
 Provide ONLY the JSON object:"""
 
     model = genai.GenerativeModel(
-        'gemini-3-pro-preview',
+        'gemini-2.5-flash',
         generation_config={"temperature": 0, "top_p": 0.1}
     )
     
@@ -227,6 +282,52 @@ Provide ONLY the JSON object:"""
         
         game_profile = json.loads(result_text)
         
+        # Ensure home_team_assignment is set to EDIT_ME (AI sometimes forgets to include it)
+        if 'home_team_assignment' not in game_profile:
+            game_profile['home_team_assignment'] = 'EDIT_ME'
+            print(f"⚠️  Added missing 'home_team_assignment': 'EDIT_ME' field")
+        
+        # Post-process match times: if start is within first 60s, set to 0
+        # (sampling interval may have missed the actual start)
+        if 'match_times' in game_profile:
+            mt = game_profile['match_times']
+            if mt.get('start', 0) > 0 and mt.get('start', 0) <= 60:
+                print(f"⚠️  Start time {mt['start']}s detected - adjusting to 0s to account for sampling interval")
+                mt['start'] = 0
+        
+        # Add human-readable time formats
+        def seconds_to_readable(seconds: int) -> str:
+            """Convert seconds to mm:ss or hh:mm:ss format"""
+            hours = seconds // 3600
+            minutes = (seconds % 3600) // 60
+            secs = seconds % 60
+            if hours > 0:
+                return f"{hours}h{minutes:02d}m{secs:02d}s"
+            else:
+                return f"{minutes}m{secs:02d}s"
+        
+        if 'match_times' in game_profile:
+            mt = game_profile['match_times']
+            game_profile['match_times_readable'] = {
+                'start': seconds_to_readable(mt['start']),
+                'half_time': seconds_to_readable(mt['half_time']),
+                'second_half_start': seconds_to_readable(mt['second_half_start']),
+                'end': seconds_to_readable(mt['end'])
+            }
+        
+        # Add video URL from video_source.json if available
+        video_source_path = GAME_ROOT / "inputs" / "video_source.json"
+        if video_source_path.exists():
+            try:
+                with open(video_source_path, 'r') as f:
+                    video_source = json.load(f)
+                    if video_source.get('downloads') and len(video_source['downloads']) > 0:
+                        video_url = video_source['downloads'][0]['url']
+                        game_profile['video_url'] = video_url
+                        print(f"✅ Added video URL from video_source.json")
+            except Exception as e:
+                print(f"⚠️  Could not read video_source.json: {e}")
+        
         # Get token usage
         usage = response.usage_metadata
         input_tokens = usage.prompt_token_count
@@ -238,6 +339,12 @@ Provide ONLY the JSON object:"""
         step2_cost = input_cost + output_cost
         
         total_cost = step1_cost + step2_cost
+        
+        # Add verification reminder as comment in notes
+        if 'notes' in game_profile:
+            game_profile['notes'] = game_profile['notes'] + "\n\n⚠️ VERIFY: Attack directions are AI-inferred and may be incorrect. Watch first kickoff to confirm which team attacks which direction."
+        else:
+            game_profile['notes'] = "⚠️ VERIFY: Attack directions are AI-inferred and may be incorrect. Watch first kickoff to confirm which team attacks which direction."
         
         # Save profile
         OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
@@ -261,25 +368,25 @@ Provide ONLY the JSON object:"""
         
         print(f"\n⏱️  MATCH TIMES:")
         mt = game_profile['match_times']
+        print(f"   Start: {mt['start']}s ({mt['start']//60}m{mt['start']%60:02d}s)")
+        print(f"   Half Time: {mt['half_time']}s ({mt['half_time']//60}m{mt['half_time']%60:02d}s)")
+        print(f"   2nd Half: {mt['second_half_start']}s ({mt['second_half_start']//60}m{mt['second_half_start']%60:02d}s)")
+        print(f"   End: {mt['end']}s ({mt['end']//60}m{mt['end']%60:02d}s)")
         
-        def format_time(seconds):
-            if seconds is None:
-                return "Not detected"
-            return f"{seconds}s ({seconds//60}m{seconds%60:02d}s)"
-        
-        print(f"   Start: {format_time(mt['start'])}")
-        print(f"   Half Time: {format_time(mt['half_time'])}")
-        print(f"   2nd Half: {format_time(mt['second_half_start'])}")
-        print(f"   End: {format_time(mt['end'])}")
-        
-        print(f"\n🎯 ATTACKING DIRECTIONS:")
-        print(f"   1st Half - Team A: {game_profile['team_a']['attack_direction_1st_half']}, " +
-              f"Team B: {game_profile['team_b']['attack_direction_1st_half']}")
+        print(f"\n🎯 ATTACKING DIRECTIONS (AI INFERENCE - VERIFY MANUALLY):")
+        print(f"   1st Half - Team A ({game_profile['team_a']['jersey_color']}): {game_profile['team_a']['attack_direction_1st_half']}")
+        print(f"             Team B ({game_profile['team_b']['jersey_color']}): {game_profile['team_b']['attack_direction_1st_half']}")
         print(f"   2nd Half - Team A: {game_profile['team_a']['attack_direction_2nd_half']}, " +
               f"Team B: {game_profile['team_b']['attack_direction_2nd_half']}")
         
         if 'notes' in game_profile and game_profile['notes']:
-            print(f"\n📝 Notes: {game_profile['notes']}")
+            print(f"\n📝 AI Notes:")
+            # Truncate long notes
+            notes = game_profile['notes']
+            if len(notes) > 300:
+                print(f"   {notes[:300]}...")
+            else:
+                print(f"   {notes}")
         
         print(f"\n💰 TOTAL COST:")
         print(f"   Step 1 (Frame descriptions): ${step1_cost:.4f}")
@@ -287,13 +394,30 @@ Provide ONLY the JSON object:"""
         print(f"   TOTAL: ${total_cost:.4f}")
         
         print(f"\n💾 Saved to: {OUTPUT_FILE}")
-        print(f"\n⚠️  ACTION REQUIRED - Set Home Team:")
-        print(f"   1. Watch S3 website or check ground truth for 'Home Goal Kick'")
-        print(f"   2. See which keeper takes it:")
-        print(f"      - {game_profile['team_a']['keeper_color']} keeper → set 'home_team_assignment': 'team_a'")
-        print(f"      - {game_profile['team_b']['keeper_color']} keeper → set 'home_team_assignment': 'team_b'")
-        print(f"   3. Edit {OUTPUT_FILE.name} and change 'EDIT_ME' to the correct team")
-        print(f"\nNext step: python3 1_clips_to_descriptions.py --game {ARGS.game} --start-clip X --end-clip Y")
+        
+        if 'video_url' in game_profile:
+            print(f"\n🎥 VIDEO URL:")
+            print(f"   {game_profile['video_url']}")
+        
+        print(f"\n" + "=" * 70)
+        print("⚠️  MANUAL VERIFICATION REQUIRED")
+        print("=" * 70)
+        
+        print(f"\n1️⃣  VERIFY ATTACK DIRECTIONS:")
+        print(f"   Watch first kickoff or check ground truth to see:")
+        print(f"   - Which team shoots toward LEFT side of screen? → 'right-to-left'")
+        print(f"   - Which team shoots toward RIGHT side of screen? → 'left-to-right'")
+        print(f"   - Teams should SWITCH directions at halftime")
+        print(f"\n   If AI got it wrong, edit {OUTPUT_FILE.name}:")
+        print(f"   - Change 'attack_direction_1st_half' and 'attack_direction_2nd_half'")
+        
+        print(f"\n2️⃣  SET HOME TEAM:")
+        print(f"   Watch first 'Home Goal Kick' to see which keeper takes it:")
+        print(f"   - {game_profile['team_a']['keeper_color']} keeper → 'home_team_assignment': 'team_a'")
+        print(f"   - {game_profile['team_b']['keeper_color']} keeper → 'home_team_assignment': 'team_b'")
+        print(f"   Edit {OUTPUT_FILE.name} and change 'EDIT_ME' to correct team")
+        
+        print(f"\n✅ Once verified, run: python3 1_clips_to_descriptions.py --game {ARGS.game} --start-clip 0 --end-clip 20")
         
         return True
         

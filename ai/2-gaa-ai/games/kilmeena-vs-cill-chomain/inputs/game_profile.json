@@ -1,13 +1,13 @@
 {
   "team_a": {
     "jersey_color": "White",
-    "keeper_color": "White",
+    "keeper_color": "Black",
     "attack_direction_1st_half": "right-to-left",
     "attack_direction_2nd_half": "left-to-right"
   },
   "team_b": {
-    "jersey_color": "Dark Blue",
-    "keeper_color": "Black",
+    "jersey_color": "Black",
+    "keeper_color": "Yellow/Black",
     "attack_direction_1st_half": "left-to-right",
     "attack_direction_2nd_half": "right-to-left"
   },

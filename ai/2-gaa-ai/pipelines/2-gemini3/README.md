@@ -1,24 +1,8 @@
-# Gemini 3 Pipeline: 1-gaa-ai Approach
+# Production Pipeline 1: Standard Clips
 
-This pipeline uses **Gemini 3 Pro Preview** (`gemini-3-pro-preview`) with the proven 1-gaa-ai approach.
-
-## Approach
-
-This pipeline follows the exact same methodology as **1-gaa-ai/production1**:
-
-- **Full game analysis** (not just 10 minutes)
-- **Possession-based detection** (Possession Own, Possession Opp)
-- **41 detectable event types** including:
-  - Possession Own/Opp (with Won, Lost, Turnover labels)
-  - Shot Own/Opp (with From Play, From Free, Point, Goal, Wide)
-  - Kickout Own/Opp (with Long, Mid, Short, Left, Centre, Right)
-  - Turnover Won/lost
-  - Foul Awarded/Conceded
-- **60-second clips** with no overlap
-- **Schema:** `schema_gaa_basic_events.json`
+This is the original pipeline using **60-second clips with no overlap**.
 
 ## Clip Strategy
-
 - **Clip Duration:** 60 seconds
 - **Overlap:** None
 - **Storage:** `clips/` directory
@@ -29,7 +13,7 @@ This pipeline follows the exact same methodology as **1-gaa-ai/production1**:
 # 0.0 Download videos (reads inputs/video_source.json)
 python3 0.0_download_videos.py --game {game-name}
 
-# 0.5 Calibration (one-time per game)
+# 0. Calibration (one-time per game)
 python3 0.5_calibrate_game.py --game {game-name}
 
 # 0.1 Generate clips (60s, no overlap)
@@ -57,39 +41,34 @@ python3 6_export_for_web.py --game {game-name}
 python3 7_evaluate.py --game {game-name}
 ```
 
-## Model Details
+### Video Source Config
 
-- **Model:** gemini-3-pro-preview
-- **Cost:** $2.00/$12.00 per 1M tokens (input/output, ≤200k prompts)
-- **Cost:** $4.00/$18.00 per 1M tokens (input/output, >200k prompts)
-- **Free Tier:** Not available (paid tier only)
-- **Rate Limit:** 50 requests per minute (RPM)
+Each game directory should contain an `inputs/video_source.json` file describing where to fetch raw footage:
 
-## Expected Performance
+```jsonc
+{
+  "game": "example-game",
+  "title": "Example Team v Other Team",
+  "downloads": [
+    {
+      "label": "full_match",
+      "url": "https://example.com/path/to/video.mp4",
+      "target": "example-game.mp4"
+    }
+  ]
+}
+```
 
-Based on 1-gaa-ai results:
-- **Target F1 Score:** 60%+
-- **Precision:** ~66%
-- **Recall:** ~55%
+Use `python3 0.0_download_videos.py --dry-run` to validate URLs without downloading.
 
-With Gemini 3's advanced reasoning, we expect similar or better performance.
+## Performance
 
-## Cost Estimate
-
-For a 90-minute GAA match:
-- **Calibration:** ~$0.05 (one-time)
-- **Stage 1 (Descriptions):** ~$0.65
-- **Stage 2-7:** ~$0.10
-- **Total:** ~$0.80 per full match
-
-## Differences from 2-gaa-ai/production1
-
-This pipeline is **identical** to 1-gaa-ai/production1 except:
-1. Uses Gemini 3 Pro Preview instead of Gemini 2.5 Pro/Flash
-2. Located in 2-gaa-ai for organizational purposes
-3. Uses the proven Possession-based approach, not the experimental detectable-only approach
+- Lower cost (fewer clips)
+- Faster processing
+- Good for longer segments (full half)
+- May miss events at clip boundaries
 
 ## See Also
 
-- **1-gaa-ai/production1:** Original pipeline (Gemini 2.5 Pro)
-- **2-gaa-ai/production1:** Experimental detectable-events-only approach
+- **Production 2:** Uses 30s clips with 5s overlap for better boundary detection
+

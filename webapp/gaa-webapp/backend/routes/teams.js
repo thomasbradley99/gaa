@@ -82,6 +82,29 @@ router.post('/create', authenticateToken, async (req, res) => {
   }
 });
 
+// Get all teams with colors (public endpoint for team selection)
+router.get('/all', async (req, res) => {
+  try {
+    const result = await query(
+      `SELECT 
+        id,
+        name,
+        description,
+        primary_color,
+        secondary_color,
+        created_at
+       FROM teams
+       WHERE primary_color IS NOT NULL
+       ORDER BY name ASC`
+    );
+
+    res.json({ teams: result.rows });
+  } catch (error) {
+    console.error('Get all teams error:', error);
+    res.status(500).json({ error: 'Failed to get teams' });
+  }
+});
+
 // Join team by invite code
 router.post('/join-by-code', authenticateToken, async (req, res) => {
   try {
@@ -123,6 +146,47 @@ router.post('/join-by-code', authenticateToken, async (req, res) => {
     res.json({ team, message: 'Successfully joined team' });
   } catch (error) {
     console.error('Join team error:', error);
+    res.status(500).json({ error: 'Failed to join team' });
+  }
+});
+
+// Join team by ID (for color-based selection)
+router.post('/:teamId/join', authenticateToken, async (req, res) => {
+  try {
+    const { teamId } = req.params;
+
+    // Find team by ID
+    const teamResult = await query(
+      'SELECT * FROM teams WHERE id = $1',
+      [teamId]
+    );
+
+    if (teamResult.rows.length === 0) {
+      return res.status(404).json({ error: 'Team not found' });
+    }
+
+    const team = teamResult.rows[0];
+
+    // Check if user is already a member
+    const memberResult = await query(
+      'SELECT * FROM team_members WHERE team_id = $1 AND user_id = $2',
+      [team.id, req.user.userId]
+    );
+
+    if (memberResult.rows.length > 0) {
+      return res.json({ team, message: 'Already a member' });
+    }
+
+    // Add user to team
+    await query(
+      `INSERT INTO team_members (team_id, user_id, role)
+       VALUES ($1, $2, 'member')`,
+      [team.id, req.user.userId]
+    );
+
+    res.json({ team, message: 'Successfully joined team' });
+  } catch (error) {
+    console.error('Join team by ID error:', error);
     res.status(500).json({ error: 'Failed to join team' });
   }
 });

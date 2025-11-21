@@ -113,19 +113,51 @@ DATABASE_URL=postgresql://localhost/gaa_app
 ### Git Integration
 
 **Automatic Deployments:**
-- Push to `main` → Production deployment
+- Push to `main` → Production deployment (if enabled)
 - Push to `feature-branch` → Preview deployment
 - Pull request → Preview URL in PR comments
 
+**Disable Auto-Deploy:**
+1. Go to Vercel Dashboard → Project → Settings → Git
+2. Scroll to "Ignored Build Step"
+3. Change "Behavior" from "Automatic" to "Custom"
+4. Enter: `echo "Skipping automatic build - manual deployment only" && exit 0`
+5. This prevents deployments on git push
+
 **Manual Deployments:**
 ```bash
-vercel        # Deploy to preview
-vercel --prod # Deploy to production
+# From repository root (required due to rootDirectory setting)
+cd /Users/thomasbradley/clann-repos/gaa
+vercel --prod --yes  # Deploy frontend to production
+
+# Or from frontend directory (if rootDirectory is cleared)
+cd webapp/gaa-webapp/frontend
+vercel --prod --yes
 ```
+
+**Note:** The frontend project has `rootDirectory: webapp/gaa-webapp/frontend` set in Vercel, so you must deploy from the repository root (`/Users/thomasbradley/clann-repos/gaa`).
 
 ---
 
 ## 1️⃣ Frontend Deployment (Vercel)
+
+### Project Structure
+
+The frontend is located at `webapp/gaa-webapp/frontend` from the repository root:
+```
+gaa/                          # Repository root
+└── webapp/
+    └── gaa-webapp/
+        └── frontend/          # Next.js app
+            ├── src/
+            ├── package.json
+            └── vercel.json
+```
+
+**Vercel Configuration:**
+- **Root Directory:** `webapp/gaa-webapp/frontend` (set in Vercel dashboard)
+- **Project Name:** `frontend`
+- **Team:** `clannai`
 
 ### First Time Setup
 
@@ -134,36 +166,49 @@ vercel --prod # Deploy to production
    npm install -g vercel
    ```
 
-2. **Deploy Frontend**
+2. **Link Project** (from repository root)
    ```bash
-   cd frontend
-   vercel
+   cd /Users/thomasbradley/clann-repos/gaa
+   vercel link --project frontend --yes
    ```
 
-3. **Set Environment Variables** (in Vercel dashboard)
+3. **Set Root Directory** (in Vercel dashboard)
+   - Go to: Project Settings → General → Root Directory
+   - Set to: `webapp/gaa-webapp/frontend`
+   - Or leave empty if deploying from frontend directory
+
+4. **Set Environment Variables** (in Vercel dashboard)
    - Go to: Project Settings → Environment Variables
    - Add:
      ```
-     NEXT_PUBLIC_API_URL=https://your-backend.vercel.app
+     NEXT_PUBLIC_API_URL=https://api-gaa.clannai.com
+     NEXT_PUBLIC_POSTHOG_KEY=phc_your_key_here
+     NEXT_PUBLIC_POSTHOG_HOST=https://eu.i.posthog.com
      ```
+   - Apply to: Production, Preview, Development
 
-4. **Deploy to Production**
+5. **Deploy to Production**
    ```bash
-   vercel --prod
+   cd /Users/thomasbradley/clann-repos/gaa
+   vercel --prod --yes
    ```
 
 ### Subsequent Deployments
 
-**Option 1: Git Push (Recommended)**
+**Option 1: Manual Deploy (Recommended)**
+```bash
+# From repository root (required if rootDirectory is set)
+cd /Users/thomasbradley/clann-repos/gaa
+vercel --prod --yes
+```
+
+**Option 2: Auto-Deploy (if enabled)**
 - Push to GitHub → Vercel auto-deploys
 - Main branch → Production
 - Other branches → Preview deployments
 
-**Option 2: Manual Deploy**
-```bash
-cd frontend
-vercel --prod
-```
+**To disable auto-deploy:**
+- See "Disable Auto-Deploy" section above
 
 ### Vercel Configuration
 
@@ -206,14 +251,14 @@ The `frontend/vercel.json` configures:
 
 ### Subsequent Deployments
 
-**Option 1: Git Push (Recommended)**
-- Push to GitHub → Vercel auto-deploys
-
-**Option 2: Manual Deploy**
+**Option 1: Manual Deploy**
 ```bash
-cd backend
-vercel --prod
+cd /Users/thomasbradley/clann-repos/gaa/webapp/gaa-webapp/backend
+vercel --prod --yes
 ```
+
+**Option 2: Auto-Deploy (if enabled)**
+- Push to GitHub → Vercel auto-deploys
 
 ### Vercel Configuration
 
@@ -473,6 +518,55 @@ Before going live:
 
 ---
 
-**Last Updated:** November 19, 2025  
-**Status:** Production Ready
+---
+
+## 9️⃣ Manual Deployment Workflow
+
+### Current Setup (Manual Deployments)
+
+**Frontend:**
+```bash
+# 1. Make changes and commit
+cd /Users/thomasbradley/clann-repos/gaa
+git add .
+git commit -m "Your changes"
+git push
+
+# 2. Deploy manually (from repo root)
+vercel --prod --yes
+```
+
+**Why deploy from repo root?**
+- Vercel project has `rootDirectory: webapp/gaa-webapp/frontend` configured
+- This tells Vercel where to find the code relative to repo root
+- Deploying from repo root ensures correct path resolution
+
+**Backend:**
+```bash
+cd /Users/thomasbradley/clann-repos/gaa/webapp/gaa-webapp/backend
+vercel --prod --yes
+```
+
+### Troubleshooting Deployment Issues
+
+**"Path does not exist" error:**
+- Make sure you're deploying from the correct directory
+- Check Vercel dashboard → Settings → Root Directory matches your structure
+- Try: `vercel link --project frontend --yes` to relink
+
+**Build fails:**
+- Check build logs in Vercel dashboard
+- Test locally: `cd webapp/gaa-webapp/frontend && npm run build`
+- Verify all environment variables are set in Vercel
+
+**Wrong project deployed:**
+- Check `.vercel/project.json` in repo root
+- Should have: `"projectName": "frontend"`
+- Relink if needed: `rm -rf .vercel && vercel link --project frontend --yes`
+
+---
+
+**Last Updated:** November 21, 2025  
+**Status:** Production Ready  
+**Deployment Method:** Manual (auto-deploy disabled)
 

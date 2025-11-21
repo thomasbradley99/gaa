@@ -75,7 +75,7 @@ function MobileVideoPlayer({
     <div className="relative" onClick={handleVideoTap}>
       {/* Mobile Game Header - fades in/out */}
       <div 
-        className={`absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/90 to-transparent p-4 transition-opacity duration-300 ${
+        className={`absolute top-[28px] left-0 right-0 z-10 bg-gradient-to-b from-black/90 to-transparent p-4 transition-opacity duration-300 ${
           showOverlay ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >
@@ -94,8 +94,8 @@ function MobileVideoPlayer({
       </div>
 
       {/* 10 Minute Analysis Banner - Mobile */}
-      <div className="absolute top-16 left-0 right-0 z-10 bg-yellow-500/90 px-3 py-2 text-black text-xs flex items-center gap-2">
-        <span>ℹ️</span>
+      <div className="absolute top-0 left-0 right-0 z-10 bg-black/70 backdrop-blur-sm px-3 py-1.5 text-white text-[10px] flex items-center gap-1.5 border-b border-white/10">
+        <span className="text-[#2D8B4D]">ℹ️</span>
         <span className="font-medium">Only first 10 minutes analyzed</span>
       </div>
       
@@ -395,7 +395,7 @@ export default function GameDetailPage() {
 
   // Mobile/Portrait Layout (YouTube-style)
   return (
-    <div className="min-h-screen bg-black">
+    <div className="bg-black">
       <UnifiedSidebar
         isOpen={true} // Always open on mobile
         onClose={() => {}} // No close on mobile

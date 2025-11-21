@@ -453,8 +453,8 @@ export default function UnifiedSidebar({
         <div
           className={`${
             isMobile
-              ? 'relative w-full min-h-screen bg-black/90 backdrop-blur-sm'
-              : `fixed top-0 right-0 h-full bg-black/90 backdrop-blur-lg border-l border-white/10 z-50 ${
+              ? 'fixed inset-0 w-full h-full bg-black/90 backdrop-blur-sm flex flex-col overflow-y-auto'
+              : `fixed top-0 right-0 h-full bg-black/90 backdrop-blur-lg border-l border-white/10 z-50 flex flex-col ${
                   isOpen ? 'w-full md:w-[360px] translate-x-0 transition-transform duration-300' : 'hidden'
                 }`
           }`}
@@ -465,7 +465,7 @@ export default function UnifiedSidebar({
             {mobileVideoComponent}
           </div>
         )}
-        {/* Header - sticky on mobile with offset for video */}
+        {/* Header - sticky on mobile with offset for video (16:9 aspect ratio = 56.25vw) */}
         <div className={`flex items-center justify-between px-4 py-3 border-b border-white/10 bg-black/90 backdrop-blur-sm z-10 ${
           isMobile ? 'sticky top-[56.25vw]' : ''
         }`}>
@@ -528,7 +528,7 @@ export default function UnifiedSidebar({
         </div>
 
         {/* Content */}
-        <div className={`${isMobile ? 'h-[calc(100vh-57px)]' : 'h-[calc(100%-57px)]'} flex flex-col`}>
+        <div className="flex-1 overflow-hidden flex flex-col">
           {activeTab === 'events' && (
             <div className="flex-1 flex flex-col overflow-hidden">
               {/* Filters and Actions Section */}

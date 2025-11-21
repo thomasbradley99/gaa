@@ -92,6 +92,10 @@ Create `.env.local`:
 # Backend API URL
 NEXT_PUBLIC_API_URL=http://localhost:5011
 
+# PostHog Analytics
+NEXT_PUBLIC_POSTHOG_KEY=phc_your_gaa_project_key_here
+NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
+
 # Optional: Analytics, monitoring, etc.
 # NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 ```
@@ -99,6 +103,8 @@ NEXT_PUBLIC_API_URL=http://localhost:5011
 **Production:**
 ```bash
 NEXT_PUBLIC_API_URL=https://api-gaa.clannai.com
+NEXT_PUBLIC_POSTHOG_KEY=phc_your_gaa_project_key_here
+NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
 ```
 
 **Note:** Variables prefixed with `NEXT_PUBLIC_` are exposed to the browser.

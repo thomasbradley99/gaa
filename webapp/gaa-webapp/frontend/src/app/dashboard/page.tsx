@@ -153,12 +153,20 @@ export default function DashboardPage() {
                 <p className="text-gray-400 mb-4">
                   You need to create or join a squad before adding matches.
                 </p>
-                <button
-                  onClick={() => router.push('/team')}
-                  className="px-6 py-3 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white font-semibold rounded-xl transition-colors"
-                >
-                  Go to Squad Page
-                </button>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <button
+                    onClick={() => router.push('/select-team')}
+                    className="px-6 py-3 bg-[#2D8B4D] hover:bg-[#2D8B4D]/80 text-white font-semibold rounded-xl transition-colors"
+                  >
+                    Select Team by Color
+                  </button>
+                  <button
+                    onClick={() => router.push('/team')}
+                    className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-colors"
+                  >
+                    Create or Join Squad
+                  </button>
+                </div>
               </div>
             )}
 
@@ -190,7 +198,14 @@ export default function DashboardPage() {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {gamesList.map((game) => (
-                  <GameCard key={game.id} game={game} />
+                  <GameCard 
+                    key={game.id} 
+                    game={game} 
+                    onTeamSelected={() => {
+                      fetchTeams()
+                      fetchGames()
+                    }}
+                  />
                 ))}
               </div>
             )}

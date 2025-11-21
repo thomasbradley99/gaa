@@ -72,6 +72,7 @@ export const auth = {
 // Teams API
 export const teams = {
   list: () => apiRequest('/api/teams/my-teams'),
+  listAll: () => apiRequest('/api/teams/all'),
   create: (data: { name: string; description?: string }) =>
     apiRequest('/api/teams/create', {
       method: 'POST',
@@ -91,6 +92,10 @@ export const teams = {
     apiRequest('/api/teams/join-by-code', {
       method: 'POST',
       body: JSON.stringify({ inviteCode }),
+    }),
+  joinById: (teamId: string) =>
+    apiRequest(`/api/teams/${teamId}/join`, {
+      method: 'POST',
     }),
   getMembers: (teamId: string) =>
     apiRequest(`/api/teams/${teamId}/members`),

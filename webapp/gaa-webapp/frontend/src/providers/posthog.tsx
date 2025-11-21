@@ -24,19 +24,23 @@ function PostHogPageView() {
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // Check if PostHog is already initialized
-      if ((posthog as any).__loaded || (posthog as any).__initialized) {
-        return;
-      }
-      
-      const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY;
-      const posthogHost = process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://eu.i.posthog.com';
-      
-      if (!posthogKey) {
-        console.warn('⚠️ PostHog key not found. Set NEXT_PUBLIC_POSTHOG_KEY in your environment variables.');
-        return;
-      }
+    // Only initialize PostHog in production
+    if (typeof window === 'undefined' || process.env.NODE_ENV !== 'production') {
+      return;
+    }
+    
+    // Check if PostHog is already initialized
+    if ((posthog as any).__loaded || (posthog as any).__initialized) {
+      return;
+    }
+    
+    const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY;
+    const posthogHost = process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com';
+    
+    if (!posthogKey) {
+      console.warn('⚠️ PostHog key not found. Set NEXT_PUBLIC_POSTHOG_KEY in your environment variables.');
+      return;
+    }
 
       posthog.init(posthogKey, {
         api_host: posthogHost,

@@ -371,22 +371,24 @@ export default function GameDetailPage() {
         </div>
 
         {/* Right Sidebar - Toggleable */}
-        <UnifiedSidebar
-          isOpen={showRightSidebar}
-          onClose={() => setShowRightSidebar(false)}
-          game={game}
-          events={filteredEvents}
-          allEvents={gameEvents}
-          currentTime={currentTime}
-          duration={duration}
-          onEventClick={handleEventClick}
-          teamFilter={teamFilter}
-          onTeamFilterChange={setTeamFilter}
-          onEventsUploaded={handleEventsUploaded}
-          onEventsUpdate={handleEventsUpdate}
-          onEventPaddingsChange={setEventPaddings}
-          onAutoplayChange={setAutoplayEnabled}
-        />
+        {showRightSidebar && (
+          <UnifiedSidebar
+            isOpen={showRightSidebar}
+            onClose={() => setShowRightSidebar(false)}
+            game={game}
+            events={filteredEvents}
+            allEvents={gameEvents}
+            currentTime={currentTime}
+            duration={duration}
+            onEventClick={handleEventClick}
+            teamFilter={teamFilter}
+            onTeamFilterChange={setTeamFilter}
+            onEventsUploaded={handleEventsUploaded}
+            onEventsUpdate={handleEventsUpdate}
+            onEventPaddingsChange={setEventPaddings}
+            onAutoplayChange={setAutoplayEnabled}
+          />
+        )}
       </div>
     )
   }

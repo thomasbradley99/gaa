@@ -226,7 +226,7 @@ export default function TeamPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
             {/* Header */}
             <div className="mb-6">
-              <h1 className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2">Squad</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2">Team</h1>
               <p className="text-sm sm:text-base text-gray-400">Manage your GAA team</p>
             </div>
 
@@ -236,9 +236,9 @@ export default function TeamPage() {
                 {!showMap ? (
                   <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-6 sm:p-8 text-center mb-6">
                     <Users className="w-12 h-12 sm:w-16 sm:h-16 text-gray-600 mx-auto mb-4" />
-                    <h2 className="text-lg sm:text-xl font-semibold text-white mb-2">No Squad Yet</h2>
+                    <h2 className="text-lg sm:text-xl font-semibold text-white mb-2">No Team Yet</h2>
                     <p className="text-sm sm:text-base text-gray-400 mb-6">
-                      Find your GAA club on the map or create/join a squad manually.
+                      Find your GAA club on the map or create/join a team manually.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                       <button
@@ -260,7 +260,7 @@ export default function TeamPage() {
                         className="w-full sm:w-auto px-6 py-3 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
                       >
                         <UserPlus className="w-5 h-5" />
-                        Join Squad
+                        Join Team
                       </button>
                     </div>
                   </div>
@@ -312,7 +312,7 @@ export default function TeamPage() {
                     <button
                       onClick={openEditModal}
                       className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors flex-shrink-0"
-                      title="Edit squad"
+                      title="Edit team"
                     >
                       <Edit className="w-5 h-5" />
                     </button>
@@ -321,7 +321,7 @@ export default function TeamPage() {
 
                 {/* Team Info */}
                 <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-4 sm:p-6 mb-6">
-                  <h3 className="text-base sm:text-lg font-semibold text-white mb-4">Squad Information</h3>
+                  <h3 className="text-base sm:text-lg font-semibold text-white mb-4">Team Information</h3>
                   <div className="space-y-4">
                     <div>
                       <label className="text-xs sm:text-sm text-gray-400">Invite Code</label>

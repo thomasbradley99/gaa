@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Play, Clock, Users } from 'lucide-react'
+import { Play, Clock, Users, Check } from 'lucide-react'
 import { teams } from '@/lib/api-client'
 
 interface GameCardProps {
@@ -27,9 +27,14 @@ interface GameCardProps {
     }
   }
   onTeamSelected?: () => void
+  userTeam?: {
+    id: string
+    primary_color?: string
+    secondary_color?: string
+  } | null
 }
 
-export default function GameCard({ game, onTeamSelected }: GameCardProps) {
+export default function GameCard({ game, onTeamSelected, userTeam }: GameCardProps) {
   const router = useRouter()
   const [selectingTeam, setSelectingTeam] = useState<string | null>(null)
   
@@ -43,6 +48,83 @@ export default function GameCard({ game, onTeamSelected }: GameCardProps) {
     away: game.metadata.teams.away_team?.jersey_color
   } : null
   
+  // Map color names to hex values
+  const colorNameToHex = (colorName: string): string => {
+    const colorMap: Record<string, string> = {
+      'white': '#FFFFFF',
+      'black': '#000000',
+      'red': '#DC143C',
+      'blue': '#0066CC',
+      'green': '#016F32',
+      'yellow': '#FFD700',
+      'orange': '#FF6600',
+      'purple': '#800080',
+      'pink': '#FFC0CB',
+      'gray': '#808080',
+      'grey': '#808080',
+      'brown': '#8B4513',
+      'navy': '#1B365D',
+      'maroon': '#8B0000',
+      'gold': '#FFD700',
+      'silver': '#C0C0C0',
+      'amber': '#FFB300',
+      'saffron': '#FFB300',
+      'sky blue': '#87CEEB',
+    }
+    
+    const colorLower = colorName.toLowerCase().trim()
+    
+    // Direct match
+    if (colorMap[colorLower]) {
+      return colorMap[colorLower]
+    }
+    
+    // Check if it's already a hex color
+    if (colorLower.startsWith('#')) {
+      return colorName
+    }
+    
+    // Try partial matches
+    for (const [key, value] of Object.entries(colorMap)) {
+      if (colorLower.includes(key) || key.includes(colorLower)) {
+        return value
+      }
+    }
+    
+    // Default fallback - try to parse as hex or return a default
+    return colorLower.startsWith('#') ? colorLower : '#016F32'
+  }
+
+  // Normalize hex color (ensure # prefix and uppercase)
+  const normalizeHexColor = (color: string): string => {
+    if (!color) return ''
+    let normalized = color.trim()
+    if (!normalized.startsWith('#')) {
+      normalized = '#' + normalized
+    }
+    return normalized.toLowerCase()
+  }
+
+  // Check if a color matches the user's team color
+  const isUserTeamColor = (color: string): boolean => {
+    if (!userTeam?.primary_color || !color) return false
+    
+    // Normalize both colors to hex and compare
+    const userColorHex = normalizeHexColor(userTeam.primary_color)
+    const detectedColorHex = normalizeHexColor(colorNameToHex(color))
+    
+    // Direct hex match
+    if (detectedColorHex === userColorHex) return true
+    
+    // Also check secondary color
+    if (userTeam.secondary_color) {
+      const userSecondaryHex = normalizeHexColor(userTeam.secondary_color)
+      if (detectedColorHex === userSecondaryHex) return true
+    }
+    
+    return false
+  }
+
   const handleColorClick = async (e: React.MouseEvent, color: string) => {
     e.stopPropagation() // Prevent card click
     
@@ -51,35 +133,44 @@ export default function GameCard({ game, onTeamSelected }: GameCardProps) {
     setSelectingTeam(color)
     
     try {
-      // Find team with matching color
-      const allTeams = await teams.listAll()
-      const colorLower = color.toLowerCase().trim()
+      // Get user's current team
+      const userTeamsResponse = await teams.list()
+      const userTeams = userTeamsResponse.teams || []
       
-      // Match color name to team colors (flexible matching)
-      const matchingTeam = allTeams.find((t: any) => {
-        const primary = (t.primary_color || '').toLowerCase().trim()
-        const secondary = (t.secondary_color || '').toLowerCase().trim()
-        
-        // Check if detected color matches primary or secondary
-        return primary.includes(colorLower) || 
-               colorLower.includes(primary) ||
-               secondary.includes(colorLower) || 
-               colorLower.includes(secondary) ||
-               // Also check common color name variations
-               (colorLower === 'black' && (primary === '#000000' || primary === 'black')) ||
-               (colorLower === 'white' && (primary === '#ffffff' || primary === '#fff' || primary === 'white'))
+      if (userTeams.length === 0) {
+        alert('You need to create or join a team first. Go to the Team page to set one up.')
+        setSelectingTeam(null)
+        return
+      }
+      
+      // Update the user's first team with the selected color
+      const currentTeam = userTeams[0]
+      const hexColor = colorNameToHex(color)
+      
+      // Update team colors - set primary color to selected color
+      // Note: This requires admin status - will show error if user isn't admin
+      await teams.updateTeamColors(currentTeam.id, {
+        primary_color: hexColor,
+        secondary_color: currentTeam.secondary_color || null,
       })
       
-      if (matchingTeam) {
-        await teams.joinById(matchingTeam.id)
-        if (onTeamSelected) onTeamSelected()
+      // Refresh the team list if callback is provided
+      if (onTeamSelected) {
+        onTeamSelected()
       } else {
-        // Could create a new team here, but for now just show error
-        alert(`No team found with color "${color}". Please create a team with this color first.`)
+        // Show success message
+        alert(`Team color updated to ${color}!`)
       }
     } catch (err: any) {
-      console.error('Failed to assign team:', err)
-      alert(err.message || 'Failed to assign team')
+      console.error('Failed to update team color:', err)
+      // More specific error handling
+      if (err.status === 403) {
+        alert('Only team admins can update team colors. Contact your team admin or go to the Team page to set your color.')
+      } else if (err.status === 404) {
+        alert('Team not found. Please refresh the page.')
+      } else {
+        alert(err.message || 'Failed to update team color. Please try again.')
+      }
     } finally {
       setSelectingTeam(null)
     }
@@ -235,26 +326,44 @@ export default function GameCard({ game, onTeamSelected }: GameCardProps) {
                 <button
                   onClick={(e) => handleColorClick(e, detectedColors.home!)}
                   disabled={selectingTeam === detectedColors.home}
-                  className="flex-1 px-3 py-2 rounded-lg text-xs font-medium transition-all hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed border border-white/20 hover:border-[#2D8B4D]/50"
+                  className="relative flex-1 px-3 py-2 rounded-lg text-xs font-medium transition-all hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed border border-white/20 hover:border-[#2D8B4D]/50 flex items-center justify-center gap-1.5"
                   style={{
                     ...getColorStyle(detectedColors.home),
                     color: detectedColors.home.toLowerCase().includes('white') ? '#000' : '#fff'
                   }}
                 >
-                  {selectingTeam === detectedColors.home ? 'Selecting...' : getColorName(detectedColors.home)}
+                  {selectingTeam === detectedColors.home ? (
+                    'Selecting...'
+                  ) : (
+                    <>
+                      {getColorName(detectedColors.home)}
+                      {isUserTeamColor(detectedColors.home) && (
+                        <Check className="w-3 h-3" strokeWidth={3} />
+                      )}
+                    </>
+                  )}
                 </button>
               )}
               {detectedColors.away && (
                 <button
                   onClick={(e) => handleColorClick(e, detectedColors.away!)}
                   disabled={selectingTeam === detectedColors.away}
-                  className="flex-1 px-3 py-2 rounded-lg text-xs font-medium transition-all hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed border border-white/20 hover:border-[#2D8B4D]/50"
+                  className="relative flex-1 px-3 py-2 rounded-lg text-xs font-medium transition-all hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed border border-white/20 hover:border-[#2D8B4D]/50 flex items-center justify-center gap-1.5"
                   style={{
                     ...getColorStyle(detectedColors.away),
                     color: detectedColors.away.toLowerCase().includes('white') ? '#000' : '#fff'
                   }}
                 >
-                  {selectingTeam === detectedColors.away ? 'Selecting...' : getColorName(detectedColors.away)}
+                  {selectingTeam === detectedColors.away ? (
+                    'Selecting...'
+                  ) : (
+                    <>
+                      {getColorName(detectedColors.away)}
+                      {isUserTeamColor(detectedColors.away) && (
+                        <Check className="w-3 h-3" strokeWidth={3} />
+                      )}
+                    </>
+                  )}
                 </button>
               )}
             </div>

@@ -160,32 +160,107 @@ async function triggerAIAnalyzer(gameId, s3Key, title, teamColors) {
   }
 }
 
-// Get user's games
+// Get user's games (or all games if admin)
 router.get('/', authenticateToken, async (req, res) => {
   try {
     const { teamId } = req.query;
+    const isAdmin = req.user.role === 'admin';
     
-    let queryText = `
-      SELECT 
-        g.*,
-        t.name as team_name
-      FROM games g
-      INNER JOIN team_members tm ON g.team_id = tm.team_id
-      INNER JOIN teams t ON g.team_id = t.id
-      WHERE tm.user_id = $1
-    `;
+    console.log('🎮 GET /api/games request:', {
+      userId: req.user.userId,
+      userRole: req.user.role,
+      isAdmin,
+      teamId: teamId || 'none'
+    });
     
-    const params = [req.user.userId];
+    let queryText;
+    let params = [];
     
-    // Filter by team if teamId provided
-    if (teamId) {
-      queryText += ` AND g.team_id = $2`;
-      params.push(teamId);
+    if (isAdmin) {
+      // Admins see ALL games
+      queryText = `
+        SELECT DISTINCT
+          g.*,
+          t.name as team_name,
+          u.email as created_by_email,
+          u.name as created_by_name
+        FROM games g
+        LEFT JOIN teams t ON g.team_id = t.id
+        LEFT JOIN users u ON g.created_by = u.id
+        WHERE 1=1
+      `;
+      
+      // Filter by team if teamId provided (even for admins)
+      if (teamId) {
+        queryText += ` AND g.team_id = $1`;
+        params.push(teamId);
+      }
+    } else {
+      // Regular users see games where they are either:
+      // 1. A member of the team that owns the game, OR
+      // 2. The creator of the game (created_by)
+      queryText = `
+        SELECT DISTINCT
+          g.*,
+          t.name as team_name
+        FROM games g
+        LEFT JOIN teams t ON g.team_id = t.id
+        LEFT JOIN team_members tm ON g.team_id = tm.team_id AND tm.user_id = $1
+        WHERE (tm.user_id = $1 OR g.created_by = $1)
+      `;
+      
+      params.push(req.user.userId);
+      
+      // Filter by team if teamId provided
+      if (teamId) {
+        queryText += ` AND g.team_id = $2`;
+        params.push(teamId);
+      }
     }
     
     queryText += ` ORDER BY g.created_at DESC`;
     
+    console.log('📝 Executing query:', queryText.replace(/\s+/g, ' ').trim());
+    console.log('📝 Query params:', params);
+    console.log('👤 User info:', {
+      userId: req.user.userId,
+      email: req.user.email,
+      role: req.user.role,
+      isAdmin
+    });
+    
     const result = await query(queryText, params);
+    
+    console.log('📊 Query returned:', result.rows.length, 'games');
+    if (result.rows.length > 0) {
+      console.log('🎮 First 3 games:', result.rows.slice(0, 3).map(r => ({
+        id: r.id,
+        title: r.title,
+        team_id: r.team_id,
+        created_by: r.created_by,
+        team_name: r.team_name
+      })));
+    } else {
+      // Debug: Let's check if games exist at all
+      const allGamesCheck = await query('SELECT COUNT(*) as total FROM games');
+      console.log('🔍 Total games in database:', allGamesCheck.rows[0].total);
+      
+      // Check user's team memberships
+      if (!isAdmin) {
+        const userTeams = await query(
+          'SELECT team_id, role FROM team_members WHERE user_id = $1',
+          [req.user.userId]
+        );
+        console.log('👥 User team memberships:', userTeams.rows);
+        
+        // Check games created by user
+        const userCreatedGames = await query(
+          'SELECT COUNT(*) as total FROM games WHERE created_by = $1',
+          [req.user.userId]
+        );
+        console.log('🎮 Games created by user:', userCreatedGames.rows[0].total);
+      }
+    }
 
     // Generate presigned URLs for thumbnails
     console.log(`🔍 Generating thumbnail URLs for ${result.rows.length} games`);
@@ -279,16 +354,32 @@ router.post('/', authenticateToken, async (req, res) => {
       fileType = 'upload';
       finalVideoUrl = `https://${process.env.AWS_BUCKET_NAME || 'clann-gaa-videos-nov25'}.s3.${process.env.AWS_REGION || 'eu-west-1'}.amazonaws.com/${s3Key}`;
     } else if (videoUrl) {
-      // URL input
-      finalVideoUrl = videoUrl;
-      if (videoUrl.includes('veo.co') || videoUrl.includes('app.veo.co')) {
+      // URL input - extract direct video URL if it's a VEO match page
+      if (videoUrl.includes('app.veo.co/matches')) {
         fileType = 'veo';
-      } else if (videoUrl.includes('traceup.com')) {
-        fileType = 'trace';
-      } else if (videoUrl.includes('spiideo.com')) {
-        fileType = 'spiideo';
+        console.log('🔍 VEO match page detected, extracting direct video URL...');
+        const { extractVideoUrlFromVeoPage } = require('../utils/veo-extractor');
+        const extractedUrl = await extractVideoUrlFromVeoPage(videoUrl);
+        if (extractedUrl) {
+          finalVideoUrl = extractedUrl;
+          console.log('✅ Extracted direct video URL:', finalVideoUrl);
+        } else {
+          // Fallback: store the match page URL, video-proxy will handle it
+          finalVideoUrl = videoUrl;
+          console.log('⚠️  Could not extract video URL, storing match page URL');
+        }
       } else {
-        fileType = 'veo'; // default for external URLs
+        // Already a direct URL or other provider
+        finalVideoUrl = videoUrl;
+        if (videoUrl.includes('veo.co') || videoUrl.includes('veocdn.com')) {
+          fileType = 'veo';
+        } else if (videoUrl.includes('traceup.com')) {
+          fileType = 'trace';
+        } else if (videoUrl.includes('spiideo.com')) {
+          fileType = 'spiideo';
+        } else {
+          fileType = 'veo'; // default for external URLs
+        }
       }
     }
 

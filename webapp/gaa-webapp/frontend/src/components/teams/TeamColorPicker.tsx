@@ -84,6 +84,31 @@ export default function TeamColorPicker({
     setHasSecondaryColor(true) // Presets always have secondary colors
   }
 
+  const handlePresetSelect = async (preset: { primary: string; secondary: string }) => {
+    // Apply preset to local state
+    applyPreset(preset)
+    
+    // Immediately save the preset colors
+    setSaving(true)
+    setError('')
+    setSuccess(false)
+
+    try {
+      await apiClient.updateTeamColors(teamId, {
+        primary_color: preset.primary,
+        secondary_color: preset.secondary,
+      })
+      setSuccess(true)
+      onColorsUpdated?.()
+      
+      setTimeout(() => setSuccess(false), 3000)
+    } catch (err: any) {
+      setError(err.message || 'Failed to update colors')
+    } finally {
+      setSaving(false)
+    }
+  }
+
   return (
     <div className="bg-[#1a1a1a] rounded-lg border border-gray-800">
       {/* Collapsible Header */}
@@ -196,8 +221,9 @@ export default function TeamColorPicker({
             {Object.entries(GAA_TEAM_COLORS).map(([key, colors]) => (
               <button
                 key={key}
-                onClick={() => applyPreset(colors)}
-                className="flex items-center gap-2 p-2 rounded hover:bg-gray-800 transition-colors text-left group"
+                onClick={() => handlePresetSelect(colors)}
+                disabled={saving}
+                className="flex items-center gap-2 p-2 rounded hover:bg-gray-800 transition-colors text-left group disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <div className="flex gap-1">
                   <div

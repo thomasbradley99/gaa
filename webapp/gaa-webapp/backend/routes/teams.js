@@ -262,14 +262,19 @@ router.patch('/:teamId/colors', authenticateToken, async (req, res) => {
     const { teamId } = req.params;
     const { primary_color, secondary_color, accent_color } = req.body;
 
-    // Verify user is admin of team
+    // Allow if user is application admin OR team admin
+    const isApplicationAdmin = req.user.role === 'admin';
+    
+    // Check if user is team admin
     const memberCheck = await query(
       'SELECT * FROM team_members WHERE team_id = $1 AND user_id = $2 AND role = $3',
       [teamId, req.user.userId, 'admin']
     );
 
-    if (memberCheck.rows.length === 0) {
-      return res.status(403).json({ error: 'Only team admins can update team colors' });
+    const isTeamAdmin = memberCheck.rows.length > 0;
+
+    if (!isApplicationAdmin && !isTeamAdmin) {
+      return res.status(403).json({ error: 'Only team admins or application admins can update team colors' });
     }
 
     // Update colors

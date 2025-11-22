@@ -45,7 +45,9 @@ app.get('/api', (req, res) => {
     endpoints: {
       auth: '/api/auth/*',
       teams: '/api/teams/*',
-      games: '/api/games/*'
+      games: '/api/games/*',
+      admin: '/api/admin/*',
+      crm: '/api/crm/*'
     }
   });
 });
@@ -57,6 +59,13 @@ const videoProxyRoutes = require('./routes/video-proxy');
 const gamesRoutes = require('./routes/games');
 const adminRoutes = require('./routes/admin');
 const clubsRoutes = require('./routes/clubs');
+// CRM routes (optional - only load if module available)
+let crmRoutes = null;
+try {
+  crmRoutes = require('./routes/crm');
+} catch (err) {
+  console.log('⚠️  CRM routes not available (missing @aws-sdk/client-ses)');
+}
 
 // Register routes
 app.use('/api/auth', authRoutes);
@@ -65,6 +74,17 @@ app.use('/api/video-proxy', videoProxyRoutes);
 app.use('/api/games', gamesRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/clubs', clubsRoutes);
+if (crmRoutes) {
+  app.use('/api/crm', crmRoutes);
+}
+
+// CRM notifications (always available, doesn't need SES)
+const crmNotifications = require('./routes/crm-notifications');
+app.use('/api/crm', crmNotifications);
+
+// CRM bounce handling
+const crmBounces = require('./routes/crm-bounces');
+app.use('/api/crm', crmBounces);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

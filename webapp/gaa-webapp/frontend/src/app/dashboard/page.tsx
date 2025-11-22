@@ -39,9 +39,19 @@ export default function DashboardPage() {
     setGamesLoading(true)
     setError('')
     try {
-      // Fetch games for user's team (if they have one)
-      const teamId = userTeams.length > 0 ? userTeams[0].id : undefined
+      // Admins see ALL games - don't filter by team
+      // Regular users see games from ALL their teams (don't filter - backend query handles it)
+      // The backend query shows games where user is a member of the team OR created the game
+      const isAdmin = user?.role === 'admin'
+      // Don't pass teamId - let users see games from all their teams
+      // If we want to filter by team later, we can add a team selector dropdown
+      const teamId = undefined
       const data = await games.list(teamId)
+      
+      console.log('👤 User role:', user?.role)
+      console.log('👥 User teams:', userTeams.length)
+      console.log('🎮 Fetching games with teamId:', teamId || 'none (all games for admin)')
+      console.log('🔍 Is admin:', isAdmin)
       
       // 🔍 DEBUG LOGS
       console.log('📦 API Response:', data)
@@ -82,7 +92,10 @@ export default function DashboardPage() {
   }, [router])
 
   useEffect(() => {
-    if (!loading && user && userTeams.length > 0) {
+    // Fetch games if:
+    // 1. User is loaded AND (has teams OR is admin)
+    // Admins should see all games even without teams
+    if (!loading && user && (userTeams.length > 0 || user.role === 'admin')) {
       fetchGames()
     }
   }, [loading, user, userTeams])
@@ -151,7 +164,7 @@ export default function DashboardPage() {
             {userTeams.length === 0 && (
               <div className="bg-black/80 backdrop-blur-lg border border-white/10 rounded-xl p-8 text-center mb-8">
                 <p className="text-gray-400 mb-4">
-                  You need to create or join a squad before adding matches.
+                  You need to create or join a team before adding matches.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <button
@@ -164,7 +177,7 @@ export default function DashboardPage() {
                     onClick={() => router.push('/team')}
                     className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-colors"
                   >
-                    Create or Join Squad
+                    Create or Join Team
                   </button>
                 </div>
               </div>
@@ -191,7 +204,7 @@ export default function DashboardPage() {
                 <div className="text-gray-400 mb-4">No matches yet</div>
                 <p className="text-gray-500 text-sm">
                   {userTeams.length === 0
-                    ? 'Create or join a squad to get started'
+                    ? 'Create or join a team to get started'
                     : 'Add your first match using the form above'}
                 </p>
               </div>
@@ -201,6 +214,7 @@ export default function DashboardPage() {
                   <GameCard 
                     key={game.id} 
                     game={game} 
+                    userTeam={userTeams.length > 0 ? userTeams[0] : null}
                     onTeamSelected={() => {
                       fetchTeams()
                       fetchGames()

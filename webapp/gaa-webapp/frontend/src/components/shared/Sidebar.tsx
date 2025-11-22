@@ -32,7 +32,7 @@ export default function Sidebar({ user }: SidebarProps) {
       active: pathname === '/dashboard',
     },
     {
-      label: 'Squad',
+      label: 'Team',
       icon: Users,
       path: '/team',
       active: pathname === '/team',

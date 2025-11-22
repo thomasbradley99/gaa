@@ -49,7 +49,7 @@ const authenticateAdmin = (req, res, next) => {
  */
 const authenticateLambda = (req, res, next) => {
   const apiKey = req.headers['x-api-key'];
-  const expectedKey = process.env.LAMBDA_API_KEY || 'gaa-lambda-secret-key-change-in-production';
+  const expectedKey = process.env.LAMBDA_API_KEY || 'gaa-lambda-secret-key-2024';
 
   if (!apiKey || apiKey !== expectedKey) {
     return res.status(401).json({ error: 'Invalid API key' });

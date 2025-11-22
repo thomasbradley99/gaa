@@ -50,7 +50,11 @@ export default function GameHeader({
         <div className="flex items-center gap-3 min-w-0 flex-1">
           {/* Back Button */}
           <button
-            onClick={() => router.push('/dashboard')}
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              router.push('/dashboard')
+            }}
             className="flex items-center justify-center w-8 h-8 text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-colors"
             title="Back to Dashboard"
           >

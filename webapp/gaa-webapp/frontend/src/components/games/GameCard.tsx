@@ -178,7 +178,21 @@ export default function GameCard({ game, onTeamSelected, userTeam }: GameCardPro
   
   const getColorName = (color: string) => {
     // Convert color string to display name
-    return color.charAt(0).toUpperCase() + color.slice(1)
+    // If it's already a formatted string like "Green and White striped", just capitalize first letter
+    // If it's a simple color like "green", capitalize it
+    if (!color) return ''
+    
+    // Check if it's already a mixed color (contains "and" or multiple words)
+    if (color.includes(' and ') || color.includes(' & ') || color.includes(' striped') || color.includes(' with ')) {
+      // Capitalize first letter of each word while preserving the rest
+      return color
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(' ')
+    }
+    
+    // Simple color - just capitalize first letter
+    return color.charAt(0).toUpperCase() + color.slice(1).toLowerCase()
   }
   
   const getColorStyle = (colorName: string) => {

@@ -142,6 +142,17 @@ export const admin = {
     const url = teamId ? `/api/admin/users?teamId=${teamId}` : '/api/admin/users';
     return apiRequest(url);
   },
+  updateUserRole: (userId: string, role: 'admin' | 'user') =>
+    apiRequest(`/api/admin/users/${userId}/role`, {
+      method: 'PUT',
+      body: JSON.stringify({ role }),
+    }),
+  getStats: () => apiRequest('/api/admin/stats'),
+  getTeams: () => apiRequest('/api/admin/teams'),
+  getUsers: (teamId?: string) => {
+    const url = teamId ? `/api/admin/users?teamId=${teamId}` : '/api/admin/users';
+    return apiRequest(url);
+  },
   getStats: () => apiRequest('/api/admin/stats'),
 };
 
@@ -159,5 +170,73 @@ export const clubs = {
   getStats: () => apiRequest('/api/clubs/stats'),
   getCounties: () => apiRequest('/api/clubs/counties'),
   getProvinces: () => apiRequest('/api/clubs/provinces'),
+};
+
+// CRM API
+export const crm = {
+  getContacts: (filters?: { search?: string; club?: string; reply_status?: string; limit?: number; offset?: number }) => {
+    const params = new URLSearchParams();
+    if (filters?.search) params.append('search', filters.search);
+    if (filters?.club) params.append('club', filters.club);
+    if (filters?.reply_status) params.append('reply_status', filters.reply_status);
+    if (filters?.limit) params.append('limit', filters.limit.toString());
+    if (filters?.offset) params.append('offset', filters.offset.toString());
+    const url = params.toString() ? `/api/crm/contacts?${params.toString()}` : '/api/crm/contacts';
+    return apiRequest(url);
+  },
+  createContact: (data: any) =>
+    apiRequest('/api/crm/contacts', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  importContacts: (contacts: any[]) =>
+    apiRequest('/api/crm/contacts/import', {
+      method: 'POST',
+      body: JSON.stringify({ contacts }),
+    }),
+  getSequences: () => apiRequest('/api/crm/sequences'),
+  createSequence: (data: { name: string; description?: string; enabled?: boolean }) =>
+    apiRequest('/api/crm/sequences', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  getSequenceSteps: (sequenceId: string) =>
+    apiRequest(`/api/crm/sequences/${sequenceId}/steps`),
+  addSequenceStep: (sequenceId: string, data: { step_number: number; delay_days?: number; subject: string; body_html: string; body_text?: string }) =>
+    apiRequest(`/api/crm/sequences/${sequenceId}/steps`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  enroll: (data: { sequence_id: string; contact_ids?: string[]; all_contacts?: boolean }) =>
+    apiRequest('/api/crm/enroll', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  getEnrollments: (filters?: { sequence_id?: string; status?: string }) => {
+    const params = new URLSearchParams();
+    if (filters?.sequence_id) params.append('sequence_id', filters.sequence_id);
+    if (filters?.status) params.append('status', filters.status);
+    const url = params.toString() ? `/api/crm/enrollments?${params.toString()}` : '/api/crm/enrollments';
+    return apiRequest(url);
+  },
+  sendSequence: (data: { sequence_id: string; step_number?: number; limit?: number }) =>
+    apiRequest('/api/crm/send', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  getReplies: (filters?: { processed?: boolean; contact_id?: string; limit?: number }) => {
+    const params = new URLSearchParams();
+    if (filters?.processed !== undefined) params.append('processed', filters.processed.toString());
+    if (filters?.contact_id) params.append('contact_id', filters.contact_id);
+    if (filters?.limit) params.append('limit', filters.limit.toString());
+    const url = params.toString() ? `/api/crm/replies?${params.toString()}` : '/api/crm/replies';
+    return apiRequest(url);
+  },
+  processReply: (replyId: string, replyStatus: string) =>
+    apiRequest(`/api/crm/replies/${replyId}/process`, {
+      method: 'POST',
+      body: JSON.stringify({ reply_status: replyStatus }),
+    }),
+  getStats: () => apiRequest('/api/crm/stats'),
 };
 

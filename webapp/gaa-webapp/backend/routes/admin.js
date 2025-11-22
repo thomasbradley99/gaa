@@ -172,6 +172,49 @@ router.get('/users', authenticateAdmin, async (req, res) => {
 });
 
 /**
+ * PUT /api/admin/users/:id/role
+ * Update a user's role (make admin or remove admin)
+ * Body: { role: 'admin' | 'user' }
+ */
+router.put('/users/:id/role', authenticateAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { role } = req.body;
+
+    if (!role || (role !== 'admin' && role !== 'user')) {
+      return res.status(400).json({ error: 'Role must be "admin" or "user"' });
+    }
+
+    // Prevent removing your own admin access
+    if (req.user.userId === id && role !== 'admin') {
+      return res.status(403).json({ error: 'Cannot remove your own admin access' });
+    }
+
+    const result = await query(
+      `UPDATE users 
+       SET role = $1, updated_at = NOW()
+       WHERE id = $2
+       RETURNING id, email, name, role`,
+      [role, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    console.log(`✅ Admin ${req.user.email} updated user ${result.rows[0].email} role to ${role}`);
+
+    res.json({ 
+      user: result.rows[0],
+      message: `User role updated to ${role}`
+    });
+  } catch (error) {
+    console.error('Admin update user role error:', error);
+    res.status(500).json({ error: 'Failed to update user role' });
+  }
+});
+
+/**
  * GET /api/admin/stats
  * Get overall statistics
  */

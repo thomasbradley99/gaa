@@ -2,10 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { auth, admin, clubs, crm, getToken } from '@/lib/api-client'
+import { auth, admin, clubs, getToken } from '@/lib/api-client'
 import Sidebar from '@/components/shared/Sidebar'
-import CrmDashboard from '@/components/admin/CrmDashboard'
-import { Shield, Users, Gamepad2, TrendingUp, Loader2, Building2, Video, ExternalLink, Mail, Send } from 'lucide-react'
+import { Shield, Users, Gamepad2, TrendingUp, Loader2, Building2, Video, ExternalLink } from 'lucide-react'
 
 export default function AdminPage() {
   const router = useRouter()
@@ -17,7 +16,7 @@ export default function AdminPage() {
   const [users, setUsers] = useState<any[]>([])
   const [clubsList, setClubsList] = useState<any[]>([])
   const [clubsStats, setClubsStats] = useState<any>(null)
-  const [activeTab, setActiveTab] = useState<'overview' | 'games' | 'teams' | 'users' | 'clubs' | 'crm'>('overview')
+  const [activeTab, setActiveTab] = useState<'overview' | 'games' | 'teams' | 'users' | 'clubs'>('overview')
   const [dataLoading, setDataLoading] = useState(false)
   const [selectedTeamId, setSelectedTeamId] = useState<string>('')
   const [clubsFilter, setClubsFilter] = useState<'all' | 'veo' | 'no-veo'>('all')
@@ -155,8 +154,6 @@ export default function AdminPage() {
         fetchUsers() // Fetch all users by default
       } else if (activeTab === 'clubs') {
         fetchClubs()
-      } else if (activeTab === 'crm') {
-        // CRM data is loaded by CrmDashboard component
       }
     }
   }, [loading, user, activeTab, clubsFilter])
@@ -214,7 +211,6 @@ export default function AdminPage() {
                 { id: 'teams', label: 'Teams' },
                 { id: 'users', label: 'Users' },
                 { id: 'clubs', label: 'Clubs Using Veo' },
-                { id: 'crm', label: 'CRM' },
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -424,7 +420,6 @@ export default function AdminPage() {
                             <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Role</th>
                             <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Team Role</th>
                             <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Games</th>
-                            <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase">Actions</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-white/10">
@@ -452,31 +447,6 @@ export default function AdminPage() {
                                 </span>
                               </td>
                               <td className="px-6 py-4 text-sm text-gray-400">{u.game_count || 0}</td>
-                              <td className="px-6 py-4 text-sm">
-                                {u.id !== user?.id && (
-                                  <button
-                                    onClick={async () => {
-                                      try {
-                                        const newRole = u.role === 'admin' ? 'user' : 'admin'
-                                        await admin.updateUserRole(u.id, newRole)
-                                        fetchUsers(selectedTeamId || undefined)
-                                      } catch (err: any) {
-                                        alert(err.message || 'Failed to update user role')
-                                      }
-                                    }}
-                                    className={`px-3 py-1 rounded text-xs font-medium transition-colors ${
-                                      u.role === 'admin'
-                                        ? 'bg-red-900/50 text-red-300 hover:bg-red-900/70'
-                                        : 'bg-[#2D8B4D]/50 text-green-300 hover:bg-[#2D8B4D]/70'
-                                    }`}
-                                  >
-                                    {u.role === 'admin' ? 'Remove Admin' : 'Make Admin'}
-                                  </button>
-                                )}
-                                {u.id === user?.id && (
-                                  <span className="text-xs text-gray-500">Current user</span>
-                                )}
-                              </td>
                             </tr>
                           ))}
                         </tbody>
@@ -488,11 +458,6 @@ export default function AdminPage() {
                   </div>
                 )}
               </div>
-            )}
-
-            {/* CRM Tab */}
-            {activeTab === 'crm' && (
-              <CrmDashboard />
             )}
 
             {/* Clubs Tab */}

@@ -105,6 +105,27 @@ router.get('/all', async (req, res) => {
   }
 });
 
+// Get team info by invite code (public endpoint)
+router.get('/codes/:inviteCode', async (req, res) => {
+  try {
+    const { inviteCode } = req.params;
+
+    const result = await query(
+      'SELECT id, name, description, invite_code FROM teams WHERE invite_code = $1',
+      [inviteCode.toUpperCase()]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Team not found' });
+    }
+
+    res.json({ team: result.rows[0] });
+  } catch (error) {
+    console.error('Get team by code error:', error);
+    res.status(500).json({ error: 'Failed to get team info' });
+  }
+});
+
 // Join team by invite code
 router.post('/join-by-code', authenticateToken, async (req, res) => {
   try {
@@ -335,6 +356,198 @@ router.get('/:teamId/members', authenticateToken, async (req, res) => {
   } catch (error) {
     console.error('Get team members error:', error);
     res.status(500).json({ error: 'Failed to get team members' });
+  }
+});
+
+// Remove member from team (admin only)
+router.delete('/:teamId/members/:memberId', authenticateToken, async (req, res) => {
+  try {
+    const { teamId, memberId } = req.params;
+
+    // Verify user is admin of team
+    const adminCheck = await query(
+      'SELECT * FROM team_members WHERE team_id = $1 AND user_id = $2 AND role = $3',
+      [teamId, req.user.userId, 'admin']
+    );
+
+    if (adminCheck.rows.length === 0) {
+      return res.status(403).json({ error: 'Only team admins can remove members' });
+    }
+
+    // Get member to remove
+    const memberCheck = await query(
+      'SELECT * FROM team_members WHERE id = $1 AND team_id = $2',
+      [memberId, teamId]
+    );
+
+    if (memberCheck.rows.length === 0) {
+      return res.status(404).json({ error: 'Member not found' });
+    }
+
+    const member = memberCheck.rows[0];
+
+    // Prevent removing yourself if you're the only admin
+    if (member.user_id === req.user.userId && member.role === 'admin') {
+      const adminCount = await query(
+        'SELECT COUNT(*) as count FROM team_members WHERE team_id = $1 AND role = $2',
+        [teamId, 'admin']
+      );
+      if (parseInt(adminCount.rows[0].count) === 1) {
+        return res.status(400).json({ error: 'Cannot remove the only admin. Promote another member first or delete the team.' });
+      }
+    }
+
+    // Remove member
+    await query(
+      'DELETE FROM team_members WHERE id = $1 AND team_id = $2',
+      [memberId, teamId]
+    );
+
+    res.json({ message: 'Member removed successfully' });
+  } catch (error) {
+    console.error('Remove member error:', error);
+    res.status(500).json({ error: 'Failed to remove member' });
+  }
+});
+
+// Leave team (member can leave themselves)
+router.post('/:teamId/leave', authenticateToken, async (req, res) => {
+  try {
+    const { teamId } = req.params;
+
+    // Get user's membership
+    const memberCheck = await query(
+      'SELECT * FROM team_members WHERE team_id = $1 AND user_id = $2',
+      [teamId, req.user.userId]
+    );
+
+    if (memberCheck.rows.length === 0) {
+      return res.status(404).json({ error: 'You are not a member of this team' });
+    }
+
+    const member = memberCheck.rows[0];
+
+    // Prevent leaving if you're the only admin
+    if (member.role === 'admin') {
+      const adminCount = await query(
+        'SELECT COUNT(*) as count FROM team_members WHERE team_id = $1 AND role = $2',
+        [teamId, 'admin']
+      );
+      if (parseInt(adminCount.rows[0].count) === 1) {
+        return res.status(400).json({ error: 'Cannot leave as the only admin. Promote another member first or delete the team.' });
+      }
+    }
+
+    // Remove member
+    await query(
+      'DELETE FROM team_members WHERE team_id = $1 AND user_id = $2',
+      [teamId, req.user.userId]
+    );
+
+    res.json({ message: 'Left team successfully' });
+  } catch (error) {
+    console.error('Leave team error:', error);
+    res.status(500).json({ error: 'Failed to leave team' });
+  }
+});
+
+// Promote member to admin (admin only)
+router.post('/:teamId/members/:memberId/promote', authenticateToken, async (req, res) => {
+  try {
+    const { teamId, memberId } = req.params;
+
+    // Verify user is admin of team
+    const adminCheck = await query(
+      'SELECT * FROM team_members WHERE team_id = $1 AND user_id = $2 AND role = $3',
+      [teamId, req.user.userId, 'admin']
+    );
+
+    if (adminCheck.rows.length === 0) {
+      return res.status(403).json({ error: 'Only team admins can promote members' });
+    }
+
+    // Get member to promote
+    const memberCheck = await query(
+      'SELECT * FROM team_members WHERE id = $1 AND team_id = $2',
+      [memberId, teamId]
+    );
+
+    if (memberCheck.rows.length === 0) {
+      return res.status(404).json({ error: 'Member not found' });
+    }
+
+    // Promote to admin
+    await query(
+      'UPDATE team_members SET role = $1 WHERE id = $2 AND team_id = $3',
+      ['admin', memberId, teamId]
+    );
+
+    res.json({ message: 'Member promoted to admin successfully' });
+  } catch (error) {
+    console.error('Promote member error:', error);
+    res.status(500).json({ error: 'Failed to promote member' });
+  }
+});
+
+// Delete team (owner/admin only)
+router.delete('/:teamId', authenticateToken, async (req, res) => {
+  try {
+    const { teamId } = req.params;
+
+    // Verify user is admin of team
+    const adminCheck = await query(
+      'SELECT * FROM team_members WHERE team_id = $1 AND user_id = $2 AND role = $3',
+      [teamId, req.user.userId, 'admin']
+    );
+
+    if (adminCheck.rows.length === 0) {
+      return res.status(403).json({ error: 'Only team admins can delete the team' });
+    }
+
+    // Delete team (cascade will handle team_members and games)
+    await query('DELETE FROM teams WHERE id = $1', [teamId]);
+
+    res.json({ message: 'Team deleted successfully' });
+  } catch (error) {
+    console.error('Delete team error:', error);
+    res.status(500).json({ error: 'Failed to delete team' });
+  }
+});
+
+// Get team statistics
+router.get('/:teamId/stats', authenticateToken, async (req, res) => {
+  try {
+    const { teamId } = req.params;
+
+    // Verify user is member of team
+    const memberCheck = await query(
+      'SELECT * FROM team_members WHERE team_id = $1 AND user_id = $2',
+      [teamId, req.user.userId]
+    );
+
+    if (memberCheck.rows.length === 0) {
+      return res.status(403).json({ error: 'Not a member of this team' });
+    }
+
+    // Get game count
+    const gameCountResult = await query(
+      'SELECT COUNT(*) as count FROM games WHERE team_id = $1',
+      [teamId]
+    );
+
+    // Get member count
+    const memberCountResult = await query(
+      'SELECT COUNT(*) as count FROM team_members WHERE team_id = $1',
+      [teamId]
+    );
+
+    res.json({
+      gameCount: parseInt(gameCountResult.rows[0].count),
+      memberCount: parseInt(memberCountResult.rows[0].count),
+    });
+  } catch (error) {
+    console.error('Get team stats error:', error);
+    res.status(500).json({ error: 'Failed to get team statistics' });
   }
 });
 

@@ -78,13 +78,21 @@ if (crmRoutes) {
   app.use('/api/crm', crmRoutes);
 }
 
-// CRM notifications (always available, doesn't need SES)
-const crmNotifications = require('./routes/crm-notifications');
-app.use('/api/crm', crmNotifications);
+// CRM notifications (optional - wrap in try-catch to prevent crashes)
+try {
+  const crmNotifications = require('./routes/crm-notifications');
+  app.use('/api/crm', crmNotifications);
+} catch (err) {
+  console.log('⚠️  CRM notifications routes not available:', err.message);
+}
 
-// CRM bounce handling
-const crmBounces = require('./routes/crm-bounces');
-app.use('/api/crm', crmBounces);
+// CRM bounce handling (optional - wrap in try-catch to prevent crashes)
+try {
+  const crmBounces = require('./routes/crm-bounces');
+  app.use('/api/crm', crmBounces);
+} catch (err) {
+  console.log('⚠️  CRM bounces routes not available:', err.message);
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {

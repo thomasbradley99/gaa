@@ -48,8 +48,10 @@ const authenticateAdmin = (req, res, next) => {
  * Lambda sends X-API-Key header with secret key
  */
 const authenticateLambda = (req, res, next) => {
-  const apiKey = req.headers['x-api-key'];
-  const expectedKey = process.env.LAMBDA_API_KEY || 'gaa-lambda-secret-key-2024';
+  const apiKey = req.headers['x-api-key']?.trim();
+  // Trim env var to handle any whitespace/newline issues
+  const envKey = process.env.LAMBDA_API_KEY?.trim();
+  const expectedKey = envKey || 'gaa-lambda-secret-key-2024';
 
   // Debug logging (remove after fix)
   console.log('🔐 Lambda Auth Check:', {

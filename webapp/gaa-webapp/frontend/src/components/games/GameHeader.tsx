@@ -1,6 +1,7 @@
 'use client'
 
-import { Calendar, Users } from 'lucide-react'
+import { Calendar, Users, ArrowLeft } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import type { GameEvent } from './video-player/types'
 import { calculateScore } from '@/lib/score-calculator'
 
@@ -23,6 +24,7 @@ export default function GameHeader({
   onToggleLeftSidebar,
   events = [],
 }: GameHeaderProps) {
+  const router = useRouter()
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
     return date.toLocaleDateString('en-US', {
@@ -44,8 +46,17 @@ export default function GameHeader({
   return (
     <div className="bg-black/80 backdrop-blur-md border-b border-white/10 px-4 sm:px-6 py-3">
       <div className="flex items-center justify-between">
-        {/* Left: Toggle Left Sidebar + Game Info */}
-        <div className="flex items-center gap-4 min-w-0 flex-1">
+        {/* Left: Back Button + Toggle Left Sidebar + Game Info */}
+        <div className="flex items-center gap-3 min-w-0 flex-1">
+          {/* Back Button */}
+          <button
+            onClick={() => router.push('/dashboard')}
+            className="flex items-center justify-center w-8 h-8 text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-colors"
+            title="Back to Dashboard"
+          >
+            <ArrowLeft className="w-5 h-5" strokeWidth={2} />
+          </button>
+
           {/* Toggle Left Sidebar */}
           <button
             onClick={onToggleLeftSidebar}

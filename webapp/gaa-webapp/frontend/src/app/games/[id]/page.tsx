@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { useParams, useRouter } from 'next/navigation'
+import { ArrowLeft } from 'lucide-react'
 import { games, auth, getToken } from '@/lib/api-client'
 import Sidebar from '@/components/shared/Sidebar'
 import VideoPlayer from '@/components/games/VideoPlayer'
@@ -21,6 +22,7 @@ function MobileVideoPlayer({
   handleEventClick,
   seekToTimestamp,
   eventPaddings,
+  onBack,
 }: {
   game: any
   filteredEvents: GameEvent[]
@@ -30,6 +32,7 @@ function MobileVideoPlayer({
   handleEventClick: (event: GameEvent) => void
   seekToTimestamp: (timestamp: number) => void
   eventPaddings?: Map<number, { beforePadding: number, afterPadding: number }>
+  onBack: () => void
 }) {
   const [showOverlay, setShowOverlay] = useState(true)
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null)
@@ -80,8 +83,18 @@ function MobileVideoPlayer({
         }`}
       >
         <div className="text-white">
-          <div className="flex items-center justify-between gap-3">
-            <h1 className="text-lg font-semibold truncate flex-1">{game.title}</h1>
+          {/* Back Button Row */}
+          <div className="flex items-center gap-3 mb-2">
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                onBack()
+              }}
+              className="flex items-center justify-center w-9 h-9 bg-black/60 hover:bg-black/80 rounded-full transition-colors"
+              title="Back to Dashboard"
+            >
+              <ArrowLeft className="w-5 h-5" strokeWidth={2.5} />
+            </button>
             {hasScore && (
               <div className="flex items-center gap-2 text-sm font-mono bg-black/60 px-3 py-1 rounded-lg border border-white/20">
                 <span className="font-bold">{score.home.display}</span>
@@ -90,6 +103,7 @@ function MobileVideoPlayer({
               </div>
             )}
           </div>
+          <h1 className="text-lg font-semibold truncate">{game.title}</h1>
         </div>
       </div>
 
@@ -181,9 +195,9 @@ export default function GameDetailPage() {
     init()
   }, [router, gameId])
 
-  // Poll for game updates if status is 'pending' (Lambda is downloading)
+  // Poll for game updates if status is 'pending' or 'processing' (Lambda is downloading/analyzing)
   useEffect(() => {
-    if (!game || game.status !== 'pending') return
+    if (!game || (game.status !== 'pending' && game.status !== 'processing')) return
 
     const pollInterval = setInterval(async () => {
       try {
@@ -194,10 +208,13 @@ export default function GameDetailPage() {
         if (updatedGame.s3_key && !game.s3_key) {
           setGame(updatedGame)
           clearInterval(pollInterval)
-        } else if (updatedGame.status !== 'pending') {
-          // Status changed (analyzed/failed), update and stop polling
+        } else if (updatedGame.status === 'analyzed' || updatedGame.status === 'failed') {
+          // Status changed to final state (analyzed/failed), update and stop polling
           setGame(updatedGame)
           clearInterval(pollInterval)
+        } else if (updatedGame.status !== game.status) {
+          // Status changed (e.g., pending -> processing), update but keep polling
+          setGame(updatedGame)
         }
       } catch (err) {
         console.error('Error polling game status:', err)
@@ -415,6 +432,7 @@ export default function GameDetailPage() {
               handleEventClick={handleEventClick}
               seekToTimestamp={seekToTimestamp}
               eventPaddings={eventPaddings}
+              onBack={() => router.push('/dashboard')}
             />
           ) : (
             <div className="w-full aspect-video bg-black flex items-center justify-center">

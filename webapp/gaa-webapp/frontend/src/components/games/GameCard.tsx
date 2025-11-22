@@ -225,48 +225,44 @@ export default function GameCard({ game, onTeamSelected, userTeam }: GameCardPro
     return emojis.length > 0 ? emojis.join(' ') : '⚫'
   }
 
-  const getColorStyle = (colorName: string) => {
+  // Get text color for the color name
+  const getTextColor = (colorName: string): string => {
     const colorMap: { [key: string]: string } = {
-      'black': '#000000',
+      'black': '#AAAAAA',
       'white': '#FFFFFF',
-      'red': '#FF0000',
-      'blue': '#0000FF',
-      'green': '#008000',
-      'yellow': '#FFFF00',
+      'red': '#FF4444',
+      'blue': '#4488FF',
+      'green': '#44FF88',
+      'yellow': '#FFDD00',
       'gold': '#FFD700',
-      'orange': '#FFA500',
-      'purple': '#800080',
-      'navy': '#000080',
-      'maroon': '#800000',
-      'grey': '#808080',
-      'gray': '#808080',
+      'orange': '#FF8844',
+      'purple': '#AA44FF',
+      'navy': '#4466FF',
+      'maroon': '#FF4444',
+      'grey': '#CCCCCC',
+      'gray': '#CCCCCC',
     }
     
     const lower = colorName.toLowerCase().trim()
     
-    // If it's already a hex code, use it as background
-    if (colorName.startsWith('#')) {
-      return { backgroundColor: colorName }
-    }
-    
-    // For mixed/striped colors, keep background black
+    // For mixed colors, use white text
     if (lower.includes(' striped') || lower.includes(' and ') || lower.includes(' & ')) {
-      return { backgroundColor: '#000000' }
+      return '#FFFFFF'
     }
     
-    // Simple color - map from color name
-    if (colorMap[lower]) {
-      return { backgroundColor: colorMap[lower] }
-    }
-    
-    // Try partial match for simple colors
+    // Try to find the primary color
     for (const [key, value] of Object.entries(colorMap)) {
-      if (lower.includes(key) && !lower.includes(' and ') && !lower.includes(' & ')) {
-        return { backgroundColor: value }
+      if (lower.includes(key)) {
+        return value
       }
     }
     
-    // Fallback - black background
+    // Fallback to white
+    return '#FFFFFF'
+  }
+
+  const getColorStyle = (colorName: string) => {
+    // Always black background
     return { backgroundColor: '#000000' }
   }
 
@@ -394,7 +390,7 @@ export default function GameCard({ game, onTeamSelected, userTeam }: GameCardPro
                   className="relative flex-1 px-3 py-2 rounded-lg text-xs font-medium transition-all hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed border border-white/20 hover:border-[#2D8B4D]/50 flex items-center justify-center gap-1.5"
                   style={{
                     ...getColorStyle(detectedColors.home),
-                    color: '#ffffff'
+                    color: getTextColor(detectedColors.home)
                   }}
                 >
                   {selectingTeam === detectedColors.home ? (
@@ -419,7 +415,7 @@ export default function GameCard({ game, onTeamSelected, userTeam }: GameCardPro
                   className="relative flex-1 px-3 py-2 rounded-lg text-xs font-medium transition-all hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed border border-white/20 hover:border-[#2D8B4D]/50 flex items-center justify-center gap-1.5"
                   style={{
                     ...getColorStyle(detectedColors.away),
-                    color: '#ffffff'
+                    color: getTextColor(detectedColors.away)
                   }}
                 >
                   {selectingTeam === detectedColors.away ? (

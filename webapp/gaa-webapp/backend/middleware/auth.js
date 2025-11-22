@@ -51,6 +51,15 @@ const authenticateLambda = (req, res, next) => {
   const apiKey = req.headers['x-api-key'];
   const expectedKey = process.env.LAMBDA_API_KEY || 'gaa-lambda-secret-key-2024';
 
+  // Debug logging (remove after fix)
+  console.log('🔐 Lambda Auth Check:', {
+    received: apiKey ? `${apiKey.substring(0, 10)}...` : 'missing',
+    expected: expectedKey ? `${expectedKey.substring(0, 10)}...` : 'missing',
+    match: apiKey === expectedKey,
+    receivedLength: apiKey?.length,
+    expectedLength: expectedKey?.length
+  });
+
   if (!apiKey || apiKey !== expectedKey) {
     return res.status(401).json({ error: 'Invalid API key' });
   }
